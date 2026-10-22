@@ -24,7 +24,14 @@ BANNED = [
     (r'东西', '抽象指代 东西'),
     (r'一部分', '抽象指代 一部分'),
     (r'[说交给挑选写拿做找举]一[个件段句条份样](?=东西|部分|[，。、]|\s|<|$)', '空壳量词 单字动词+一X'),
+    (r'[问聊谈讲说]一[句段个声](?=话|[，。、；]|\s|<|$)', '空壳量词 单字动词+一X'),
     (r'说明我们|这几件事|下面几件|这段', '解释性导语 页面自述'),
+    # ── 2026-10-23 第二轮：全站铺开时补的签名 ─────────────────
+    (r'才是', '否定定义 才是'),
+    (r'以「[^」]{2,12}」为例', '元话语 以X为例'),
+    (r'下面这张表|以下信息|这一节|本节', '元话语 页面自述'),
+    (r'出口', '术语 出口→实践机会'),
+    (r'赋能|闭环|抓手|助力|护航|一站式|全方位|能力跃迁|肌肉记忆|生态位', '空转套话'),
 ]
 
 # 教案型产物不做文案规则检查：这些「不是X」是教学澄清（如「五问是导航，
@@ -112,6 +119,26 @@ def main():
         print('\n⚠ 占位素材 %d 处（换真实素材时，同时删掉 class="ph"、.ph-badge、data-ph）' % len(phs))
         for pg, n, lab in phs:
             print('    %-14s L%-4d %s' % (pg, n, lab))
+
+    # 活动子站是独立仓库（events.leadtheway.cn），结构/内链各查各的，
+    # 但对外文案是同一套规则，所以禁句要一起扫，否则改完主站子站还在说老话。
+    sib = os.path.join(ROOT, '..', 'events-site')
+    if os.path.isdir(sib):
+        sib_pages = sorted(f for f in os.listdir(sib) if f.endswith('.html'))
+        sib_bad = 0
+        for pg in sib_pages:
+            s = io.open(os.path.join(sib, pg), encoding='utf-8').read()
+            hits = []
+            for pat, name in BANNED:
+                for m in re.finditer(pat, s):
+                    hits.append('禁句[%s] %s' % (name, m.group(0)[:30]))
+            if hits:
+                sib_bad += 1
+                print('✗ events-site/' + pg)
+                for i in dict.fromkeys(hits):
+                    print('    ', i)
+        print('\n活动子站 events-site：%d 页，%d 页有禁句' % (len(sib_pages), sib_bad))
+        bad += sib_bad
 
     print('\n检查 %d 个页面，%d 个有问题' % (len(pages), bad))
     return 1 if bad else 0
