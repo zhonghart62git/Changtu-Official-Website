@@ -1,8 +1,8 @@
 # 仓库边界
 
-本仓库只放官网。教师端、学生小程序、运营后台在 `zhonghart62git/changtu-compass-miniapp`，由另一方负责。
+本仓库只放官网。教师端、学生小程序、运营后台在 `zhonghart62git/changtu-compass-miniapp`，由另一方负责；活动详情页在 `zhonghart62git/Changtu-Events`，发布到 `events.leadtheway.cn`。
 
-两个仓库**各自构建、各自发布、互不触发**。任何一方的代码改动都不会让另一方上线，这是有意设计的。
+三个仓库**各自构建、各自发布、互不触发**。任何一方的代码改动都不会让另一方上线，这是有意设计的。
 
 ## 谁改什么
 
@@ -10,6 +10,7 @@
 |---|---|---|---|
 | `Changtu-Official-Website`（本仓库） | 官网 16 页 + `/teacher` `/admin` 两个入口中转页 | push 到 `main`，GitHub Pages 构建 | 约 1 分钟 |
 | `changtu-compass-miniapp` | 教师端、学生小程序、运营后台、云函数 | 本地构建 + 手动部署到腾讯云 CloudBase | 取决于部署 |
+| `Changtu-Events` | 活动详情页（赛事 / 考级 / 展演） | push 到 `main`，GitHub Pages 构建 | 约 1 分钟 |
 
 `main` 已开启分支保护：禁止 force push、禁止删除。
 
@@ -41,6 +42,21 @@
 ### 3. 小程序码 —— 一次性素材
 
 `assets/miniapp-qr.png` 由小程序侧出图后交付。文件缺失时首页自动降级为「小程序即将开放 + 先在线报名」，不会破图。这是素材依赖，不构成版本依赖。
+
+### 4. 活动子站 —— 本仓库提供设计系统，单向
+
+`events.leadtheway.cn` 是独立仓库、独立 Pages 站点。它**不复制**本仓库的设计系统，而是用绝对 URL 引用：
+
+```
+https://leadtheway.cn/assets/site.css
+https://leadtheway.cn/assets/site-v2.css
+https://leadtheway.cn/assets/logo.png
+```
+
+- 改本仓库的 `site.css` / `site-v2.css`，活动站自动跟随（Pages CDN 缓存约 10 分钟）
+- 活动站自己的样式只有 `events.css`，归它自己管
+- **代价**：本仓库样式表改名或改路径，会同时打断活动站。改这两个文件前先搜一遍有没有被外部引用
+- 本仓库的 `events/` 目录只剩三个跳转壳（`tools/make_events_stubs.py` 生成），正文只存在于活动站，避免同一份内容两个域名各一份
 
 ## 硬规则
 
