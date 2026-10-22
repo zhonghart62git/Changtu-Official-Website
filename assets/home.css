@@ -271,6 +271,30 @@
   .hs-track{transition:none;}
 }
 
+/* ── 19b. 首屏与活动合并成一个 banner ──────────────────
+   第 1 屏是平台定位（真 HTML，H1 仍是真文本），第 2–6 屏是活动图。
+   整块通栏，首屏内容用 .wrap 对齐，和导航、下方各区块左右齐边。 */
+.hslider-hero{padding:0 0 10px;}
+.hslider-hero .hs-box{border-radius:0;box-shadow:none;background:#F4F9FF;}
+.hslider-hero .hs-track{align-items:stretch;}
+.hs-intro{position:relative;display:flex;align-items:center;line-height:normal;}
+.hs-intro > .hero{width:100%;}
+.hs-intro .hero-lg{padding:46px 0 42px;}
+/* 活动图铺满整屏：高度由最高的那一屏决定，多出来的部分裁掉 */
+.hs-ev picture{display:block;height:100%;}
+.hs-ev img{width:100%;height:100%;object-fit:cover;object-position:center;display:block;}
+
+@media (max-width:1020px){
+  .hs-intro .hero-lg{padding:38px 0 34px;}
+}
+@media (max-width:760px){
+  .hs-intro .hero-lg{padding:30px 0 28px;}
+  /* 手机上首屏把装饰图形藏掉，否则一屏拉得太长 */
+  .hs-intro .hero-visual{display:none;}
+  /* 裁切只从右侧走，文字在左边不会被切 */
+  .hs-ev img{object-position:left center;}
+}
+
 /* ── 响应式 ───────────────────────────────────────────── */
 @media (max-width:1020px){
   .ability-grid,.case-proof,.support,.steps3,.team-brief,.outcome{grid-template-columns:1fr;}

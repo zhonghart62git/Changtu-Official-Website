@@ -26,7 +26,7 @@
 </script>
 <link rel="stylesheet" href="assets/site.css?v=7e56c289">
 <link rel="stylesheet" href="assets/site-v2.css?v=80a0e448">
-<link rel="stylesheet" href="assets/home.css?v=32c5708b">
+<link rel="stylesheet" href="assets/home.css?v=d714700d">
 <script>document.documentElement.classList.remove('no-js');</script>
 <link rel="canonical" href="https://leadtheway.cn/">
 <meta name="robots" content="index,follow">
@@ -71,124 +71,127 @@
 
 <main id="top">
 
-<!-- ============ 1. 平台定位 ============ -->
-<section class="hero hero-lg">
-  <div class="aurora" aria-hidden="true"><i class="a1"></i><i class="a2"></i><i class="a3"></i></div>
-  <div class="wrap">
-    <div class="hero-copy">
-      <div class="eyebrow"><i></i>面向 AI 时代的青少年成长平台</div>
-      <h1>面向 AI 时代，<br>培养<em>创造未来</em>的能力</h1>
-      <p class="lead">
-        从认识自己、探索方向，到发展能力、参与实践——畅途以课程、AI 工具与展演活动支持青少年持续成长，并为机构和教师提供教学支持。
-      </p>
-      <div class="hero-cta">
-        <a class="btn btn-p" href="#why">探索成长路径
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg>
-        </a>
-        <a class="btn btn-s" href="#partner">了解机构合作</a>
+<!-- ============ 1+2. 首屏 banner：平台定位与活动报名同一个轮播 ============ -->
+<section class="hslider hslider-hero" aria-roledescription="轮播" aria-label="畅途平台介绍与近期活动报名">
+  <div class="hs-box" id="hsBox">
+    <div class="hs-track" id="hsTrack">
+
+    <!-- 第 1 屏：平台定位 -->
+    <div class="hs-slide hs-intro" aria-label="平台介绍：面向 AI 时代，培养创造未来的能力">
+        <section class="hero hero-lg">
+      <div class="aurora" aria-hidden="true"><i class="a1"></i><i class="a2"></i><i class="a3"></i></div>
+      <div class="wrap">
+        <div class="hero-copy">
+          <div class="eyebrow"><i></i>面向 AI 时代的青少年成长平台</div>
+          <h1>面向 AI 时代，<br>培养<em>创造未来</em>的能力</h1>
+          <p class="lead">
+            从认识自己、探索方向，到发展能力、参与实践——畅途以课程、AI 工具与展演活动支持青少年持续成长，并为机构和教师提供教学支持。
+          </p>
+          <div class="hero-cta">
+            <a class="btn btn-p" href="#why">探索成长路径
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg>
+            </a>
+            <a class="btn btn-s" href="#partner">了解机构合作</a>
+          </div>
+          <div class="hero-note">咨询 180 3882 9260　·　已合作机构从右上角「教师工作台」进入</div>
+        </div>
+
+        <div class="hero-visual" aria-hidden="true">
+          <svg viewBox="0 0 520 520" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <radialGradient id="glow" cx="50%" cy="50%" r="50%">
+                <stop offset="0%" stop-color="#1E9BE8" stop-opacity=".16"></stop>
+                <stop offset="70%" stop-color="#7B3FE4" stop-opacity=".06"></stop>
+                <stop offset="100%" stop-color="#7B3FE4" stop-opacity="0"></stop>
+              </radialGradient>
+              <linearGradient id="gTri" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0%" stop-color="#0B63C5"></stop><stop offset="55%" stop-color="#1E9BE8"></stop><stop offset="100%" stop-color="#7B3FE4"></stop>
+              </linearGradient>
+              <linearGradient id="gOr" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0%" stop-color="#FF7A1A"></stop><stop offset="100%" stop-color="#FFB169"></stop>
+              </linearGradient>
+              <linearGradient id="gVio" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0%" stop-color="#7B3FE4"></stop><stop offset="100%" stop-color="#A78BFA"></stop>
+              </linearGradient>
+            </defs>
+
+            <circle cx="260" cy="260" r="238" fill="url(#glow)"></circle>
+
+            <g class="spin-slow" opacity=".55">
+              <circle cx="260" cy="260" r="204" fill="none" stroke="#DCEBFB" stroke-width="1" stroke-dasharray="4 10"></circle>
+              <circle cx="260" cy="260" r="166" fill="none" stroke="#E4D9FB" stroke-width="1" stroke-dasharray="2 12"></circle>
+            </g>
+
+            <path d="M260 118 L384 330 L136 330 Z" fill="none" stroke="url(#gTri)" stroke-width="2.4" stroke-linejoin="round" opacity=".85"></path>
+            <circle cx="260" cy="118" r="9" fill="#fff" stroke="#0B63C5" stroke-width="2.6"></circle>
+            <circle cx="384" cy="330" r="9" fill="#fff" stroke="#1E9BE8" stroke-width="2.6"></circle>
+            <circle cx="136" cy="330" r="9" fill="#fff" stroke="#7B3FE4" stroke-width="2.6"></circle>
+
+            <circle cx="260" cy="260" r="56" fill="#fff" stroke="#E3ECF6" stroke-width="1.5"></circle>
+            <circle cx="260" cy="260" r="56" fill="none" stroke="url(#gTri)" stroke-width="2" opacity=".7"></circle>
+            <text x="260" y="252" text-anchor="middle" font-size="15" font-weight="800" fill="#0F1B2A" font-family="Noto Sans SC,PingFang SC,sans-serif">未来领袖</text>
+            <text x="260" y="272" text-anchor="middle" font-size="9.5" letter-spacing="1.4" fill="#78879C" font-family="Noto Sans SC,PingFang SC,sans-serif">MATRIX</text>
+
+            <g opacity=".9">
+              <circle cx="260" cy="46" r="5" fill="url(#gOr)"></circle>
+              <circle cx="438" cy="196" r="5" fill="url(#gVio)"></circle>
+              <circle cx="82" cy="196" r="5" fill="url(#gTri)"></circle>
+              <circle cx="370" cy="452" r="4" fill="#1E9BE8" opacity=".7"></circle>
+              <circle cx="150" cy="452" r="4" fill="#7B3FE4" opacity=".7"></circle>
+            </g>
+
+            <g font-family="Noto Sans SC,PingFang SC,sans-serif" font-size="11.5" fill="#3C4C63" font-weight="600">
+              <text x="260" y="86" text-anchor="middle">表达力</text>
+              <text x="420" y="352" text-anchor="middle">思辨力</text>
+              <text x="100" y="352" text-anchor="middle">学习力</text>
+            </g>
+            <text x="260" y="404" text-anchor="middle" font-family="Noto Sans SC,PingFang SC,sans-serif" font-size="10" fill="#94A3B8">创造力 · 筹备中</text>
+            <circle class="pulse" cx="260" cy="26" r="4" fill="#FF7A1A"></circle>
+          </svg>
+        </div>
       </div>
-      <div class="hero-note">咨询 180 3882 9260　·　已合作机构从右上角「教师工作台」进入</div>
-    </div>
+    </section>
+    </div><!-- /.hs-slide.hs-intro -->
 
-    <div class="hero-visual" aria-hidden="true">
-      <svg viewBox="0 0 520 520" xmlns="http://www.w3.org/2000/svg">
-        <defs>
-          <radialGradient id="glow" cx="50%" cy="50%" r="50%">
-            <stop offset="0%" stop-color="#1E9BE8" stop-opacity=".16"></stop>
-            <stop offset="70%" stop-color="#7B3FE4" stop-opacity=".06"></stop>
-            <stop offset="100%" stop-color="#7B3FE4" stop-opacity="0"></stop>
-          </radialGradient>
-          <linearGradient id="gTri" x1="0" y1="0" x2="1" y2="1">
-            <stop offset="0%" stop-color="#0B63C5"></stop><stop offset="55%" stop-color="#1E9BE8"></stop><stop offset="100%" stop-color="#7B3FE4"></stop>
-          </linearGradient>
-          <linearGradient id="gOr" x1="0" y1="0" x2="1" y2="1">
-            <stop offset="0%" stop-color="#FF7A1A"></stop><stop offset="100%" stop-color="#FFB169"></stop>
-          </linearGradient>
-          <linearGradient id="gVio" x1="0" y1="0" x2="1" y2="1">
-            <stop offset="0%" stop-color="#7B3FE4"></stop><stop offset="100%" stop-color="#A78BFA"></stop>
-          </linearGradient>
-        </defs>
+    <!-- 第 2–6 屏：活动图片，整张图就是链接，点进去直接到报名 -->
+    <a class="hs-slide" href="enroll.html?act=caocan" aria-label="2027 曹灿杯香港站，2027 年 1 月 24 至 27 日，亚洲国际博览馆，报名中">
+      <picture>
+        <source media="(max-width:760px)" srcset="assets/banner/s1m.jpg">
+        <img src="assets/banner/s1.jpg" width="2000" height="700" fetchpriority="high" decoding="async" alt="2027 曹灿杯香港站 · 2027 年 1 月 24—27 日 · 亚洲国际博览馆">
+      </picture>
+    </a>
+    <a class="hs-slide" href="enroll.html?act=bilingual" aria-label="雏英杯中英双语主持人大会，省总展示 2026 年 11 月底起，全国盛典 2027 年 1 月杭州，报名中">
+      <picture>
+        <source media="(max-width:760px)" srcset="assets/banner/s2m.jpg">
+        <img src="assets/banner/s2.jpg" width="2000" height="700" fetchpriority="low" decoding="async" alt="雏英杯 · 中英双语主持人大会 · 省总展示 2026 年 11 月底起 · 全国盛典 2027 年 1 月杭州">
+      </picture>
+    </a>
+    <a class="hs-slide" href="enroll.html?act=sdg" aria-label="联合国青少年领袖发言人，线上海选 11 月 8 日截止">
+      <picture>
+        <source media="(max-width:760px)" srcset="assets/banner/s3m.jpg">
+        <img src="assets/banner/s3.jpg" width="2000" height="700" fetchpriority="low" decoding="async" alt="联合国青少年领袖发言人 · 线上海选 11 月 8 日截止 · 北外国际会议中心展演">
+      </picture>
+    </a>
+    <a class="hs-slide" href="enroll.html?act=debate" aria-label="华语辩论世界杯岭南挑战赛，校内赛到区域赛到全国赛，报名中">
+      <picture>
+        <source media="(max-width:760px)" srcset="assets/banner/s4m.jpg">
+        <img src="assets/banner/s4.jpg" width="2000" height="700" fetchpriority="low" decoding="async" alt="华语辩论世界杯 · 岭南挑战赛 · 校内赛到区域赛到全国赛">
+      </picture>
+    </a>
+    <a class="hs-slide" href="enroll.html?act=brtv" aria-label="北京广播电视台三大艺术考级，朗诵、主持、课本剧，常年滚动">
+      <picture>
+        <source media="(max-width:760px)" srcset="assets/banner/s5m.jpg">
+        <img src="assets/banner/s5.jpg" width="2000" height="700" fetchpriority="low" decoding="async" alt="北京广播电视台三大艺术考级 · 朗诵、主持、课本剧（表演）· 常年滚动">
+      </picture>
+    </a>
+    </div><!-- /.hs-track -->
+  </div><!-- /.hs-box -->
 
-        <circle cx="260" cy="260" r="238" fill="url(#glow)"></circle>
-
-        <g class="spin-slow" opacity=".55">
-          <circle cx="260" cy="260" r="204" fill="none" stroke="#DCEBFB" stroke-width="1" stroke-dasharray="4 10"></circle>
-          <circle cx="260" cy="260" r="166" fill="none" stroke="#E4D9FB" stroke-width="1" stroke-dasharray="2 12"></circle>
-        </g>
-
-        <path d="M260 118 L384 330 L136 330 Z" fill="none" stroke="url(#gTri)" stroke-width="2.4" stroke-linejoin="round" opacity=".85"></path>
-        <circle cx="260" cy="118" r="9" fill="#fff" stroke="#0B63C5" stroke-width="2.6"></circle>
-        <circle cx="384" cy="330" r="9" fill="#fff" stroke="#1E9BE8" stroke-width="2.6"></circle>
-        <circle cx="136" cy="330" r="9" fill="#fff" stroke="#7B3FE4" stroke-width="2.6"></circle>
-
-        <circle cx="260" cy="260" r="56" fill="#fff" stroke="#E3ECF6" stroke-width="1.5"></circle>
-        <circle cx="260" cy="260" r="56" fill="none" stroke="url(#gTri)" stroke-width="2" opacity=".7"></circle>
-        <text x="260" y="252" text-anchor="middle" font-size="15" font-weight="800" fill="#0F1B2A" font-family="Noto Sans SC,PingFang SC,sans-serif">未来领袖</text>
-        <text x="260" y="272" text-anchor="middle" font-size="9.5" letter-spacing="1.4" fill="#78879C" font-family="Noto Sans SC,PingFang SC,sans-serif">MATRIX</text>
-
-        <g opacity=".9">
-          <circle cx="260" cy="46" r="5" fill="url(#gOr)"></circle>
-          <circle cx="438" cy="196" r="5" fill="url(#gVio)"></circle>
-          <circle cx="82" cy="196" r="5" fill="url(#gTri)"></circle>
-          <circle cx="370" cy="452" r="4" fill="#1E9BE8" opacity=".7"></circle>
-          <circle cx="150" cy="452" r="4" fill="#7B3FE4" opacity=".7"></circle>
-        </g>
-
-        <g font-family="Noto Sans SC,PingFang SC,sans-serif" font-size="11.5" fill="#3C4C63" font-weight="600">
-          <text x="260" y="86" text-anchor="middle">表达力</text>
-          <text x="420" y="352" text-anchor="middle">思辨力</text>
-          <text x="100" y="352" text-anchor="middle">学习力</text>
-        </g>
-        <text x="260" y="404" text-anchor="middle" font-family="Noto Sans SC,PingFang SC,sans-serif" font-size="10" fill="#94A3B8">创造力 · 筹备中</text>
-        <circle class="pulse" cx="260" cy="26" r="4" fill="#FF7A1A"></circle>
-      </svg>
-    </div>
-  </div>
-</section>
-
-<!-- 活动图片轮播：一张图一个活动，整张图就是链接，点进去直接到报名 -->
-<section class="hslider" aria-roledescription="轮播" aria-label="近期活动报名">
-  <div class="wrap">
-    <div class="hs-box" id="hsBox">
-      <div class="hs-track" id="hsTrack">
-        <a class="hs-slide" href="enroll.html?act=caocan" aria-label="2027 曹灿杯香港站，2027 年 1 月 24 至 27 日，亚洲国际博览馆，报名中">
-          <picture>
-            <source media="(max-width:760px)" srcset="assets/banner/s1m.jpg">
-            <img src="assets/banner/s1.jpg" width="2000" height="700" loading="eager" decoding="async" alt="2027 曹灿杯香港站 · 2027 年 1 月 24—27 日 · 亚洲国际博览馆">
-          </picture>
-        </a>
-        <a class="hs-slide" href="enroll.html?act=bilingual" aria-label="雏英杯中英双语主持人大会，省总展示 2026 年 11 月底起，全国盛典 2027 年 1 月杭州，报名中">
-          <picture>
-            <source media="(max-width:760px)" srcset="assets/banner/s2m.jpg">
-            <img src="assets/banner/s2.jpg" width="2000" height="700" loading="lazy" decoding="async" alt="雏英杯 · 中英双语主持人大会 · 省总展示 2026 年 11 月底起 · 全国盛典 2027 年 1 月杭州">
-          </picture>
-        </a>
-        <a class="hs-slide" href="enroll.html?act=sdg" aria-label="联合国青少年领袖发言人，线上海选 11 月 8 日截止">
-          <picture>
-            <source media="(max-width:760px)" srcset="assets/banner/s3m.jpg">
-            <img src="assets/banner/s3.jpg" width="2000" height="700" loading="lazy" decoding="async" alt="联合国青少年领袖发言人 · 线上海选 11 月 8 日截止 · 北外国际会议中心展演">
-          </picture>
-        </a>
-        <a class="hs-slide" href="enroll.html?act=debate" aria-label="华语辩论世界杯岭南挑战赛，校内赛到区域赛到全国赛，报名中">
-          <picture>
-            <source media="(max-width:760px)" srcset="assets/banner/s4m.jpg">
-            <img src="assets/banner/s4.jpg" width="2000" height="700" loading="lazy" decoding="async" alt="华语辩论世界杯 · 岭南挑战赛 · 校内赛到区域赛到全国赛">
-          </picture>
-        </a>
-        <a class="hs-slide" href="enroll.html?act=brtv" aria-label="北京广播电视台三大艺术考级，朗诵、主持、课本剧，常年滚动">
-          <picture>
-            <source media="(max-width:760px)" srcset="assets/banner/s5m.jpg">
-            <img src="assets/banner/s5.jpg" width="2000" height="700" loading="lazy" decoding="async" alt="北京广播电视台三大艺术考级 · 朗诵、主持、课本剧（表演）· 常年滚动">
-          </picture>
-        </a>
-      </div>
-    </div>
-    <div class="hs-bar">
-      <button class="hs-nav prev" type="button" aria-label="上一张活动">‹</button>
-      <div class="hs-dots" id="hsDots"></div>
-      <button class="hs-nav next" type="button" aria-label="下一张活动">›</button>
-      <a class="hs-all" href="https://events.leadtheway.cn/">全部活动 →</a>
-    </div>
+  <div class="hs-bar wrap">
+    <button class="hs-nav prev" type="button" aria-label="上一张">‹</button>
+    <div class="hs-dots" id="hsDots"></div>
+    <button class="hs-nav next" type="button" aria-label="下一张">›</button>
+    <a class="hs-all" href="https://events.leadtheway.cn/">全部活动 →</a>
   </div>
 </section>
 
@@ -855,11 +858,18 @@
       hsI=(k+hsN)%hsN;
       hsTrack.style.transform='translateX('+(-hsI*100)+'%)';
       hsDots.forEach(function(d,j){d.classList.toggle('on',j===hsI);});
-      hsSlides.forEach(function(s,j){s.setAttribute('tabindex',j===hsI?'0':'-1');});
+      hsSlides.forEach(function(s,j){
+        if(s.tagName==='A')s.setAttribute('tabindex',j===hsI?'0':'-1');
+      });
     }
     function hsRestart(){
-      clearInterval(hsTimer);
-      hsTimer=setInterval(function(){if(!hsPaused)hsGo(hsI+1);},5000);
+      clearTimeout(hsTimer);
+      /* 第 1 屏是平台定位，停久一点，别刚露脸就被切走 */
+      var wait=(hsI===0?9000:5000);
+      hsTimer=setTimeout(function(){
+        if(!hsPaused)hsGo(hsI+1);
+        hsRestart();
+      },wait);
     }
 
     var hsPrev=hsSec.querySelector('.hs-nav.prev'), hsNext=hsSec.querySelector('.hs-nav.next');
