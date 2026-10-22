@@ -284,6 +284,33 @@
 .hs-ev picture{display:block;height:100%;}
 .hs-ev img{width:100%;height:100%;object-fit:cover;object-position:center;display:block;}
 
+/* ── 19c. 活动 banner 的两个按钮 ─────────────────────────
+   图里不再烤 CTA，两个按钮是真链接，可聚焦、可读屏。
+   左「查看详情」去活动详情页，右「点击报名」去该活动专属报名页。 */
+.hs-evslide{position:relative;line-height:0;}
+.hs-evslide picture{display:block;}
+.hs-acts{position:absolute;left:0;right:0;bottom:0;z-index:2;
+  display:flex;align-items:center;gap:10px;line-height:normal;
+  padding:16px 5.5% 18px;
+  background:linear-gradient(to top,rgba(4,22,44,.46) 0%,rgba(4,22,44,.18) 52%,rgba(4,22,44,0) 100%);}
+.hs-btn{display:inline-flex;align-items:center;justify-content:center;
+  height:40px;padding:0 22px;border-radius:999px;white-space:nowrap;
+  font-size:14.5px;font-weight:700;letter-spacing:.3px;text-decoration:none;
+  transition:background .2s,border-color .2s;}
+.hs-btn-line{color:#fff;background:rgba(255,255,255,.14);
+  border:1px solid rgba(255,255,255,.58);}
+.hs-btn-line:hover{background:rgba(255,255,255,.26);border-color:#fff;}
+.hs-btn-fill{color:#fff;background:var(--orange,#FF7A1A);
+  border:1px solid var(--orange,#FF7A1A);
+  box-shadow:0 8px 20px -8px rgba(255,122,26,.7);}
+.hs-btn-fill:hover{background:#ff8a38;border-color:#ff8a38;}
+.hs-btn:focus-visible{outline:2px solid #fff;outline-offset:2px;}
+@media (max-width:760px){
+  .hs-acts{padding:12px 5% 14px;gap:8px;}
+  .hs-btn{height:36px;padding:0 16px;font-size:13.5px;}
+}
+@media (prefers-reduced-motion:reduce){.hs-btn{transition:none;}}
+
 @media (max-width:1020px){
   .hs-intro .hero-lg{padding:38px 0 34px;}
 }

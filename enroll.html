@@ -64,7 +64,14 @@
 
   <!-- 表单视图 -->
   <div id="formView">
-    <div class="card card-pad mb18">
+    <!-- 专属报名：带 ?act= 进来时锁死项目，这里替掉「选项目」那一步 -->
+    <div class="card card-pad mb18" id="actFixed" style="display:none;">
+      <div class="sect-title"><h2>报名项目</h2><a class="tiny" href="enroll.html" style="color:var(--blue);font-weight:600;">换个活动</a>
+    </div>
+      <div class="alert alert-info" id="actFixedBody" style="margin-bottom:0;"></div>
+    </div>
+
+    <div class="card card-pad mb18" id="actPick">
       <div class="sect-title"><h2>① 选项目</h2><span>共 7 条业务线</span>
     </div>
       <div class="opts" id="actOpts"></div>
@@ -268,6 +275,29 @@
     return m ? m[1] : null;
   }
 
+  /* 专属报名：项目已由链接指定，藏掉选项目那一步，标题也换成这个活动 */
+  function lockAct(){
+    var a = state.actData;
+    if (!a) return;
+    $('actPick').style.display = 'none';
+    $('actFixed').style.display = 'block';
+    $('actFixedBody').innerHTML = '<span><b>' + esc(a.full) + '</b><br>' + esc(a.note) + '</span>';
+
+    var s1 = document.querySelector('.step[data-s="1"]');
+    if (s1) {
+      s1.classList.remove('on'); s1.classList.add('done');
+      s1.lastElementChild.textContent = '已选项目';
+    }
+    var s2 = document.querySelector('.step[data-s="2"]');
+    if (s2) s2.classList.add('on');
+
+    var h1 = document.querySelector('.pagehead h1');
+    if (h1) h1.textContent = a.name + ' · 报名';
+    var pp = document.querySelector('.pagehead p');
+    if (pp) pp.textContent = '正在报名：' + a.full + '。选好组别、填完信息提交，老师按组别与场次联系确认。';
+    document.title = a.name + ' 报名｜畅途 · 未来领袖';
+  }
+
   function renderActs(){
     CT.API.activities().then(function(list){
       state.acts = list;
@@ -285,7 +315,7 @@
       });
       if (pre) {
         var el = $('actOpts').querySelector('[data-act="' + pre + '"]');
-        if (el) { el.querySelector('input').checked = true; selectAct(pre); }
+        if (el) { el.querySelector('input').checked = true; selectAct(pre); lockAct(); }
       }
     });
   }
