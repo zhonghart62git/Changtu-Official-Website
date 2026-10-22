@@ -2,7 +2,7 @@
 """官网本地自检：结构闭合 / 内链可达 / 禁句 / 资源版本号。
 不改任何文件，只报告。退出码 0=全通过 1=有问题。
 """
-import io, os, re, sys
+import html, io, os, re, sys
 from html.parser import HTMLParser
 from urllib.parse import urlsplit, unquote
 
@@ -37,6 +37,28 @@ BANNED = [
 # 教案型产物不做文案规则检查：这些「不是X」是教学澄清（如「五问是导航，
 # 不是机械口令」），删掉会改变原意。它们不是对外营销文案。
 COPY_EXEMPT = {'sanyuanli-course.html'}
+
+
+# 标题规则（用户 2026-10-23）：段落标题最多 4 个汉字，不用解释性或陈述性语句。
+# h2 一律查；h3/h4 里有产品名、赛事名、阶位名，字数不能一刀切，但带句读的
+# 一定是把一句话当标题用，直接判违规。
+def head_issues(s):
+    out = []
+    s = re.sub(r'<(script|style)\b.*?</\1>', '', s, flags=re.S | re.I)
+    for m in re.finditer(r'<(h2|h3|h4)\b[^>]*>(.*?)</\1>', s, re.S):
+        tag = m.group(1)
+        t = re.sub(r'<small>.*?</small>', '', m.group(2), flags=re.S)
+        t = re.sub(r'<[^>]+>', '', t)
+        t = html.unescape(t).strip()
+        t = re.sub(r'\s+', ' ', t)
+        if not t:
+            continue
+        han = len(re.findall(r'[\u4e00-\u9fff]', t))
+        if tag == 'h2' and han > 4:
+            out.append('标题超长 h2 %d 字「%s」' % (han, t[:22]))
+        if re.search(r'[，。；]', t):
+            out.append('标题带句读 %s「%s」' % (tag, t[:22]))
+    return out
 
 class P(HTMLParser):
     def __init__(self):
@@ -95,6 +117,8 @@ def main():
             elif not os.path.exists(f):
                 dead.append(h)
         if dead: issues.append('死链 %r' % (sorted(set(dead))[:5],))
+        if pg not in COPY_EXEMPT:
+            issues += head_issues(s)[:3]
         # 禁句
         if pg not in COPY_EXEMPT:
             for pat, name in BANNED:

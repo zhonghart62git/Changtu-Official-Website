@@ -325,3 +325,22 @@
   .trust-logos::-webkit-scrollbar{height:0;}
   .home .stats-band .stats{row-gap:26px;}
 }
+
+/* ── 19c 课程分册：能力 → 赛道 → 课程目录 ─────────────────────
+   用户 2026-10-23 指出「不只有两套课程」：四大能力下 12 个赛道，
+   每个赛道有自己的课程目录，演讲还是中英两套。用四列摊开，
+   避免读者以为畅途只卖两门课。 */
+.cat-map{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin:0 0 24px;}
+.cat-col{background:var(--surface,#fff);border:1px solid var(--line,#E3ECF6);border-radius:16px;padding:18px 18px 14px;}
+.cat-col h3{margin:0 0 10px;font-size:15px;color:var(--blue-deep,#08427F);letter-spacing:.2px;}
+.cat-row{display:flex;flex-direction:column;gap:3px;padding:9px 0;border-top:1px solid #EEF3FA;}
+.cat-col h3 + .cat-row{border-top:0;padding-top:2px;}
+.cat-row b{font-size:13.5px;color:var(--ink,#0F1B2A);font-weight:700;}
+.cat-row span{font-size:12px;color:var(--ink-2,#3C4C63);line-height:1.62;}
+.cat-chips{display:flex;flex-wrap:wrap;gap:5px;margin:2px 0 10px;}
+.cat-chips span{font-size:12px;color:#64748B;background:#F1F5FB;border-radius:20px;padding:3px 9px;white-space:nowrap;}
+.cat-note{margin:0;font-size:12px;color:#94A3B8;line-height:1.6;}
+.cat-col.is-soon{background:#FAFCFF;border-style:dashed;}
+.cat-col.is-soon h3{color:#94A3B8;}
+@media (max-width:1020px){.cat-map{grid-template-columns:repeat(2,1fr);}}
+@media (max-width:560px){.cat-map{grid-template-columns:1fr;}}
