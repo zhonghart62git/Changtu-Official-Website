@@ -26,7 +26,7 @@
 </script>
 <link rel="stylesheet" href="assets/site.css?v=7e56c289">
 <link rel="stylesheet" href="assets/site-v2.css?v=80a0e448">
-<link rel="stylesheet" href="assets/home.css?v=6c633c3f">
+<link rel="stylesheet" href="assets/home.css?v=32c5708b">
 <script>document.documentElement.classList.remove('no-js');</script>
 <link rel="canonical" href="https://leadtheway.cn/">
 <meta name="robots" content="index,follow">
@@ -182,11 +182,11 @@
           </picture>
         </a>
       </div>
-      <button class="hs-nav prev" type="button" aria-label="上一张活动">‹</button>
-      <button class="hs-nav next" type="button" aria-label="下一张活动">›</button>
     </div>
     <div class="hs-bar">
+      <button class="hs-nav prev" type="button" aria-label="上一张活动">‹</button>
       <div class="hs-dots" id="hsDots"></div>
+      <button class="hs-nav next" type="button" aria-label="下一张活动">›</button>
       <a class="hs-all" href="https://events.leadtheway.cn/">全部活动 →</a>
     </div>
   </div>
@@ -834,9 +834,10 @@
   }
 
   /* 活动图片轮播：5 秒自动切，悬停/聚焦暂停，圆点、箭头、触屏、键盘都能切 */
-  var hsBox=document.getElementById('hsBox');
-  if(hsBox){
-    var hsTrack=document.getElementById('hsTrack'),
+  var hsSec=document.querySelector('.hslider');
+  if(hsSec){
+    var hsBox=document.getElementById('hsBox'),
+        hsTrack=document.getElementById('hsTrack'),
         hsSlides=[].slice.call(hsTrack.children),
         hsDotBox=document.getElementById('hsDots'),
         hsN=hsSlides.length, hsI=0, hsTimer=null, hsPaused=false;
@@ -861,12 +862,13 @@
       hsTimer=setInterval(function(){if(!hsPaused)hsGo(hsI+1);},5000);
     }
 
-    hsBox.querySelector('.next').addEventListener('click',function(){hsGo(hsI+1);hsRestart();});
-    hsBox.querySelector('.prev').addEventListener('click',function(){hsGo(hsI-1);hsRestart();});
-    hsBox.addEventListener('mouseenter',function(){hsPaused=true;});
-    hsBox.addEventListener('mouseleave',function(){hsPaused=false;});
-    hsBox.addEventListener('focusin',function(){hsPaused=true;});
-    hsBox.addEventListener('focusout',function(){hsPaused=false;});
+    var hsPrev=hsSec.querySelector('.hs-nav.prev'), hsNext=hsSec.querySelector('.hs-nav.next');
+    if(hsNext)hsNext.addEventListener('click',function(){hsGo(hsI+1);hsRestart();});
+    if(hsPrev)hsPrev.addEventListener('click',function(){hsGo(hsI-1);hsRestart();});
+    hsSec.addEventListener('mouseenter',function(){hsPaused=true;});
+    hsSec.addEventListener('mouseleave',function(){hsPaused=false;});
+    hsSec.addEventListener('focusin',function(){hsPaused=true;});
+    hsSec.addEventListener('focusout',function(){hsPaused=false;});
 
     var hsX=null;
     hsBox.addEventListener('touchstart',function(e){hsX=e.touches[0].clientX;hsPaused=true;},{passive:true});
@@ -876,7 +878,7 @@
       if(Math.abs(dx)>40)hsGo(dx<0?hsI+1:hsI-1);
       hsX=null;hsPaused=false;hsRestart();
     },{passive:true});
-    hsBox.addEventListener('keydown',function(e){
+    hsSec.addEventListener('keydown',function(e){
       if(e.key==='ArrowLeft'){hsGo(hsI-1);hsRestart();}
       else if(e.key==='ArrowRight'){hsGo(hsI+1);hsRestart();}
     });
