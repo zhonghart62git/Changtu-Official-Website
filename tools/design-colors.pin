@@ -1,0 +1,8 @@
+# 官网采纳的品牌颜色版本。由 tools/check_contract.py 读写，不要手改。
+# 换版本：python tools/check_contract.py --adopt <miniapp 提交 SHA>
+# 自行改色后：python tools/check_contract.py --rehash
+repo = zhonghart62git/changtu-compass-miniapp
+path = design/changtu-design-tokens.css
+commit = 915bc2e579b4b5e49ad71b77319c46ab01fdc05d
+colors-sha256 = 4694e72321f5d31476b8ea1fbf156fb1bbcfb0c46a590411e929bddffcc45699
+colors-count = 84

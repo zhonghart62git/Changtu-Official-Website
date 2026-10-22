@@ -10,18 +10,23 @@ python3 -m http.server 4180 --directory .
 
 GitHub Pages 使用 `main` 分支根目录，域名为 `https://leadtheway.cn/`。push 到 `main` 即自动构建，约 1 分钟生效。
 
-**仓库边界、与 miniapp 的三个接口点、发布方式见 [BOUNDARIES.md](BOUNDARIES.md)。** 改完代码跑一次契约自检：
+**仓库边界、与 miniapp 的三个接口点、发布方式见 [BOUNDARIES.md](BOUNDARIES.md)。** 改完代码跑一次自检：
 
 ```bash
 python tools/check_contract.py
 ```
 
-颜色来自 miniapp 仓库的 `design/changtu-design-tokens.css`，`assets/design-colors.css` 是它的生成副本，**不要手改**。需要更新颜色时在该仓库运行：
+自检默认全程离线：核对颜色指纹、两个入口地址是否一致、颜色文件是否保留来源说明。
+
+颜色令牌的真源在 miniapp 仓库的 `design/changtu-design-tokens.css`，`assets/design-colors.css` 是它的生成副本。**交接单位是完整提交 SHA，不是「最新」**——官网采纳哪一版，记在 `tools/design-colors.pin` 里（commit + 变量指纹）。
 
 ```bash
-node scripts/sync-design-colors.cjs --website-root /workspace/Changtu-Official-Website
-node scripts/sync-design-colors.cjs --check --website-root /workspace/Changtu-Official-Website
+python tools/check_contract.py --check-upstream <sha>   # 只读：看某版与本地差在哪
+python tools/check_contract.py --adopt <sha>            # 采纳某版并登记
+python tools/check_contract.py --rehash                 # 官网自行改色后重新登记
 ```
+
+miniapp 改色不会动到官网文件，也不会让官网自检失败；官网改色也不影响 miniapp。两边各自发布。
 
 保留现有排版，不引入新的 UI 框架。修改 CSS 或脚本后更新 HTML 中的内容哈希查询参数。
 

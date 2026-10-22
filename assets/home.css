@@ -81,11 +81,7 @@
 .home .mx-head .why span{display:block;margin-top:4px;font-size:12px;
   font-weight:400;color:var(--text-3);letter-spacing:0;line-height:1.6;}
 
-/* ── 7. 首屏第二段：主张之后紧跟证据 ───────────────────── */
-.home .hero-lg .lead-sub{margin-top:14px;max-width:530px;font-size:14.5px;
-  line-height:1.85;color:var(--ink-2);}
-
-/* ── 8. AI 区块：全站唯一一段浅紫底，标出「这一层和别处不同」 ── */
+/* ── 7. AI 区块：全站唯一一段浅紫底，标出「这一层和别处不同」 ── */
 .ai-sec{background:linear-gradient(160deg,#FCFAFF 0%,var(--violet-tint) 62%,#F7F4FF 100%);
   border-top:1px solid var(--violet-line);border-bottom:1px solid var(--violet-line);}
 .ai-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;}
