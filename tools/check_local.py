@@ -86,6 +86,21 @@ def main():
             print('✗', pg)
             for i in issues[:6]:
                 print('    ', i)
+    # 占位素材：不阻断发布（用户允许先用编的素材占位），但每次都要报出来。
+    # 假案例一旦忘了替换就挂在线上卖给校长，所以宁可每次都烦一遍。
+    phs = []
+    for pg in pages:
+        path = os.path.join(ROOT, pg)
+        if not os.path.exists(path):
+            continue
+        for n, line in enumerate(io.open(path, encoding='utf-8'), 1):
+            for m in re.finditer(r'data-ph="([^"]+)"', line):
+                phs.append((pg, n, m.group(1)))
+    if phs:
+        print('\n⚠ 占位素材 %d 处（换真实素材时，同时删掉 class="ph"、.ph-badge、data-ph）' % len(phs))
+        for pg, n, lab in phs:
+            print('    %-14s L%-4d %s' % (pg, n, lab))
+
     print('\n检查 %d 个页面，%d 个有问题' % (len(pages), bad))
     return 1 if bad else 0
 

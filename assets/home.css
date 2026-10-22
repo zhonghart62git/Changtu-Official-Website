@@ -224,6 +224,66 @@
   .dr{grid-template-columns:1fr;gap:14px;padding:26px 0;}
 }
 
+/* ── 18. 占位素材标记 ───────────────────────────────────
+   用户要求先用编的素材占位，晚些替换真素材。占位必须一眼能认出来，
+   否则两个月后会忘了替换，假案例就真的挂在线上卖给校长了。
+   约定：任何占位容器加 class="ph" + data-ph="用途"，
+   替换真素材时同时删掉 .ph / .ph-badge / data-ph。
+   发布前跑 tools/list_placeholders.py 或看 check_local.py 的末尾提醒。 */
+.ph{position:relative;}
+.ph-badge{position:absolute;top:-10px;left:16px;z-index:3;
+  display:inline-block;padding:5px 10px;border-radius:20px;
+  font-size:10.5px;font-weight:700;letter-spacing:.4px;line-height:1;
+  background:#FFF4E6;color:#9A4A00;border:1px solid #FFD8A8;
+  white-space:nowrap;box-shadow:0 2px 6px rgba(154,74,0,.08);}
+
+/* 教案页示意 + 三段表并排 */
+.lesson-grid{display:grid;grid-template-columns:1.28fr .72fr;gap:16px;align-items:start;margin-top:16px;}
+.lesson-grid .lesson{margin-top:0;}
+.doc-mock{margin:0;border:1px dashed var(--violet-200);border-radius:14px;
+  background:var(--surface);overflow:hidden;}
+.doc-bar{display:flex;justify-content:space-between;gap:10px;padding:11px 16px;
+  background:var(--bg-2);border-bottom:1px solid var(--line);
+  font-size:11px;color:var(--text-3);letter-spacing:.3px;}
+.doc-body{padding:16px 16px 18px;}
+.doc-h{font-size:14.5px;font-weight:800;margin:0 0 10px;letter-spacing:-.2px;line-height:1.5;}
+.doc-line{display:grid;grid-template-columns:54px 1fr;gap:10px;padding:9px 0;
+  border-top:1px dashed var(--line);font-size:12px;line-height:1.72;}
+.doc-line:first-of-type{border-top:none;padding-top:0;}
+.doc-line b{font-size:11px;color:var(--violet-600);font-weight:700;letter-spacing:.2px;}
+.doc-line span{color:var(--ink-2);}
+.doc-mock figcaption{padding:10px 16px;background:var(--bg-2);
+  border-top:1px solid var(--line);font-size:11px;color:var(--text-3);}
+
+/* 教学成效条 */
+.effect{margin-top:16px;padding:22px 24px 18px;border-radius:14px;
+  background:var(--surface);border:1px dashed var(--violet-200);}
+.effect-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
+.effect-grid .e b{display:block;font-size:27px;font-weight:800;letter-spacing:-.6px;
+  color:var(--violet-700);font-variant-numeric:tabular-nums;}
+.effect-grid .e span{display:block;font-size:12px;color:var(--text-3);margin-top:3px;}
+.effect-note{margin:15px 0 0;padding-top:13px;border-top:1px dashed var(--line);
+  font-size:11.5px;color:var(--text-3);line-height:1.7;}
+
+/* 机构案例 */
+.client-case{margin-top:16px;padding:26px 28px;border-radius:16px;
+  background:var(--surface);border:1px dashed var(--violet-200);
+  display:grid;grid-template-columns:1fr 300px;gap:34px;align-items:center;}
+.client-case .cc-k{font-size:11.5px;font-weight:800;letter-spacing:1.5px;color:var(--violet-600);}
+.client-case h3{font-size:18px;margin:8px 0 10px;letter-spacing:-.2px;}
+.client-case p{font-size:14px;line-height:1.85;color:var(--ink-2);margin:0 0 9px;}
+.client-case .cc-meta{font-size:12.5px;color:var(--text-3);line-height:1.8;}
+.client-case blockquote{margin:0;padding-left:18px;border-left:2px solid var(--violet);
+  font-size:14px;line-height:1.85;color:var(--ink);}
+.client-case cite{display:block;margin-top:10px;font-style:normal;
+  font-size:12px;color:var(--text-3);}
+
+@media (max-width:1020px){
+  .lesson-grid{grid-template-columns:1fr;}
+  .effect-grid{grid-template-columns:1fr;}
+  .client-case{grid-template-columns:1fr;gap:20px;}
+}
+
 @media (max-width:1020px){
   .aud-grid{grid-template-columns:repeat(2,minmax(0,1fr));}
   .ai-grid{grid-template-columns:repeat(2,minmax(0,1fr));}
