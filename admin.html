@@ -159,20 +159,24 @@
 
         <div class="grid2" style="gap:18px;">
           <div class="card card-pad">
-            <div class="sect-title"><h2>已收金额</h2><span>按已确认到账统计</span></div>
-            <div style="font-size:34px;font-weight:800;letter-spacing:-1.5px;color:var(--ok);">¥<span id="kAmount">0</span></div>
+            <div class="sect-title"><h2>已收金额</h2><span>按已确认到账统计</span>
+    </div>
+            <div style="font-size:34px;font-weight:800;letter-spacing:-1.5px;color:var(--ok);">¥<span id="kAmount">0</span>
+    </div>
             <p class="tiny muted mt8">应收合计 ¥<span id="kDue">0</span>　待收 ¥<span id="kLeft">0</span></p>
             <hr class="sep">
             <div class="tiny muted">后台当前数据存于本机浏览器。换电脑或换浏览器看不到彼此的报名，请固定用同一台设备 + 同一浏览器管理，并定期导出 CSV 备份。</div>
           </div>
           <div class="card card-pad">
-            <div class="sect-title"><h2>各项目报名</h2><span>人数 / 已缴</span></div>
+            <div class="sect-title"><h2>各项目报名</h2><span>人数 / 已缴</span>
+    </div>
             <div id="actBars"></div>
           </div>
         </div>
 
         <div class="card card-pad mt18">
-          <div class="sect-title"><h2>待办提醒</h2><span>需要跟进的事</span></div>
+          <div class="sect-title"><h2>待办提醒</h2><span>需要跟进的事</span>
+    </div>
           <div id="todoList"></div>
         </div>
       </div>
@@ -230,7 +234,8 @@
           <span><b>这里的金额是初始参考值，请务必按当期实际收费标准修改。</b>修改后对之后的新报名生效，已提交的订单金额不变。</span>
         </div>
         <div class="card card-pad">
-          <div class="sect-title"><h2>各项目报名费</h2><span>单位：元</span></div>
+          <div class="sect-title"><h2>各项目报名费</h2><span>单位：元</span>
+    </div>
           <div id="feeList"></div>
           <div class="mt24"><button class="btn btn-p btn-sm" type="button" id="btnSaveFees">保存收费设置</button></div>
         </div>
@@ -240,7 +245,8 @@
       <div class="tabpane" id="pane-settings">
         <div class="grid2" style="gap:18px;align-items:start;">
           <div class="card card-pad">
-            <div class="sect-title"><h2>收款与联系</h2><span>显示在学员端</span></div>
+            <div class="sect-title"><h2>收款与联系</h2><span>显示在学员端</span>
+    </div>
             <div class="field">
               <label>收款微信号 / 手机号</label>
               <input type="text" id="setWechat">
@@ -266,7 +272,8 @@
           </div>
 
           <div class="card card-pad">
-            <div class="sect-title"><h2>报名开关</h2><span>控制线上报名入口</span></div>
+            <div class="sect-title"><h2>报名开关</h2><span>控制线上报名入口</span>
+    </div>
             <label class="opt" id="openToggle" style="border-radius:12px;padding:13px 16px;width:100%;">
               <input type="checkbox" id="setOpen">
               <span class="small">开放线上报名</span>
@@ -275,7 +282,8 @@
               关闭后，报名页提交会提示「暂未开放」，适合名额已满或活动结束的时段。已提交的报名不受影响。
             </p>
             <hr class="sep">
-            <div class="sect-title"><h2>后台口令</h2><span>请及时修改</span></div>
+            <div class="sect-title"><h2>后台口令</h2><span>请及时修改</span>
+    </div>
             <div class="field">
               <label>新口令</label>
               <input type="password" id="setPass" placeholder="至少 6 位">
@@ -286,7 +294,8 @@
             </div>
             <button class="btn btn-s btn-sm" type="button" id="btnSavePass">修改口令</button>
             <hr class="sep">
-            <div class="sect-title"><h2>数据</h2><span>备份与清空</span></div>
+            <div class="sect-title"><h2>数据</h2><span>备份与清空</span>
+    </div>
             <p class="tiny muted" style="line-height:1.9;margin-bottom:12px;">
               数据存在本机浏览器，清空浏览器数据会一并清除。<b>建议每周导出一次 CSV 备份。</b>
             </p>
@@ -410,7 +419,8 @@
     if (nearFull.length) todos.push({ t: nearFull.length + ' 个场次即将满员', d: nearFull.map(function(x){ return x.tag + '（剩 ' + x.left + '）'; }).join('、'), tab: 'sessions' });
 
     if (!todos.length) {
-      $('todoList').innerHTML = '<div class="alert alert-ok"><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg><span>暂时没有待办事项，一切正常。</span></div>';
+      $('todoList').innerHTML = '<div class="alert alert-ok"><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg><span>暂时没有待办事项，一切正常。</span>
+    </div>';
     } else {
       $('todoList').innerHTML = todos.map(function(x){
         return '<div class="flex between center wrapf gap12" style="padding:12px 0;border-bottom:1px solid #F0F5FA;">' +
@@ -457,7 +467,8 @@
         : o.status === 'refunded' ? '<span class="tag tag-gray">已退款</span>'
         : '<span class="tag tag-gray">已取消</span>';
       var sess = o.session
-        ? '<div class="act-cell" style="white-space:normal;min-width:150px;"><b style="font-size:12.5px;">' + esc(o.session.tag || '场次') + '</b><span>' + esc(o.session.date) + ' ' + esc(o.session.time).split('（')[0] + '</span></div>'
+        ? '<div class="act-cell" style="white-space:normal;min-width:150px;"><b style="font-size:12.5px;">' + esc(o.session.tag || '场次') + '</b><span>' + esc(o.session.date) + ' ' + esc(o.session.time).split('（')[0] + '</span>
+    </div>'
         : '<span class="tag tag-orange">未选</span>';
       var ops = '';
       if (o.status === 'pending') {
@@ -473,7 +484,8 @@
 
       return '<tr>' +
         '<td class="mono" style="font-weight:700;color:var(--blue-deep);">' + esc(o.code) + '</td>' +
-        '<td class="cell-wrap"><div class="act-cell"><b>' + esc(o.actShort) + '</b><span>' + esc(o.group) + (o.item ? ' · ' + esc(o.item.split('、')[0]) : '') + '</span></div></td>' +
+        '<td class="cell-wrap"><div class="act-cell"><b>' + esc(o.actShort) + '</b><span>' + esc(o.group) + (o.item ? ' · ' + esc(o.item.split('、')[0]) : '') + '</span>
+    </div></td>' +
         '<td>' + esc(o.student) + '<div class="tiny muted">' + esc(o.grade || '') + '</div></td>' +
         '<td>' + esc(o.parent) + '</td>' +
         '<td class="mono" style="font-size:12.5px;">' + esc(o.phone) + '</td>' +
@@ -612,7 +624,8 @@
             '<p class="small muted">' + esc(s.date) + '　' + esc(s.time) + '　·　' + esc(s.place) + '</p>' +
           '</div>' +
           '<div style="text-align:right;flex:none;">' +
-            '<div style="font-size:17px;font-weight:800;">' + s.used + '<span class="tiny muted" style="font-weight:500;"> / ' + s.cap + '</span></div>' +
+            '<div style="font-size:17px;font-weight:800;">' + s.used + '<span class="tiny muted" style="font-weight:500;"> / ' + s.cap + '</span>
+    </div>' +
             '<div class="tiny muted">已选 / 容量</div>' +
           '</div>' +
         '</div>' +

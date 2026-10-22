@@ -52,7 +52,8 @@
 
   <!-- 查询 -->
   <div class="card card-pad mb18" id="queryCard">
-    <div class="sect-title"><h2>查我的报名</h2><span>手机号为唯一凭证</span></div>
+    <div class="sect-title"><h2>查我的报名</h2><span>手机号为唯一凭证</span>
+    </div>
     <div class="grid2">
       <div class="field" id="f-qphone">
         <label>家长手机号<span class="req">*</span></label>
@@ -132,7 +133,8 @@
       state.orders = list;
       render();
     }).catch(function(err){
-      $('result').innerHTML = '<div class="alert alert-bad"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16.5v.5"/></svg><span>' + esc(err.message) + '</span></div>';
+      $('result').innerHTML = '<div class="alert alert-bad"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16.5v.5"/></svg><span>' + esc(err.message) + '</span>
+    </div>';
     });
   }
 
@@ -180,7 +182,8 @@
         html += '<div class="alert alert-warn">' +
           '<svg viewBox="0 0 24 24"><path d="M12 9v5M12 17.5v.5"/><path d="M10.3 3.9L2.6 17.2A1.9 1.9 0 0 0 4.3 20h15.4a1.9 1.9 0 0 0 1.7-2.8L13.7 3.9a1.9 1.9 0 0 0-3.4 0z"/></svg>' +
           '<span>报名费尚未到账。微信转账至 <b>' + esc(CT.API.settings().wechat) + '</b>，备注「<b>' + esc(o.code) + ' ' + esc(o.student) + '</b>」。' +
-          '场次可以先选，名额会为你保留至活动前 3 天。</span></div>';
+          '场次可以先选，名额会为你保留至活动前 3 天。</span>
+    </div>';
       }
 
       // 已选场次
@@ -211,7 +214,8 @@
 
       // 场次选择面板
       html += '<div id="picker-' + esc(o.code) + '" style="display:none;margin-top:18px;padding-top:18px;border-top:1px solid var(--line);">' +
-        '<div class="sect-title"><h2 style="font-size:16px;">选择场次</h2><span>同项目内可改期，满员场次不可选</span></div>' +
+        '<div class="sect-title"><h2 style="font-size:16px;">选择场次</h2><span>同项目内可改期，满员场次不可选</span>
+    </div>' +
         '<div id="sessList-' + esc(o.code) + '"></div>' +
         '<div class="flex gap12 mt18"><button class="btn btn-ghost btn-sm" type="button" data-close="' + esc(o.code) + '">收起</button></div>' +
       '</div>';
@@ -267,7 +271,8 @@
 
     CT.API.sessions(o.act).then(function(ss){
       if (!ss.length) {
-        list.innerHTML = '<div class="alert alert-info"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7.5v.5"/></svg><span>该项目场次正在排期中，公布后会在公众号通知，也可以先致电 180 3882 9260 预登记意向。</span></div>';
+        list.innerHTML = '<div class="alert alert-info"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7.5v.5"/></svg><span>该项目场次正在排期中，公布后会在公众号通知，也可以先致电 180 3882 9260 预登记意向。</span>
+    </div>';
       } else {
         list.innerHTML = ss.map(function(s){
           var dp = dateParts(s.date);
@@ -276,7 +281,8 @@
             ? '<span class="tag tag-bad">已满</span>'
             : '<b>' + s.left + '</b><span>剩余名额</span>';
           return '<div class="' + cls + '" ' + (s.full && o.sessionId !== s.id ? '' : 'data-sess="' + esc(s.id) + '" data-code="' + esc(code) + '"') + ' role="button" tabindex="0">' +
-            '<div class="date"><b>' + esc(dp.day) + '</b><span>' + esc(dp.mon) + '</span></div>' +
+            '<div class="date"><b>' + esc(dp.day) + '</b><span>' + esc(dp.mon) + '</span>
+    </div>' +
             '<div class="info">' +
               '<h4>' + esc(s.tag || '场次') + (o.sessionId === s.id ? ' <span class="tag tag-ok">当前</span>' : '') + '</h4>' +
               '<p>' + esc(s.time) + '<br>' + esc(s.place) + '</p>' +

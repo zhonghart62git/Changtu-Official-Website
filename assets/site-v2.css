@@ -709,3 +709,9 @@ a.mx-item:hover{background:var(--d-tint);border-color:var(--d-line);transform:tr
   .track-card{padding:22px 20px;}
   .track-card h3{font-size:18px;}
 }
+
+/* ── 备案号（页脚）─────────────────────────────────────── */
+.icp-num{color:inherit;text-decoration:none;white-space:nowrap;}
+.icp-num::before{content:"　｜　";opacity:.55;}
+.icp-num.solo::before{content:none;}
+.icp-num:hover{color:var(--blue);text-decoration:underline;}
