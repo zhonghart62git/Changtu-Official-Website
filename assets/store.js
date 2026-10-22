@@ -315,8 +315,6 @@
       if (!s) return reject(new Error('场次不存在。'));
       if (s.act !== o.act) return reject(new Error('这个场次不属于你报名的项目。'));
 
-      var used = bookCount(db, s.id);
-      if (o.sessionId !== s.id && used >= (s.cap || 0)) return reject(new Error('这个场次已满，请选择其他场次。'));
 
       o.sessionId = s.id;
       o.updatedAt = nowISO();
