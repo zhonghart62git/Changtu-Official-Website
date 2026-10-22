@@ -464,6 +464,9 @@ a.mx-item:hover{background:var(--d-tint);border-color:var(--d-line);transform:tr
 .mx-sec.is-violet .mx-dhead .dk{color:var(--violet-600);}
 .mx-dhead h2{font-size:clamp(24px,2.8vw,32px);margin:0 0 8px;color:var(--text);letter-spacing:-.3px;}
 .mx-dhead p{font-size:15px;color:var(--text-2);line-height:1.7;margin:0;}
+/* 家长语言在前，官方表述在后：读者先对上号，再看口径 */
+.mx-dhead p.mx-plain{font-size:17px;font-weight:800;color:var(--blue-700);line-height:1.45;margin:0 0 5px;}
+.mx-sec.is-violet .mx-dhead p.mx-plain{color:var(--violet-700);}
 .mx-dmeta{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px;}
 .mx-dmeta span{
   font-size:12px;color:var(--text-3);background:var(--surface);

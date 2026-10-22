@@ -4,14 +4,14 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>关于畅途｜赛事组织方 · 课程研发方 · 考级服务方</title>
-<meta name="description" content="畅途文化科技 · 未来领袖。连续 12 年承办广东曹灿杯青少年朗诵展示活动，累计服务 909 家广东合作机构、12,499 人次学员。自研破界三原力与破界 MUN 课程体系，提供两类社会艺术水平考级服务。">
+<meta name="description" content="畅途文化科技 · 未来领袖。连续 12 年承办广东曹灿杯青少年朗诵展示活动，累计服务 909 家广东合作机构、12,499 人次学员，覆盖广东 21 个地级市并延伸至港澳。自研破界三原力与破界 MUN 课程体系，提供两类社会艺术水平考级服务。">
 <meta name="keywords" content="畅途文化科技,未来领袖,广东曹灿杯承办,破界三原力,破界MUN,教育合作联盟">
 <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
 <link rel="icon" type="image/png" sizes="64x64" href="assets/favicon-64.png">
 <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
 <meta name="theme-color" content="#0B63C5">
 <link rel="stylesheet" href="assets/site.css?v=2fcc0aff">
-<link rel="stylesheet" href="assets/site-v2.css?v=d0cb52b2">
+<link rel="stylesheet" href="assets/site-v2.css?v=8f4c0419">
 <script>document.documentElement.classList.remove('no-js');</script>
 <link rel="canonical" href="https://leadtheway.cn/about.html">
 <meta name="robots" content="index,follow">
@@ -56,6 +56,22 @@
   .prin h3{font-size:17px;font-weight:700;margin:8px 0 8px;}
   .prin p{font-size:14px;color:var(--text-2);line-height:1.8;margin:0;}
 
+  /* 团队卡 */
+  .team-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;}
+  .tm{background:var(--surface-2);border:1px solid var(--border);border-radius:var(--r-lg);padding:26px 24px;
+    transition:box-shadow var(--dur) var(--ease),transform var(--dur) var(--ease);}
+  .tm:hover{box-shadow:var(--shadow-md);transform:translateY(-2px);}
+  .tm .tm-n{font-size:11.5px;font-weight:800;letter-spacing:1.6px;color:var(--blue-400);}
+  .tm h3{font-size:19px;font-weight:800;margin:8px 0 4px;letter-spacing:-.2px;}
+  .tm .tm-r{display:block;font-size:12.5px;font-weight:700;color:var(--violet-600);letter-spacing:.3px;margin-bottom:12px;}
+  .tm p{font-size:13.5px;color:var(--text-2);line-height:1.85;margin:0;}
+
+  /* 全国路径 */
+  .scale-proof{margin-top:22px;padding:22px 24px;background:var(--surface);
+    border:1px solid var(--border);border-left:3px solid var(--violet);border-radius:12px;}
+  .scale-proof p{font-size:14.5px;line-height:1.9;color:var(--text-2);margin:0;}
+  .scale-proof b{color:var(--text);}
+
   /* 事实表 */
   .fact-table{width:100%;border-collapse:collapse;font-size:14.5px;}
   .fact-table th,.fact-table td{text-align:left;padding:14px 16px;border-bottom:1px solid var(--border);vertical-align:top;}
@@ -65,8 +81,12 @@
   @media (max-width:760px){
     .phase-row{grid-template-columns:1fr;gap:8px;}
     .prin-grid{grid-template-columns:1fr;}
+    .team-grid{grid-template-columns:1fr;}
     .fact-table th{width:110px;font-size:12.5px;padding:12px 10px;}
     .fact-table td{padding:12px 10px;font-size:13.5px;}
+  }
+  @media (max-width:1020px){
+    .team-grid{grid-template-columns:repeat(2,1fr);}
   }
 </style>
 </head>
@@ -113,7 +133,7 @@
     <h1>十二年，<br>把「上台」变成<span class="grad-violet">一条可走的路</span></h1>
     <p class="lead">
       畅途文化科技是广东的青少年素质教育机构，办赛、研发课程、组织考级三件事由同一个团队做。
-      十二年前从一场朗诵展演开始，现在是四域十二技能的矩阵、两套自研课程、七个项目的出口。
+      十二年前从一场朗诵展演开始，现在是四域十二技能的矩阵、两套自研课程、四类赛事和两类考级。
     </p>
   </div>
 </section>
@@ -127,7 +147,7 @@
     </div>
     <div class="stat"><b>12,499<i>人次</i></b><span>历届参赛学员</span>
     </div>
-    <div class="stat"><b>7<i>条</i></b><span>业务线，一站配齐</span>
+    <div class="stat"><b>21<i>市</i></b><span>覆盖广东全省，延伸至港澳</span>
     </div>
   </div>
 </div>
@@ -212,6 +232,76 @@
   </div>
 </section>
 
+<!-- 团队 -->
+<section>
+  <div class="wrap">
+    <div class="sec-head rv2">
+      <div class="bar"></div>
+      <h2>谁在做这件事 <small>Team</small></h2>
+      <p>三个人，三种背景：区域渠道、AI 与战略、双语与国际。机构怎么谈、课程怎么设计、跨区域怎么复制，分别有人负责。</p>
+    </div>
+    <div class="team-grid">
+      <article class="tm rv2">
+        <span class="tm-n">01</span>
+        <h3>天道</h3>
+        <span class="tm-r">机构渠道与区域经营</span>
+        <p>北大应用心理学背景、计算机高级工程师，深耕青少年素质教育 20 余年，连续 12 年负责曹灿杯广东地区运营。央视朗诵大赛全国十佳、《破解三原力》创始人，长期连接广东教育机构与学校，负责区域市场判断、机构渠道拓展与项目经营。</p>
+      </article>
+      <article class="tm rv2">
+        <span class="tm-n">02</span>
+        <h3>Hart</h3>
+        <span class="tm-r">战略合作与项目共建</span>
+        <p>清华大学计算机、哥伦比亚大学运筹学背景，长期从事 AI 产品、战略咨询与商业模式设计。曾任清华大学学生艺术团话剧队队长，兼具技术、策略与内容表达能力，负责合作项目评估、全国资源协同及跨区域增长模式设计。</p>
+      </article>
+      <article class="tm rv2">
+        <span class="tm-n">03</span>
+        <h3>方圆</h3>
+        <span class="tm-r">双语教育与国际合作</span>
+        <p>30 年双语教学与青少年教育实践经验，曾任伦敦汉语教育项目特聘教师、北京广播影视培训中心师训特聘教师。长期参与中英教育与文化交流，兼具课程适配、语言表达和活动实践能力，设计双语项目、连接国际教育合作资源。</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- 全国路径 -->
+<section style="background:var(--bg-2);">
+  <div class="wrap">
+    <div class="sec-head rv2">
+      <div class="bar"></div>
+      <h2>广东验证，大湾区复制，全国共建 <small>How We Scale</small></h2>
+      <p>一套东西在广东跑通之后，往外交接要解决三件事：找谁谈、怎么招、现场怎么交付。下面三段是已经跑过一遍的流程。</p>
+    </div>
+
+    <div class="phase rv2">
+      <div class="phase-row">
+        <span class="pn">STEP 01</span>
+        <div>
+          <h3>广东验证</h3>
+          <p>对产品形态清晰、具备基本市场素材的项目，首阶段以 30 至 50 家重点机构为触达范围，争取形成 10 至 20 家深度沟通，推动其中 3 至 5 家进入首批合作验证。具体目标按项目类型、城市和合作周期共同确定。</p>
+        </div>
+      </div>
+      <div class="phase-row">
+        <span class="pn">STEP 02</span>
+        <div>
+          <h3>大湾区复制</h3>
+          <p>覆盖广东 21 个地级市，延伸至香港、澳门，累计服务 909 家语言艺术与思辨教育机构、公办学校与国际学校。广州、深圳、香港三地积累了不同规模活动的交付经验，单城试点、区域赛事、多城市联动都做过。</p>
+        </div>
+      </div>
+      <div class="phase-row">
+        <span class="pn">STEP 03</span>
+        <div>
+          <h3>全国共建</h3>
+          <p>对具备跨区域潜力的项目，先在广东完成首批验证，在实际运营里沉淀渠道选择、机构合作、招生组织与现场交付的方法，再向大湾区及其他省市复制。工作范围覆盖项目推广、机构组织、报名服务、赛务统筹、现场管理和用户沟通。</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="scale-proof rv2">
+      <p><b>一个可以核对的例子：</b>华语辩论世界杯与亚青赛在广东启动首年，向全国赛阶段输送的参赛队伍约占当年全国总量的四分之一。这条「区域启动 → 全国晋级」的路已经走过一遍。</p>
+    </div>
+  </div>
+</section>
+
 <!-- 做事原则 -->
 <section>
   <div class="wrap">
@@ -258,11 +348,12 @@
         <tbody>
           <tr><th>主体名称</th><td>畅途文化科技 · 未来领袖</td></tr>
           <tr><th>所在地</th><td>广东 · 广州（来访请先电话预约）</td></tr>
+          <tr><th>覆盖区域</th><td>广东 21 个地级市，延伸至香港、澳门</td></tr>
           <tr><th>核心业务</th><td>青少年赛事组织 · 课程研发 · 社会艺术水平考级服务</td></tr>
           <tr><th>赛事承办</th><td>曹灿杯青少年朗诵展示活动 广东展区（连续 12 年）</td></tr>
           <tr><th>自研课程</th><td>破界三原力（三级九册 · 144 课时）· 破界 MUN（六阶 · 156 课时）</td></tr>
           <tr><th>考级服务</th><td>北京广播电视台语言类 · 浙江音乐学院社会艺术水平考级</td></tr>
-          <tr><th>服务规模</th><td>累计 909 家广东合作机构 · 12,499 人次学员</td></tr>
+          <tr><th>服务规模</th><td>累计 909 家广东合作机构 · 12,499 人次参赛学员 · 累计服务超 5 万组家庭 · 执行赛事考级与主题活动数百场</td></tr>
           <tr><th>合作方式</th><td>未来领袖教育合作联盟：启程伙伴 / 同行伙伴 / 领航伙伴</td></tr>
           <tr><th>咨询电话</th><td><a href="tel:18038829260" style="color:var(--blue);font-weight:600;">180 3882 9260</a>　/　180 3882 9261（微信同号）</td></tr>
         </tbody>
