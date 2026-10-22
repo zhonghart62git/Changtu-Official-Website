@@ -1,7 +1,6 @@
 User-agent: *
 Allow: /
 
-Disallow: /admin.html
 Disallow: /my.html
 Disallow: /enroll.html
 
