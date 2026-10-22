@@ -25,7 +25,7 @@
 }
 </script>
 <link rel="stylesheet" href="assets/site.css?v=d9e94bb9">
-<link rel="stylesheet" href="assets/site-v2.css?v=4ca709b0">
+<link rel="stylesheet" href="assets/site-v2.css?v=28d0d35d">
 <script>document.documentElement.classList.remove('no-js');</script>
 <link rel="canonical" href="https://leadtheway.cn/">
 <meta name="robots" content="index,follow">
@@ -577,7 +577,7 @@
     <div class="qr-band rv2">
       <div>
         <h3>扫码进小程序，<br>报名、查进度、看课程都在里面</h3>
-        <p>官网适合了解全貌，小程序适合日常使用。两边数据是通的——在官网报的名，小程序里能查到。</p>
+        <p>官网适合了解全貌，小程序适合日常使用。报名、查报名号、选场次，在官网就能完成。</p>
         <div class="qr-list">
           <span>在线报名</span><span>查报名号</span><span>选场次</span><span>课程进度</span><span>我的记录</span>
         </div>
@@ -748,14 +748,20 @@
   }else{showAll();}
   setTimeout(showAll,3000); /* 兜底：任何情况下内容都可见 */
 
-  /* 小程序码：文件不存在时优雅降级，不显示破图 */
+  /* 小程序码：图片未就位时改成对访客可用的入口，不露开发信息、不显示破图 */
   var qr=document.getElementById('miniappQr');
   if(qr){
     qr.addEventListener('error',function(){
-      var ph=document.createElement('div');
-      ph.className='qr-ph';
-      ph.innerHTML='<div>小程序码</div><div>待替换为正式码</div><div class="ph-hint">assets/miniapp-qr.png</div>';
-      if(qr.parentNode)qr.parentNode.replaceChild(ph,qr);
+      var card=qr.closest('.qr-card');
+      if(card){
+        card.innerHTML='<div class="qr-fallback">'+
+          '<b>小程序即将开放</b>'+
+          '<span>现在可以在官网完成报名。小程序上线后，报名记录会同步过去。</span>'+
+          '<a class="btn btn-p btn-sm" href="enroll.html">先在线报名</a>'+
+          '</div>';
+      }
+      var head=document.querySelector('#miniapp .qr-band h3');
+      if(head)head.innerHTML='报名现在就能办，<br>小程序上线后再搬到手机上';
     });
   }
 
