@@ -1,0 +1,96 @@
+/* ============================================================
+   畅途官网 · 首页专属样式层
+   所有规则都挂在 body.home 下，不影响其他 13 个页面。
+   用途：建立区块节奏（三级标题）、首屏与背书条、受众分流、卡片等高。
+   ============================================================ */
+
+/* ── 1. 标题分级：让每屏不再一样重 ───────────────────────
+   原来全站 24 处共用同一个 .sec-head，视觉重量完全相同，
+   读者翻到第三屏就失去方向。这里分三级：
+   sec-lg 核心区（三重身份 / 矩阵 / 课程 / 赛事）
+   sec-sm 次要区（近期活动 / 四步 / 联盟 / 分流）
+   默认    收尾区（小程序 / FAQ / 联系） */
+.home .sec-head.sec-lg{margin-bottom:50px;}
+.home .sec-head.sec-lg h2{font-size:clamp(28px,3.9vw,44px);letter-spacing:-1px;line-height:1.24;}
+.home .sec-head.sec-lg p{font-size:16.5px;max-width:640px;}
+
+.home .sec-head.sec-sm{margin-bottom:26px;}
+.home .sec-head.sec-sm .bar{width:30px;height:4px;margin-bottom:12px;}
+.home .sec-head.sec-sm h2{font-size:clamp(20px,2.3vw,25px);letter-spacing:-.2px;}
+.home .sec-head.sec-sm h2 small{font-size:10.5px;letter-spacing:1.6px;}
+.home .sec-head.sec-sm p{font-size:14px;margin-top:9px;max-width:640px;}
+
+/* ── 2. 首屏 ───────────────────────────────────────────── */
+.home .hero-lg{padding:64px 0 54px;}
+.home .hero-lg .wrap{grid-template-columns:1.16fr .84fr;gap:40px;}
+.home .hero-lg h1{font-size:clamp(32px,4.1vw,58px);line-height:1.16;letter-spacing:-1.4px;margin:22px 0 20px;}
+.home .hero-lg .lead{font-size:16px;max-width:530px;line-height:1.9;}
+.home .hero-lg .hero-cta{margin-top:32px;}
+.home .hero-lg .hero-note{margin-top:18px;font-size:12.5px;color:var(--muted);letter-spacing:.2px;}
+
+/* 背书条：把五个合作方标识从正文里提出来，紧跟首屏 */
+.trust-band{border-top:1px solid var(--line);background:var(--surface);}
+.trust-band .wrap{display:flex;align-items:center;gap:36px;padding:26px 24px;flex-wrap:wrap;}
+.trust-label{font-size:11.5px;letter-spacing:2.4px;color:var(--muted);text-transform:uppercase;font-weight:600;white-space:nowrap;}
+.trust-logos{display:flex;align-items:center;gap:36px;flex-wrap:wrap;}
+.trust-logos img{height:40px;width:auto;max-width:150px;object-fit:contain;opacity:.85;filter:grayscale(1);transition:opacity .25s,filter .25s;}
+.trust-logos img:hover{opacity:1;filter:none;}
+
+/* ── 3. 受众分流 ───────────────────────────────────────── */
+.aud-sec{padding:54px 0 62px;background:var(--bg-2);border-top:1px solid var(--line);}
+.aud-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px;}
+.aud-card{display:flex;flex-direction:column;background:var(--surface);border:1px solid var(--line);
+  border-radius:16px;padding:24px 22px 20px;transition:border-color .2s,transform .2s,box-shadow .2s;}
+.aud-card:hover{border-color:var(--blue);transform:translateY(-3px);box-shadow:0 14px 34px rgba(8,66,127,.09);}
+.aud-card .who{font-size:11.5px;letter-spacing:1.6px;color:var(--muted);text-transform:uppercase;font-weight:600;}
+.aud-card h3{font-size:17px;margin:9px 0 12px;letter-spacing:-.2px;}
+.aud-card ul{list-style:none;margin:0 0 16px;padding:0;flex:1;}
+.aud-card li{font-size:13px;color:var(--ink-2);line-height:1.7;padding-left:14px;position:relative;}
+.aud-card li::before{content:"";position:absolute;left:0;top:.62em;width:5px;height:5px;border-radius:50%;background:var(--blue-2);opacity:.6;}
+.aud-card .go{margin-top:auto;font-size:13.5px;font-weight:600;color:var(--blue);}
+
+/* ── 4. 卡片等高：修底部对齐线错乱 ─────────────────────── */
+.home .id-grid{align-items:stretch;}
+.home .id-card{display:flex;flex-direction:column;}
+.home .id-card .means{margin-top:auto;}
+
+.home .mx-grid{align-items:stretch;}
+.home .mx-col{display:flex;flex-direction:column;}
+.home .mx-col .mx-body{flex:1;display:flex;flex-direction:column;}
+/* 技能条数少的域会留出空白，用一条虚线把「技能列表」和「出口说明」分开，
+   让空白读起来是分区，而不是内容缺失 */
+.home .mx-col .mx-note{margin-top:auto;padding-top:14px;border-top:1px dashed var(--line);}
+
+.home .matrix{align-items:stretch;}
+.home .m-card{display:flex;flex-direction:column;}
+.home .m-card .go{margin-top:auto;}
+
+/* ── 5. 数据条：去掉四条碎竖线，让数字当主角 ───────────── */
+.home .stats-band .stat+.stat::before{display:none;}
+.home .stats-band .stats{padding:36px 0;}
+.home .stats-band .stat b{font-size:clamp(30px,3.6vw,44px);}
+.home .stats-band .stat span{font-size:12.5px;margin-top:4px;}
+
+/* ── 6. 矩阵域标签：去掉无信息量的 Domain 01–04 ────────── */
+.home .mx-head .k{letter-spacing:1.4px;}
+
+@media (max-width:1020px){
+  .aud-grid{grid-template-columns:repeat(2,minmax(0,1fr));}
+}
+@media (max-width:920px){
+  .home .hero-lg .wrap{grid-template-columns:1fr;}
+  .home .hero-lg .hero-visual{max-width:400px;margin:10px auto 0;}
+  .trust-logos{gap:24px;}
+  .trust-logos img{height:28px;}
+}
+@media (max-width:560px){
+  .aud-grid{grid-template-columns:1fr;}
+  .home .sec-head.sec-lg{margin-bottom:32px;}
+  /* 背书条：窄屏改成单行横滑，避免 5 个 logo 折成 4+1 */
+  .trust-band .wrap{flex-direction:column;align-items:flex-start;gap:10px;padding:20px 24px;}
+  .trust-logos{flex-wrap:nowrap;overflow-x:auto;width:100%;gap:26px;padding-bottom:4px;}
+  .trust-logos img{height:26px;flex-shrink:0;}
+  .trust-logos::-webkit-scrollbar{height:0;}
+  /* 数据条 2×2 时补行距，否则上下两排贴在一起 */
+  .home .stats-band .stats{row-gap:26px;}
+}
