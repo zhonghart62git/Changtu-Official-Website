@@ -65,8 +65,7 @@
 .home .m-card{display:flex;flex-direction:column;}
 .home .m-card .go{margin-top:auto;}
 
-/* ── 5. 数据条：去掉四条碎竖线，让数字当主角 ───────────── */
-.home .stats-band .stat+.stat::before{display:none;}
+/* ── 5. 数据条：让数字当主角 ───────────────────────────── */
 .home .stats-band .stats{padding:36px 0;}
 .home .stats-band .stat b{font-size:clamp(30px,3.6vw,44px);}
 .home .stats-band .stat span{font-size:12.5px;margin-top:4px;}

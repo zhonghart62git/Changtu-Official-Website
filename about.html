@@ -3,39 +3,60 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>关于畅途｜赛事组织方 · 课程研发方 · 考级服务方</title>
-<meta name="description" content="畅途文化科技 · 未来领袖。连续 12 年承办广东曹灿杯青少年朗诵展示活动，累计服务 909 家广东合作机构、12,499 人次学员，覆盖广东 21 个地级市并延伸至港澳。自研破界三原力与破界 MUN 课程体系，提供两类社会艺术水平考级服务。">
-<meta name="keywords" content="畅途文化科技,未来领袖,广东曹灿杯承办,破界三原力,破界MUN,教育合作联盟">
+<title>关于我们｜畅途 · 未来领袖</title>
+<meta name="description" content="畅途是面向 AI 时代的青少年素质教育平台：为机构提供课程体系、展演活动与 AI 工具，为孩子提供从能力摸底、系统训练到能力跃迁的路径。四域十二技能、两套自研课程、四类赛事与两类考级，覆盖广东 21 个地级市并延伸至港澳。">
+<meta name="keywords" content="畅途文化科技,未来领袖,关于我们,AI 时代素质教育,四域十二技能,破界三原力,破界MUN,广东曹灿杯承办">
 <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
 <link rel="icon" type="image/png" sizes="64x64" href="assets/favicon-64.png">
 <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
 <meta name="theme-color" content="#0B63C5">
-<link rel="stylesheet" href="assets/site.css?v=2fcc0aff">
+<link rel="stylesheet" href="assets/site.css?v=8c0395bc">
 <link rel="stylesheet" href="assets/site-v2.css?v=8f4c0419">
 <script>document.documentElement.classList.remove('no-js');</script>
 <link rel="canonical" href="https://leadtheway.cn/about.html">
 <meta name="robots" content="index,follow">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="畅途 · 未来领袖">
-<meta property="og:title" content="关于畅途｜赛事组织方 · 课程研发方 · 考级服务方">
-<meta property="og:description" content="连续 12 年承办广东曹灿杯。909 家合作机构，12,499 人次学员。">
+<meta property="og:title" content="关于我们｜畅途 · 未来领袖">
+<meta property="og:description" content="面向 AI 时代的青少年素质教育平台。四域十二技能、两套自研课程、四类赛事、两类考级，覆盖广东 21 个地级市并延伸至港澳。">
 <meta property="og:url" content="https://leadtheway.cn/about.html">
 <meta property="og:image" content="https://leadtheway.cn/assets/og-cover.png">
 <style>
-  /* 本页专用：叙事段落与阶段条 */
+  /* 本页专用：定位段、为什么是现在、四层家当、阶段条、原则卡、事实表 */
   .about-hero{position:relative;overflow:hidden;padding:70px 0 54px;
     background:radial-gradient(820px 420px at 82% -14%,var(--surface-3) 0%,rgba(234,244,254,0) 70%),
                radial-gradient(680px 380px at 4% 108%,var(--surface-3) 0%,rgba(234,244,254,0) 72%),var(--surface);}
-  .about-hero .wrap{position:relative;z-index:1;max-width:860px;}
+  .about-hero .wrap{position:relative;z-index:1;max-width:880px;}
   .about-hero h1{font-size:clamp(28px,3.6vw,46px);line-height:1.28;letter-spacing:-.8px;font-weight:800;margin:18px 0 20px;}
   .about-hero .lead{font-size:17px;color:var(--text-2);line-height:1.85;}
   .about-hero .lead b{color:var(--blue-700);}
+  .about-hero .lead-sub{margin-top:14px;font-size:14.5px;color:var(--text-3);line-height:1.85;}
+
+  /* 为什么是现在 */
+  .now-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;}
+  .now{background:var(--surface-2);border:1px solid var(--border);border-radius:var(--r-lg);padding:26px 24px;
+    transition:box-shadow var(--dur) var(--ease),transform var(--dur) var(--ease);}
+  .now:hover{box-shadow:var(--shadow-md);transform:translateY(-2px);}
+  .now .n{font-family:var(--font-num,inherit);font-size:12px;font-weight:800;letter-spacing:1.6px;color:var(--blue-400);}
+  .now h3{font-size:17px;font-weight:800;margin:8px 0 10px;letter-spacing:-.2px;line-height:1.45;}
+  .now p{font-size:13.5px;color:var(--text-2);line-height:1.85;margin:0;}
+
+  /* 我们有什么：四层 */
+  .layers{display:flex;flex-direction:column;border-top:1px solid var(--border);}
+  .layer{display:grid;grid-template-columns:210px 1fr;gap:28px;padding:26px 0;border-bottom:1px solid var(--border);}
+  .ly-h{display:flex;flex-direction:column;gap:7px;align-items:flex-start;}
+  .ly-n{font-family:var(--font-num,inherit);font-size:11.5px;font-weight:800;letter-spacing:1.6px;color:var(--violet);}
+  .ly-h h3{font-size:18px;font-weight:800;margin:0;letter-spacing:-.2px;}
+  .ly-st{font-size:11.5px;font-weight:700;letter-spacing:.4px;color:var(--blue-700);
+    background:var(--surface-3);border-radius:20px;padding:3px 11px;}
+  .layer p{font-size:14.5px;color:var(--text-2);line-height:1.9;margin:0 0 8px;}
+  .ly-meta{font-size:12.5px;color:var(--text-3);line-height:1.8;}
+  .ly-meta a{color:var(--blue);font-weight:600;}
 
   .prose{max-width:800px;}
   .prose h2{font-size:clamp(22px,2.6vw,30px);line-height:1.35;letter-spacing:-.4px;margin-bottom:18px;font-weight:800;}
   .prose p{font-size:15.5px;color:var(--text-2);line-height:1.95;margin-bottom:16px;}
   .prose p b{color:var(--text);}
-  .prose .hl{background:linear-gradient(180deg,transparent 62%,var(--violet-100) 62%);padding:0 2px;}
 
   /* 阶段条 */
   .phase{display:flex;flex-direction:column;gap:0;margin-top:10px;}
@@ -47,18 +68,9 @@
   .phase-row h3{font-size:17.5px;font-weight:700;margin-bottom:8px;}
   .phase-row p{font-size:14.5px;color:var(--text-2);line-height:1.85;margin:0;}
 
-  /* 原则卡 */
-  .prin-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;}
-  .prin{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-lg);padding:26px 24px;
-    transition:box-shadow var(--dur) var(--ease),transform var(--dur) var(--ease);}
-  .prin:hover{box-shadow:var(--shadow-md);transform:translateY(-2px);}
-  .prin .n{font-family:var(--font-num,inherit);font-size:12px;font-weight:800;letter-spacing:1.6px;color:var(--blue-400);}
-  .prin h3{font-size:17px;font-weight:700;margin:8px 0 8px;}
-  .prin p{font-size:14px;color:var(--text-2);line-height:1.8;margin:0;}
-
   /* 团队卡 */
   .team-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;}
-  .tm{background:var(--surface-2);border:1px solid var(--border);border-radius:var(--r-lg);padding:26px 24px;
+  .tm{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-lg);padding:26px 24px;
     transition:box-shadow var(--dur) var(--ease),transform var(--dur) var(--ease);}
   .tm:hover{box-shadow:var(--shadow-md);transform:translateY(-2px);}
   .tm .tm-n{font-size:11.5px;font-weight:800;letter-spacing:1.6px;color:var(--blue-400);}
@@ -72,21 +84,33 @@
   .scale-proof p{font-size:14.5px;line-height:1.9;color:var(--text-2);margin:0;}
   .scale-proof b{color:var(--text);}
 
+  /* 原则卡 */
+  .prin-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;}
+  .prin{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-lg);padding:26px 24px;
+    transition:box-shadow var(--dur) var(--ease),transform var(--dur) var(--ease);}
+  .prin:hover{box-shadow:var(--shadow-md);transform:translateY(-2px);}
+  .prin .n{font-family:var(--font-num,inherit);font-size:12px;font-weight:800;letter-spacing:1.6px;color:var(--blue-400);}
+  .prin h3{font-size:17px;font-weight:700;margin:8px 0 8px;}
+  .prin p{font-size:14px;color:var(--text-2);line-height:1.8;margin:0;}
+
   /* 事实表 */
   .fact-table{width:100%;border-collapse:collapse;font-size:14.5px;}
   .fact-table th,.fact-table td{text-align:left;padding:14px 16px;border-bottom:1px solid var(--border);vertical-align:top;}
   .fact-table th{width:180px;font-weight:600;color:var(--text-3);font-size:13px;letter-spacing:.3px;}
   .fact-table td{color:var(--text);}
   .fact-table tr:last-child th,.fact-table tr:last-child td{border-bottom:none;}
+
+  @media (max-width:1020px){
+    .team-grid{grid-template-columns:repeat(2,1fr);}
+    .now-grid{grid-template-columns:1fr;}
+    .layer{grid-template-columns:1fr;gap:12px;}
+  }
   @media (max-width:760px){
     .phase-row{grid-template-columns:1fr;gap:8px;}
     .prin-grid{grid-template-columns:1fr;}
     .team-grid{grid-template-columns:1fr;}
     .fact-table th{width:110px;font-size:12.5px;padding:12px 10px;}
     .fact-table td{padding:12px 10px;font-size:13.5px;}
-  }
-  @media (max-width:1020px){
-    .team-grid{grid-template-columns:repeat(2,1fr);}
   }
 </style>
 </head>
@@ -110,7 +134,7 @@
       <a href="index.html#courses">课程体系</a>
       <a href="index.html#projects">项目与赛事</a>
       <a href="partner.html">机构合作</a>
-      <a href="about.html" style="color:var(--blue);">关于畅途</a>
+      <a href="about.html" style="color:var(--blue);">关于我们</a>
       <a href="teacher/" class="m-only">教师工作台</a>
     </nav>
     <div class="nav-cta">
@@ -125,15 +149,18 @@
 
 <main>
 
-<!-- Hero -->
+<!-- 我们是什么 -->
 <section class="about-hero">
   <div class="aurora" aria-hidden="true"><i class="a1"></i><i class="a2"></i></div>
   <div class="wrap">
-    <div class="eyebrow"><i></i>关于畅途 · About</div>
-    <h1>十二年，<br>把「上台」变成<span class="grad-violet">一条可走的路</span></h1>
+    <div class="eyebrow"><i></i>关于我们 · About</div>
+    <h1>把 AI 时代需要的能力，<br>做成<span class="grad-violet">能教、能练、能考、能赛</span>的东西</h1>
     <p class="lead">
-      畅途文化科技是广东的青少年素质教育机构，办赛、研发课程、组织考级三件事由同一个团队做。
-      十二年前从一场朗诵展演开始，现在是四域十二技能的矩阵、两套自研课程、四类赛事和两类考级。
+      畅途是面向 AI 时代的青少年素质教育平台。机构拿到的是课程体系、展演活动与 AI 工具；
+      孩子拿到的是一条从能力摸底、系统训练到能力跃迁的路径。
+    </p>
+    <p class="lead-sub">
+      这套东西现在覆盖广东 21 个地级市，延伸至香港、澳门。往外交接的路径是：广东验证、大湾区复制、全国共建。
     </p>
   </div>
 </section>
@@ -152,47 +179,102 @@
   </div>
 </div>
 
-<!-- 三重身份 -->
-<section class="identity">
+<!-- 为什么是现在 -->
+<section>
   <div class="wrap">
     <div class="sec-head rv2">
       <div class="bar"></div>
-      <h2>办赛、编课、办考级 <small>Three Roles</small></h2>
-      <p>三件事在同一个团队里完成。机构从我们这里能同时拿到赛事名额、成套课程、考级通道，日期与口径对得上。</p>
+      <h2>为什么是现在 <small>Why Now</small></h2>
+      <p>三件正在发生的事，决定了我们把课程按能力拆成四个域。</p>
     </div>
-    <div class="id-grid">
-      <article class="id-card rv2">
-        <span class="num">01</span>
-        <span class="role">Event Organizer</span>
-        <h3>赛事组织方</h3>
-        <p>曹灿杯广东展区连续 12 年由我们承办。华语辩论世界杯与亚青辩岭南挑战赛、雏英杯中英双语主持人大会、联合国青少年领袖发言人（ART FOR SDGs）的区域选拔，由我们组织。</p>
-        <div class="means">开赛前提供组别表、场次表、评审标准原文。</div>
+    <div class="now-grid">
+      <article class="now rv2">
+        <span class="n">01</span>
+        <h3>能查到的知识在贬值</h3>
+        <p>搜一下就有答案的知识，价值在下降。值钱的是提出什么问题、判断答案对不对。</p>
       </article>
-      <article class="id-card rv2">
-        <span class="num">02</span>
-        <span class="role">Curriculum Developer</span>
-        <h3>课程研发方</h3>
-        <p>破界三原力（三级九册，144 课时）与破界 MUN（六阶，156 课时）由我们自己研发。教案、物料包、师训包、会务清单都已成品化，签约后整包交付。</p>
-        <div class="means">教材、师训、备课工具、赛事出口出自同一份大纲。</div>
+      <article class="now rv2">
+        <span class="n">02</span>
+        <h3>一个人加 AI，做出一个团队的产出</h3>
+        <p>会指挥 AI 的人和不用 AI 的人，差距在拉大。这件事在成年人的工作里已经发生，孩子的准备期就是现在。</p>
       </article>
-      <article class="id-card is-violet rv2">
-        <span class="num">03</span>
-        <span class="role">Certification Service</span>
-        <h3>考级服务方</h3>
-        <p>北京广播电视台语言类、浙江音乐学院社会艺术水平考级的报名与组织服务。语言与音乐两条线的证书在同一处办理。</p>
-        <div class="means">参赛记录与考级进度记在同一份学员档案里。</div>
+      <article class="now rv2">
+        <span class="n">03</span>
+        <h3>评价方式正在变</h3>
+        <p>升学面试、竞赛答辩、校内选拔，越来越看「你能不能讲清楚自己的判断」，而不只是答对题。</p>
       </article>
     </div>
   </div>
 </section>
 
-<!-- 叙事：能力是怎么长出来的 -->
+<!-- 我们有什么 -->
 <section style="background:var(--bg-2);">
+  <div class="wrap">
+    <div class="sec-head rv2">
+      <div class="bar"></div>
+      <h2>我们有什么 <small>What We Have</small></h2>
+      <p>四层东西，从框架到工具。每一层标注真实状态：有的写有，没有的写没有。</p>
+    </div>
+
+    <div class="layers rv2">
+      <div class="layer">
+        <div class="ly-h">
+          <span class="ly-n">LAYER 01</span>
+          <h3>能力框架</h3>
+          <span class="ly-st">7 项上线</span>
+        </div>
+        <div>
+          <p>四域十二技能：表达力（朗诵 · 主持）、思辨力（演讲 · 辩论 · 模联）、学习力（学习方法 · 测评）、创造力（AI · 科创 · 商赛 · 音乐 · 美术）。四个域合起来回答一件事——孩子离开标准答案的场合，能不能站得住。</p>
+          <div class="ly-meta">创造力域 5 个方向暂无课程与工具，2026 年内陆续开放　·　<a href="matrix.html">看完整矩阵 →</a></div>
+        </div>
+      </div>
+
+      <div class="layer">
+        <div class="ly-h">
+          <span class="ly-n">LAYER 02</span>
+          <h3>课程</h3>
+          <span class="ly-st">成品化</span>
+        </div>
+        <div>
+          <p>破界三原力 三级九册 · 144 课时（L1 初阶 7–9 岁 / L2 中阶 10–12 岁 / L3 高阶 13–15 岁）；破界 MUN 六阶 · 156 课时（L0 观察员 → L5 主席团，中英双语双轨）。</p>
+          <div class="ly-meta">教案、物料包、师训包、会务清单齐备，签约即整包交付　·　<a href="sanyuanli.html">三原力</a>　·　<a href="mun.html">破界 MUN</a></div>
+        </div>
+      </div>
+
+      <div class="layer">
+        <div class="ly-h">
+          <span class="ly-n">LAYER 03</span>
+          <h3>出口</h3>
+          <span class="ly-st">广东区域承办</span>
+        </div>
+        <div>
+          <p>四类赛事：曹灿杯青少年朗诵展示活动、华语辩论世界杯 / 亚青辩岭南挑战赛、雏英杯中英双语主持人大会、联合国青少年领袖发言人（ART FOR SDGs）。两类考级：北京广播电视台语言类、浙江音乐学院社会艺术水平。</p>
+          <div class="ly-meta">组别表、场次表、评审标准原文由我们出　·　<a href="partner.html">合作方式 →</a></div>
+        </div>
+      </div>
+
+      <div class="layer">
+        <div class="ly-h">
+          <span class="ly-n">LAYER 04</span>
+          <h3>工具</h3>
+          <span class="ly-st">已上线</span>
+        </div>
+        <div>
+          <p>学生端：文字创作室、辩论助手、模拟对手、练习复盘。教师端：课件、稿件库、辩题库、作业、测评。三个学生端工具都在跑 AI——起草、陪练、模拟对手。</p>
+          <div class="ly-meta">AI 在练功房里当陪练，孩子仍然要自己上台；教师端测评工具仍在接入中</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 怎么走到今天 -->
+<section>
   <div class="wrap">
     <div class="prose rv2">
       <div class="sec-head" style="margin-bottom:30px;">
         <div class="bar"></div>
-        <h2>这张表是怎么长出来的 <small>How We Got Here</small></h2>
+        <h2>怎么走到今天 <small>How We Got Here</small></h2>
       </div>
       <p>
         矩阵是长出来的：办赛撞上一个问题，补一块能力；四块能力拼起来，才成了今天这张表。下面是四次具体的撞墙。
@@ -222,7 +304,7 @@
         </div>
       </div>
       <div class="phase-row">
-        <span class="pn">PHASE 04</span>
+        <div class="pn">PHASE 04</div>
         <div>
           <h3>编成矩阵，开放给机构</h3>
           <p>课程做出来之后，新的问题来了：机构想开课，但没有教研能力；想参赛，但不知道怎么把参赛和日常教学接上。所以我们把赛事、课程、考级编成一张矩阵，按三档权益开放给合作机构——机构不必从零研发，孩子不必东奔西跑找出口。</p>
@@ -233,7 +315,7 @@
 </section>
 
 <!-- 团队 -->
-<section>
+<section style="background:var(--bg-2);">
   <div class="wrap">
     <div class="sec-head rv2">
       <div class="bar"></div>
@@ -264,7 +346,7 @@
 </section>
 
 <!-- 全国路径 -->
-<section style="background:var(--bg-2);">
+<section>
   <div class="wrap">
     <div class="sec-head rv2">
       <div class="bar"></div>
@@ -303,7 +385,7 @@
 </section>
 
 <!-- 做事原则 -->
-<section>
+<section style="background:var(--bg-2);">
   <div class="wrap">
     <div class="sec-head rv2">
       <div class="bar"></div>
@@ -336,7 +418,7 @@
 </section>
 
 <!-- 事实表 -->
-<section style="background:var(--bg-2);">
+<section>
   <div class="wrap">
     <div class="sec-head rv2">
       <div class="bar"></div>
@@ -363,7 +445,7 @@
 </section>
 
 <!-- CTA -->
-<section>
+<section style="background:var(--bg-2);">
   <div class="wrap">
     <div class="qr-band rv2">
       <div>
@@ -419,7 +501,7 @@
         <div class="f-col">
           <b>合作</b>
           <a href="partner.html">教育合作联盟</a>
-          <a href="about.html">关于畅途</a>
+          <a href="about.html">关于我们</a>
           <a href="teacher/">教师工作台</a>
           <a href="index.html#contact">联系我们</a>
         </div>
