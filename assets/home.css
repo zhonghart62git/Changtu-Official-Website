@@ -227,46 +227,50 @@
   background:#FFF4E6;color:#9A4A00;border:1px solid #FFD8A8;
   white-space:nowrap;box-shadow:0 2px 6px rgba(154,74,0,.08);}
 
-/* ── 19. 活动滚动 banner ────────────────────────────────
-   原来最顶上那条静态活动条，改成首屏下方的滚动 banner，
-   逐条轮播近期活动并链到对应页面。鼠标悬停或键盘聚焦时暂停。 */
-.rollbar{position:relative;overflow:hidden;color:#fff;
-  background:linear-gradient(100deg,var(--blue-900) 0%,var(--blue-700) 54%,var(--violet-900) 100%);
-  border-top:1px solid rgba(255,255,255,.10);border-bottom:1px solid rgba(255,255,255,.10);}
-.rollbar .wrap{display:flex;align-items:center;gap:18px;min-height:54px;padding:0 24px;}
-.rb-badge{flex-shrink:0;font-size:10.5px;font-weight:800;letter-spacing:1.4px;
-  padding:5px 10px;border-radius:20px;background:rgba(255,255,255,.17);color:#fff;white-space:nowrap;}
-.rb-view{position:relative;flex:1;min-width:0;height:54px;overflow:hidden;}
-.rb-item{position:absolute;inset:0;display:flex;align-items:center;gap:12px;
-  opacity:0;transform:translateY(9px);pointer-events:none;
-  transition:opacity .45s var(--ease,ease),transform .45s var(--ease,ease);
-  font-size:13.5px;line-height:1.5;color:#fff;text-decoration:none;
-  overflow:hidden;white-space:nowrap;text-overflow:ellipsis;}
-.rb-item.on{opacity:1;transform:none;pointer-events:auto;}
-.rb-item b{font-weight:800;flex-shrink:0;}
-.rb-item i{font-style:normal;color:rgba(255,255,255,.74);font-size:12.5px;overflow:hidden;text-overflow:ellipsis;}
-.rb-item em{font-style:normal;font-size:10.5px;font-weight:800;letter-spacing:.6px;
-  padding:3px 8px;border-radius:20px;background:rgba(255,255,255,.18);flex-shrink:0;}
-.rb-actions{flex-shrink:0;display:flex;align-items:center;gap:16px;}
-.rb-actions a{font-size:12.5px;font-weight:700;color:#fff;text-decoration:none;
-  border-bottom:1px solid rgba(255,255,255,.45);padding-bottom:2px;white-space:nowrap;}
-.rb-actions a:hover{border-color:#fff;}
-.rb-dots{flex-shrink:0;display:flex;align-items:center;gap:5px;}
-.rb-dots button{width:5px;height:5px;padding:0;border:0;border-radius:50%;
-  background:rgba(255,255,255,.34);cursor:pointer;transition:width .25s,background .25s;}
-.rb-dots button.on{background:#fff;width:15px;border-radius:3px;}
+/* ── 19. 活动图片轮播 banner ────────────────────────────
+   首屏下方。一张图一个活动，整张图就是一个链接，点进去直接到报名。
+   桌面用 2000×700 图，手机换 900×640 图。5 秒自动切，
+   悬停/聚焦暂停，可点圆点、箭头、触屏左右滑、键盘左右键。 */
+.hslider{position:relative;padding:26px 0 8px;}
+.hs-box{position:relative;border-radius:20px;overflow:hidden;
+  background:var(--blue-900,#08427F);
+  box-shadow:0 18px 46px -18px rgba(8,66,127,.42);}
+.hs-track{display:flex;width:100%;
+  transition:transform .62s cubic-bezier(.22,.61,.36,1);will-change:transform;}
+.hs-slide{flex:0 0 100%;display:block;text-decoration:none;line-height:0;}
+.hs-slide img{width:100%;height:auto;display:block;}
+.hs-slide:focus-visible{outline:3px solid var(--orange,#FF7A1A);outline-offset:-3px;}
 
-@media (max-width:860px){
-  .rollbar .wrap{flex-wrap:wrap;gap:4px 12px;padding:11px 20px;}
-  .rb-view{flex-basis:100%;height:auto;min-height:21px;order:3;}
-  .rb-item{position:static;display:none;opacity:1;transform:none;
-    white-space:normal;font-size:13px;}
-  .rb-item.on{display:flex;flex-wrap:wrap;gap:6px 10px;}
-  .rb-actions{margin-left:auto;}
-  .rb-dots{order:4;}
+.hs-nav{position:absolute;top:50%;transform:translateY(-50%);
+  width:44px;height:44px;padding:0;border:0;border-radius:50%;cursor:pointer;
+  background:rgba(255,255,255,.86);color:var(--blue-900,#08427F);
+  font-size:22px;line-height:1;display:flex;align-items:center;justify-content:center;
+  box-shadow:0 4px 14px rgba(8,66,127,.24);
+  opacity:.86;transition:opacity .2s,background .2s,transform .2s;z-index:3;}
+.hs-nav:hover{background:#fff;opacity:1;}
+.hs-nav:active{transform:translateY(-50%) scale(.94);}
+.hs-nav.prev{left:14px;}
+.hs-nav.next{right:14px;}
+
+.hs-bar{position:relative;display:flex;align-items:center;justify-content:center;
+  gap:14px;margin-top:14px;}
+.hs-dots{display:flex;align-items:center;gap:7px;}
+.hs-dots button{width:7px;height:7px;padding:0;border:0;border-radius:50%;
+  background:#C9D9EC;cursor:pointer;transition:width .25s,background .25s;}
+.hs-dots button.on{background:var(--blue,#0B63C5);width:22px;border-radius:4px;}
+.hs-all{position:absolute;right:0;font-size:13px;font-weight:700;
+  color:var(--blue,#0B63C5);text-decoration:none;white-space:nowrap;}
+.hs-all:hover{text-decoration:underline;}
+
+@media (max-width:760px){
+  .hslider{padding:16px 0 2px;}
+  .hs-box{border-radius:14px;}
+  .hs-nav{display:none;}
+  .hs-bar{margin-top:11px;}
+  .hs-all{position:static;}
 }
 @media (prefers-reduced-motion:reduce){
-  .rb-item{transition:none;}
+  .hs-track{transition:none;}
 }
 
 /* ── 响应式 ───────────────────────────────────────────── */

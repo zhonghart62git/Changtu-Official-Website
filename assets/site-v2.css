@@ -81,6 +81,8 @@
 @media (prefers-reduced-motion:reduce){
   .rv2{opacity:1;transform:none;}
 }
+/* 没有 JS（或脚本被拦）时不能留 opacity:0，否则整页下方是空白 */
+html.no-js .rv2{opacity:1;transform:none;}
 
 /* ============================================================
    3. Hero 增强

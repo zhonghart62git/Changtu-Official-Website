@@ -438,6 +438,11 @@ footer{background:var(--brand-hover);color:rgba(255,255,255,.78);padding:46px 0 
 .rv{opacity:0;transform:translateY(18px);transition:opacity .6s ease,transform .6s ease;}
 .rv.in{opacity:1;transform:none;}
 html.no-js .rv{opacity:1;transform:none;}
+/* 脚本被禁用/被 CSP 拦时，入场动画的初始 opacity:0 会把整页内容藏掉。
+   这条兜底保证「没有 JS 也一定看得见」，宁可不动画。 */
+@media (scripting: none){
+  .rv,.rv2{opacity:1 !important;transform:none !important;}
+}
 
 /* ===== 响应式 ===== */
 @media (max-width:1020px){
