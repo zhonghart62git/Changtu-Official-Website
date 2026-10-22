@@ -363,7 +363,7 @@ a.mx-item:hover{background:var(--d-tint);border-color:var(--d-line);transform:tr
 }
 .qr-card .cap{font-size:12px;color:var(--text-2);margin-top:11px;font-weight:600;}
 .qr-card .cap small{display:block;font-weight:400;color:var(--text-3);font-size:11px;margin-top:2px;}
-/* 小程序码未就位时的降级：换成可用的报名入口 */
+/* 微信搜索入口：复用小程序入口卡片，不依赖二维码图片。 */
 .qr-card .qr-fallback{
   width:196px;display:flex;flex-direction:column;align-items:center;gap:10px;
   padding:6px 2px 2px;

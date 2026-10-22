@@ -576,15 +576,14 @@
   <div class="wrap">
     <div class="qr-band rv2">
       <div>
-        <h3>扫码进小程序，<br>报名、查进度、看课程都在里面</h3>
-        <p>官网适合了解全貌，小程序适合日常使用。报名、查报名号、选场次，在官网就能完成。</p>
-        <div class="qr-list">
-          <span>在线报名</span><span>查报名号</span><span>选场次</span><span>课程进度</span><span>我的记录</span>
-        </div>
+        <h3>畅途 · 未来领袖小程序，<br>在微信中继续使用</h3>
+        <p>打开微信，搜索「畅途未来领袖」进入小程序。教师工作台和运营后台可通过本站入口打开。</p>
       </div>
       <div class="qr-card">
-        <img id="miniappQr" src="assets/miniapp-qr.png" alt="畅途 · 未来领袖 小程序码" width="172" height="172" loading="lazy">
-        <div class="cap">畅途 · 未来领袖<small>微信扫码进入</small></div>
+        <div class="qr-fallback">
+          <b>畅途 · 未来领袖</b>
+          <span>微信 → 发现 → 小程序<br>搜索「畅途未来领袖」</span>
+        </div>
       </div>
     </div>
   </div>
@@ -747,23 +746,6 @@
     els.forEach(function(el){io.observe(el);});
   }else{showAll();}
   setTimeout(showAll,3000); /* 兜底：任何情况下内容都可见 */
-
-  /* 小程序码：图片未就位时改成对访客可用的入口，不露开发信息、不显示破图 */
-  var qr=document.getElementById('miniappQr');
-  if(qr){
-    qr.addEventListener('error',function(){
-      var card=qr.closest('.qr-card');
-      if(card){
-        card.innerHTML='<div class="qr-fallback">'+
-          '<b>小程序即将开放</b>'+
-          '<span>现在可以在官网完成报名。小程序上线后，报名记录会同步过去。</span>'+
-          '<a class="btn btn-p btn-sm" href="enroll.html">先在线报名</a>'+
-          '</div>';
-      }
-      var head=document.querySelector('#miniapp .qr-band h3');
-      if(head)head.innerHTML='报名现在就能办，<br>小程序上线后再搬到手机上';
-    });
-  }
 
   /* 导航高亮当前区块 */
   var links=[].slice.call(document.querySelectorAll('.nav-links a[href^="#"]'));
