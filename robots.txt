@@ -3,5 +3,6 @@ Allow: /
 
 Disallow: /my.html
 Disallow: /enroll.html
+Disallow: /admin/
 
 Sitemap: https://leadtheway.cn/sitemap.xml
