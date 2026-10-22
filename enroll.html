@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>活动报名 · 畅途未来领袖</title>
+<meta name="robots" content="noindex">
+<meta name="description" content="畅途未来领袖七大业务线在线报名：曹灿杯、华语辩论世界杯、雏英杯、联合国青少年领袖发言人、破界三原力、北京广播电视台考级、浙江音乐学院考级。">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
+<link rel="icon" type="image/png" sizes="64x64" href="assets/favicon-64.png">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<meta name="theme-color" content="#005098">
+<link rel="stylesheet" href="assets/ui.css">
+<!-- domain-seo:start -->
+<link rel="canonical" href="https://leadtheway.cn/enroll.html">
+<meta name="robots" content="noindex,follow">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="畅途 · 未来领袖">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:title" content="活动报名 · 畅途未来领袖">
+<meta property="og:description" content="畅途未来领袖七大业务线在线报名：曹灿杯、华语辩论世界杯、雏英杯、联合国青少年领袖发言人、破界三原力、北京广播电视台考级、浙江音乐学院考级。">
+<meta property="og:url" content="https://leadtheway.cn/enroll.html">
+<meta property="og:image" content="https://leadtheway.cn/assets/og-cover.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="活动报名 · 畅途未来领袖">
+<meta name="twitter:description" content="畅途未来领袖七大业务线在线报名：曹灿杯、华语辩论世界杯、雏英杯、联合国青少年领袖发言人、破界三原力、北京广播电视台考级、浙江音乐学院考级。">
+<meta name="twitter:image" content="https://leadtheway.cn/assets/og-cover.png">
+<!-- domain-seo:end -->
+</head>
+<body>
+
+<div class="bar"><div class="wrap">
+  <span><b>在线报名</b><i class="bar-hint">　提交后生成报名号，凭报名号选场次</i></span>
+  <a href="my.html">已报名？去选场次 →</a>
+</div></div>
+
+<header class="nav"><div class="wrap">
+  <a class="logo" href="index.html">
+    <img class="logo-img" src="assets/logo.png" alt="畅途" width="72" height="34">
+    <span>未来领袖<small>CHANGTU FUTURE LEADERS</small></span>
+  </a>
+  <a class="nav-back" href="index.html">← 返回官网</a>
+</div></header>
+
+<div class="pagehead"><div class="narrow">
+  <div class="kicker">Enrollment</div>
+  <h1>活动报名</h1>
+  <p>选一个项目，填一份信息，一分钟完成。提交后系统生成报名号，把报名信息一键发给招生老师，老师会拉你进群、锁定场次。</p>
+</div></div>
+
+<div class="sect"><div class="narrow">
+
+  <!-- 步骤条 -->
+  <div class="steps" id="steps">
+    <div class="step on" data-s="1"><span class="dot">1</span><span>选项目</span></div>
+    <div class="step-line"></div>
+    <div class="step" data-s="2"><span class="dot">2</span><span>填信息</span></div>
+    <div class="step-line"></div>
+    <div class="step" data-s="3"><span class="dot">3</span><span>获取报名号</span></div>
+  </div>
+
+  <!-- 表单视图 -->
+  <div id="formView">
+    <div class="card card-pad mb18">
+      <div class="sect-title"><h2>① 选择报名项目</h2><span>共 7 条业务线</span></div>
+      <div class="opts" id="actOpts"></div>
+      <div id="actNote" class="alert alert-info mt18" style="display:none;">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7.5v.5"/></svg>
+        <span id="actNoteText"></span>
+      </div>
+    </div>
+
+    <div class="card card-pad mb18">
+      <div class="sect-title"><h2>② 报名信息</h2><span>带 <b style="color:var(--orange)">*</b> 为必填</span></div>
+
+      <div class="field" id="f-group">
+        <label>参赛 / 报考组别<span class="req">*</span></label>
+        <select id="group"><option value="">请先选择报名项目</option></select>
+        <div class="errmsg">请选择组别</div>
+      </div>
+
+      <div class="field" id="f-item">
+        <label>参赛类别 <span class="muted small">（可多选，不选则按项目默认）</span></label>
+        <div class="opts" id="itemOpts"></div>
+      </div>
+
+      <hr class="sep">
+
+      <div class="grid2">
+        <div class="field" id="f-student">
+          <label>学员姓名<span class="req">*</span></label>
+          <input type="text" id="student" placeholder="请填写真实姓名" autocomplete="name">
+          <div class="errmsg">请填写学员姓名</div>
+        </div>
+        <div class="field">
+          <label>性别</label>
+          <div class="opts" id="genderOpts">
+            <label class="opt"><input type="radio" name="gender" value="男">男</label>
+            <label class="opt"><input type="radio" name="gender" value="女">女</label>
+          </div>
+        </div>
+      </div>
+
+      <div class="grid2">
+        <div class="field">
+          <label>出生年月</label>
+          <input type="text" id="age" placeholder="如 2014-08" inputmode="numeric">
+        </div>
+        <div class="field">
+          <label>在读年级</label>
+          <input type="text" id="grade" placeholder="如 四年级 / 初一">
+        </div>
+      </div>
+
+      <hr class="sep">
+
+      <div class="grid2">
+        <div class="field" id="f-parent">
+          <label>家长姓名<span class="req">*</span></label>
+          <input type="text" id="parent" placeholder="便于现场核对">
+          <div class="errmsg">请填写家长姓名</div>
+        </div>
+        <div class="field" id="f-phone">
+          <label>家长手机号<span class="req">*</span></label>
+          <input type="tel" id="phone" placeholder="11 位手机号，用于查报名与选场次" maxlength="11" inputmode="numeric">
+          <div class="hint">查报名、选场次都靠这个号码，请填常用号。</div>
+          <div class="errmsg">请输入正确的 11 位手机号</div>
+        </div>
+      </div>
+
+      <div class="grid2">
+        <div class="field">
+          <label>所在城市 / 区</label>
+          <input type="text" id="city" placeholder="如 广州市天河区">
+        </div>
+        <div class="field">
+          <label>学校 / 就读机构</label>
+          <input type="text" id="school" placeholder="选填">
+        </div>
+      </div>
+
+      <div class="field">
+        <label>指导老师 <span class="muted small">（选填）</span></label>
+        <input type="text" id="teacher" placeholder="如有机构或老师推荐，可填写">
+      </div>
+
+      <div class="field">
+        <label>备注 <span class="muted small">（选填）</span></label>
+        <textarea id="note" placeholder="例如：需要无障碍通道、普通话/粤语偏好、曾获过的奖项等"></textarea>
+      </div>
+
+      <div class="field" id="f-agree">
+        <label class="opt" style="border-radius:11px;padding:13px 16px;">
+          <input type="checkbox" id="agree">
+          <span class="small">我已阅读并同意<b>《报名须知》</b>：所填信息真实有效，报名费一经缴纳不因个人原因退费，因不可抗力改期以官方通知为准。</span>
+        </label>
+        <div class="errmsg">请先勾选同意报名须知</div>
+      </div>
+    </div>
+
+    <!-- 费用条 -->
+    <div class="card card-pad mb18" style="background:linear-gradient(135deg,#F7FBFF,#EAF4FE);border-color:rgba(11,99,197,.16);">
+      <div class="flex between center wrapf gap12">
+        <div>
+          <div class="tiny muted" style="letter-spacing:1.4px;font-weight:800;">应付金额</div>
+          <div style="font-size:30px;font-weight:800;letter-spacing:-1px;color:var(--blue-deep);line-height:1.3;">
+            <span id="feeShow">—</span><span style="font-size:15px;font-weight:600;margin-left:4px;">元</span>
+          </div>
+          <div class="tiny muted mt8" id="feeHint">选择项目后显示</div>
+        </div>
+        <button class="btn btn-o btn-lg" id="submitBtn" type="button">提交报名</button>
+      </div>
+    </div>
+
+    <p class="tiny muted center-t" style="line-height:1.9;">
+      提交即代表同意我们通过短信 / 微信与你联系。<br>
+      咨询电话 <a href="tel:18038829260" style="color:var(--blue);font-weight:700;">180 3882 9260</a> / <a href="tel:18038829261" style="color:var(--blue);font-weight:700;">180 3882 9261</a>
+    </p>
+  </div>
+
+  <!-- 成功视图 -->
+  <div id="doneView" style="display:none;">
+    <div class="card card-pad center-t" style="padding:40px 26px;">
+      <div style="width:64px;height:64px;border-radius:50%;background:var(--ok-bg);display:grid;place-items:center;margin:0 auto 18px;">
+        <svg viewBox="0 0 24 24" style="width:32px;height:32px;stroke:var(--ok);fill:none;stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round;"><path d="M20 6L9 17l-5-5"/></svg>
+      </div>
+      <h2 style="font-size:23px;margin-bottom:8px;">报名已提交</h2>
+      <p class="muted small">报名号已生成，请截图保存。把下面的报名信息发给招生老师，才算完成登记；凭报名号和手机号，随时回来选场次、查状态。</p>
+
+      <div style="background:var(--tint-2);border:1.5px dashed rgba(11,99,197,.3);border-radius:14px;padding:20px;margin:24px 0;">
+        <div class="tiny muted" style="letter-spacing:2px;font-weight:800;">报名号</div>
+        <div class="mono" id="doneCode" style="font-size:28px;font-weight:800;letter-spacing:1.5px;color:var(--blue-deep);margin:6px 0 4px;"></div>
+        <div class="tiny muted" id="doneMeta"></div>
+      </div>
+
+      <div class="alert alert-warn" style="text-align:left;">
+        <svg viewBox="0 0 24 24"><path d="M12 9v5M12 17.5v.5"/><path d="M10.3 3.9L2.6 17.2A1.9 1.9 0 0 0 4.3 20h15.4a1.9 1.9 0 0 0 1.7-2.8L13.7 3.9a1.9 1.9 0 0 0-3.4 0z"/></svg>
+        <div>
+          <b>还差一步：把报名信息发给招生老师</b><br>
+          <span class="small">点下面<b>「一键复制报名信息」</b>，粘贴发到招生微信 <b id="doneWechat">—</b>（手机号可搜），或直接致电 <b>180 3882 9260</b>。老师核对后会拉你进群、锁定场次。</span>
+        </div>
+      </div>
+
+      <p class="small muted" id="payGuide" style="text-align:left;margin:14px 0 4px;"></p>
+
+      <div class="flex gap12 wrapf" style="justify-content:center;margin-top:14px;">
+        <button class="btn btn-p" type="button" id="copyAll">一键复制报名信息</button>
+        <a class="btn btn-s" href="my.html">去选场次 →</a>
+        <button class="btn btn-ghost" type="button" id="copyCode">只复制报名号</button>
+        <a class="btn btn-ghost" href="enroll.html">再报一个</a>
+      </div>
+    </div>
+  </div>
+
+</div></div>
+
+<footer style="border-top:1px solid var(--line);background:#fff;padding:24px 0;">
+  <div class="wrap flex between center wrapf gap12">
+    <span class="tiny muted">© 2026 畅途 · 未来领袖　青少年素质教育矩阵</span>
+    <span class="tiny muted">
+      <a href="index.html" style="color:var(--ink-2);">官网</a> ·
+      <a href="my.html" style="color:var(--ink-2);">查报名 / 选场次</a> ·
+      <a href="admin.html" style="color:var(--ink-2);">管理后台</a>
+    </span>
+  </div>
+</footer>
+
+<script src="assets/store.js"></script>
+<script>
+(function(){
+  'use strict';
+  var $ = function(id){ return document.getElementById(id); };
+
+  var state = { act: null, items: [], fee: null, actData: null, acts: [] };
+  var lastOrder = null;
+
+  // 统一复制：优先 Clipboard API，失败回落 execCommand
+  function copyText(text, btn, normalLabel, doneLabel){
+    function flash(){
+      btn.textContent = doneLabel;
+      setTimeout(function(){ btn.textContent = normalLabel; }, 2400);
+    }
+    function fallback(){
+      var ta = document.createElement('textarea');
+      ta.value = text;
+      ta.style.position = 'fixed'; ta.style.top = '-1000px'; ta.style.opacity = '0';
+      document.body.appendChild(ta); ta.select();
+      try { document.execCommand('copy'); } catch (e) {}
+      document.body.removeChild(ta);
+    }
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(flash).catch(function(){ fallback(); flash(); });
+    } else { fallback(); flash(); }
+  }
+
+  function esc(s){ return String(s == null ? '' : s).replace(/[&<>"]/g, function(c){
+    return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];
+  }); }
+
+  /* 读取 URL 预选项目 */
+  function preAct(){
+    var m = location.search.match(/[?&]act=([\w-]+)/);
+    return m ? m[1] : null;
+  }
+
+  function renderActs(){
+    CT.API.activities().then(function(list){
+      state.acts = list;
+      var pre = preAct();
+      $('actOpts').innerHTML = list.map(function(a){
+        return '<label class="opt" data-act="' + a.id + '" style="border-radius:12px;padding:11px 16px;">' +
+          '<input type="radio" name="act" value="' + a.id + '">' +
+          '<span><b>' + esc(a.name) + '</b> <span class="tiny muted">' + esc(a.cat) + '</span></span>' +
+        '</label>';
+      }).join('');
+      $('actOpts').addEventListener('click', function(e){
+        var el = e.target.closest('.opt[data-act]');
+        if (!el) return;
+        setTimeout(function(){ selectAct(el.getAttribute('data-act')); }, 0);
+      });
+      if (pre) {
+        var el = $('actOpts').querySelector('[data-act="' + pre + '"]');
+        if (el) { el.querySelector('input').checked = true; selectAct(pre); }
+      }
+    });
+  }
+
+  function selectAct(id){
+    Array.prototype.forEach.call($('actOpts').querySelectorAll('.opt'), function(el){
+      el.classList.toggle('on', el.getAttribute('data-act') === id);
+    });
+    var a = state.acts.filter(function(x){ return x.id === id; })[0];
+    if (!a) return;
+    state.act = id; state.actData = a; state.items = []; state.fee = a.fee;
+
+    // 组别
+    var sel = $('group');
+    sel.innerHTML = '<option value="">请选择组别</option>' + a.groups.map(function(g){
+      return '<option value="' + esc(g) + '">' + esc(g) + '</option>';
+    }).join('');
+
+    // 类别
+    $('itemOpts').innerHTML = a.items.map(function(it){
+      return '<label class="opt" data-item="' + esc(it) + '"><input type="checkbox" value="' + esc(it) + '">' + esc(it) + '</label>';
+    }).join('');
+    Array.prototype.forEach.call($('itemOpts').querySelectorAll('.opt'), function(el){
+      el.classList.toggle('on', false);
+    });
+
+    // 说明
+    $('actNote').style.display = 'flex';
+    $('actNoteText').innerHTML = '<b>' + esc(a.full) + '</b><br>' + esc(a.note) +
+      '<br><span class="tiny">当前场次 ' + a.sessionCount + ' 个，已报名 ' + a.booked + ' 人。报名后再选场次。</span>';
+
+    updateFee();
+    $('f-group').classList.remove('err');
+  }
+
+  function updateFee(){
+    var f = state.fee;
+    $('feeShow').textContent = (f == null ? '—' : Number(f).toLocaleString('zh-CN'));
+    $('feeHint').textContent = state.actData
+      ? (state.actData.id === 'brtv' || state.actData.id === 'zjcm'
+          ? '按实际报考级别结算，最终以报名确认通知为准'
+          : '含评审、场地与证书；晋级下一阶段按通知另行缴纳')
+      : '选择项目后显示';
+  }
+
+  $('itemOpts').addEventListener('click', function(e){
+    var el = e.target.closest('.opt[data-item]');
+    if (!el) return;
+    setTimeout(function(){
+      el.classList.toggle('on', el.querySelector('input').checked);
+      state.items = Array.prototype.filter.call($('itemOpts').querySelectorAll('input:checked'), function(i){ return true; })
+        .map(function(i){ return i.value; });
+    }, 0);
+  });
+
+  $('genderOpts').addEventListener('click', function(e){
+    var el = e.target.closest('.opt');
+    if (!el) return;
+    setTimeout(function(){
+      Array.prototype.forEach.call($('genderOpts').querySelectorAll('.opt'), function(o){
+        o.classList.toggle('on', o.querySelector('input').checked);
+      });
+    }, 0);
+  });
+
+  $('agree').addEventListener('change', function(){
+    if (this.checked) $('f-agree').classList.remove('err');
+  });
+
+  function setErr(id, on){ $(id).classList.toggle('err', !!on); }
+
+  function submit(){
+    var g = $('group').value;
+    var stu = $('student').value.trim();
+    var par = $('parent').value.trim();
+    var ph = $('phone').value.replace(/\s/g, '');
+
+    var bad = false;
+    if (!state.act) { alert('请先选择报名项目'); bad = true; }
+    setErr('f-group', !g); if (!g) bad = true;
+    setErr('f-student', !stu); if (!stu) bad = true;
+    setErr('f-parent', !par); if (!par) bad = true;
+    var phOk = /^1\d{10}$/.test(ph);
+    setErr('f-phone', !phOk); if (!phOk) bad = true;
+    var ag = $('agree').checked;
+    setErr('f-agree', !ag); if (!ag) bad = true;
+
+    if (bad) {
+      var first = document.querySelector('.field.err');
+      if (first) first.scrollIntoView({behavior:'smooth', block:'center'});
+      return;
+    }
+
+    var btn = $('submitBtn');
+    btn.disabled = true; btn.textContent = '提交中…';
+
+    CT.API.submit({
+      act: state.act,
+      group: g,
+      item: state.items.join('、'),
+      student: stu,
+      gender: (document.querySelector('input[name=gender]:checked') || {}).value || '',
+      age: $('age').value.trim(),
+      grade: $('grade').value.trim(),
+      parent: par,
+      phone: ph,
+      city: $('city').value.trim(),
+      school: $('school').value.trim(),
+      teacher: $('teacher').value.trim(),
+      note: $('note').value.trim(),
+      fee: state.fee
+    }).then(function(o){
+      lastOrder = o;
+      $('formView').style.display = 'none';
+      $('doneView').style.display = 'block';
+      document.querySelector('.step[data-s="1"]').classList.add('done');
+      document.querySelector('.step[data-s="2"]').classList.add('done');
+      document.querySelector('.step[data-s="3"]').classList.add('done');
+      $('doneCode').textContent = o.code;
+      $('doneMeta').innerHTML = esc(o.actName) + ' · ' + esc(o.group) + '<br>应付 <b style="color:var(--orange);">¥' + Number(o.fee).toLocaleString('zh-CN') + '</b>　报名人 ' + esc(o.student);
+      $('doneWechat').textContent = CT.API.settings().wechat;
+      $('payGuide').innerHTML = '缴费方式：微信转账至 <b>' + esc(CT.API.settings().wechat) + '</b>（手机号可搜），' +
+        '备注「<b>' + esc(o.code) + ' ' + esc(o.student) + '</b>」。' +
+        '如需对公转账或开票，请致电 180 3882 9260。到账后 1 个工作日内确认，状态会同步到「我的报名」。';
+      window.scrollTo({top:0, behavior:'smooth'});
+    }).catch(function(err){
+      alert(err.message || '提交失败，请稍后重试。');
+    }).then(function(){
+      btn.disabled = false; btn.textContent = '提交报名';
+    });
+  }
+
+  $('submitBtn').addEventListener('click', submit);
+
+  $('copyCode').addEventListener('click', function(){
+    copyText($('doneCode').textContent, $('copyCode'), '只复制报名号', '已复制 ✓');
+  });
+
+  // 一键复制完整报名信息：老师收到就能直接建档
+  $('copyAll').addEventListener('click', function(){
+    if (!lastOrder) { alert('请先提交报名信息。'); return; }
+    var o = lastOrder;
+    var lines = [
+      '【畅途 · 未来领袖】报名号 ' + o.code,
+      '项目：' + o.actName,
+      '组别：' + o.group,
+      '参赛项：' + (o.item || '—'),
+      '学员：' + o.student + (o.gender ? '（' + o.gender + '）' : '') + (o.age ? '　出生 ' + o.age : ''),
+      '年级：' + (o.grade || '—'),
+      '家长：' + o.parent + '　' + o.phone,
+      '城市：' + (o.city || '—') + (o.school ? '　学校：' + o.school : ''),
+      o.teacher ? '推荐：' + o.teacher : '',
+      o.note ? '备注：' + o.note : '',
+      '应付：¥' + Number(o.fee).toLocaleString('zh-CN'),
+      '（本信息由畅途官网生成，转发给招生老师即可完成登记）'
+    ].filter(function(x){ return x; });
+    copyText(lines.join('\n'), $('copyAll'), '一键复制报名信息', '已复制，去微信粘贴 ✓');
+  });
+
+  $('phone').addEventListener('input', function(){
+    this.value = this.value.replace(/\D/g, '').slice(0, 11);
+    if (/^1\d{10}$/.test(this.value)) $('f-phone').classList.remove('err');
+  });
+
+  renderActs();
+})();
+</script>
+</body>
+</html>

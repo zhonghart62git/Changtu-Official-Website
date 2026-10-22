@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>我的报名 · 选场次 · 畅途未来领袖</title>
+<meta name="robots" content="noindex">
+<meta name="description" content="凭手机号查询报名记录，选择或更改活动场次。">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
+<link rel="icon" type="image/png" sizes="64x64" href="assets/favicon-64.png">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<meta name="theme-color" content="#005098">
+<link rel="stylesheet" href="assets/ui.css">
+<!-- domain-seo:start -->
+<link rel="canonical" href="https://leadtheway.cn/my.html">
+<meta name="robots" content="noindex,follow">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="畅途 · 未来领袖">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:title" content="我的报名 · 选场次 · 畅途未来领袖">
+<meta property="og:description" content="凭手机号查询报名记录，选择或更改活动场次。">
+<meta property="og:url" content="https://leadtheway.cn/my.html">
+<meta property="og:image" content="https://leadtheway.cn/assets/og-cover.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="我的报名 · 选场次 · 畅途未来领袖">
+<meta name="twitter:description" content="凭手机号查询报名记录，选择或更改活动场次。">
+<meta name="twitter:image" content="https://leadtheway.cn/assets/og-cover.png">
+<!-- domain-seo:end -->
+</head>
+<body>
+
+<div class="bar"><div class="wrap">
+  <span><b>场次选择</b><i class="bar-hint">　已报名学员凭手机号选择或更改场次</i></span>
+  <a href="enroll.html">还没报名？先报名 →</a>
+</div></div>
+
+<header class="nav"><div class="wrap">
+  <a class="logo" href="index.html">
+    <img class="logo-img" src="assets/logo.png" alt="畅途" width="72" height="34">
+    <span>未来领袖<small>CHANGTU FUTURE LEADERS</small></span>
+  </a>
+  <a class="nav-back" href="index.html">← 返回官网</a>
+</div></header>
+
+<div class="pagehead"><div class="narrow">
+  <div class="kicker">My Enrollment</div>
+  <h1>我的报名 · 选场次</h1>
+  <p>输入报名时用的手机号，查到你的报名记录后即可选择场次。场次有人数上限，先到先得，选好后可改期。</p>
+</div></div>
+
+<div class="sect"><div class="narrow">
+
+  <!-- 查询 -->
+  <div class="card card-pad mb18" id="queryCard">
+    <div class="sect-title"><h2>查我的报名</h2><span>手机号为唯一凭证</span></div>
+    <div class="grid2">
+      <div class="field" id="f-qphone">
+        <label>家长手机号<span class="req">*</span></label>
+        <input type="tel" id="qphone" placeholder="报名时填的 11 位手机号" maxlength="11" inputmode="numeric">
+        <div class="errmsg">请输入正确的 11 位手机号</div>
+      </div>
+      <div class="field">
+        <label>报名号 <span class="muted small">（选填，填了更精确）</span></label>
+        <input type="text" id="qcode" placeholder="如 CT261017-0001">
+      </div>
+    </div>
+    <div class="flex gap12 wrapf center">
+      <button class="btn btn-p" type="button" id="btnQuery">查询我的报名</button>
+      <span class="tiny muted" id="qHint"></span>
+    </div>
+  </div>
+
+  <!-- 结果 -->
+  <div id="result"></div>
+
+</div></div>
+
+<footer style="border-top:1px solid var(--line);background:#fff;padding:24px 0;">
+  <div class="wrap flex between center wrapf gap12">
+    <span class="tiny muted">© 2026 畅途 · 未来领袖　青少年素质教育矩阵</span>
+    <span class="tiny muted">
+      <a href="index.html" style="color:var(--ink-2);">官网</a> ·
+      <a href="enroll.html" style="color:var(--ink-2);">在线报名</a> ·
+      <a href="admin.html" style="color:var(--ink-2);">管理后台</a>
+    </span>
+  </div>
+</footer>
+
+<script src="assets/store.js"></script>
+<script>
+(function(){
+  'use strict';
+  var $ = function(id){ return document.getElementById(id); };
+  var state = { phone: '', orders: [], openPicker: null };
+
+  function esc(s){ return String(s == null ? '' : s).replace(/[&<>"]/g, function(c){
+    return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];
+  }); }
+
+  function money(n){ return Number(n || 0).toLocaleString('zh-CN'); }
+
+  /* 项目 id → 官网锚点 */
+  var ANCHOR = { caocan:'caocan.html', debate:'debate.html', bilingual:'bilingual.html',
+                 sdg:'sdg.html', brtv:'brtv.html', zjcm:'zjcm.html', sanyuanli:'sanyuanli.html' };
+  function anchorOf(id){ return ANCHOR[id] || 'index.html#matrix'; }
+
+
+  function statusTag(o){
+    if (o.status === 'paid') return '<span class="tag tag-ok">已缴费</span>';
+    if (o.status === 'refunded') return '<span class="tag tag-gray">已退款</span>';
+    if (o.status === 'cancelled') return '<span class="tag tag-gray">已取消</span>';
+    return '<span class="tag tag-warn">待缴费</span>';
+  }
+
+  function dateParts(d){
+    var p = String(d).split('-');
+    var mm = ['','JAN','FEB','MAR','APR','MAY','JUN','JUL','AUG','SEP','OCT','NOV','DEC'];
+    return { day: p[2] || '', mon: mm[Number(p[1])] || p[1] };
+  }
+
+  function query(){
+    var ph = $('qphone').value.replace(/\D/g, '');
+    var code = $('qcode').value.trim();
+    if (!/^1\d{10}$/.test(ph)) {
+      $('f-qphone').classList.add('err');
+      $('qphone').focus();
+      return;
+    }
+    $('f-qphone').classList.remove('err');
+    state.phone = ph;
+    CT.API.query(ph, code).then(function(list){
+      state.orders = list;
+      render();
+    }).catch(function(err){
+      $('result').innerHTML = '<div class="alert alert-bad"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16.5v.5"/></svg><span>' + esc(err.message) + '</span></div>';
+    });
+  }
+
+  function render(){
+    if (!state.orders.length) {
+      $('result').innerHTML =
+        '<div class="card card-pad empty">' +
+          '<svg viewBox="0 0 24 24"><path d="M9 11h6M9 15h4"/><path d="M5 4h14a1 1 0 0 1 1 1v14a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1z"/></svg>' +
+          '<p><b>没查到报名记录</b></p>' +
+          '<p class="tiny">请确认手机号与报名时填写的一致。若刚提交，刷新页面再试；也可直接致电 180 3882 9260。</p>' +
+          '<a class="btn btn-s btn-sm mt18" href="enroll.html">去报名</a>' +
+        '</div>';
+      return;
+    }
+
+    var html = '<div class="flex between center wrapf gap12 mb18">' +
+      '<h2 style="font-size:18px;">共 ' + state.orders.length + ' 条报名记录</h2>' +
+      '<span class="tiny muted">手机号 ' + state.phone.replace(/(\d{3})\d{4}(\d{4})/, '$1****$2') + '</span>' +
+    '</div>';
+
+    state.orders.forEach(function(o){
+      var paid = o.status === 'paid';
+      var sess = o.session;
+      html += '<div class="card card-pad mb18">';
+
+      // 头部
+      html += '<div class="flex between center wrapf gap12 mb18">' +
+        '<div>' +
+          '<div class="flex center gap8 wrapf" style="margin-bottom:5px;">' +
+            '<span class="mono bold" style="font-size:15px;letter-spacing:.6px;color:var(--blue-deep);">' + esc(o.code) + '</span>' +
+            statusTag(o) +
+            (sess ? '<span class="tag tag-blue">已选场次</span>' : '<span class="tag tag-orange">待选场次</span>') +
+          '</div>' +
+          '<h3 style="font-size:17px;">' + esc(o.actName) + '</h3>' +
+          '<p class="tiny muted mt8">' + esc(o.group) + (o.item ? ' · ' + esc(o.item) : '') + '　学员 ' + esc(o.student) + '</p>' +
+        '</div>' +
+        '<div style="text-align:right;">' +
+          '<div class="tiny muted">应付</div>' +
+          '<div style="font-size:22px;font-weight:800;letter-spacing:-.5px;color:' + (paid ? 'var(--ok)' : 'var(--orange)') + ';">¥' + money(o.fee) + '</div>' +
+        '</div>' +
+      '</div>';
+
+      // 未缴费提示
+      if (!paid) {
+        html += '<div class="alert alert-warn">' +
+          '<svg viewBox="0 0 24 24"><path d="M12 9v5M12 17.5v.5"/><path d="M10.3 3.9L2.6 17.2A1.9 1.9 0 0 0 4.3 20h15.4a1.9 1.9 0 0 0 1.7-2.8L13.7 3.9a1.9 1.9 0 0 0-3.4 0z"/></svg>' +
+          '<span>报名费尚未到账。微信转账至 <b>' + esc(CT.API.settings().wechat) + '</b>，备注「<b>' + esc(o.code) + ' ' + esc(o.student) + '</b>」。' +
+          '场次可以先选，名额会为你保留至活动前 3 天。</span></div>';
+      }
+
+      // 已选场次
+      if (sess) {
+        var dp = dateParts(sess.date);
+        html += '<div style="background:var(--tint-2);border:1.5px solid rgba(11,99,197,.18);border-radius:14px;padding:16px 18px;margin-bottom:14px;">' +
+          '<div class="flex center gap12 wrapf">' +
+            '<div style="flex:none;text-align:center;padding-right:14px;border-right:1px solid var(--line);">' +
+              '<b style="display:block;font-size:22px;line-height:1;color:var(--blue-deep);">' + esc(dp.day) + '</b>' +
+              '<span class="tiny muted">' + esc(dp.mon) + '</span>' +
+            '</div>' +
+            '<div style="flex:1;min-width:160px;">' +
+              '<div class="flex center gap8 wrapf" style="margin-bottom:3px;"><b style="font-size:15px;">' + esc(sess.tag || '活动场次') + '</b></div>' +
+              '<p class="small muted">' + esc(sess.time) + '　·　' + esc(sess.place) + '</p>' +
+            '</div>' +
+          '</div>' +
+        '</div>' +
+        '<div class="flex gap12 wrapf">' +
+          '<button class="btn btn-s btn-sm" type="button" data-change="' + esc(o.code) + '">更改场次</button>' +
+          (paid ? '' : '<button class="btn btn-ghost btn-sm" type="button" data-clear="' + esc(o.code) + '">取消选择</button>') +
+        '</div>';
+      } else {
+        html += '<div class="flex gap12 wrapf">' +
+          '<button class="btn btn-o" type="button" data-pick="' + esc(o.code) + '">选择场次 →</button>' +
+          '<a class="btn btn-ghost" href="' + anchorOf(o.act) + '">了解这个项目</a>' +
+        '</div>';
+      }
+
+      // 场次选择面板
+      html += '<div id="picker-' + esc(o.code) + '" style="display:none;margin-top:18px;padding-top:18px;border-top:1px solid var(--line);">' +
+        '<div class="sect-title"><h2 style="font-size:16px;">选择场次</h2><span>同项目内可改期，满员场次不可选</span></div>' +
+        '<div id="sessList-' + esc(o.code) + '"></div>' +
+        '<div class="flex gap12 mt18"><button class="btn btn-ghost btn-sm" type="button" data-close="' + esc(o.code) + '">收起</button></div>' +
+      '</div>';
+
+      html += '</div>';
+    });
+
+    $('result').innerHTML = html;
+  }
+
+  /* 事件只绑定一次（委托在容器上，innerHTML 替换不影响） */
+  function bind(){
+    $('result').addEventListener('click', function(e){
+      var t = e.target.closest('button[data-pick],button[data-change],button[data-close],button[data-clear],[data-sess]');
+      if (!t) return;
+
+      if (t.hasAttribute('data-pick') || t.hasAttribute('data-change')) {
+        var code = t.getAttribute('data-pick') || t.getAttribute('data-change');
+        openPicker(code);
+        return;
+      }
+      if (t.hasAttribute('data-close')) {
+        $('picker-' + t.getAttribute('data-close')).style.display = 'none';
+        return;
+      }
+      if (t.hasAttribute('data-clear')) {
+        var c = t.getAttribute('data-clear');
+        if (!confirm('确定取消已选场次？取消后名额会释放，需要重新选择。')) return;
+        CT.API.clearSession(c, state.phone).then(refresh).catch(function(err){ alert(err.message); });
+        return;
+      }
+      if (t.hasAttribute('data-sess')) {
+        var sid = t.getAttribute('data-sess');
+        var ocode = t.getAttribute('data-code');
+        t.disabled = true;
+        CT.API.chooseSession(ocode, state.phone, sid).then(function(){
+          refresh();
+          $('queryCard').scrollIntoView({behavior:'smooth', block:'start'});
+        }).catch(function(err){
+          alert(err.message);
+          t.disabled = false;
+        });
+      }
+    }, { once: false });
+  }
+
+  function openPicker(code){
+    var box = $('picker-' + code);
+    var list = $('sessList-' + code);
+    if (!box) return;
+    var o = state.orders.filter(function(x){ return x.code === code; })[0];
+    if (!o) return;
+
+    CT.API.sessions(o.act).then(function(ss){
+      if (!ss.length) {
+        list.innerHTML = '<div class="alert alert-info"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7.5v.5"/></svg><span>该项目场次正在排期中，公布后会在公众号通知，也可以先致电 180 3882 9260 预登记意向。</span></div>';
+      } else {
+        list.innerHTML = ss.map(function(s){
+          var dp = dateParts(s.date);
+          var cls = 'sess' + (s.full && o.sessionId !== s.id ? ' full' : '') + (o.sessionId === s.id ? ' on' : '');
+          var right = s.full && o.sessionId !== s.id
+            ? '<span class="tag tag-bad">已满</span>'
+            : '<b>' + s.left + '</b><span>剩余名额</span>';
+          return '<div class="' + cls + '" ' + (s.full && o.sessionId !== s.id ? '' : 'data-sess="' + esc(s.id) + '" data-code="' + esc(code) + '"') + ' role="button" tabindex="0">' +
+            '<div class="date"><b>' + esc(dp.day) + '</b><span>' + esc(dp.mon) + '</span></div>' +
+            '<div class="info">' +
+              '<h4>' + esc(s.tag || '场次') + (o.sessionId === s.id ? ' <span class="tag tag-ok">当前</span>' : '') + '</h4>' +
+              '<p>' + esc(s.time) + '<br>' + esc(s.place) + '</p>' +
+            '</div>' +
+            '<div class="right">' + right + '</div>' +
+          '</div>';
+        }).join('');
+      }
+      box.style.display = 'block';
+      box.scrollIntoView({behavior:'smooth', block:'nearest'});
+    });
+  }
+
+  function refresh(){
+    CT.API.query(state.phone, '').then(function(list){
+      state.orders = list;
+      state.orders.forEach(function(o){
+        if (o.sessionId) state.openPicker = null;
+      });
+      render();
+      $('result').scrollIntoView({behavior:'smooth', block:'start'});
+    });
+  }
+
+  bind();
+  $('btnQuery').addEventListener('click', query);
+  $('qphone').addEventListener('keydown', function(e){ if (e.key === 'Enter') query(); });
+  $('qcode').addEventListener('keydown', function(e){ if (e.key === 'Enter') query(); });
+  $('qphone').addEventListener('input', function(){
+    this.value = this.value.replace(/\D/g, '').slice(0, 11);
+    if (/^1\d{10}$/.test(this.value)) $('f-qphone').classList.remove('err');
+  });
+
+  // 支持从报名页带参跳转
+  var m = location.search.match(/[?&]phone=(\d{11})/);
+  if (m) {
+    $('qphone').value = m[1];
+    var c = location.search.match(/[?&]code=([\w-]+)/);
+    if (c) $('qcode').value = c[1];
+    query();
+  } else {
+    $('qHint').textContent = '查询不收取任何费用，也不会向你发送营销短信。';
+  }
+})();
+</script>
+</body>
+</html>

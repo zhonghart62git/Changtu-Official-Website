@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+
+Disallow: /admin.html
+Disallow: /my.html
+Disallow: /enroll.html
+
+Sitemap: https://leadtheway.cn/sitemap.xml
