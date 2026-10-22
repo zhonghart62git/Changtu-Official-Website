@@ -99,9 +99,139 @@
   font-size:13.5px;line-height:1.85;color:var(--ink-2);}
 .ai-note b{color:var(--violet-700);}
 
+/* ── 8. 配套材料：开课前 / 开课中 / 结课后各有什么成品 ───── */
+.deliver-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;}
+.dv{display:flex;flex-direction:column;background:var(--surface);border:1px solid var(--line);
+  border-radius:16px;padding:24px 22px;}
+.dv .dv-k{font-size:11.5px;letter-spacing:1.5px;color:var(--blue-700);font-weight:700;}
+.dv h3{font-size:18px;margin:9px 0 10px;letter-spacing:-.2px;}
+.dv p{font-size:13.5px;line-height:1.8;color:var(--ink-2);margin:0 0 14px;}
+.dv .dv-in{margin-top:auto;padding-top:13px;border-top:1px dashed var(--line);
+  font-size:12.5px;color:var(--text-3);line-height:1.75;}
+.dv .dv-in b{color:var(--blue);font-weight:700;}
+
+/* ── 9. 一节课怎么排 ───────────────────────────────────── */
+.lesson{margin-top:16px;border:1px solid var(--line);border-radius:16px;
+  overflow:hidden;background:var(--surface);}
+.lesson-top{display:flex;flex-wrap:wrap;gap:8px 14px;align-items:baseline;
+  padding:18px 22px;background:var(--bg-2);border-bottom:1px solid var(--line);}
+.lesson-top h3{font-size:16px;margin:0;letter-spacing:-.2px;}
+.lesson-top span{font-size:12.5px;color:var(--text-3);}
+.lesson-row{display:grid;grid-template-columns:132px 96px 1fr;gap:16px;
+  padding:15px 22px;border-bottom:1px solid var(--line);align-items:baseline;}
+.lesson-row .ln{font-size:13.5px;font-weight:700;}
+.lesson-row .lt{font-size:12.5px;color:var(--blue-700);font-weight:600;white-space:nowrap;}
+.lesson-row .ld{font-size:13.5px;line-height:1.75;color:var(--ink-2);}
+.lesson-foot{padding:15px 22px;background:var(--bg-2);font-size:13px;
+  line-height:1.8;color:var(--ink-2);}
+.lesson-foot b{color:var(--ink);}
+
+/* ── 10. 教学工具：三个入口，各自说明能干什么 ───────────── */
+.tool-row{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-top:16px;}
+.tool{background:var(--surface-2);border:1px solid var(--line);border-radius:14px;padding:18px 20px;}
+.tool b{display:block;font-size:11.5px;letter-spacing:.7px;color:var(--text-3);
+  font-weight:700;margin-bottom:6px;}
+.tool p{font-size:13.5px;line-height:1.75;color:var(--ink-2);margin:0;}
+.tool a{color:var(--blue);font-weight:600;}
+
+/* ── 11. 学习链条：任务 → 反馈 → 展示 ──────────────────── */
+.chain{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));
+  border:1px solid var(--line);border-radius:16px;overflow:hidden;background:var(--surface);}
+.ch{padding:26px 24px;border-right:1px solid var(--line);}
+.ch:last-child{border-right:none;}
+.ch .cn{font-size:11.5px;font-weight:800;letter-spacing:1.6px;color:var(--violet);}
+.ch h3{font-size:17px;margin:8px 0 10px;letter-spacing:-.2px;}
+.ch p{font-size:13.5px;line-height:1.8;color:var(--ink-2);margin:0;}
+
+/* ── 12. 出口：六个可点的小胶囊，替代六张大卡 ───────────── */
+.exit{display:flex;flex-wrap:wrap;gap:10px;}
+.exit a{display:inline-flex;align-items:center;gap:8px;padding:10px 17px;border-radius:30px;
+  border:1px solid var(--line);background:var(--surface);font-size:13px;font-weight:600;
+  color:var(--ink-2);transition:border-color .2s,color .2s,transform .2s;}
+.exit a:hover{border-color:var(--blue);color:var(--blue);transform:translateY(-1px);}
+.exit a i{font-style:normal;font-size:11px;color:var(--text-3);font-weight:500;}
+
+/* ── 13. 完整矩阵入口条 ────────────────────────────────── */
+.mx-strip{display:flex;flex-wrap:wrap;align-items:center;gap:18px;margin-top:22px;
+  padding:20px 24px;border-radius:14px;border:1px dashed var(--line);background:var(--bg-2);}
+.mx-strip p{margin:0;font-size:14px;line-height:1.75;color:var(--ink-2);flex:1;min-width:280px;}
+.mx-strip b{color:var(--ink);}
+
+/* ── 14. 合作依据：两个可核对的例子 ────────────────────── */
+.case-proof{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:18px;}
+.cp{background:var(--surface);border:1px solid var(--line);border-left:3px solid var(--violet);
+  border-radius:12px;padding:22px 24px;}
+.cp .cp-k{font-size:11.5px;font-weight:800;letter-spacing:1.5px;color:var(--violet-600);}
+.cp p{margin:9px 0 0;font-size:14px;line-height:1.85;color:var(--ink-2);}
+.cp b{color:var(--ink);}
+
+/* ── 15. 团队：职责在前，履历在后 ──────────────────────── */
+.team-brief{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin-top:18px;}
+.tb{padding:22px;border:1px solid var(--line);border-radius:14px;background:var(--surface);}
+.tb h3{font-size:17px;margin:0 0 3px;}
+.tb .tb-r{display:block;font-size:12.5px;font-weight:700;color:var(--blue-700);margin-bottom:9px;}
+.tb p{font-size:13px;line-height:1.75;color:var(--text-3);margin:0;}
+
+/* ── 16. 合作三步 ──────────────────────────────────────── */
+.steps3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin-bottom:44px;}
+.s3{position:relative;padding:22px 22px 22px 58px;background:var(--surface);
+  border:1px solid var(--line);border-radius:14px;}
+.s3 .sn{position:absolute;left:20px;top:21px;font-size:13px;font-weight:800;
+  color:var(--blue);letter-spacing:.5px;}
+.s3 h3{font-size:16.5px;margin:0 0 8px;letter-spacing:-.2px;}
+.s3 p{font-size:13.5px;line-height:1.8;color:var(--ink-2);margin:0;}
+.s3 .so{display:block;margin-top:11px;font-size:12.5px;font-weight:700;color:var(--violet-600);}
+
+/* 数据口径注：数字是信任基础，但必须说明统计到什么时候、怎么算 */
+.stats-note{margin:0;padding:0 0 20px;font-size:12px;line-height:1.75;color:var(--text-3);}
+
+/* ── 17. 推导链：前提 → 推论，三跳 ───────────────────────
+   这一块不是「三个并列论点」，是「因为 A 所以 B，因为 B 所以 C」。
+   左窄右宽的双栏，左边放前提句，右边放论证，读起来是推导不是清单。 */
+.derive{display:flex;flex-direction:column;border-top:1px solid var(--line);}
+.dr{display:grid;grid-template-columns:272px 1fr;gap:36px;
+  padding:32px 0;border-bottom:1px solid var(--line);}
+.dr .dq{font-size:16px;font-weight:800;line-height:1.62;letter-spacing:-.2px;margin:0;}
+.dr .dq em{display:block;font-style:normal;font-size:11.5px;font-weight:700;
+  letter-spacing:1.6px;color:var(--violet);margin-bottom:9px;}
+.dr .da{font-size:14.5px;line-height:1.95;color:var(--ink-2);margin:0;}
+.dr .da p{margin:0 0 12px;}
+.dr .da p:last-child{margin-bottom:0;}
+.dr .da b{color:var(--ink);font-weight:700;}
+.dr .da .pull{display:block;margin:14px 0 0;padding:13px 18px;border-radius:11px;
+  background:var(--bg-2);border-left:2px solid var(--violet);
+  font-size:13.5px;font-weight:600;color:var(--ink);line-height:1.75;}
+
+/* 能力对照表：以前稀缺 vs 现在稀缺 */
+.swap{width:100%;border-collapse:collapse;margin:2px 0 14px;font-size:13.5px;}
+.swap th,.swap td{text-align:left;padding:10px 14px 10px 0;border-bottom:1px solid var(--line);vertical-align:top;}
+.swap thead th{font-size:11px;letter-spacing:1.3px;color:var(--text-3);font-weight:700;
+  padding-bottom:7px;border-bottom:1px solid var(--border);}
+.swap td:first-child{color:var(--text-3);width:30%;}
+.swap td:nth-child(2){color:var(--ink);font-weight:700;width:34%;}
+.swap td:last-child{color:var(--ink-2);}
+.swap tr:last-child td{border-bottom:none;}
+
+/* 推导收口：把三跳接回产品 */
+.derive-end{margin-top:26px;padding:26px 28px;border-radius:16px;
+  background:linear-gradient(160deg,#FCFAFF 0%,var(--violet-tint) 100%);
+  border:1px solid var(--violet-line);}
+.derive-end p{margin:0;font-size:14.5px;line-height:1.9;color:var(--ink-2);}
+.derive-end p+p{margin-top:12px;}
+.derive-end b{color:var(--violet-700);}
+
+@media (max-width:1020px){
+  .dr{grid-template-columns:1fr;gap:14px;padding:26px 0;}
+}
+
 @media (max-width:1020px){
   .aud-grid{grid-template-columns:repeat(2,minmax(0,1fr));}
   .ai-grid{grid-template-columns:repeat(2,minmax(0,1fr));}
+  .deliver-grid,.tool-row,.team-brief,.steps3{grid-template-columns:1fr;}
+  .case-proof{grid-template-columns:1fr;}
+  .chain{grid-template-columns:1fr;}
+  .ch{border-right:none;border-bottom:1px solid var(--line);}
+  .ch:last-child{border-bottom:none;}
 }
 @media (max-width:920px){
   .home .hero-lg .wrap{grid-template-columns:1fr;}

@@ -4,8 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>关于我们｜畅途 · 未来领袖</title>
-<meta name="description" content="畅途是面向 AI 时代的青少年素质教育平台：为机构提供课程体系、展演活动与 AI 工具，为孩子提供从能力摸底、系统训练到能力跃迁的路径。四域十二技能、两套自研课程、四类赛事与两类考级，覆盖广东 21 个地级市并延伸至港澳。">
-<meta name="keywords" content="畅途文化科技,未来领袖,关于我们,AI 时代素质教育,四域十二技能,破界三原力,破界MUN,广东曹灿杯承办">
+<meta name="description" content="畅途是面向未来人才培养的青少年素质教育平台：为机构提供课程体系、展演活动与 AI 工具，为孩子提供生涯规划、能力摸底与能力跃迁。广东起步，面向全国，向国际通道延伸。">
+<meta name="keywords" content="畅途文化科技,未来领袖,关于我们,青少年素质教育平台,破界三原力,破界MUN,广东曹灿杯承办">
 <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
 <link rel="icon" type="image/png" sizes="64x64" href="assets/favicon-64.png">
 <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
@@ -18,45 +18,32 @@
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="畅途 · 未来领袖">
 <meta property="og:title" content="关于我们｜畅途 · 未来领袖">
-<meta property="og:description" content="面向 AI 时代的青少年素质教育平台。四域十二技能、两套自研课程、四类赛事、两类考级，覆盖广东 21 个地级市并延伸至港澳。">
+<meta property="og:description" content="面向未来人才培养的青少年素质教育平台。为机构提供课程体系、展演活动与 AI 工具，为孩子提供生涯规划、能力摸底与能力跃迁。">
 <meta property="og:url" content="https://leadtheway.cn/about.html">
 <meta property="og:image" content="https://leadtheway.cn/assets/og-cover.png">
 <style>
-  /* 本页专用：定位段、为什么是现在、四层家当、阶段条、原则卡、事实表 */
+  /* 本页专用：定位段、四件事、阶段条、团队卡、原则卡、事实表 */
   .about-hero{position:relative;overflow:hidden;padding:70px 0 54px;
     background:radial-gradient(820px 420px at 82% -14%,var(--surface-3) 0%,rgba(234,244,254,0) 70%),
                radial-gradient(680px 380px at 4% 108%,var(--surface-3) 0%,rgba(234,244,254,0) 72%),var(--surface);}
   .about-hero .wrap{position:relative;z-index:1;max-width:880px;}
-  .about-hero h1{font-size:clamp(28px,3.6vw,46px);line-height:1.28;letter-spacing:-.8px;font-weight:800;margin:18px 0 20px;}
+  .about-hero h1{font-size:clamp(27px,3.5vw,44px);line-height:1.3;letter-spacing:-.8px;font-weight:800;margin:18px 0 20px;}
   .about-hero .lead{font-size:17px;color:var(--text-2);line-height:1.85;}
   .about-hero .lead b{color:var(--blue-700);}
   .about-hero .lead-sub{margin-top:14px;font-size:14.5px;color:var(--text-3);line-height:1.85;}
 
-  /* 为什么是现在 */
-  .now-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;}
-  .now{background:var(--surface-2);border:1px solid var(--border);border-radius:var(--r-lg);padding:26px 24px;
-    transition:box-shadow var(--dur) var(--ease),transform var(--dur) var(--ease);}
-  .now:hover{box-shadow:var(--shadow-md);transform:translateY(-2px);}
-  .now .n{font-family:var(--font-num,inherit);font-size:12px;font-weight:800;letter-spacing:1.6px;color:var(--blue-400);}
-  .now h3{font-size:17px;font-weight:800;margin:8px 0 10px;letter-spacing:-.2px;line-height:1.45;}
-  .now p{font-size:13.5px;color:var(--text-2);line-height:1.85;margin:0;}
-
-  /* 我们有什么：四层 */
-  .layers{display:flex;flex-direction:column;border-top:1px solid var(--border);}
-  .layer{display:grid;grid-template-columns:210px 1fr;gap:28px;padding:26px 0;border-bottom:1px solid var(--border);}
-  .ly-h{display:flex;flex-direction:column;gap:7px;align-items:flex-start;}
-  .ly-n{font-family:var(--font-num,inherit);font-size:11.5px;font-weight:800;letter-spacing:1.6px;color:var(--violet);}
-  .ly-h h3{font-size:18px;font-weight:800;margin:0;letter-spacing:-.2px;}
-  .ly-st{font-size:11.5px;font-weight:700;letter-spacing:.4px;color:var(--blue-700);
-    background:var(--surface-3);border-radius:20px;padding:3px 11px;}
-  .layer p{font-size:14.5px;color:var(--text-2);line-height:1.9;margin:0 0 8px;}
-  .ly-meta{font-size:12.5px;color:var(--text-3);line-height:1.8;}
-  .ly-meta a{color:var(--blue);font-weight:600;}
+  /* 四件事：能教 / 能练 / 能赛 / 能考，每格对应一个真实存在的东西 */
+  .four{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:34px;}
+  .f4{padding:18px 18px 16px;background:var(--surface);border:1px solid var(--border);border-radius:13px;}
+  .f4 .fk{font-size:11px;font-weight:800;letter-spacing:1.4px;color:var(--violet);}
+  .f4 h3{font-size:15.5px;margin:7px 0 6px;letter-spacing:-.2px;}
+  .f4 p{font-size:12.5px;color:var(--text-3);line-height:1.7;margin:0;}
 
   .prose{max-width:800px;}
   .prose h2{font-size:clamp(22px,2.6vw,30px);line-height:1.35;letter-spacing:-.4px;margin-bottom:18px;font-weight:800;}
   .prose p{font-size:15.5px;color:var(--text-2);line-height:1.95;margin-bottom:16px;}
   .prose p b{color:var(--text);}
+  .prose .to{display:inline-block;margin-top:4px;font-size:14px;font-weight:700;color:var(--blue);}
 
   /* 阶段条 */
   .phase{display:flex;flex-direction:column;gap:0;margin-top:10px;}
@@ -78,7 +65,7 @@
   .tm .tm-r{display:block;font-size:12.5px;font-weight:700;color:var(--violet-600);letter-spacing:.3px;margin-bottom:12px;}
   .tm p{font-size:13.5px;color:var(--text-2);line-height:1.85;margin:0;}
 
-  /* 全国路径 */
+  /* 路径说明 */
   .scale-proof{margin-top:22px;padding:22px 24px;background:var(--surface);
     border:1px solid var(--border);border-left:3px solid var(--violet);border-radius:12px;}
   .scale-proof p{font-size:14.5px;line-height:1.9;color:var(--text-2);margin:0;}
@@ -102,13 +89,13 @@
 
   @media (max-width:1020px){
     .team-grid{grid-template-columns:repeat(2,1fr);}
-    .now-grid{grid-template-columns:1fr;}
-    .layer{grid-template-columns:1fr;gap:12px;}
+    .four{grid-template-columns:repeat(2,1fr);}
   }
   @media (max-width:760px){
     .phase-row{grid-template-columns:1fr;gap:8px;}
     .prin-grid{grid-template-columns:1fr;}
     .team-grid{grid-template-columns:1fr;}
+    .four{grid-template-columns:1fr;}
     .fact-table th{width:110px;font-size:12.5px;padding:12px 10px;}
     .fact-table td{padding:12px 10px;font-size:13.5px;}
   }
@@ -118,8 +105,8 @@
 
 <div class="topbar">
   <div class="wrap">
-    <div><b>2026 秋季档期</b>　雏英杯中英双语主持人大会 · 联合国青少年领袖发言人 线上海选 11 月 8 日截止</div>
-    <div><a href="enroll.html">报名咨询 →</a>　<a href="my.html">查看报名意向</a></div>
+    <div><b>线上海选 11 月 8 日截止</b>　雏英杯 · 联合国 SDG 发言人</div>
+    <div><a href="index.html#calendar">查看详情 →</a>　<a href="enroll.html">填写报名意向</a></div>
   </div>
 </div>
 
@@ -149,135 +136,81 @@
 
 <main>
 
-<!-- 我们是什么 -->
+<!-- 我们是什么：完整定位 -->
 <section class="about-hero">
   <div class="aurora" aria-hidden="true"><i class="a1"></i><i class="a2"></i></div>
   <div class="wrap">
     <div class="eyebrow"><i></i>关于我们 · About</div>
-    <h1>把 AI 时代需要的能力，<br>做成<span class="grad-violet">能教、能练、能考、能赛</span>的东西</h1>
+    <h1>畅途是面向未来人才培养的<br>青少年素质教育平台</h1>
     <p class="lead">
-      畅途是面向 AI 时代的青少年素质教育平台。机构拿到的是课程体系、展演活动与 AI 工具；
-      孩子拿到的是一条从能力摸底、系统训练到能力跃迁的路径。
+      为机构提供<b>课程体系、展演活动与 AI 工具</b>；为孩子提供<b>生涯规划、能力摸底与能力跃迁</b>。
     </p>
     <p class="lead-sub">
-      这套东西现在覆盖广东 21 个地级市，延伸至香港、澳门。往外交接的路径是：广东验证、大湾区复制、全国共建。
+      围绕 AI 时代青少年成长路径上真正需要的能力，做一整套教学与引领体系。广东是起点——21 个地级市、909 家机构、12,499 人次已经跑通；
+      目标是全国性平台，并向国际通道延伸。
     </p>
+
+    <div class="four">
+      <div class="f4">
+        <span class="fk">能教</span>
+        <h3>教案与课件</h3>
+        <p>三原力九册 · MUN 六阶，逐次课写清课堂动作与产出</p>
+      </div>
+      <div class="f4">
+        <span class="fk">能练</span>
+        <h3>课堂任务与陪练</h3>
+        <p>90 分钟三段融合，AI 三件工具随时开练</p>
+      </div>
+      <div class="f4">
+        <span class="fk">能赛</span>
+        <h3>四类赛事</h3>
+        <p>曹灿杯 · 辩论世界杯 · 雏英杯 · UN SDG 发言人</p>
+      </div>
+      <div class="f4">
+        <span class="fk">能考</span>
+        <h3>两类考级</h3>
+        <p>北京广播电视台语言类 · 浙江音乐学院音乐类</p>
+      </div>
+    </div>
   </div>
 </section>
 
-<!-- 数据条 -->
-<div class="stats-band">
-  <div class="wrap stats">
-    <div class="stat"><b>12<i>年</i></b><span>连续承办广东曹灿杯</span>
-    </div>
-    <div class="stat"><b>909<i>家</i></b><span>累计服务广东合作机构</span>
-    </div>
-    <div class="stat"><b>12,499<i>人次</i></b><span>历届参赛学员</span>
-    </div>
-    <div class="stat"><b>21<i>市</i></b><span>覆盖广东全省，延伸至港澳</span>
-    </div>
-  </div>
-</div>
-
-<!-- 为什么是现在 -->
+<!-- 我们的立场 -->
 <section>
   <div class="wrap">
-    <div class="sec-head rv2">
-      <div class="bar"></div>
-      <h2>为什么是现在 <small>Why Now</small></h2>
-      <p>三件正在发生的事，决定了我们把课程按能力拆成四个域。</p>
-    </div>
-    <div class="now-grid">
-      <article class="now rv2">
-        <span class="n">01</span>
-        <h3>能查到的知识在贬值</h3>
-        <p>搜一下就有答案的知识，价值在下降。值钱的是提出什么问题、判断答案对不对。</p>
-      </article>
-      <article class="now rv2">
-        <span class="n">02</span>
-        <h3>一个人加 AI，做出一个团队的产出</h3>
-        <p>会指挥 AI 的人和不用 AI 的人，差距在拉大。这件事在成年人的工作里已经发生，孩子的准备期就是现在。</p>
-      </article>
-      <article class="now rv2">
-        <span class="n">03</span>
-        <h3>评价方式正在变</h3>
-        <p>升学面试、竞赛答辩、校内选拔，越来越看「你能不能讲清楚自己的判断」，而不只是答对题。</p>
-      </article>
-    </div>
-  </div>
-</section>
-
-<!-- 我们有什么 -->
-<section style="background:var(--bg-2);">
-  <div class="wrap">
-    <div class="sec-head rv2">
-      <div class="bar"></div>
-      <h2>我们有什么 <small>What We Have</small></h2>
-      <p>四层东西，从框架到工具。每一层标注真实状态：有的写有，没有的写没有。</p>
-    </div>
-
-    <div class="layers rv2">
-      <div class="layer">
-        <div class="ly-h">
-          <span class="ly-n">LAYER 01</span>
-          <h3>能力框架</h3>
-          <span class="ly-st">7 项上线</span>
-        </div>
-        <div>
-          <p>四域十二技能：表达力（朗诵 · 主持）、思辨力（演讲 · 辩论 · 模联）、学习力（学习方法 · 测评）、创造力（AI · 科创 · 商赛 · 音乐 · 美术）。四个域合起来回答一件事——孩子离开标准答案的场合，能不能站得住。</p>
-          <div class="ly-meta">创造力域 5 个方向暂无课程与工具，2026 年内陆续开放　·　<a href="matrix.html">看完整矩阵 →</a></div>
-        </div>
+    <div class="prose rv2">
+      <div class="sec-head" style="margin-bottom:26px;">
+        <div class="bar"></div>
+        <h2>我们为什么按「三力」编课 <small>Our Stance</small></h2>
       </div>
-
-      <div class="layer">
-        <div class="ly-h">
-          <span class="ly-n">LAYER 02</span>
-          <h3>课程</h3>
-          <span class="ly-st">成品化</span>
-        </div>
-        <div>
-          <p>破界三原力 三级九册 · 144 课时（L1 初阶 7–9 岁 / L2 中阶 10–12 岁 / L3 高阶 13–15 岁）；破界 MUN 六阶 · 156 课时（L0 观察员 → L5 主席团，中英双语双轨）。</p>
-          <div class="ly-meta">教案、物料包、师训包、会务清单齐备，签约即整包交付　·　<a href="sanyuanli.html">三原力</a>　·　<a href="mun.html">破界 MUN</a></div>
-        </div>
-      </div>
-
-      <div class="layer">
-        <div class="ly-h">
-          <span class="ly-n">LAYER 03</span>
-          <h3>出口</h3>
-          <span class="ly-st">广东区域承办</span>
-        </div>
-        <div>
-          <p>四类赛事：曹灿杯青少年朗诵展示活动、华语辩论世界杯 / 亚青辩岭南挑战赛、雏英杯中英双语主持人大会、联合国青少年领袖发言人（ART FOR SDGs）。两类考级：北京广播电视台语言类、浙江音乐学院社会艺术水平。</p>
-          <div class="ly-meta">组别表、场次表、评审标准原文由我们出　·　<a href="partner.html">合作方式 →</a></div>
-        </div>
-      </div>
-
-      <div class="layer">
-        <div class="ly-h">
-          <span class="ly-n">LAYER 04</span>
-          <h3>工具</h3>
-          <span class="ly-st">已上线</span>
-        </div>
-        <div>
-          <p>学生端：文字创作室、辩论助手、模拟对手、练习复盘。教师端：课件、稿件库、辩题库、作业、测评。三个学生端工具都在跑 AI——起草、陪练、模拟对手。</p>
-          <div class="ly-meta">AI 在练功房里当陪练，孩子仍然要自己上台；教师端测评工具仍在接入中</div>
-        </div>
-      </div>
+      <p>
+        AI 把「做出来」的边际成本压到接近零，但没有让「想清楚」降价。判断的成本是责任的成本，而责任不能外包。
+        所以稀缺的东西换了一批：从知道答案，换成提出值得回答的问题；从把活干出来，换成判断活干得对不对；
+        从学会一门手艺，换成没人教也能学会新手艺。
+      </p>
+      <p>
+        这三件事收敛成三句——<b>提得出问题、讲得清判断、学得会新东西</b>。它们就是破界三原力的思辨力、表达力、学习力。
+        三力就是课程的分册依据，理由在这里，不在课程表里。
+      </p>
+      <p>
+        而这三种能力有一个共同点：<b>只能在有对手、有观众、有评委、有截止日期的场合被验证</b>。
+        家庭给不了，屏幕也给不了。它们只能由课程提供训练结构、由展演与赛事提供验证场域——这也是我们把办赛和编课放在同一个团队里的原因。
+      </p>
+      <a class="to" href="index.html#why">完整推导在首页「AI 把做出来变便宜了，把判断变贵了」 →</a>
     </div>
   </div>
 </section>
 
 <!-- 怎么走到今天 -->
-<section>
+<section style="background:var(--bg-2);">
   <div class="wrap">
     <div class="prose rv2">
       <div class="sec-head" style="margin-bottom:30px;">
         <div class="bar"></div>
-        <h2>怎么走到今天 <small>How We Got Here</small></h2>
+        <h2>从赛事走向日常教学 <small>How We Got Here</small></h2>
       </div>
       <p>
-        矩阵是长出来的：办赛撞上一个问题，补一块能力；四块能力拼起来，才成了今天这张表。下面是四次具体的撞墙。
+        矩阵是长出来的，不是规划出来的：办赛撞上一个问题，补一块能力；四块能力拼起来，才成了今天这张表。
       </p>
     </div>
 
@@ -307,7 +240,7 @@
         <div class="pn">PHASE 04</div>
         <div>
           <h3>编成矩阵，开放给机构</h3>
-          <p>课程做出来之后，新的问题来了：机构想开课，但没有教研能力；想参赛，但不知道怎么把参赛和日常教学接上。所以我们把赛事、课程、考级编成一张矩阵，按三档权益开放给合作机构——机构不必从零研发，孩子不必东奔西跑找出口。</p>
+          <p>课程做出来之后，新的问题来了：机构想开课，但没有教研能力；想参赛，但不知道怎么把参赛和日常教学接上。所以我们把赛事、课程、考级编成一张矩阵，按三档权益开放给合作机构。机构拿到的是配套课程与教师支持，省掉重复备课与课程研发这一段。</p>
         </div>
       </div>
     </div>
@@ -315,7 +248,7 @@
 </section>
 
 <!-- 团队 -->
-<section style="background:var(--bg-2);">
+<section>
   <div class="wrap">
     <div class="sec-head rv2">
       <div class="bar"></div>
@@ -327,31 +260,31 @@
         <span class="tm-n">01</span>
         <h3>天道</h3>
         <span class="tm-r">机构渠道与区域经营</span>
-        <p>北大应用心理学背景、计算机高级工程师，深耕青少年素质教育 20 余年，连续 12 年负责曹灿杯广东地区运营。央视朗诵大赛全国十佳、《破解三原力》创始人，长期连接广东教育机构与学校，负责区域市场判断、机构渠道拓展与项目经营。</p>
+        <p>负责区域市场判断、机构渠道拓展与项目经营。连续 12 年负责曹灿杯广东地区运营，长期连接广东教育机构与学校。北大应用心理学背景、计算机高级工程师，央视朗诵大赛全国十佳，《破解三原力》创始人。</p>
       </article>
       <article class="tm rv2">
         <span class="tm-n">02</span>
         <h3>Hart</h3>
         <span class="tm-r">战略合作与项目共建</span>
-        <p>清华大学计算机、哥伦比亚大学运筹学背景，长期从事 AI 产品、战略咨询与商业模式设计。曾任清华大学学生艺术团话剧队队长，兼具技术、策略与内容表达能力，负责合作项目评估、全国资源协同及跨区域增长模式设计。</p>
+        <p>负责合作项目评估、全国资源协同与跨区域增长模式设计。清华大学计算机、哥伦比亚大学运筹学背景，长期从事 AI 产品、战略咨询与商业模式设计。</p>
       </article>
       <article class="tm rv2">
         <span class="tm-n">03</span>
         <h3>方圆</h3>
         <span class="tm-r">双语教育与国际合作</span>
-        <p>30 年双语教学与青少年教育实践经验，曾任伦敦汉语教育项目特聘教师、北京广播影视培训中心师训特聘教师。长期参与中英教育与文化交流，兼具课程适配、语言表达和活动实践能力，设计双语项目、连接国际教育合作资源。</p>
+        <p>负责双语项目设计与国际教育合作资源对接。30 年双语教学与青少年教育实践经验，曾任伦敦汉语教育项目特聘教师、北京广播影视培训中心师训特聘教师。</p>
       </article>
     </div>
   </div>
 </section>
 
 <!-- 全国路径 -->
-<section>
+<section style="background:var(--bg-2);">
   <div class="wrap">
     <div class="sec-head rv2">
       <div class="bar"></div>
       <h2>广东验证，大湾区复制，全国共建 <small>How We Scale</small></h2>
-      <p>一套东西在广东跑通之后，往外交接要解决三件事：找谁谈、怎么招、现场怎么交付。下面三段是已经跑过一遍的流程。</p>
+      <p>能力本身没有地域性，出口有。一个孩子一年能上台几次，决定这套课程在他身上能不能生效——所以复制的是出口网络，不只是教材。</p>
     </div>
 
     <div class="phase rv2">
@@ -359,21 +292,21 @@
         <span class="pn">STEP 01</span>
         <div>
           <h3>广东验证</h3>
-          <p>对产品形态清晰、具备基本市场素材的项目，首阶段以 30 至 50 家重点机构为触达范围，争取形成 10 至 20 家深度沟通，推动其中 3 至 5 家进入首批合作验证。具体目标按项目类型、城市和合作周期共同确定。</p>
+          <p>21 个地级市、909 家语言艺术与思辨教育机构、12,499 人次上台。单城试点、区域赛事、多城市联动都做过，三种规模的交付经验都有。</p>
         </div>
       </div>
       <div class="phase-row">
         <span class="pn">STEP 02</span>
         <div>
           <h3>大湾区复制</h3>
-          <p>覆盖广东 21 个地级市，延伸至香港、澳门，累计服务 909 家语言艺术与思辨教育机构、公办学校与国际学校。广州、深圳、香港三地积累了不同规模活动的交付经验，单城试点、区域赛事、多城市联动都做过。</p>
+          <p>向香港、澳门延伸，双语轨与英文轨先落地。广州、深圳、香港三地积累了不同规模活动的交付经验，跨城协作的流程已经跑熟。</p>
         </div>
       </div>
       <div class="phase-row">
         <span class="pn">STEP 03</span>
         <div>
-          <h3>全国共建</h3>
-          <p>对具备跨区域潜力的项目，先在广东完成首批验证，在实际运营里沉淀渠道选择、机构合作、招生组织与现场交付的方法，再向大湾区及其他省市复制。工作范围覆盖项目推广、机构组织、报名服务、赛务统筹、现场管理和用户沟通。</p>
+          <h3>全国共建 · 国际通道</h3>
+          <p>先在广东完成首批验证，在实际运营里沉淀渠道选择、机构合作、招生组织与现场交付的方法，再向其他省市复制。国际通道走联合国 SDG 青少年发言人、中英双语主持与 MUN 中英双轨。</p>
         </div>
       </div>
     </div>
@@ -385,44 +318,44 @@
 </section>
 
 <!-- 做事原则 -->
-<section style="background:var(--bg-2);">
+<section>
   <div class="wrap">
     <div class="sec-head rv2">
       <div class="bar"></div>
       <h2>我们怎么做事 <small>Principles</small></h2>
-      <p>这四条可以拿去做验收。</p>
+      <p>四条落在具体动作上的规矩。</p>
     </div>
     <div class="prin-grid">
       <article class="prin rv2">
         <span class="n">01</span>
-        <h3>筹备中的，格子里写筹备</h3>
-        <p>创造力域五个方向还没有课程与工具，矩阵页用空心格标出。日期未定的项目标「待公布」，开放时间定了就在原处更新。</p>
-      </article>
-      <article class="prin rv2">
-        <span class="n">02</span>
-        <h3>每册课必须有真上台</h3>
+        <h3>每册课必须有一次真上台</h3>
         <p>三原力每册 16 课时，收口是 3 条可验收的达标动作 + 1 个真实场次 + 1 个物证。内部模拟不计入场次，物证要能被家长拍照发群。</p>
       </article>
       <article class="prin rv2">
-        <span class="n">03</span>
+        <span class="n">02</span>
         <h3>每一阶写清练什么、下一站在哪</h3>
         <p>每一册、每一阶都标注：练什么、练成了能做什么、下一站是什么。保过、提分、升学加分不在服务范围内。</p>
       </article>
       <article class="prin rv2">
+        <span class="n">03</span>
+        <h3>合作机构与自有教学团队用同一版</h3>
+        <p>教材、师训、备课工具、赛事出口是同一版，机构拿到的和学生在这里学到的是同一套。</p>
+      </article>
+      <article class="prin rv2">
         <span class="n">04</span>
-        <h3>机构用的，和我们自己用的一样</h3>
-        <p>教材、师训、备课工具、赛事出口，合作机构与自有教学团队用的是同一版。</p>
+        <h3>日期与口径由同一个团队出</h3>
+        <p>组别表、场次表、评审标准原文由我们出；参赛记录与考级进度记在同一份学员档案里。所以日期对得上、口径对得上。</p>
       </article>
     </div>
   </div>
 </section>
 
 <!-- 事实表 -->
-<section>
+<section style="background:var(--bg-2);">
   <div class="wrap">
     <div class="sec-head rv2">
       <div class="bar"></div>
-      <h2>可以核实的基本信息 <small>Facts</small></h2>
+      <h2>基本信息 <small>Facts</small></h2>
       <p>以下信息都可以来电核实。</p>
     </div>
     <div class="rv2" style="background:var(--surface);border:1px solid var(--border);border-radius:var(--r-lg);overflow:hidden;">
@@ -430,14 +363,11 @@
         <tbody>
           <tr><th>主体名称</th><td>畅途文化科技 · 未来领袖</td></tr>
           <tr><th>所在地</th><td>广东 · 广州（来访请先电话预约）</td></tr>
-          <tr><th>覆盖区域</th><td>广东 21 个地级市，延伸至香港、澳门</td></tr>
           <tr><th>核心业务</th><td>青少年赛事组织 · 课程研发 · 社会艺术水平考级服务</td></tr>
           <tr><th>赛事承办</th><td>曹灿杯青少年朗诵展示活动 广东展区（连续 12 年）</td></tr>
-          <tr><th>自研课程</th><td>破界三原力（三级九册 · 144 课时）· 破界 MUN（六阶 · 156 课时）</td></tr>
-          <tr><th>考级服务</th><td>北京广播电视台语言类 · 浙江音乐学院社会艺术水平考级</td></tr>
-          <tr><th>服务规模</th><td>累计 909 家广东合作机构 · 12,499 人次参赛学员 · 累计服务超 5 万组家庭 · 执行赛事考级与主题活动数百场</td></tr>
           <tr><th>合作方式</th><td>未来领袖教育合作联盟：启程伙伴 / 同行伙伴 / 领航伙伴</td></tr>
           <tr><th>咨询电话</th><td><a href="tel:18038829260" style="color:var(--blue);font-weight:600;">180 3882 9260</a>　/　180 3882 9261（微信同号）</td></tr>
+          <tr><th>公众号</th><td>畅途未来领袖 · 华语辩论世界杯广东赛区 · 广东曹灿杯</td></tr>
         </tbody>
       </table>
     </div>
@@ -445,14 +375,14 @@
 </section>
 
 <!-- CTA -->
-<section style="background:var(--bg-2);">
+<section>
   <div class="wrap">
     <div class="qr-band rv2">
       <div>
-        <h3>想合作，或者想先问一句？</h3>
-        <p>机构合作、课程咨询、赛事报名，都可以直接打电话。也可以先看矩阵，知道自己缺哪一块再来聊。</p>
+        <h3>想开课，先说三句话</h3>
+        <p>学生年龄段、想开哪门课、老师几个人。说这三句，我们回一份开班建议：先开哪一阶、走中文轨还是英文轨、第一个出口排在哪一季。</p>
         <div class="qr-list">
-          <a href="matrix.html" style="color:var(--surface);border-color:rgba(255,255,255,.5);">看教育矩阵 →</a>
+          <a href="index.html#courses" style="color:var(--surface);border-color:rgba(255,255,255,.5);">看课程与交付 →</a>
           <a href="partner.html" style="color:var(--surface);border-color:rgba(255,255,255,.5);">看三档权益 →</a>
         </div>
       </div>
@@ -473,7 +403,7 @@
           <img src="assets/logo-white.png" alt="畅途" width="63" height="30">
           <strong>未来领袖</strong>
         </div>
-        <p>畅途文化科技旗下青少年素质教育矩阵。广东曹灿杯承办团队。业务覆盖朗诵展演、思辨辩论、双语主持、国际演讲、破界三原力与破界 MUN 课程，以及语言 / 音乐类社会艺术水平考级服务。</p>
+        <p>畅途文化科技旗下青少年素质教育平台。广东曹灿杯承办团队。业务覆盖朗诵展演、思辨辩论、双语主持、国际演讲、破界三原力与破界 MUN 课程，以及语言 / 音乐类社会艺术水平考级服务。</p>
       </div>
       <div class="f-links">
         <div class="f-col">
