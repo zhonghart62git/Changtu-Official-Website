@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>教师工作台 · 畅途未来领袖</title>
+<meta name="description" content="畅途 · 未来领袖 教师工作台入口。">
+<meta name="robots" content="noindex,nofollow">
+<link rel="icon" type="image/png" sizes="32x32" href="../assets/favicon-32.png">
+<link rel="icon" type="image/png" sizes="64x64" href="../assets/favicon-64.png">
+<link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
+<meta name="theme-color" content="#0B63C5">
+<link rel="stylesheet" href="../assets/site.css">
+<style>
+  html,body{height:100%;}
+  body{
+    display:grid;place-items:center;padding:24px;
+    background:
+      radial-gradient(820px 420px at 18% -6%,rgba(11,99,197,.10),transparent 62%),
+      radial-gradient(620px 320px at 92% 4%,rgba(123,63,228,.09),transparent 60%),
+      #F7FAFE;
+  }
+  .gate{
+    width:100%;max-width:440px;background:#fff;border:1px solid var(--line);
+    border-radius:22px;padding:36px 34px 30px;text-align:center;
+    box-shadow:0 20px 60px rgba(11,66,127,.12);
+  }
+  .gate .logo{display:block;margin:0 auto 18px;width:104px;height:auto;}
+  .gate h1{font-size:20px;font-weight:800;letter-spacing:-.3px;color:var(--ink);}
+  .gate .sub{font-size:13px;color:var(--ink-2);margin-top:7px;line-height:1.6;}
+  .gate .bar{
+    width:56px;height:3px;border-radius:99px;margin:20px auto 22px;
+    background:linear-gradient(90deg,var(--blue),var(--purple,#7B3FE4));
+    position:relative;overflow:hidden;
+  }
+  .gate .bar::after{
+    content:"";position:absolute;inset:0;border-radius:99px;
+    background:linear-gradient(90deg,transparent,rgba(255,255,255,.85),transparent);
+    animation:sweep 1.15s linear infinite;
+  }
+  @keyframes sweep{from{transform:translateX(-100%);}to{transform:translateX(100%);}}
+  @media (prefers-reduced-motion:reduce){.gate .bar::after{animation:none;opacity:0;}}
+  .gate .status{font-size:13.5px;color:var(--ink-2);}
+  .gate .status b{color:var(--blue);font-weight:600;}
+  .gate .go{
+    display:inline-flex;align-items:center;justify-content:center;gap:7px;
+    margin-top:22px;width:100%;height:46px;border-radius:30px;
+    background:var(--blue);color:#fff;font-size:14.5px;font-weight:600;
+    text-decoration:none;transition:background .16s,transform .16s;
+  }
+  .gate .go:hover{background:var(--blue-deep);transform:translateY(-1px);}
+  .gate .note{
+    font-size:11.5px;color:var(--muted);line-height:1.7;margin-top:20px;
+    padding-top:18px;border-top:1px solid var(--line);
+  }
+  .gate .note a{color:var(--blue);text-decoration:none;}
+  .gate .note a:hover{text-decoration:underline;}
+  .gate .addr{
+    display:block;font-family:ui-monospace,Menlo,Consolas,monospace;
+    font-size:10.5px;color:#94A3B8;word-break:break-all;margin-top:6px;
+  }
+</style>
+</head>
+<body>
+  <div class="gate">
+    <img class="logo" src="../assets/logo.png" alt="畅途 · 未来领袖" width="104" height="49">
+    <h1>教师工作台</h1>
+    <p class="sub">正在进入，请不要关闭本页。</p>
+
+    <div class="bar" aria-hidden="true"></div>
+    <p class="status" id="status">正在跳转 <b>教师工作台</b>…</p>
+
+    <a class="go" id="go" href="https://cloud1-d1g7lb8uud155b7b9-1435450577.ap-shanghai.app.tcloudbase.com/teacher">
+      手动进入
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6"/></svg>
+    </a>
+
+    <p class="note">
+      需要教师账号才能登录。账号由机构管理员开通，忘记密码请联系管理员重置。<br>
+      回到 <a href="../index.html">官网首页</a>　｜　家长报名请用 <a href="../enroll.html">在线报名</a>
+    </p>
+  </div>
+
+<script>
+  var TARGET = 'https://cloud1-d1g7lb8uud155b7b9-1435450577.ap-shanghai.app.tcloudbase.com/teacher';
+  // 保留路径与查询串，便于以后带参数进入（如 ?next=lesson/xxx）
+  var here = location.search || '';
+  var url = TARGET + (here && TARGET.indexOf('?') < 0 ? here : '');
+  document.getElementById('go').href = url;
+
+  // 用 replace，避免老师按返回键又被弹回这个中转页
+  setTimeout(function () {
+    location.replace(url);
+  }, 550);
+
+  // 跳转被拦（内嵌浏览器、扩展拦截）时给出明确提示
+  setTimeout(function () {
+    var s = document.getElementById('status');
+    if (s) s.innerHTML = '没有自动跳转？点下面的<b>手动进入</b>。';
+  }, 2600);
+</script>
+</body>
+</html>
