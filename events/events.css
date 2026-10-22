@@ -1,0 +1,66 @@
+/* ============================================================
+   畅途 · 活动子站（/events/）专属样式
+   复用主站 design-colors / site.css 的令牌与基础组件，
+   这里只加活动页需要的信息表、流程条、来源说明。
+   ============================================================ */
+
+.ev-hero{position:relative;overflow:hidden;padding:64px 0 48px;
+  background:radial-gradient(760px 400px at 84% -16%,var(--surface-3) 0%,rgba(234,244,254,0) 70%),
+             radial-gradient(620px 360px at 2% 108%,var(--surface-3) 0%,rgba(234,244,254,0) 72%),
+             var(--surface);}
+.ev-hero .wrap{position:relative;z-index:1;max-width:900px;}
+.ev-hero h1{font-size:clamp(26px,3.4vw,42px);line-height:1.3;letter-spacing:-.8px;font-weight:800;margin:16px 0 16px;}
+.ev-hero .lead{font-size:16.5px;color:var(--text-2);line-height:1.85;max-width:720px;}
+.ev-hero .ev-when{margin-top:18px;display:flex;flex-wrap:wrap;gap:8px;}
+.ev-hero .ev-when span{font-size:13px;font-weight:600;color:var(--blue-700);
+  background:var(--surface);border:1px solid var(--border);border-radius:20px;padding:6px 14px;}
+
+/* 关键信息表 */
+.ev-meta{width:100%;border-collapse:collapse;font-size:14.5px;
+  background:var(--surface);border:1px solid var(--border);border-radius:var(--r-lg);overflow:hidden;}
+.ev-meta th,.ev-meta td{text-align:left;padding:14px 18px;border-bottom:1px solid var(--border);vertical-align:top;}
+.ev-meta th{width:150px;font-weight:600;color:var(--text-3);font-size:13px;letter-spacing:.3px;background:var(--bg-2);}
+.ev-meta td{color:var(--text);line-height:1.75;}
+.ev-meta tr:last-child th,.ev-meta tr:last-child td{border-bottom:none;}
+
+/* 流程条：报名步骤 */
+.ev-steps{list-style:none;margin:0;padding:0;counter-reset:s;}
+.ev-steps li{position:relative;padding:14px 0 14px 46px;border-top:1px dashed var(--border);
+  font-size:14.5px;line-height:1.8;color:var(--text-2);counter-increment:s;}
+.ev-steps li:first-child{border-top:none;}
+.ev-steps li::before{content:counter(s);position:absolute;left:0;top:15px;
+  width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center;
+  background:var(--surface-3);color:var(--blue-700);font-size:12px;font-weight:800;}
+.ev-steps li b{color:var(--text);font-weight:700;}
+
+/* 提示条 */
+.ev-note{padding:18px 22px;border-radius:12px;background:var(--bg-2);
+  border-left:3px solid var(--violet);font-size:13.5px;line-height:1.85;color:var(--text-2);}
+.ev-note b{color:var(--text);}
+
+/* 来源说明：活动信息必须写清依据哪篇推文，改了要能追 */
+.ev-src{margin-top:10px;font-size:12px;line-height:1.8;color:var(--text-3);}
+.ev-src a{color:var(--blue);}
+
+/* 活动总览卡 */
+.ev-list{display:grid;grid-template-columns:1fr 1fr;gap:18px;}
+.evc{display:flex;flex-direction:column;background:var(--surface);
+  border:1px solid var(--border);border-radius:var(--r-lg);padding:26px 26px 22px;
+  transition:box-shadow var(--dur) var(--ease),transform var(--dur) var(--ease),border-color var(--dur) var(--ease);}
+.evc:hover{box-shadow:var(--shadow-md);transform:translateY(-3px);border-color:var(--blue-2);}
+.evc .k{font-size:11.5px;letter-spacing:1.5px;color:var(--violet);font-weight:700;}
+.evc h3{font-size:20px;margin:9px 0 8px;letter-spacing:-.3px;line-height:1.35;}
+.evc .when{font-size:13px;font-weight:700;color:var(--blue-700);margin-bottom:10px;}
+.evc p{font-size:13.5px;line-height:1.8;color:var(--text-2);margin:0 0 16px;}
+.evc .go{margin-top:auto;font-size:13.5px;font-weight:700;color:var(--blue);}
+.evc .tag{display:inline-block;margin-left:8px;padding:2px 9px;border-radius:20px;
+  font-size:10.5px;font-weight:700;background:var(--bg-2);color:var(--text-3);
+  border:1px solid var(--border);vertical-align:2px;}
+
+@media (max-width:1020px){
+  .ev-list{grid-template-columns:1fr;}
+}
+@media (max-width:760px){
+  .ev-meta th{width:104px;font-size:12px;padding:12px 12px;}
+  .ev-meta td{padding:12px 12px;font-size:13.5px;}
+}

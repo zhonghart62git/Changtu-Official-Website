@@ -26,7 +26,7 @@
 </script>
 <link rel="stylesheet" href="assets/site.css?v=8c0395bc">
 <link rel="stylesheet" href="assets/site-v2.css?v=8f4c0419">
-<link rel="stylesheet" href="assets/home.css?v=8aeab602">
+<link rel="stylesheet" href="assets/home.css?v=0e7c0671">
 <script>document.documentElement.classList.remove('no-js');</script>
 <link rel="canonical" href="https://leadtheway.cn/">
 <meta name="robots" content="index,follow">
@@ -43,14 +43,6 @@
 <meta name="twitter:image" content="https://leadtheway.cn/assets/og-cover.png">
 </head>
 <body class="home">
-
-<!-- 顶部公告：活动名称 + 截止日期 + 查看详情，完整信息在详情页 -->
-<div class="topbar">
-  <div class="wrap">
-    <div><b>线上海选 11 月 8 日截止</b>　雏英杯 · 联合国 SDG 发言人</div>
-    <div><a href="#calendar">查看详情 →</a>　<a href="enroll.html">填写报名意向</a></div>
-  </div>
-</div>
 
 <!-- 导航 -->
 <header class="nav">
@@ -153,6 +145,25 @@
     </div>
   </div>
 </section>
+
+<!-- 活动滚动 banner：逐条轮播近期活动，点进各自页面 -->
+<div class="rollbar" id="rollbar">
+  <div class="wrap">
+    <span class="rb-badge">近期活动</span>
+    <div class="rb-view" aria-live="polite">
+      <a class="rb-item on" href="events/hongkong-2027.html"><em>报名中</em><b>曹灿杯香港站</b><i>2027 年 1 月 24—27 日 · 亚洲国际博览馆</i></a>
+      <a class="rb-item" href="events/yingying-2027.html"><em>报名中</em><b>雏英杯中英双语主持人大会</b><i>省总展示 2026 年 11 月底起 · 全国盛典 2027 年 1 月杭州</i></a>
+      <a class="rb-item" href="sdg.html"><em>11 月 8 日截止</em><b>联合国青少年领袖发言人</b><i>线上海选 · 北京外国语大学国际会议中心展演</i></a>
+      <a class="rb-item" href="debate.html"><em>报名中</em><b>华语辩论世界杯岭南挑战赛</b><i>校内赛 → 区域赛 → 全国赛</i></a>
+      <a class="rb-item" href="brtv.html"><em>常年</em><b>北京广播电视台三大艺术考级</b><i>朗诵 · 主持 · 课本剧（表演）</i></a>
+    </div>
+    <div class="rb-dots" aria-label="切换活动"></div>
+    <div class="rb-actions">
+      <a href="events/index.html">全部活动 →</a>
+      <a href="enroll.html">填写报名意向</a>
+    </div>
+  </div>
+</div>
 
 <!-- 承办与授权标识 -->
 <div class="trust-band">
@@ -793,6 +804,33 @@
       });
     },{threshold:.3});
     Object.keys(map).forEach(function(id){var t=document.getElementById(id);if(t)so.observe(t);});
+  }
+
+  /* 活动滚动 banner：5 秒一条，悬停/聚焦暂停，点圆点手动切 */
+  var roll=document.getElementById('rollbar');
+  if(roll){
+    var items=[].slice.call(roll.querySelectorAll('.rb-item')),
+        dotBox=roll.querySelector('.rb-dots'),
+        idx=0, timer=null, paused=false;
+    items.forEach(function(_,k){
+      var b=document.createElement('button');
+      b.type='button';
+      b.setAttribute('aria-label','第 '+(k+1)+' 条活动：'+items[k].textContent.trim());
+      b.addEventListener('click',function(){go(k);restart();});
+      dotBox.appendChild(b);
+    });
+    var dots=[].slice.call(dotBox.children);
+    function go(n){
+      idx=(n+items.length)%items.length;
+      items.forEach(function(el,k){el.classList.toggle('on',k===idx);});
+      dots.forEach(function(el,k){el.classList.toggle('on',k===idx);});
+    }
+    function restart(){clearInterval(timer);timer=setInterval(function(){if(!paused)go(idx+1);},5000);}
+    go(0);restart();
+    roll.addEventListener('mouseenter',function(){paused=true;});
+    roll.addEventListener('mouseleave',function(){paused=false;});
+    roll.addEventListener('focusin',function(){paused=true;});
+    roll.addEventListener('focusout',function(){paused=false;});
   }
 })();
 </script>

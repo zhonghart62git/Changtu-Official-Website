@@ -227,6 +227,48 @@
   background:#FFF4E6;color:#9A4A00;border:1px solid #FFD8A8;
   white-space:nowrap;box-shadow:0 2px 6px rgba(154,74,0,.08);}
 
+/* ── 19. 活动滚动 banner ────────────────────────────────
+   原来最顶上那条静态活动条，改成首屏下方的滚动 banner，
+   逐条轮播近期活动并链到对应页面。鼠标悬停或键盘聚焦时暂停。 */
+.rollbar{position:relative;overflow:hidden;color:#fff;
+  background:linear-gradient(100deg,var(--blue-900) 0%,var(--blue-700) 54%,var(--violet-900) 100%);
+  border-top:1px solid rgba(255,255,255,.10);border-bottom:1px solid rgba(255,255,255,.10);}
+.rollbar .wrap{display:flex;align-items:center;gap:18px;min-height:54px;padding:0 24px;}
+.rb-badge{flex-shrink:0;font-size:10.5px;font-weight:800;letter-spacing:1.4px;
+  padding:5px 10px;border-radius:20px;background:rgba(255,255,255,.17);color:#fff;white-space:nowrap;}
+.rb-view{position:relative;flex:1;min-width:0;height:54px;overflow:hidden;}
+.rb-item{position:absolute;inset:0;display:flex;align-items:center;gap:12px;
+  opacity:0;transform:translateY(9px);pointer-events:none;
+  transition:opacity .45s var(--ease,ease),transform .45s var(--ease,ease);
+  font-size:13.5px;line-height:1.5;color:#fff;text-decoration:none;
+  overflow:hidden;white-space:nowrap;text-overflow:ellipsis;}
+.rb-item.on{opacity:1;transform:none;pointer-events:auto;}
+.rb-item b{font-weight:800;flex-shrink:0;}
+.rb-item i{font-style:normal;color:rgba(255,255,255,.74);font-size:12.5px;overflow:hidden;text-overflow:ellipsis;}
+.rb-item em{font-style:normal;font-size:10.5px;font-weight:800;letter-spacing:.6px;
+  padding:3px 8px;border-radius:20px;background:rgba(255,255,255,.18);flex-shrink:0;}
+.rb-actions{flex-shrink:0;display:flex;align-items:center;gap:16px;}
+.rb-actions a{font-size:12.5px;font-weight:700;color:#fff;text-decoration:none;
+  border-bottom:1px solid rgba(255,255,255,.45);padding-bottom:2px;white-space:nowrap;}
+.rb-actions a:hover{border-color:#fff;}
+.rb-dots{flex-shrink:0;display:flex;align-items:center;gap:5px;}
+.rb-dots button{width:5px;height:5px;padding:0;border:0;border-radius:50%;
+  background:rgba(255,255,255,.34);cursor:pointer;transition:width .25s,background .25s;}
+.rb-dots button.on{background:#fff;width:15px;border-radius:3px;}
+
+@media (max-width:860px){
+  .rollbar .wrap{flex-wrap:wrap;gap:4px 12px;padding:11px 20px;}
+  .rb-view{flex-basis:100%;height:auto;min-height:21px;order:3;}
+  .rb-item{position:static;display:none;opacity:1;transform:none;
+    white-space:normal;font-size:13px;}
+  .rb-item.on{display:flex;flex-wrap:wrap;gap:6px 10px;}
+  .rb-actions{margin-left:auto;}
+  .rb-dots{order:4;}
+}
+@media (prefers-reduced-motion:reduce){
+  .rb-item{transition:none;}
+}
+
 /* ── 响应式 ───────────────────────────────────────────── */
 @media (max-width:1020px){
   .ability-grid,.case-proof,.support,.steps3,.team-brief,.outcome{grid-template-columns:1fr;}

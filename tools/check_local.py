@@ -49,6 +49,12 @@ class P(HTMLParser):
 
 def main():
     pages = sorted(f for f in os.listdir(ROOT) if f.endswith('.html') and not f.startswith('_'))
+    # 子目录页面（events 活动子站）也要查，否则新页面会绕过自检
+    for sub in ('events',):
+        d = os.path.join(ROOT, sub)
+        if os.path.isdir(d):
+            pages += sorted(sub + '/' + f for f in os.listdir(d)
+                            if f.endswith('.html') and not f.startswith('_'))
     pages += ['teacher/index.html', 'admin/index.html']
     bad = 0
     for pg in pages:
