@@ -38,8 +38,27 @@
 .home .stats-band .stat b{font-size:clamp(30px,3.6vw,44px);}
 .home .stats-band .stat span{font-size:12.5px;margin-top:4px;}
 
-/* 数据口径注：数字是信任基础，但必须说明统计到什么时候、怎么算 */
-.stats-note{margin:0;padding:0 0 20px;font-size:12px;line-height:1.75;color:var(--text-3);}
+/* 数据口径：收进抽屉，不占版面。数字是信任基础，但口径要能当场查到 */
+/* site.css 给 FAQ 的 details / summary 设了卡片边框与「+」角标，这里要全部抵消 */
+.stats-cal{position:relative;padding:0 0 16px;font-size:12px;
+  background:none;border:0;border-radius:0;}
+.stats-cal > summary{display:inline-block;cursor:pointer;list-style:none;
+  font-size:12px;line-height:1.6;color:var(--text-3,#64748B);padding:2px 0;
+  border-bottom:1px dashed currentColor;transition:color .16s;}
+.stats-cal > summary::after{content:none;}
+.stats-cal > summary::-webkit-details-marker{display:none;}
+.stats-cal > summary:hover,.stats-cal[open] > summary{color:var(--blue,#0B63C5);}
+.stats-cal-panel{position:absolute;top:100%;left:0;z-index:30;
+  width:min(480px,calc(100vw - 48px));background:var(--surface,#fff);
+  border:1px solid var(--line,#E3ECF6);border-radius:14px;padding:16px 18px;
+  box-shadow:0 20px 48px rgba(8,66,127,.16);}
+.stats-cal-panel p{margin:0 0 9px;font-size:12.5px;line-height:1.72;color:var(--ink-2,#3C4C63);}
+.stats-cal-panel p:last-child{margin-bottom:0;}
+.stats-cal-panel b{display:inline-block;min-width:74px;color:var(--ink,#0F1B2A);font-weight:700;}
+@media (max-width:560px){
+  .stats-cal-panel{width:calc(100vw - 48px);padding:14px 16px;}
+  .stats-cal-panel b{display:block;min-width:0;margin-bottom:1px;}
+}
 
 /* ── 4. 四大能力：从「分类目录」变成「培养框架」 ───────── */
 .ability-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;}
