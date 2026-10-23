@@ -26,6 +26,8 @@ h1,h2,h3,h4,p,li,dd,dt,span,b,strong{overflow-wrap:break-word;}
   color:var(--surface-3);font-size:13px;letter-spacing:.2px;
 }
 .topbar .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;height:38px;}
+/* 状态条只放操作时靠右，左侧不重复页面身份 */
+.topbar .wrap.solo{justify-content:flex-end;}
 .topbar b{color:var(--surface);font-weight:600;}
 .topbar a{color:var(--surface);border-bottom:1px solid rgba(255,255,255,.4);padding-bottom:1px;}
 .topbar a:hover{border-color:var(--surface);}
@@ -618,9 +620,8 @@ html.no-js .rv{opacity:1;transform:none;}
 
 /* 活动练哪几个力。活动是实践维度，品类是教学维度，两者不一一对应：
    一个活动可以只练一个力（双语主持 → 表达力），也可以同时练两个（联合国演讲 → 表达力 + 思辨力）。
-   标签并列，不分主次；色取四域令牌，只上圆点与底色，文字保持 ink。 */
+   标签并列，不分主次；色取四域令牌，只上圆点，文字保持 ink。标签本身已说明是什么，不加前缀。 */
 .cap-tags{display:flex;flex-wrap:wrap;align-items:center;gap:7px;margin-top:15px;}
-.cap-k{font-size:12px;color:var(--ink-2);letter-spacing:.3px;margin-right:1px;}
 .cap{
   display:inline-flex;align-items:center;gap:6px;
   padding:5px 12px;border-radius:20px;
