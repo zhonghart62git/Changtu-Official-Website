@@ -19,9 +19,10 @@
 
 /* ── 2. 首屏 ───────────────────────────────────────────── */
 .home .hero-lg{padding:64px 0 54px;}
-.home .hero-lg .wrap{grid-template-columns:minmax(0,1.24fr) minmax(0,.76fr);gap:36px;}
-/* 标题第一行 12.2em、第二行 9em，字号上限按第一行算：12.2em ≤ 667px → 52px */
-.home .hero-lg h1{font-size:clamp(26px,3.6vw,52px);line-height:1.16;letter-spacing:-1.4px;margin:22px 0 20px;}
+.home .hero-lg .wrap{grid-template-columns:minmax(0,1.24fr) minmax(0,.76fr);gap:36px;align-items:center;}
+/* 标题第一行 10.2em、第二行 14em（12 字 + 两个逗号），字号上限按第二行算：
+   14em ≤ 667px → 46px */
+.home .hero-lg h1{font-size:clamp(26px,3.6vw,46px);line-height:1.16;letter-spacing:-1.4px;margin:22px 0 0;}
 .home .hero-lg .lead{font-size:16px;max-width:540px;line-height:1.9;}
 .home .hero-lg .hero-cta{margin-top:32px;}
 
@@ -170,25 +171,35 @@
   .exit a .c-tags{margin-left:auto;}
 }
 
-/* ── 10. 合作依据：可核对的例子 ────────────────────────── */
-.case-proof{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
-.cp{background:var(--surface);border:1px solid var(--line);border-left:3px solid var(--violet);
-  border-radius:12px;padding:22px 24px;}
-.cp .cp-k{font-size:11.5px;font-weight:800;letter-spacing:1.5px;color:var(--violet-600);}
-.cp p{margin:9px 0 0;font-size:14px;line-height:1.85;color:var(--ink-2);}
-.cp b{color:var(--ink);}
+/* ── 10. 学员与赛事案例：三张引述卡 ─────────────────────── */
+.stories{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px;align-items:stretch;}
+.sc{display:flex;flex-direction:column;background:var(--surface);border:1px solid var(--line);
+  border-radius:16px;overflow:hidden;box-shadow:0 1px 2px rgba(8,66,127,.04);
+  transition:transform .24s,box-shadow .24s,border-color .24s;}
+.sc:hover{transform:translateY(-3px);border-color:var(--border);box-shadow:0 16px 34px rgba(8,66,127,.10);}
+.sc-media{position:relative;aspect-ratio:1/1;overflow:hidden;background:var(--bg-2);}
+.sc-media img{width:100%;height:100%;object-fit:cover;display:block;}
+/* 暂无现场照的那张：用赛事标识拼一块版式占位，不做成假照片 */
+.sc-media--tile{display:flex;align-items:center;justify-content:center;
+  background:linear-gradient(135deg,#F4F9FF,#E6F0FC 58%,#EFE9FD);}
+.sc-tile{display:flex;flex-direction:column;align-items:center;gap:14px;}
+.sc-tile img{width:auto;height:60px;object-fit:contain;mix-blend-mode:multiply;}
+.sc-tile span{font-size:12.5px;font-weight:700;letter-spacing:3px;color:var(--blue-700);opacity:.66;}
 
-/* 机构案例（当前为示例素材） */
-.client-case{padding:26px 28px;border-radius:16px;background:var(--surface);
-  border:1px dashed var(--violet-200);display:grid;grid-template-columns:1fr 300px;
-  gap:34px;align-items:center;}
-.client-case .cc-k{font-size:11.5px;font-weight:800;letter-spacing:1.5px;color:var(--violet-600);}
-.client-case h3{font-size:18px;margin:8px 0 10px;letter-spacing:-.2px;}
-.client-case p{font-size:14px;line-height:1.85;color:var(--ink-2);margin:0 0 9px;}
-.client-case .cc-meta{font-size:12.5px;color:var(--text-3);line-height:1.8;}
-.client-case blockquote{margin:0;padding-left:18px;border-left:2px solid var(--violet);
-  font-size:14px;line-height:1.85;color:var(--ink);}
-.client-case cite{display:block;margin-top:10px;font-style:normal;font-size:12px;color:var(--text-3);}
+.sc-body{display:flex;flex-direction:column;flex:1;padding:20px 22px 22px;}
+.sc-k{font-size:11.5px;font-weight:800;letter-spacing:1.5px;color:var(--violet-600);}
+.sc h3{font-size:17.5px;line-height:1.5;margin:9px 0 11px;letter-spacing:-.2px;color:var(--ink);}
+.sc blockquote{margin:0;font-size:14px;line-height:1.88;color:var(--ink-2);}
+.sc cite{display:block;margin-top:12px;font-style:normal;font-size:12.5px;color:var(--text-3);}
+.sc-foot{margin-top:auto;padding-top:20px;}
+.sc-btn{display:inline-flex;align-items:center;gap:7px;padding:10px 20px;border-radius:30px;
+  font-size:13.5px;font-weight:600;color:var(--surface);
+  background:linear-gradient(135deg,var(--blue),var(--blue-2));
+  box-shadow:0 8px 18px rgba(11,99,197,.24);transition:transform .2s,box-shadow .2s;}
+.sc-btn:hover{transform:translateY(-1px);box-shadow:0 12px 24px rgba(11,99,197,.32);}
+.sc-btn svg{width:13px;height:13px;}
+
+.stories-note{margin:18px 0 0;font-size:12px;line-height:1.75;color:var(--text-3);text-align:left;}
 
 /* ── 11. 机构与教师支持 ────────────────────────────────── */
 .support{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;}
@@ -217,16 +228,6 @@
 .alliance .al-p{display:flex;flex-wrap:wrap;gap:8px;}
 .alliance .al-p span{font-size:12.5px;font-weight:600;color:var(--blue-700);
   background:var(--bg-2);border:1px solid var(--line);border-radius:20px;padding:5px 12px;}
-
-/* ── 12. 教学成效（当前为示例数据） ─────────────────────── */
-.effect{padding:22px 24px 18px;border-radius:14px;
-  background:var(--surface);border:1px dashed var(--violet-200);}
-.effect-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
-.effect-grid .e b{display:block;font-size:27px;font-weight:800;letter-spacing:-.6px;
-  color:var(--violet-700);font-variant-numeric:tabular-nums;}
-.effect-grid .e span{display:block;font-size:12px;color:var(--text-3);margin-top:3px;}
-.effect-note{margin:15px 0 0;padding-top:13px;border-top:1px dashed var(--line);
-  font-size:11.5px;color:var(--text-3);line-height:1.7;}
 
 /* ── 13. 占位素材标记 ───────────────────────────────────
    用户要求先用编的素材占位，晚些替换真素材。占位必须一眼能认出来，
@@ -389,16 +390,20 @@
   .ai3{grid-template-columns:1fr;}
   .a3{border-right:none;border-bottom:1px solid var(--violet-line);}
   .a3:last-child{border-bottom:none;}
-  .effect-grid{grid-template-columns:1fr;}
   .client-case{grid-template-columns:1fr;gap:20px;}
   .fl{grid-template-columns:1fr;gap:7px;}
   .cq .q{grid-template-columns:1fr;gap:4px;}
+  /* 三张案例卡在 1020 以下先收成两列，第三张独占一行，不落单在半边 */
+  .stories{grid-template-columns:repeat(2,minmax(0,1fr));}
+  .stories .sc:last-child{grid-column:1/-1;}
+  .stories .sc:last-child{display:grid;grid-template-columns:300px minmax(0,1fr);align-items:center;}
+  .stories .sc:last-child .sc-media{height:100%;aspect-ratio:auto;}
 }
 @media (max-width:920px){
   .home .hero-lg .wrap{grid-template-columns:1fr;gap:18px;}
-  /* 单栏后标题占满宽度，可以放大；同时放行 em 折行，
-     否则固定断点下会出现只剩一个字的孤行 */
-  .home .hero-lg h1{font-size:clamp(26px,5.4vw,44px);}
+  /* 单栏后标题占满宽度。第二行 14em（12 字 + 两个逗号），字号下限压到 21px（360 宽也能整行放下），
+     390 以下才能整行放下，不出现只剩一个字的孤行 */
+  .home .hero-lg h1{font-size:clamp(21px,5.9vw,44px);}
   .home .hero-lg h1 em{white-space:normal;}
   /* 920 以下首屏变单栏。能力环不藏，按可用宽度等比缩到文字下方，
      宽度上限压住，避免整块 banner 被拉得太高。 */
@@ -411,6 +416,9 @@
 }
 @media (max-width:760px){
   .lesson-row{grid-template-columns:1fr;gap:4px;padding:13px 18px;}
+  .stories{grid-template-columns:1fr;}
+  .stories .sc:last-child{grid-column:auto;display:flex;}
+  .stories .sc:last-child .sc-media{aspect-ratio:1/1;height:auto;}
 }
 @media (max-width:560px){
   .home .sec-head.sec-lg{margin-bottom:32px;}
