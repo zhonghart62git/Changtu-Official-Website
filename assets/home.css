@@ -149,6 +149,9 @@
 .ai-foot b{color:var(--ink-2);font-weight:600;}
 
 /* ── 9. 实践与成长成果：作品 / 过程记录 / 真实场合 ──────── */
+/* 导航「活动与机会 / 项目与赛事」落在赛事考级这一块，锚点从 section 移到内层 div，
+   section[id] 的 86px 偏移管不到它，这里补一条 */
+#projects{scroll-margin-top:86px;}
 .outcome{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;}
 .oc{display:flex;flex-direction:column;background:var(--surface);
   border:1px solid var(--line);border-radius:16px;padding:24px 22px;}
