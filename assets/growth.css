@@ -21,12 +21,15 @@
 .gp-path-note p b{color:var(--ink);font-weight:700;}
 .gp-path-note a{font-size:13px;font-weight:700;color:var(--brand);white-space:nowrap;}
 
-/* 窄屏：site.css 的 .step-out 是 flex + wrap，值一长就把「做什么 / 留下」挤成独立一行。
+/* PRD 的阶段「视觉」是三项顿号串（如「能力画像摘要、兴趣线索与观察记录」），
+   site.css 的 .step-out 是 flex + wrap，值一长就把标签挤成独立一行。
    改成块级流，标签行内跟着文字走，换行自然落在标签后面。 */
+#path .step-out{display:block;}
+#path .step-out .k{display:inline-block;margin:0 6px 2px 0;}
+#path .step-out .v{display:inline;}
+
 @media (max-width:420px){
-  .path-list .step-out{display:block;}
-  .path-list .step-out .k{display:inline-block;margin:0 6px 2px 0;}
-  .path-list .step-out .v{display:inline;font-size:12.5px;}
+  #path .step-out .v{font-size:12.5px;}
 }
 
 @media (prefers-reduced-motion:reduce){
