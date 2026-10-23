@@ -275,7 +275,7 @@ td em{font-style:normal;font-size:12.5px;color:var(--muted);}
 .step{position:relative;padding-top:60px;display:flex;flex-direction:column;}
 .step:nth-child(1){--sc:var(--brand-hover);--sc-ink:var(--brand-hover);--sc-soft:var(--surface-3);}
 .step:nth-child(2){--sc:var(--brand);--sc-ink:var(--brand);--sc-soft:var(--surface-3);}
-.step:nth-child(3){--sc:var(--danger);--sc-ink:var(--warning);--sc-soft:var(--surface-3);}
+.step:nth-child(3){--sc:var(--warning);--sc-ink:var(--warning);--sc-soft:var(--surface-3);}
 .step:nth-child(4){--sc:var(--brand);--sc-ink:var(--brand-hover);--sc-soft:var(--surface-3);}
 /* 轨道逐段铺：每段从本站连到下一站，颜色顺手从深蓝走到暖橙，收在最后一站 */
 .step::after{

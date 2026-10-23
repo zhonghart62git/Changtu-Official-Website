@@ -1,0 +1,35 @@
+/* ==========================================================================
+   成长路径块（首页 #path）—— 复用 site.css 里已有的 .path-list 组件，
+   这里只补两样 site.css 没有的：① 滚动到位时站点圆环点亮 ② 区块底色
+   组件本体（四列栅格 / 轨道渐变 / 站点圆环 / 卡片 / 三档响应式）全在 site.css 274–325 行与 452/500 段。
+   ========================================================================== */
+
+/* #why 与 #path 都取 bg-2，靠这条分隔线断成两块 */
+#path{border-top:1px solid var(--line);}
+
+/* 滚动到位：圆环由描边转实心，卡片抬起一档。
+   不用动画也能读，所以 prefers-reduced-motion 下直接给终态。 */
+.path-list .step .no{transition:background .3s,color .3s,transform .3s,box-shadow .3s;}
+.path-list .step.on .no{background:var(--sc);color:var(--surface);transform:scale(1.06);}
+.path-list .step.on .step-card{border-color:var(--border);box-shadow:var(--shadow);}
+
+/* 末段点题 */
+.gp-path-note{display:flex;flex-wrap:wrap;align-items:center;gap:14px;
+  margin-top:28px;padding:16px 20px;border-radius:14px;
+  background:var(--surface);border:1px solid var(--line);}
+.gp-path-note p{margin:0;flex:1 1 320px;font-size:13px;line-height:1.72;color:var(--ink-2);}
+.gp-path-note p b{color:var(--ink);font-weight:700;}
+.gp-path-note a{font-size:13px;font-weight:700;color:var(--brand);white-space:nowrap;}
+
+/* 窄屏：site.css 的 .step-out 是 flex + wrap，值一长就把「做什么 / 留下」挤成独立一行。
+   改成块级流，标签行内跟着文字走，换行自然落在标签后面。 */
+@media (max-width:420px){
+  .path-list .step-out{display:block;}
+  .path-list .step-out .k{display:inline-block;margin:0 6px 2px 0;}
+  .path-list .step-out .v{display:inline;font-size:12.5px;}
+}
+
+@media (prefers-reduced-motion:reduce){
+  .path-list .step .no,.path-list .step.on .no{transition:none;}
+  .path-list .step.on .no{transform:none;}
+}
