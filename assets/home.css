@@ -398,10 +398,10 @@
   .cq .q{grid-template-columns:1fr;gap:4px;}
 }
 @media (max-width:920px){
-  .home .hero-lg .wrap{grid-template-columns:1fr;}
-  /* 920 以下首屏变单栏，三角图挪到文字下方只会把整块 banner 拉高，
-     活动屏跟着 stretch 就上下留一大片空白，这里直接藏掉 */
-  .hs-intro .hero-visual{display:none;}
+  .home .hero-lg .wrap{grid-template-columns:1fr;gap:18px;}
+  /* 920 以下首屏变单栏。能力环不藏，按可用宽度等比缩到文字下方，
+     宽度上限压住，避免整块 banner 被拉得太高。 */
+  .hs-intro .hero-visual{max-width:280px;margin:0 auto;}
   .trust-logos{gap:24px;}
   .trust-logos img{height:28px;}
 }
@@ -410,6 +410,7 @@
 }
 @media (max-width:560px){
   .home .sec-head.sec-lg{margin-bottom:32px;}
+  .hs-intro .hero-visual{max-width:250px;}
   /* 背书条：窄屏改成单行横滑，避免 5 个 logo 折成 4+1 */
   .trust-band .wrap{flex-direction:column;align-items:flex-start;gap:10px;padding:20px 24px;}
   .trust-logos{flex-wrap:nowrap;overflow-x:auto;width:100%;gap:26px;padding-bottom:4px;}

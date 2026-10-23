@@ -24,10 +24,10 @@
   "knowsAbout": ["青少年语言艺术","辩论与思辨训练","中英双语主持","模拟联合国","社会艺术水平考级","青少年领导力培养"]
 }
 </script>
-<link rel="stylesheet" href="assets/site.css?v=04902b8a">
+<link rel="stylesheet" href="assets/site.css?v=abfa84f9">
 <link rel="stylesheet" href="assets/site-v2.css?v=1e3d9ce2">
 <link rel="stylesheet" href="assets/growth.css?v=047fc1e6">
-<link rel="stylesheet" href="assets/home.css?v=a540fcaa">
+<link rel="stylesheet" href="assets/home.css?v=4be76101">
 <script>document.documentElement.classList.remove('no-js');</script>
 <link rel="canonical" href="https://leadtheway.cn/">
 <meta name="robots" content="index,follow">
@@ -98,57 +98,77 @@
           <div class="hero-note">咨询 180 3882 9260　·　已合作机构从右上角「教师工作台」进入</div>
         </div>
 
-        <div class="hero-visual" aria-hidden="true">
-          <svg viewBox="0 0 520 520" xmlns="http://www.w3.org/2000/svg">
+        <div class="hero-visual" role="img" aria-label="表达力、思辨力、学习力、创造力四力等权，共同构成未来人才">
+          <svg class="force-ring" viewBox="0 0 520 520" xmlns="http://www.w3.org/2000/svg" focusable="false">
             <defs>
-              <radialGradient id="glow" cx="50%" cy="50%" r="50%">
-                <stop offset="0%" stop-color="#1E9BE8" stop-opacity=".16"></stop>
-                <stop offset="70%" stop-color="#7B3FE4" stop-opacity=".06"></stop>
+              <radialGradient id="frHalo" cx="50%" cy="50%" r="50%">
+                <stop offset="52%" stop-color="#1E9BE8" stop-opacity="0"></stop>
+                <stop offset="76%" stop-color="#1E9BE8" stop-opacity=".10"></stop>
                 <stop offset="100%" stop-color="#7B3FE4" stop-opacity="0"></stop>
               </radialGradient>
-              <linearGradient id="gTri" x1="0" y1="0" x2="1" y2="1">
-                <stop offset="0%" stop-color="#0B63C5"></stop><stop offset="55%" stop-color="#1E9BE8"></stop><stop offset="100%" stop-color="#7B3FE4"></stop>
+              <radialGradient id="frGlass" cx="38%" cy="30%" r="74%">
+                <stop offset="0%" stop-color="#FFFFFF" stop-opacity=".95"></stop>
+                <stop offset="64%" stop-color="#FFFFFF" stop-opacity=".58"></stop>
+                <stop offset="100%" stop-color="#EAF4FE" stop-opacity=".42"></stop>
+              </radialGradient>
+              <linearGradient id="frExpr" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0%" stop-color="#7FB3E8"></stop><stop offset="100%" stop-color="#0B63C5"></stop>
               </linearGradient>
-              <linearGradient id="gOr" x1="0" y1="0" x2="1" y2="1">
-                <stop offset="0%" stop-color="#FF7A1A"></stop><stop offset="100%" stop-color="#FFB169"></stop>
+              <linearGradient id="frThink" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0%" stop-color="#6FC9C9"></stop><stop offset="100%" stop-color="#0E9F9F"></stop>
               </linearGradient>
-              <linearGradient id="gVio" x1="0" y1="0" x2="1" y2="1">
-                <stop offset="0%" stop-color="#7B3FE4"></stop><stop offset="100%" stop-color="#A78BFA"></stop>
+              <linearGradient id="frLearn" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0%" stop-color="#F2B267"></stop><stop offset="100%" stop-color="#D97706"></stop>
               </linearGradient>
+              <linearGradient id="frCreate" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0%" stop-color="#A98BEE"></stop><stop offset="100%" stop-color="#7B3FE4"></stop>
+              </linearGradient>
+              <linearGradient id="frShine" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0"></stop>
+                <stop offset="50%" stop-color="#FFFFFF" stop-opacity=".95"></stop>
+                <stop offset="100%" stop-color="#FFFFFF" stop-opacity="0"></stop>
+              </linearGradient>
+              <filter id="frGlow" x="-35%" y="-35%" width="170%" height="170%">
+                <feGaussianBlur stdDeviation="12"></feGaussianBlur>
+              </filter>
             </defs>
 
-            <circle cx="260" cy="260" r="238" fill="url(#glow)"></circle>
+            <!-- 柔和光晕：两层模糊环，不参与动画 -->
+            <circle cx="260" cy="260" r="228" fill="url(#frHalo)"></circle>
+            <circle cx="260" cy="260" r="168" fill="none" stroke="#1E9BE8" stroke-opacity=".10"
+                    stroke-width="34" filter="url(#frGlow)"></circle>
 
-            <g class="spin-slow" opacity=".55">
-              <circle cx="260" cy="260" r="204" fill="none" stroke="#DCEBFB" stroke-width="1" stroke-dasharray="4 10"></circle>
-              <circle cx="260" cy="260" r="166" fill="none" stroke="#E4D9FB" stroke-width="1" stroke-dasharray="2 12"></circle>
+            <!-- 玻璃底盘 -->
+            <circle cx="260" cy="260" r="152" fill="url(#frGlass)"></circle>
+            <circle cx="260" cy="260" r="152" fill="none" stroke="#FFFFFF" stroke-opacity=".72" stroke-width="1.2"></circle>
+
+            <!-- 四段等权圆弧：各 76°，间隔 14°，r=168，圆心 (260,260)。
+                 四段各用一条显式 path：同一个 circle 加 transform 旋转四次时，
+                 浏览器会把几何相同的描边合并绘制，四段会渲染成同一种颜色。 -->
+            <g class="fr-arcs" fill="none" stroke-width="26" stroke-linecap="round">
+              <path stroke="url(#frExpr)" d="M280.47 93.25 A168 168 0 0 1 426.75 239.53"></path>
+              <path stroke="url(#frThink)" d="M426.75 280.47 A168 168 0 0 1 280.47 426.75"></path>
+              <path stroke="url(#frLearn)" d="M239.53 426.75 A168 168 0 0 1 93.25 280.47"></path>
+              <path stroke="url(#frCreate)" d="M93.25 239.53 A168 168 0 0 1 239.53 93.25"></path>
             </g>
 
-            <path d="M260 118 L384 330 L136 330 Z" fill="none" stroke="url(#gTri)" stroke-width="2.4" stroke-linejoin="round" opacity=".85"></path>
-            <circle cx="260" cy="118" r="9" fill="#fff" stroke="#0B63C5" stroke-width="2.6"></circle>
-            <circle cx="384" cy="330" r="9" fill="#fff" stroke="#1E9BE8" stroke-width="2.6"></circle>
-            <circle cx="136" cy="330" r="9" fill="#fff" stroke="#7B3FE4" stroke-width="2.6"></circle>
+            <!-- 一道光泽沿环走一圈，1 秒后停住不再出现 -->
+            <circle class="fr-shine" cx="260" cy="260" r="168" fill="none" stroke="url(#frShine)"
+                    stroke-width="9" stroke-linecap="round" stroke-dasharray="118 937.6"
+                    opacity="0"></circle>
 
-            <circle cx="260" cy="260" r="56" fill="#fff" stroke="#E3ECF6" stroke-width="1.5"></circle>
-            <circle cx="260" cy="260" r="56" fill="none" stroke="url(#gTri)" stroke-width="2" opacity=".7"></circle>
-            <text x="260" y="252" text-anchor="middle" font-size="15" font-weight="800" fill="#0F1B2A" font-family="Noto Sans SC,PingFang SC,sans-serif">未来领袖</text>
-            <text x="260" y="272" text-anchor="middle" font-size="9.5" letter-spacing="1.4" fill="#78879C" font-family="Noto Sans SC,PingFang SC,sans-serif">MATRIX</text>
-
-            <g opacity=".9">
-              <circle cx="260" cy="46" r="5" fill="url(#gOr)"></circle>
-              <circle cx="438" cy="196" r="5" fill="url(#gVio)"></circle>
-              <circle cx="82" cy="196" r="5" fill="url(#gTri)"></circle>
-              <circle cx="370" cy="452" r="4" fill="#1E9BE8" opacity=".7"></circle>
-              <circle cx="150" cy="452" r="4" fill="#7B3FE4" opacity=".7"></circle>
+            <g class="fr-center" font-family="Noto Sans SC,PingFang SC,Hiragino Sans GB,Microsoft YaHei,sans-serif">
+              <text x="260" y="260" text-anchor="middle" dominant-baseline="central" font-size="34" font-weight="800"
+                    fill="#0F1B2A" letter-spacing="2">未来人才</text>
             </g>
 
-            <g font-family="Noto Sans SC,PingFang SC,sans-serif" font-size="11.5" fill="#3C4C63" font-weight="600">
-              <text x="260" y="86" text-anchor="middle">表达力</text>
-              <text x="420" y="352" text-anchor="middle">思辨力</text>
-              <text x="100" y="352" text-anchor="middle">学习力</text>
+            <g class="fr-labels" font-family="Noto Sans SC,PingFang SC,Hiragino Sans GB,Microsoft YaHei,sans-serif"
+               font-size="15" font-weight="700" fill="#3C4C63" text-anchor="middle">
+              <text x="405" y="121">表达力</text>
+              <text x="405" y="411">思辨力</text>
+              <text x="115" y="411">学习力</text>
+              <text x="115" y="121">创造力</text>
             </g>
-            <text x="260" y="404" text-anchor="middle" font-family="Noto Sans SC,PingFang SC,sans-serif" font-size="10" fill="#94A3B8">创造力 · 筹备中</text>
-            <circle class="pulse" cx="260" cy="26" r="4" fill="#FF7A1A"></circle>
           </svg>
         </div>
       </div>

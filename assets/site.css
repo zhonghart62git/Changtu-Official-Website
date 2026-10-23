@@ -96,17 +96,43 @@ h1 em{
 .hero-cta{display:flex;flex-wrap:wrap;gap:14px;margin:30px 0 0;}
 .hero-note{margin-top:16px;font-size:13px;color:var(--muted);display:flex;align-items:center;gap:7px;}
 
-/* Hero 视觉 */
+/* Hero 视觉：四力一体能力环
+   四段等权圆弧 + 一道一次性光泽 + 中心淡入，合计约 1.15s，播完停在终态。
+   不旋转、不闪烁、不循环；prefers-reduced-motion 直接给终态。 */
 .hero-visual{position:relative;display:flex;align-items:center;justify-content:center;}
 .hero-visual svg{width:100%;height:auto;display:block;}
-.spin-slow{transform-origin:260px 260px;animation:spin 46s linear infinite;}
-@keyframes spin{
-  to{transform:rotate(360deg)}
+.force-ring .fr-arcs path,
+.force-ring .fr-center,
+.force-ring .fr-labels{opacity:0;animation:frIn .55s cubic-bezier(.22,.61,.36,1) forwards;}
+.force-ring .fr-center,
+.force-ring .fr-labels{animation-duration:.5s;animation-delay:.42s;}
+.force-ring .fr-shine{animation:frShine .95s cubic-bezier(.4,0,.5,1) .2s forwards;}
+@keyframes frIn{
+  from{opacity:0}
+  to{opacity:1}
 }
-.pulse{animation:pulse 3.6s ease-in-out infinite;}
-@keyframes pulse{
-  0%,100%{opacity:.55;r:4}
-  50%{opacity:1;r:6}
+/* 周长 2π×168 ≈ 1055.6，dash 118 + gap 937.6 正好一圈 */
+@keyframes frShine{
+  0%{stroke-dashoffset:0;opacity:0}
+  8%{opacity:.85}
+  80%{opacity:.85}
+  100%{stroke-dashoffset:-1055.6;opacity:0}
+}
+@media (prefers-reduced-motion:reduce){
+  .force-ring .fr-arcs path,
+  .force-ring .fr-center,
+  .force-ring .fr-labels{opacity:1;animation:none;}
+  .force-ring .fr-shine{display:none;}
+}
+/* 环按容器宽度等比缩放，SVG 里的字号要跟着放大，否则窄屏只剩 6px。
+   下面两个断点的字号以 viewBox 单位计，实际像素约 11px。 */
+@media (max-width:920px){
+  .force-ring .fr-labels text{font-size:20px;}
+  .force-ring .fr-center text{font-size:42px;}
+}
+@media (max-width:560px){
+  .force-ring .fr-labels text{font-size:23px;}
+  .force-ring .fr-center text{font-size:46px;}
 }
 
 /* ===== 数据条 ===== */
