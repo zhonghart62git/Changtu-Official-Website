@@ -216,13 +216,6 @@
 .alliance .al-p span{font-size:12.5px;font-weight:600;color:var(--blue-700);
   background:var(--bg-2);border:1px solid var(--line);border-radius:20px;padding:5px 12px;}
 
-/* 团队：职责在前，履历在后 */
-.team-brief{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;}
-.tb{padding:22px;border:1px solid var(--line);border-radius:14px;background:var(--surface);}
-.tb h3{font-size:17px;margin:0 0 3px;}
-.tb .tb-r{display:block;font-size:12.5px;font-weight:700;color:var(--blue-700);margin-bottom:9px;}
-.tb p{font-size:13px;line-height:1.75;color:var(--text-3);margin:0;}
-
 /* ── 12. 教学成效（当前为示例数据） ─────────────────────── */
 .effect{padding:22px 24px 18px;border-radius:14px;
   background:var(--surface);border:1px dashed var(--violet-200);}
@@ -381,7 +374,7 @@
 
 /* ── 响应式 ───────────────────────────────────────────── */
 @media (max-width:1020px){
-  .ability-grid,.case-proof,.support,.steps3,.team-brief,.outcome{grid-template-columns:1fr;}
+  .ability-grid,.case-proof,.support,.steps3,.outcome{grid-template-columns:1fr;}
   .lesson-grid{grid-template-columns:1fr;}
   .ai3{grid-template-columns:1fr;}
   .a3{border-right:none;border-bottom:1px solid var(--violet-line);}
