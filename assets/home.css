@@ -61,12 +61,22 @@
 }
 
 /* ── 4. 四大能力：从「分类目录」变成「培养框架」 ───────── */
+/* 四域色按 design-colors.css 的 --domain-* 走，表达力蓝 / 思辨力青 / 学习力琥珀 / 创造力紫。
+   色只上图形（顶条、圆点、hover 描边），文字保持 ink —— 青与琥珀在 11–15px 文字上
+   对比度只有 3.0–3.4:1，上文字会读不清。 */
 .ability-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;}
 .ab{display:flex;flex-direction:column;background:var(--surface);
-  border:1px solid var(--line);border-radius:16px;padding:26px 26px 22px;
+  border:1px solid var(--line);border-top:3px solid var(--d,var(--blue));
+  border-radius:16px;padding:24px 26px 22px;
   transition:border-color .2s,transform .2s,box-shadow .2s;}
-.ab:hover{border-color:var(--blue);transform:translateY(-2px);box-shadow:0 14px 34px rgba(8,66,127,.08);}
-.ab .ab-k{font-size:11.5px;letter-spacing:1.5px;color:var(--violet);font-weight:700;}
+.ab[data-d="expression"]{--d:var(--domain-expression);--d-tint:var(--domain-expression-tint);}
+.ab[data-d="thinking"]{--d:var(--domain-thinking);--d-tint:var(--domain-thinking-tint);}
+.ab[data-d="learning"]{--d:var(--domain-learning);--d-tint:var(--domain-learning-tint);}
+.ab[data-d="creativity"]{--d:var(--domain-creativity);--d-tint:var(--domain-creativity-tint);}
+.ab:hover{border-color:var(--d,var(--blue));transform:translateY(-2px);box-shadow:0 14px 34px rgba(8,66,127,.08);}
+.ab .ab-k{font-size:11.5px;letter-spacing:1.5px;color:var(--text-3);font-weight:700;}
+.ab .ab-k::before{content:"";display:inline-block;width:8px;height:8px;border-radius:50%;
+  background:var(--d,var(--blue));margin-right:8px;vertical-align:1px;}
 .ab h3{font-size:21px;margin:9px 0 9px;letter-spacing:-.3px;}
 .ab .ab-core{font-size:14.5px;line-height:1.85;color:var(--ink-2);margin:0 0 16px;}
 .ab .ab-dirs{margin-top:auto;padding-top:14px;border-top:1px dashed var(--line);
@@ -413,8 +423,15 @@
    每个赛道有自己的课程目录，演讲还是中英两套。用四列摊开，
    避免读者以为畅途只卖两门课。 */
 .cat-map{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin:0 0 24px;}
-.cat-col{background:var(--surface,#fff);border:1px solid var(--line,#E3ECF6);border-radius:16px;padding:18px 18px 14px;}
+.cat-col{background:var(--surface,#fff);border:1px solid var(--line,#E3ECF6);
+  border-top:3px solid var(--d,var(--blue));border-radius:16px;padding:16px 18px 14px;}
+.cat-col[data-d="expression"]{--d:var(--domain-expression);--d-tint:var(--domain-expression-tint);}
+.cat-col[data-d="thinking"]{--d:var(--domain-thinking);--d-tint:var(--domain-thinking-tint);}
+.cat-col[data-d="learning"]{--d:var(--domain-learning);--d-tint:var(--domain-learning-tint);}
+.cat-col[data-d="creativity"]{--d:var(--domain-creativity);--d-tint:var(--domain-creativity-tint);}
 .cat-col h3{margin:0 0 10px;font-size:15px;color:var(--blue-deep,#08427F);letter-spacing:.2px;}
+.cat-col h3::before{content:"";display:inline-block;width:7px;height:7px;border-radius:50%;
+  background:var(--d,var(--blue));margin-right:7px;vertical-align:1px;}
 .cat-row{display:flex;flex-direction:column;gap:3px;padding:9px 0;border-top:1px solid #EEF3FA;}
 .cat-col h3 + .cat-row{border-top:0;padding-top:2px;}
 .cat-row b{font-size:13.5px;color:var(--ink,#0F1B2A);font-weight:700;}
