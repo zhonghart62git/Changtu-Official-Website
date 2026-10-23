@@ -132,71 +132,6 @@ html.no-js .rv2{opacity:1;transform:none;}
 .id-card.is-violet .means{color:var(--violet-700);background:var(--violet-50);border-left-color:var(--violet-300);}
 
 /* ============================================================
-   5. 教育矩阵（4 域 × 技能）
-   ============================================================ */
-.mx-wrap{background:var(--surface-2);}
-.mx-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(258px,1fr));gap:16px;}
-.mx-col{
-  background:var(--surface);border:1px solid var(--border);border-radius:var(--r-lg);
-  overflow:hidden;display:flex;flex-direction:column;
-  transition:box-shadow var(--dur) var(--ease),transform var(--dur) var(--ease);
-}
-.mx-col:hover{box-shadow:var(--shadow-md);transform:translateY(-2px);}
-.mx-head{padding:22px 20px 18px;border-bottom:1px solid var(--border);}
-.mx-head .k{
-  display:inline-flex;align-items:center;gap:7px;
-  font-size:11px;letter-spacing:1.6px;text-transform:uppercase;color:var(--text-3);
-  margin-bottom:8px;
-}
-.mx-head .k i{width:8px;height:8px;border-radius:50%;background:var(--d-color);display:block;}
-.mx-head h3{font-size:20px;font-weight:800;letter-spacing:-.2px;}
-.mx-head .sub{font-size:12.5px;color:var(--text-3);margin-top:4px;}
-.mx-body{padding:14px 12px 18px;display:flex;flex-direction:column;gap:6px;flex:1;}
-
-.mx-item{
-  display:flex;align-items:center;gap:9px;
-  padding:11px 12px;border-radius:var(--r-sm);
-  font-size:14.5px;font-weight:600;color:var(--text);
-  border:1px solid transparent;
-  transition:background var(--dur-fast),border-color var(--dur-fast),transform var(--dur-fast);
-}
-.mx-item .st{
-  width:7px;height:7px;border-radius:2px;flex-shrink:0;
-  background:var(--d-color);
-}
-.mx-item .cnt{
-  margin-left:auto;font-size:11px;font-weight:500;color:var(--text-3);
-  letter-spacing:.3px;
-}
-a.mx-item:hover{background:var(--d-tint);border-color:var(--d-line);transform:translateX(2px);}
-.mx-item.pending{
-  color:var(--text-3);font-weight:500;
-  background:repeating-linear-gradient(135deg,var(--surface-2),var(--surface-2) 6px,var(--surface-2) 6px,var(--surface-2) 12px);
-  border-color:var(--border);
-}
-.mx-item.pending .st{background:transparent;border:1.5px solid var(--gray-300);border-radius:50%;}
-.mx-item.pending .cnt{color:var(--gray-400);}
-
-/* 列脚：把矩阵和三原力册次对应起来，同时填掉列底留白 */
-.mx-note{
-  margin-top:auto;padding:12px 12px 0;border-top:1px dashed var(--border);
-  font-size:11.5px;color:var(--text-3);line-height:1.7;letter-spacing:.2px;
-}
-.mx-note b{color:var(--d-color);font-weight:700;}
-
-.mx-foot{
-  margin-top:16px;display:flex;flex-wrap:wrap;align-items:center;gap:18px;
-  font-size:13px;color:var(--text-3);
-}
-
-/* 域色变量注入：矩阵页四域，由 gen_matrix.py 输出 data-d
-   （旧写法只给 .mx-col 用过，那套结构已不在页面上，是死代码，已改挂 .mx-sec） */
-.mx-sec[data-d="expression"]{--d-color:var(--domain-expression);--d-tint:var(--domain-expression-tint);--d-line:var(--blue-200);}
-.mx-sec[data-d="thinking"]{--d-color:var(--domain-thinking);--d-tint:var(--domain-thinking-tint);--d-line:var(--domain-thinking-tint);}
-.mx-sec[data-d="learning"]{--d-color:var(--domain-learning);--d-tint:var(--domain-learning-tint);--d-line:var(--domain-learning-tint);}
-.mx-sec[data-d="creativity"]{--d-color:var(--domain-creativity);--d-tint:var(--domain-creativity-tint);--d-line:var(--violet-200);}
-
-/* ============================================================
    6. 课程体系（双栏大卡）
    ============================================================ */
 .course-grid{display:grid;grid-template-columns:1fr 1fr;gap:22px;}
@@ -409,6 +344,11 @@ a.mx-item:hover{background:var(--d-tint);border-color:var(--d-line);transform:tr
 
 /* ── 总表 ── */
 .mx-table-sec{padding:76px 0 68px;}
+/* 三列的表格铺满 1080 会让「练成什么」一列空掉右半边，收到 1000 并固定前两列 */
+.mx-table-sec .wrap{max-width:1000px;}
+.mx-table{table-layout:fixed;}
+.mx-table thead th:nth-child(1){width:22%;}
+.mx-table thead th:nth-child(2){width:18%;}
 .mx-table{
   width:100%;min-width:860px;border-collapse:separate;border-spacing:0;
   background:var(--surface);border:1px solid var(--border);border-radius:var(--r-lg);
@@ -439,76 +379,44 @@ a.mx-item:hover{background:var(--d-tint);border-color:var(--d-line);transform:tr
 .mx-table .c-dom b[data-d="creativity"]::before{background:var(--domain-creativity);}
 .mx-table .c-dom span{font-size:11.5px;color:var(--text-3);}
 .mx-table .c-sk b{font-size:14.5px;color:var(--text);}
+/* 方向名是入口：点进去才看课程与实践安排，矩阵页只给方向和结果 */
+.mx-table .c-sk a{
+  display:inline-flex;align-items:center;gap:1px;
+  color:var(--blue);text-decoration:none;
+}
+.mx-table .c-sk a:hover{text-decoration:underline;}
+.mx-table .c-sk a svg{opacity:.5;transition:opacity .18s,transform .18s;}
+.mx-table .c-sk a:hover svg{opacity:1;transform:translateX(2px);}
 .mx-table .c-desc{font-size:13px;color:var(--text-3);min-width:190px;}
-.mx-table .c-course{font-size:13px;color:var(--blue-700);white-space:nowrap;}
-.mx-table .c-exit a{color:var(--blue);font-weight:600;text-decoration:none;}
-.mx-table .c-exit a:hover{text-decoration:underline;}
-.mx-table tr.row-soon .c-sk b,
+.mx-table tr.row-soon .c-sk,
 .mx-table tr.row-soon .c-desc{color:var(--text-3);opacity:.75;}
 
 
-/* ── 四域详解 ── */
-.mx-sec{padding:64px 0;border-top:1px solid var(--border);}
-.mx-sec:nth-of-type(even){background:var(--surface-2);}
-.mx-sec[data-d="creativity"]{background:var(--violet-50);border-top-color:var(--violet-line);}
-/* 域色只走图形：标题左侧 4px 色脊 + Domain 标签圆点。青与琥珀在 11–15px 文字上
-   对比度 3.0–3.4:1，直接上文字会读不清。 */
-.mx-dhead{position:relative;margin-bottom:30px;max-width:760px;padding-left:18px;}
-.mx-dhead::before{content:"";position:absolute;left:0;top:3px;bottom:3px;width:4px;
-  border-radius:2px;background:var(--d-color,var(--blue));}
-.mx-dhead .dk{
-  display:inline-block;font-size:11.5px;font-weight:800;letter-spacing:1.6px;
-  text-transform:uppercase;color:var(--text-3);margin-bottom:9px;
+/* ── 怎么开始（家长）── */
+.mx-start-sec{padding:0 0 22px;background:var(--surface);}
+.mx-start{
+  display:flex;align-items:center;justify-content:space-between;gap:36px;
+  background:var(--blue-50);border:1px solid var(--blue-200);
+  border-radius:var(--r-lg);padding:30px 34px;
 }
-.mx-dhead .dk::before{content:"";display:inline-block;width:7px;height:7px;border-radius:50%;
-  background:var(--d-color,var(--blue));margin-right:7px;vertical-align:1px;}
-.mx-dhead h2{font-size:clamp(24px,2.8vw,32px);margin:0 0 8px;color:var(--text);letter-spacing:-.3px;}
-.mx-dhead p{font-size:15px;color:var(--text-2);line-height:1.7;margin:0;}
-/* 家长语言在前，官方表述在后：读者先对上号，再看口径 */
-.mx-dhead p.mx-plain{font-size:17px;font-weight:800;color:var(--blue-700);line-height:1.45;margin:0 0 5px;}
-.mx-dmeta{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px;}
-.mx-dmeta span{
-  font-size:12px;color:var(--text-3);background:var(--surface);
-  border:1px solid var(--border);border-radius:var(--r-pill);padding:4px 11px;
-}
-.mx-sec[data-d="creativity"] .mx-dmeta span{border-color:var(--violet-line);}
-
-.skill-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(310px,1fr));gap:18px;}
-.skill-card{
-  background:var(--surface);border:1px solid var(--border);border-radius:var(--r-md);
-  padding:24px 22px;display:flex;flex-direction:column;gap:14px;
-  transition:transform var(--dur) var(--ease),box-shadow var(--dur) var(--ease);
-}
-.skill-card:hover{transform:translateY(-2px);box-shadow:var(--shadow-md);}
-.skill-card.is-soon{background:var(--surface-2);border-style:dashed;}
-.skill-card.is-wide{grid-column:1/-1;}
-.sk-top{display:flex;align-items:center;justify-content:space-between;gap:10px;}
-.sk-top h3{font-size:18px;margin:0;color:var(--text);letter-spacing:-.2px;}
-.sk-desc{font-size:13.5px;color:var(--text-2);line-height:1.7;margin:0;}
-.sk-row{
-  display:flex;gap:10px;align-items:baseline;
-  font-size:13px;color:var(--text-2);
-  border-top:1px dashed var(--border);padding-top:11px;margin-top:auto;
-}
-.sk-row i{font-style:normal;font-size:11.5px;color:var(--text-3);min-width:62px;}
-.sk-row a{color:var(--blue);font-weight:600;text-decoration:none;}
-.sk-row a:hover{text-decoration:underline;}
+.mx-start-copy h2{font-size:22px;font-weight:800;letter-spacing:-.3px;color:var(--text);margin:0 0 8px;}
+.mx-start-copy p{font-size:14px;color:var(--text-2);line-height:1.75;margin:0;max-width:600px;}
+.mx-start-acts{display:flex;flex-wrap:wrap;gap:12px;flex-shrink:0;}
 
 /* ── CTA ── */
 .mx-cta-sec{padding:0 0 84px;background:var(--surface);}
 
 @media (max-width:1020px){
   .mx-hero{padding:68px 0 56px;}
-  .mx-table-sec,.mx-sec{padding:56px 0;}
+  .mx-table-sec{padding:56px 0;}
   .mx-cta-sec{padding-bottom:64px;}
 }
 @media (max-width:760px){
   .mx-hero{padding:52px 0 44px;}
   .mx-hero h1{font-size:27px;}
-  .mx-table-sec,.mx-sec{padding:44px 0;}
-  .skill-grid{grid-template-columns:1fr;}
-  .skill-card{padding:20px 18px;}
-  .mx-dhead h2{font-size:23px;}
+  .mx-table-sec{padding:44px 0;}
+  .mx-start{flex-direction:column;align-items:flex-start;gap:20px;padding:24px 22px;}
+  .mx-start-acts{width:100%;}
 }
 @media (max-width:560px){
   /* h1 第二行 15 个字，27px 在 342 宽度里会被折出孤字，降一档 */
