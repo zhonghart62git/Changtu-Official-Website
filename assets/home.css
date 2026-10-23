@@ -25,40 +25,11 @@
 .home .hero-lg .lead{font-size:16px;max-width:540px;line-height:1.9;}
 .home .hero-lg .hero-cta{margin-top:32px;}
 
-/* 背书条：把合作方标识从正文里提出来，紧跟首屏 */
-.trust-band{border-top:1px solid var(--line);background:var(--surface);}
-.trust-band .wrap{display:flex;align-items:center;gap:36px;padding:26px 24px;flex-wrap:wrap;}
-.trust-label{font-size:11.5px;letter-spacing:2.4px;color:var(--muted);text-transform:uppercase;font-weight:600;white-space:nowrap;}
-.trust-logos{display:flex;align-items:center;gap:36px;flex-wrap:wrap;}
-.trust-logos img{height:40px;width:auto;max-width:150px;object-fit:contain;opacity:.85;filter:grayscale(1);transition:opacity .25s,filter .25s;}
-.trust-logos img:hover{opacity:1;filter:none;}
-
-/* ── 3. 数据条：让数字当主角 ───────────────────────────── */
-.home .stats-band .stats{padding:36px 0;}
-.home .stats-band .stat b{font-size:clamp(30px,3.6vw,44px);}
+/* ── 3. 数据条：让数字当主角 ─────────────────────────────
+   五项并列，一屏读完：时间 → 纵深 → 机构 → 人数 → 地域。 */
+.home .stats-band .stats{grid-template-columns:repeat(5,1fr);padding:36px 0;}
+.home .stats-band .stat b{font-size:clamp(28px,3.2vw,40px);}
 .home .stats-band .stat span{font-size:12.5px;margin-top:4px;}
-
-/* 数据口径：收进抽屉，不占版面。数字是信任基础，但口径要能当场查到 */
-/* site.css 给 FAQ 的 details / summary 设了卡片边框与「+」角标，这里要全部抵消 */
-.stats-cal{position:relative;padding:0 0 16px;font-size:12px;
-  background:none;border:0;border-radius:0;}
-.stats-cal > summary{display:inline-block;cursor:pointer;list-style:none;
-  font-size:12px;line-height:1.6;color:var(--text-3,#64748B);padding:2px 0;
-  border-bottom:1px dashed currentColor;transition:color .16s;}
-.stats-cal > summary::after{content:none;}
-.stats-cal > summary::-webkit-details-marker{display:none;}
-.stats-cal > summary:hover,.stats-cal[open] > summary{color:var(--blue,#0B63C5);}
-.stats-cal-panel{position:absolute;top:100%;left:0;z-index:30;
-  width:min(480px,calc(100vw - 48px));background:var(--surface,#fff);
-  border:1px solid var(--line,#E3ECF6);border-radius:14px;padding:16px 18px;
-  box-shadow:0 20px 48px rgba(8,66,127,.16);}
-.stats-cal-panel p{margin:0 0 9px;font-size:12.5px;line-height:1.72;color:var(--ink-2,#3C4C63);}
-.stats-cal-panel p:last-child{margin-bottom:0;}
-.stats-cal-panel b{display:inline-block;min-width:74px;color:var(--ink,#0F1B2A);font-weight:700;}
-@media (max-width:560px){
-  .stats-cal-panel{width:calc(100vw - 48px);padding:14px 16px;}
-  .stats-cal-panel b{display:block;min-width:0;margin-bottom:1px;}
-}
 
 /* ── 4. 四大能力：从「分类目录」变成「培养框架」 ───────── */
 /* 四域色按 design-colors.css 的 --domain-* 走，表达力蓝 / 思辨力青 / 学习力琥珀 / 创造力紫。
@@ -284,27 +255,39 @@
 .hs-slide img{width:100%;height:auto;display:block;}
 .hs-slide:focus-visible{outline:3px solid var(--orange,#FF7A1A);outline-offset:-3px;}
 
-.hs-nav{flex-shrink:0;width:34px;height:34px;padding:0;cursor:pointer;
-  border:1px solid #DCE7F4;border-radius:50%;
-  background:#fff;color:var(--blue-900,#08427F);
-  font-size:18px;line-height:1;display:flex;align-items:center;justify-content:center;
-  box-shadow:0 2px 8px rgba(8,66,127,.10);
-  transition:background .2s,border-color .2s,transform .15s;}
-.hs-nav:hover{background:var(--blue,#0B63C5);border-color:var(--blue,#0B63C5);color:#fff;}
-.hs-nav:active{transform:scale(.92);}
+/* 控件按 TDesign Swiper 的规范：贴在 banner 底部居中，细圆点 + 细箭头。
+   整条做成玻璃胶囊，浅底深底都读得清，不用跟着当前屏换配色
+   —— 换配色会在切屏那 0.6 秒里露出中间态。 */
+.hs-bar{position:absolute;left:50%;bottom:14px;transform:translateX(-50%);z-index:5;
+  display:flex;align-items:center;gap:8px;padding:5px 9px;border-radius:999px;
+  background:rgba(255,255,255,.56);
+  border:1px solid rgba(255,255,255,.66);
+  -webkit-backdrop-filter:blur(12px) saturate(1.5);backdrop-filter:blur(12px) saturate(1.5);
+  box-shadow:0 4px 16px rgba(8,66,127,.10);
+  pointer-events:none;}
+.hs-bar > *{pointer-events:auto;}
 
-.hs-bar{position:relative;display:flex;align-items:center;justify-content:center;
-  gap:14px;margin-top:14px;}
-.hs-dots{display:flex;align-items:center;gap:7px;}
-.hs-dots button{width:7px;height:7px;padding:0;border:0;border-radius:50%;
-  background:#C9D9EC;cursor:pointer;transition:width .25s,background .25s;}
-.hs-dots button.on{background:var(--blue,#0B63C5);width:22px;border-radius:4px;}
+.hs-dots{display:flex;align-items:center;gap:6px;padding:0 2px;}
+.hs-dots button{width:6px;height:6px;padding:0;border:0;border-radius:3px;
+  background:rgba(8,66,127,.32);cursor:pointer;
+  transition:width .25s ease,background .25s ease;}
+.hs-dots button:hover{background:rgba(8,66,127,.46);}
+.hs-dots button.on{width:18px;background:var(--blue,#0B63C5);}
+
+.hs-nav{flex-shrink:0;width:26px;height:26px;padding:0;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+  border:0;border-radius:50%;background:rgba(8,66,127,.08);color:var(--blue-900,#08427F);
+  transition:background .2s ease,transform .15s ease;}
+.hs-nav:hover{background:rgba(8,66,127,.18);}
+.hs-nav:active{transform:scale(.92);}
+.hs-nav:focus-visible{outline:2px solid var(--blue,#0B63C5);outline-offset:2px;}
 
 @media (max-width:760px){
   .hslider{padding:16px 0 2px;}
   .hs-box{border-radius:14px;}
-  .hs-bar{margin-top:11px;gap:10px;}
-  .hs-nav{width:30px;height:30px;font-size:16px;}
+  .hs-bar{bottom:10px;gap:6px;padding:4px 7px;}
+  .hs-nav{width:24px;height:24px;}
+  .hs-nav svg{width:11px;height:11px;}
 }
 @media (prefers-reduced-motion:reduce){
   .hs-track{transition:none;}
@@ -420,8 +403,11 @@
   /* 920 以下首屏变单栏。能力环不藏，按可用宽度等比缩到文字下方，
      宽度上限压住，避免整块 banner 被拉得太高。 */
   .hs-intro .hero-visual{max-width:280px;margin:0 auto;}
-  .trust-logos{gap:24px;}
-  .trust-logos img{height:28px;}
+  /* 五项数据两列排，最后一项独占一行居中，避免落单在左格 */
+  .home .stats-band .stats{grid-template-columns:repeat(2,1fr);}
+  .home .stats-band .stat:last-child{grid-column:1/-1;}
+  /* 控件贴在 banner 底部，首屏要给圆点留出落位，否则压在能力环上 */
+  .hs-intro .hero-lg{padding-bottom:56px;}
 }
 @media (max-width:760px){
   .lesson-row{grid-template-columns:1fr;gap:4px;padding:13px 18px;}
@@ -429,11 +415,6 @@
 @media (max-width:560px){
   .home .sec-head.sec-lg{margin-bottom:32px;}
   .hs-intro .hero-visual{max-width:250px;}
-  /* 背书条：窄屏改成单行横滑，避免 5 个 logo 折成 4+1 */
-  .trust-band .wrap{flex-direction:column;align-items:flex-start;gap:10px;padding:20px 24px;}
-  .trust-logos{flex-wrap:nowrap;overflow-x:auto;width:100%;gap:26px;padding-bottom:4px;}
-  .trust-logos img{height:26px;flex-shrink:0;}
-  .trust-logos::-webkit-scrollbar{height:0;}
   .home .stats-band .stats{row-gap:26px;}
 }
 
