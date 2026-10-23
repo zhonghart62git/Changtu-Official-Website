@@ -26,6 +26,12 @@
 .home .hero-lg .lead{font-size:16px;max-width:540px;line-height:1.9;}
 .home .hero-lg .hero-cta{margin-top:32px;}
 
+/* 能力环的成品图四周自带留白，桌面端左右各外扩 5%，让环的视觉直径
+   与原来那版矢量环一致，不会被留白衬小 */
+@media (min-width:921px){
+  .home .hero-lg .hero-visual{margin:0 -5%;}
+}
+
 /* ── 3. 数据条：让数字当主角 ─────────────────────────────
    五项并列，一屏读完：时间 → 纵深 → 机构 → 人数 → 地域。 */
 .home .stats-band .stats{grid-template-columns:repeat(5,1fr);padding:36px 0;}

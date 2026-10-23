@@ -97,71 +97,10 @@ h1 em{
 .hero .lead b{color:var(--blue-deep);}
 .hero-cta{display:flex;flex-wrap:wrap;gap:14px;margin:30px 0 0;}
 /* Hero 视觉：四力一体能力环
-   四瓣玻璃旋涡围着中心光球。载入时四瓣依次浮起、中心后到；
-   之后镜面高光缓慢呼吸，光球轻微脉动。prefers-reduced-motion 一律静止。 */
+   静态图，四周已按圆形羽化到透明，可以直接叠在首屏渐变底上，
+   不会出现方图的白边。 */
 .hero-visual{position:relative;display:flex;align-items:center;justify-content:center;}
-.hero-visual svg{width:100%;height:auto;display:block;}
-
-/* 载入：四瓣从中心浮起，错开 130ms */
-.force-ring .fr-lobe{opacity:0;transform-box:view-box;transform-origin:260px 260px;
-  transform:scale(.92);animation:frLobe .82s cubic-bezier(.22,.61,.36,1) forwards;}
-.force-ring .fr-lobe:nth-of-type(1){animation-delay:.02s}
-.force-ring .fr-lobe:nth-of-type(2){animation-delay:.15s}
-.force-ring .fr-lobe:nth-of-type(3){animation-delay:.28s}
-.force-ring .fr-lobe:nth-of-type(4){animation-delay:.41s}
-@keyframes frLobe{to{opacity:1;transform:scale(1)}}
-
-/* 镜面高光呼吸：四瓣周期不同，才不像统一打光 */
-.force-ring .lobe-spec{animation:frSpec 11s ease-in-out infinite alternate;}
-.force-ring .fr-lobe:nth-of-type(2) .lobe-spec{animation-duration:14s;animation-delay:-3s}
-.force-ring .fr-lobe:nth-of-type(3) .lobe-spec{animation-duration:12s;animation-delay:-6s}
-.force-ring .fr-lobe:nth-of-type(4) .lobe-spec{animation-duration:16s;animation-delay:-9s}
-@keyframes frSpec{from{opacity:.34}to{opacity:.66}}
-
-/* 中心光球脉动 */
-.force-ring .fr-core-glow{transform-box:view-box;transform-origin:260px 260px;
-  animation:frPulse 7s ease-in-out infinite alternate;}
-@keyframes frPulse{from{transform:scale(1);opacity:.85}to{transform:scale(1.06);opacity:1}}
-
-.force-ring .fr-halo,
-.force-ring .fr-core,
-.force-ring .fr-core-glass,
-.force-ring .fr-core-ring,
-.force-ring .fr-title,
-.force-ring .fr-arc,
-.force-ring .fr-spark,
-.force-ring .fr-labels{opacity:0;animation:frIn .7s ease forwards .5s;}
-@keyframes frIn{to{opacity:1}}
-
-.force-ring .fr-title{font-size:40px;font-weight:800;fill:#0F1B2A;letter-spacing:2px;}
-.force-ring .fr-labels text{font-size:22px;font-weight:700;fill:#fff;letter-spacing:1.4px;
-  paint-order:stroke;stroke:rgba(6,20,44,.22);stroke-width:2.6px;}
-.force-ring .fr-ico{opacity:.96;}
-
-@media (prefers-reduced-motion:reduce){
-  .force-ring .fr-lobe,
-  .force-ring .lobe-spec,
-  .force-ring .fr-core-glow,
-  .force-ring .fr-halo,
-  .force-ring .fr-core,
-  .force-ring .fr-core-glass,
-  .force-ring .fr-core-ring,
-  .force-ring .fr-title,
-  .force-ring .fr-arc,
-  .force-ring .fr-spark,
-  .force-ring .fr-labels{animation:none;opacity:1;transform:none;}
-}
-/* 环按容器宽度等比缩放，SVG 里的字号要跟着放大，否则窄屏只剩 7px。
-   下面两个断点的字号以 viewBox 单位计。 */
-@media (max-width:920px){
-  .force-ring .fr-labels text{font-size:25px;}
-  .force-ring .fr-title{font-size:46px;}
-}
-@media (max-width:560px){
-  .force-ring .fr-labels text{font-size:29px;}
-  .force-ring .fr-title{font-size:52px;}
-}
-}
+.hero-visual img{width:100%;height:auto;display:block;}
 
 /* ===== 数据条 ===== */
 .stats-band{background:var(--bg-2);border-top:1px solid var(--line);border-bottom:1px solid var(--line);}
