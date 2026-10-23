@@ -180,6 +180,24 @@
   color:var(--ink-2);transition:border-color .2s,color .2s,transform .2s;}
 .exit a:hover{border-color:var(--blue);color:var(--blue);transform:translateY(-1px);}
 .exit a i{font-style:normal;font-size:11px;color:var(--text-3);font-weight:500;}
+/* 活动练哪几个力：一个活动可以只练一个，也可以同时练两个（如联合国演讲 = 表达力 + 思辨力） */
+.exit a .c-tags{display:inline-flex;align-items:center;gap:6px;margin-left:2px;}
+.exit a .c-dot{
+  display:inline-flex;align-items:center;gap:5px;white-space:nowrap;flex:0 0 auto;
+  padding:2px 8px;border-radius:9px;
+  font-size:11px;font-weight:600;color:var(--ink);background:var(--d-tint);
+}
+.exit a .c-dot::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--d);}
+.exit a .c-dot[data-d="expression"]{--d:var(--domain-expression);--d-tint:var(--domain-expression-tint);}
+.exit a .c-dot[data-d="thinking"]{--d:var(--domain-thinking);--d-tint:var(--domain-thinking-tint);}
+.exit a .c-dot[data-d="learning"]{--d:var(--domain-learning);--d-tint:var(--domain-learning-tint);}
+.exit a .c-dot[data-d="creativity"]{--d:var(--domain-creativity);--d-tint:var(--domain-creativity-tint);}
+/* 窄屏：活动名一行一个，能力标签整组靠右，避免标签文字被挤成两行 */
+@media (max-width:620px){
+  .exit{display:grid;grid-template-columns:1fr;gap:8px;}
+  .exit a{display:flex;flex-wrap:wrap;row-gap:5px;}
+  .exit a .c-tags{margin-left:auto;}
+}
 
 /* ── 10. 合作依据：可核对的例子 ────────────────────────── */
 .case-proof{display:grid;grid-template-columns:1fr 1fr;gap:16px;}

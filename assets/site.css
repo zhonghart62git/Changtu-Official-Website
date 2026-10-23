@@ -615,6 +615,24 @@ html.no-js .rv{opacity:1;transform:none;}
 .proj-head .logo-plate img{max-height:66px;max-width:230px;}
 .proj-head .logo-plate img.sq{max-height:72px;max-width:72px;}
 .proj-head .logo-type b{font-size:24px;}
+
+/* 活动练哪几个力。活动是实践维度，品类是教学维度，两者不一一对应：
+   一个活动可以只练一个力（双语主持 → 表达力），也可以同时练两个（联合国演讲 → 表达力 + 思辨力）。
+   标签并列，不分主次；色取四域令牌，只上圆点与底色，文字保持 ink。 */
+.cap-tags{display:flex;flex-wrap:wrap;align-items:center;gap:7px;margin-top:15px;}
+.cap-k{font-size:12px;color:var(--ink-2);letter-spacing:.3px;margin-right:1px;}
+.cap{
+  display:inline-flex;align-items:center;gap:6px;
+  padding:5px 12px;border-radius:20px;
+  font-size:12.5px;font-weight:600;color:var(--ink);
+  background:#fff;border:1px solid var(--line);
+  box-shadow:0 1px 2px rgba(15,27,42,.05);
+}
+.cap::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--d);}
+.cap[data-d="expression"]{--d:var(--domain-expression);}
+.cap[data-d="thinking"]{--d:var(--domain-thinking);}
+.cap[data-d="learning"]{--d:var(--domain-learning);}
+.cap[data-d="creativity"]{--d:var(--domain-creativity);}
 .proj-head .logo-type span{font-size:8.5px;}
 .proj-head h1{font-size:clamp(24px,2.8vw,33px);line-height:1.34;letter-spacing:-.4px;margin:10px 0 8px;}
 .proj-head .sub{font-size:14.5px;color:var(--muted);margin:0;}
