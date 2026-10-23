@@ -19,11 +19,11 @@
 
 /* ── 2. 首屏 ───────────────────────────────────────────── */
 .home .hero-lg{padding:64px 0 54px;}
-.home .hero-lg .wrap{grid-template-columns:1.16fr .84fr;gap:40px;}
-.home .hero-lg h1{font-size:clamp(32px,4.1vw,58px);line-height:1.16;letter-spacing:-1.4px;margin:22px 0 20px;}
+.home .hero-lg .wrap{grid-template-columns:minmax(0,1.24fr) minmax(0,.76fr);gap:36px;}
+/* 标题第一行 12.2em、第二行 9em，字号上限按第一行算：12.2em ≤ 667px → 52px */
+.home .hero-lg h1{font-size:clamp(26px,3.6vw,52px);line-height:1.16;letter-spacing:-1.4px;margin:22px 0 20px;}
 .home .hero-lg .lead{font-size:16px;max-width:540px;line-height:1.9;}
 .home .hero-lg .hero-cta{margin-top:32px;}
-.home .hero-lg .hero-note{margin-top:18px;font-size:12.5px;color:var(--muted);letter-spacing:.2px;}
 
 /* 背书条：把合作方标识从正文里提出来，紧跟首屏 */
 .trust-band{border-top:1px solid var(--line);background:var(--surface);}
@@ -299,16 +299,12 @@
 .hs-dots button{width:7px;height:7px;padding:0;border:0;border-radius:50%;
   background:#C9D9EC;cursor:pointer;transition:width .25s,background .25s;}
 .hs-dots button.on{background:var(--blue,#0B63C5);width:22px;border-radius:4px;}
-.hs-all{position:absolute;right:0;font-size:13px;font-weight:700;
-  color:var(--blue,#0B63C5);text-decoration:none;white-space:nowrap;}
-.hs-all:hover{text-decoration:underline;}
 
 @media (max-width:760px){
   .hslider{padding:16px 0 2px;}
   .hs-box{border-radius:14px;}
   .hs-bar{margin-top:11px;gap:10px;}
   .hs-nav{width:30px;height:30px;font-size:16px;}
-  .hs-all{position:static;margin-left:2px;}
 }
 @media (prefers-reduced-motion:reduce){
   .hs-track{transition:none;}
@@ -417,6 +413,10 @@
 }
 @media (max-width:920px){
   .home .hero-lg .wrap{grid-template-columns:1fr;gap:18px;}
+  /* 单栏后标题占满宽度，可以放大；同时放行 em 折行，
+     否则固定断点下会出现只剩一个字的孤行 */
+  .home .hero-lg h1{font-size:clamp(26px,5.4vw,44px);}
+  .home .hero-lg h1 em{white-space:normal;}
   /* 920 以下首屏变单栏。能力环不藏，按可用宽度等比缩到文字下方，
      宽度上限压住，避免整块 banner 被拉得太高。 */
   .hs-intro .hero-visual{max-width:280px;margin:0 auto;}

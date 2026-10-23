@@ -96,45 +96,76 @@ h1 em{
 .hero .lead{font-size:16.5px;color:var(--ink-2);max-width:540px;}
 .hero .lead b{color:var(--blue-deep);}
 .hero-cta{display:flex;flex-wrap:wrap;gap:14px;margin:30px 0 0;}
-.hero-note{margin-top:16px;font-size:13px;color:var(--muted);display:flex;align-items:center;gap:7px;}
-
 /* Hero 视觉：四力一体能力环
-   四段等权圆弧 + 一道一次性光泽 + 中心淡入，合计约 1.15s，播完停在终态。
-   不旋转、不闪烁、不循环；prefers-reduced-motion 直接给终态。 */
+   四块环形扇区围着中心「未来领袖」。载入时扇区依次长出来、中心后到；
+   之后极光光斑缓慢漂移、两道高光绕环行走，整体是极光的呼吸感而不是闪烁。
+   prefers-reduced-motion 一律静止。 */
 .hero-visual{position:relative;display:flex;align-items:center;justify-content:center;}
 .hero-visual svg{width:100%;height:auto;display:block;}
-.force-ring .fr-arcs path,
-.force-ring .fr-center,
-.force-ring .fr-labels{opacity:0;animation:frIn .55s cubic-bezier(.22,.61,.36,1) forwards;}
-.force-ring .fr-center,
-.force-ring .fr-labels{animation-duration:.5s;animation-delay:.42s;}
-.force-ring .fr-shine{animation:frShine .95s cubic-bezier(.4,0,.5,1) .2s forwards;}
-@keyframes frIn{
-  from{opacity:0}
-  to{opacity:1}
+
+/* 极光：四个软光斑各自漂移，周期不同才不会同步呼吸 */
+.force-ring .au{transform-box:fill-box;transform-origin:50% 50%;
+  animation:frDrift 24s ease-in-out infinite alternate;}
+.force-ring .au2{animation-duration:31s;animation-delay:-7s;}
+.force-ring .au3{animation-duration:27s;animation-delay:-13s;}
+.force-ring .au4{animation-duration:35s;animation-delay:-4s;}
+@keyframes frDrift{
+  0%{transform:translate(0,0) scale(1);opacity:.8}
+  50%{transform:translate(16px,-14px) scale(1.14);opacity:1}
+  100%{transform:translate(-12px,12px) scale(1.02);opacity:.85}
 }
-/* 周长 2π×168 ≈ 1055.6，dash 118 + gap 937.6 正好一圈 */
-@keyframes frShine{
-  0%{stroke-dashoffset:0;opacity:0}
-  8%{opacity:.85}
-  80%{opacity:.85}
-  100%{stroke-dashoffset:-1055.6;opacity:0}
-}
+
+/* 高光绕环走一圈 */
+.force-ring .fr-spots{transform-box:view-box;transform-origin:260px 260px;
+  animation:frSpin 22s linear infinite;}
+@keyframes frSpin{to{transform:rotate(360deg)}}
+
+/* 载入：扇区从中心长出来，四块错开 120ms */
+.force-ring .fr-wedges path{opacity:0;transform-box:view-box;transform-origin:260px 260px;
+  transform:scale(.9);animation:frWedge .72s cubic-bezier(.22,.61,.36,1) forwards;}
+.force-ring .fr-wedges path:nth-child(1){animation-delay:.04s}
+.force-ring .fr-wedges path:nth-child(2){animation-delay:.16s}
+.force-ring .fr-wedges path:nth-child(3){animation-delay:.28s}
+.force-ring .fr-wedges path:nth-child(4){animation-delay:.4s}
+@keyframes frWedge{to{opacity:1;transform:scale(1)}}
+
+/* 溢光层跟着扇区一起淡入，慢一拍，看起来像光先散开再落定。
+   停在 .5 而不是 1，否则外缘一圈发灰，像脏了。 */
+.force-ring .fr-bloom{opacity:0;animation:frBloomIn 1s ease forwards .1s;}
+@keyframes frBloomIn{to{opacity:.5}}
+.force-ring .fr-halo,
+.force-ring .fr-core,
+.force-ring .fr-core-glass,
+.force-ring .fr-core-ring,
+.force-ring .fr-title,
+.force-ring .fr-labels{opacity:0;animation:frIn .6s ease forwards .52s;}
+@keyframes frIn{to{opacity:1}}
+
+.force-ring .fr-title{font-size:38px;font-weight:800;fill:#0F1B2A;letter-spacing:2px;}
+.force-ring .fr-labels text{font-size:19px;font-weight:700;fill:#fff;letter-spacing:1.5px;
+  paint-order:stroke;stroke:rgba(6,20,44,.20);stroke-width:2.4px;}
+
 @media (prefers-reduced-motion:reduce){
-  .force-ring .fr-arcs path,
-  .force-ring .fr-center,
-  .force-ring .fr-labels{opacity:1;animation:none;}
-  .force-ring .fr-shine{display:none;}
+  .force-ring .au,
+  .force-ring .fr-spots,
+  .force-ring .fr-wedges path,
+  .force-ring .fr-halo,
+  .force-ring .fr-core,
+  .force-ring .fr-core-glass,
+  .force-ring .fr-core-ring,
+  .force-ring .fr-title,
+  .force-ring .fr-labels{animation:none;opacity:1;transform:none;}
+  .force-ring .fr-bloom{animation:none;opacity:.5;}
 }
-/* 环按容器宽度等比缩放，SVG 里的字号要跟着放大，否则窄屏只剩 6px。
-   下面两个断点的字号以 viewBox 单位计，实际像素约 11px。 */
+/* 环按容器宽度等比缩放，SVG 里的字号要跟着放大，否则窄屏只剩 7px。
+   下面两个断点的字号以 viewBox 单位计。 */
 @media (max-width:920px){
-  .force-ring .fr-labels text{font-size:20px;}
-  .force-ring .fr-center text{font-size:42px;}
+  .force-ring .fr-labels text{font-size:22px;}
+  .force-ring .fr-title{font-size:44px;}
 }
 @media (max-width:560px){
-  .force-ring .fr-labels text{font-size:23px;}
-  .force-ring .fr-center text{font-size:46px;}
+  .force-ring .fr-labels text{font-size:26px;}
+  .force-ring .fr-title{font-size:50px;}
 }
 
 /* ===== 数据条 ===== */
