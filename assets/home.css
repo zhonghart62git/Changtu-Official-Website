@@ -195,6 +195,9 @@
 .sc-body{display:flex;flex-direction:column;flex:1;padding:20px 22px 22px;}
 .sc-k{font-size:11.5px;font-weight:800;letter-spacing:1.5px;color:var(--violet-600);}
 .sc h3{font-size:17.5px;line-height:1.5;margin:9px 0 11px;letter-spacing:-.2px;color:var(--ink);}
+/* 三列时标题放不下一行，就在逗号处断：后半句整块不可拆，
+   否则浏览器会按字数平均，把「一步步」「体验」这类词拆到两行。 */
+.sc h3 .nw{display:inline-block;}
 .sc blockquote{margin:0;font-size:14px;line-height:1.88;color:var(--ink-2);}
 .sc cite{display:block;margin-top:12px;font-style:normal;font-size:12.5px;color:var(--text-3);}
 

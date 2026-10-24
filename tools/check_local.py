@@ -42,6 +42,15 @@ COPY_EXEMPT = {'sanyuanli-course.html'}
 # 标题规则（用户 2026-10-23）：段落标题最多 4 个汉字，不用解释性或陈述性语句。
 # h2 一律查；h3/h4 里有产品名、赛事名、阶位名，字数不能一刀切，但带句读的
 # 一定是把一句话当标题用，直接判违规。
+# 例外：首页案例卡的标题是引述的题眼，双句式是中文编辑标题的常态（如「练就真能力，
+# 走进清华园」），与「把流程词当标题」不是一回事，按文本白名单放过。
+CASE_H3 = {
+    '练就真能力，走进清华园',
+    '不同的体验，让我一步步走近中华文化',
+    '让好教学，被更多人看见',
+}
+
+
 def head_issues(s):
     out = []
     s = re.sub(r'<(script|style)\b.*?</\1>', '', s, flags=re.S | re.I)
@@ -56,7 +65,7 @@ def head_issues(s):
         han = len(re.findall(r'[\u4e00-\u9fff]', t))
         if tag == 'h2' and han > 4:
             out.append('标题超长 h2 %d 字「%s」' % (han, t[:22]))
-        if re.search(r'[，。；]', t):
+        if re.search(r'[，。；]', t) and t not in CASE_H3:
             out.append('标题带句读 %s「%s」' % (tag, t[:22]))
     return out
 
