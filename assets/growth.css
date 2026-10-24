@@ -13,14 +13,6 @@
 .path-list .step.on .no{background:var(--sc);color:var(--surface);transform:scale(1.06);}
 .path-list .step.on .step-card{border-color:var(--border);box-shadow:var(--shadow);}
 
-/* 末段点题 */
-.gp-path-note{display:flex;flex-wrap:wrap;align-items:center;gap:14px;
-  margin-top:28px;padding:16px 20px;border-radius:14px;
-  background:var(--surface);border:1px solid var(--line);}
-.gp-path-note p{margin:0;flex:1 1 320px;font-size:13px;line-height:1.72;color:var(--ink-2);}
-.gp-path-note p b{color:var(--ink);font-weight:700;}
-.gp-path-note a{font-size:13px;font-weight:700;color:var(--brand);white-space:nowrap;}
-
 /* PRD 的阶段「视觉」是三项顿号串（如「能力画像摘要、兴趣线索与观察记录」），
    site.css 的 .step-out 是 flex + wrap，值一长就把标签挤成独立一行。
    改成块级流，标签行内跟着文字走，换行自然落在标签后面。 */
