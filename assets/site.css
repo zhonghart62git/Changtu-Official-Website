@@ -1,4 +1,4 @@
-@import url("./design-colors.css?v=2");
+@import url("./design-colors.css?v=31fe4493");
 :root{
   --blue:var(--brand);--blue-2:var(--focus);--blue-deep:var(--brand-hover);
   --tint:var(--surface-3);--tint-2:var(--surface-2);
@@ -364,6 +364,8 @@ td em{font-style:normal;font-size:12.5px;color:var(--muted);}
   background:var(--tc-btn,var(--tc));color:var(--surface);transition:transform .2s,box-shadow .2s;
 }
 .tier-card .tc-cta:hover{transform:translateY(-1px);box-shadow:0 10px 22px rgba(15,27,42,.16);}
+/* 三档卡片的 CTA 现在开弹窗，是 button 不是 a，补上按钮元素的默认差异 */
+button.tc-cta{border:0;font-family:inherit;cursor:pointer;width:100%;}
 /* 启程档不推，按钮做描边 */
 .tier-card.t1 .tc-cta{background:var(--surface);color:var(--ink-2);border:1px solid var(--tc-line);}
 .tier-card.t1 .tc-cta:hover{color:var(--ink);border-color:var(--muted);box-shadow:none;}
@@ -945,6 +947,9 @@ html.no-js .rv{opacity:1;transform:none;}
 .mo-panel.is-narrow{max-width:400px;text-align:center;}
 .mo-panel.is-narrow .mo-qr{width:200px;height:200px;margin-top:22px;}
 .mo-panel.is-narrow .mo-sub{margin-bottom:0;}
+.mo-tel{margin:20px 0 0;font-size:17px;font-weight:800;line-height:1.9;letter-spacing:-.2px;}
+.mo-tel a{color:var(--blue);}
+.mo-tel a:hover{color:var(--blue-deep);}
 @keyframes moIn{from{opacity:0;transform:translateY(14px) scale(.985);}to{opacity:1;transform:none;}}
 .mo-x{position:absolute;top:14px;right:14px;width:34px;height:34px;display:flex;
   align-items:center;justify-content:center;border:0;border-radius:50%;cursor:pointer;

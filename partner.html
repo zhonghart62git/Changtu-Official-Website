@@ -9,7 +9,7 @@
 <link rel="icon" type="image/png" sizes="64x64" href="assets/favicon-64.png?v=f0acdc9c">
 <link rel="apple-touch-icon" href="assets/apple-touch-icon.png?v=b6e8581d">
 <meta name="theme-color" content="#0B63C5">
-<link rel="stylesheet" href="assets/site.css?v=de9bc00f">
+<link rel="stylesheet" href="assets/site.css?v=9266a117">
 <!-- domain-seo:start -->
 <link rel="canonical" href="https://leadtheway.cn/partner.html">
 <meta name="robots" content="index,follow">
@@ -34,7 +34,7 @@
   </a>
   <div class="nav-cta">
     <a class="nav-mini" href="teacher/">教师工作台</a>
-    <a class="btn btn-p btn-sm" href="index.html#contact">合作咨询</a>
+    <button type="button" class="btn btn-p btn-sm" data-mo="moJoin">合作咨询</button>
   </div>
 </div></header>
 
@@ -67,7 +67,7 @@
           <li>学员与活动信息在联盟系统内建档</li>
           <li>教材、师训、智能体按需单独购买</li>
         </ul>
-        <a class="tc-cta" href="index.html#contact">免费加入</a>
+        <button type="button" class="tc-cta" data-mo="moJoin">免费加入</button>
       </div>
 
       <div class="tier-card t2">
@@ -82,7 +82,7 @@
           <li>配套教材包与 1 人免费师训名额</li>
           <li>AI 教学与运营智能体，另配 10,000 智点</li>
         </ul>
-        <a class="tc-cta" href="index.html#contact">选这档</a>
+        <button type="button" class="tc-cta" data-mo="moJoin">选这档</button>
       </div>
 
       <div class="tier-card t3">
@@ -97,7 +97,7 @@
           <li>10 万智点，5 名学员推荐名额</li>
           <li>优秀学员可参加 40 分钟名校 1 对 1 交流遴选</li>
         </ul>
-        <a class="tc-cta" href="index.html#contact">谈城市共建</a>
+        <button type="button" class="tc-cta" data-mo="moJoin">谈城市共建</button>
       </div>
     </div>
 
@@ -240,7 +240,7 @@
         <b>不确定该选哪一档？</b>
         <span>报上机构现有班型、学员人数和今年想做的活动，我们按实际情况给建议。</span>
       </div>
-      <a class="btn btn-o" href="index.html#contact">聊聊适合本机构的合作方式</a>
+      <button type="button" class="btn btn-o" data-mo="moJoin">聊聊适合本机构的合作方式</button>
     </div>
   </div>
 </section>
@@ -350,5 +350,16 @@
   });
 })();
 </script>
+<div class="mo" id="moJoin" hidden>
+  <div class="mo-mask" data-mo-close></div>
+  <div class="mo-panel is-narrow" role="dialog" aria-modal="true" aria-labelledby="moJoinT" tabindex="-1">
+    <button class="mo-x" type="button" data-mo-close aria-label="关闭">×</button>
+    <h3 id="moJoinT">谈合作</h3>
+    <p class="mo-sub">电话与微信同号。说清所在城市、现在开的课、想做的方向，我们按三档方案给具体配置。</p>
+    <p class="mo-tel"><a href="tel:18038829260">180 3882 9260</a><br><a href="tel:18038829261">180 3882 9261</a></p>
+  </div>
+</div>
+
+<script src="assets/modal.js?v=ca40bbb1"></script>
 </body>
 </html>

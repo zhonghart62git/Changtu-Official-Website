@@ -9,7 +9,7 @@
 <link rel="icon" type="image/png" sizes="64x64" href="assets/favicon-64.png?v=f0acdc9c">
 <link rel="apple-touch-icon" href="assets/apple-touch-icon.png?v=b6e8581d">
 <meta name="theme-color" content="#0B63C5">
-<link rel="stylesheet" href="assets/site.css?v=de9bc00f">
+<link rel="stylesheet" href="assets/site.css?v=9266a117">
 <link rel="stylesheet" href="assets/home.css?v=379cec18">
 <link rel="canonical" href="https://leadtheway.cn/assess.html">
 <meta name="robots" content="index,follow">
@@ -57,7 +57,7 @@
       <h1>先知道孩子在哪，<br>再决定往哪走</h1>
       <p class="lead">测评在微信小程序「畅途未来领袖」里完成。测完拿到一份能力画像，对照 12 个赛道，就知道这一阶段该练什么。</p>
       <div class="pg-cta">
-        <a class="btn btn-p" href="#how">怎么开始测评<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M6 13l6 6 6-6"></path></svg></a>
+        <button class="btn btn-p" type="button" data-mo="moTest">扫码做测评</button>
         <a class="btn btn-s" href="courses.html">查看课程体系</a>
       </div>
     </div>
@@ -305,5 +305,16 @@
   }
 })();
 </script>
+<div class="mo" id="moTest" hidden>
+  <div class="mo-mask" data-mo-close></div>
+  <div class="mo-panel is-narrow" role="dialog" aria-modal="true" aria-labelledby="moTestT" tabindex="-1">
+    <button class="mo-x" type="button" data-mo-close aria-label="关闭">×</button>
+    <h3 id="moTestT">做一次能力测评</h3>
+    <p class="mo-sub">微信扫下面的小程序码，进入畅途小程序做测评。测完会看到兴趣倾向、当前能力表现和方向建议，结果存进成长档案。</p>
+    <img class="mo-qr" src="assets/miniapp-qr.png?v=6c0116a8" alt="畅途小程序码" width="480" height="480">
+  </div>
+</div>
+
+<script src="assets/modal.js?v=ca40bbb1"></script>
 </body>
 </html>
