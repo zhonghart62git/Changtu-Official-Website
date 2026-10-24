@@ -97,43 +97,7 @@
   .ab-col.is-inst .ab-chips i{color:#5B21B6;background:#F5F1FF;border-color:#E4D9FB;}
   .ab-col .btn{margin-top:auto;align-self:flex-start;}
 
-  /* ── 04 能力养成：六阶段 ───────────────────────────────────── */
-  .ab-six{position:relative;margin-top:34px;padding-left:26px;}
-  .ab-six::before{content:"";position:absolute;left:5px;top:10px;bottom:14px;width:2px;
-    background:linear-gradient(180deg,var(--blue),var(--violet));opacity:.45;}
-  .ab-s{position:relative;padding:0 0 30px;}
-  .ab-s:last-child{padding-bottom:0;}
-  /* 节点内圈跟区块底色走，否则白点在浅蓝底上会显出一圈白边 */
-  .ab-s::before{content:"";position:absolute;left:-26px;top:6px;width:13px;height:13px;border-radius:50%;
-    background:var(--bg-2);border:2px solid var(--blue);}
-  .ab-s:nth-child(n+4)::before{border-color:var(--violet);}
-  .ab-s .sk{display:block;font-size:11px;font-weight:800;letter-spacing:1.5px;color:var(--text-3);margin-bottom:6px;}
-  .ab-s h3{font-size:18px;font-weight:800;color:var(--ink);margin:0 0 7px;letter-spacing:-.2px;}
-  .ab-s p{margin:0;font-size:14.5px;line-height:1.85;color:var(--text-2);max-width:760px;}
-
-  /* ── 04 后半：一路走来 / 真实证据 / 同行之人 ───────────────── */
-  .ab-sub{display:flex;align-items:baseline;gap:12px;margin:46px 0 18px;}
-  .ab-sub:first-of-type{margin-top:34px;}
-  .ab-sub b{font-size:15px;font-weight:800;color:var(--ink);}
-  .ab-sub span{font-size:12px;color:var(--text-3);}
-
-  /* 一路走来：四个节点排一行，与上面六阶段的竖排卡区分开 */
-  .ab-line{position:relative;display:grid;grid-template-columns:repeat(4,1fr);gap:20px;}
-  .ab-line::before{content:"";position:absolute;left:0;right:0;top:5px;height:2px;border-radius:1px;
-    background:var(--border-strong);opacity:.55;}
-  .ab-ln{position:relative;padding-top:26px;}
-  .ab-ln::before{content:"";position:absolute;left:0;top:0;width:11px;height:11px;border-radius:50%;
-    background:var(--bg-2);border:2px solid var(--border-strong);}
-  .ab-ln b{display:block;font-size:14.5px;font-weight:800;color:var(--ink);margin-bottom:5px;letter-spacing:-.1px;}
-  .ab-ln span{font-size:13px;line-height:1.75;color:var(--text-3);}
-  .ab-six + .ab-sub{margin-top:44px;}
-
-  .ab-proof{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:6px;}
-  .ab-pf{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:20px 22px;}
-  .ab-pf .pk{font-size:11px;font-weight:800;letter-spacing:1.2px;color:var(--blue);margin-bottom:9px;display:block;}
-  .ab-pf p{margin:0;font-size:14px;line-height:1.82;color:var(--text-2);}
-  .ab-pf p b{color:var(--ink);}
-
+  /* ── 04 同行之人 ─────────────────────────────────────────── */
   /* 团队卡 */
   .team-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;}
   .tm{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-lg);padding:26px 24px;
@@ -164,10 +128,8 @@
     .about-hero .ah-grid{grid-template-columns:1fr;gap:34px;}
     .ab-rel{max-width:520px;}
     .team-grid{grid-template-columns:repeat(2,1fr);}
-    .ab-two,.ab-proof{grid-template-columns:1fr;}
+    .ab-two{grid-template-columns:1fr;}
     .ab-cards{grid-template-columns:1fr;}
-    .ab-line{grid-template-columns:repeat(2,1fr);gap:22px 20px;}
-    .ab-line::before{display:none;}
   }
   @media (max-width:760px){
     .ab-axis{grid-template-columns:1fr;gap:0;}
@@ -179,10 +141,6 @@
     .team-grid{grid-template-columns:1fr;}
     .about-hero .stats-band .stats{grid-template-columns:repeat(2,1fr);row-gap:26px;}
     .about-hero .stats-band .stat:last-child{grid-column:1/-1;}
-    .ab-line{grid-template-columns:1fr;gap:0;}
-    .ab-line::before{display:block;left:5px;right:auto;top:6px;bottom:22px;width:2px;height:auto;}
-    .ab-ln{padding:0 0 18px 26px;}
-    .ab-ln::before{top:3px;}
   }
 </style>
 <script type="application/ld+json">
@@ -380,81 +338,15 @@
   </div>
 </section>
 
-<!-- ═════════ 04 能力养成 ═════════ -->
-<section id="ab-grow" style="background:var(--bg-2);">
+<!-- ═════════ 04 同行之人 ═════════ -->
+<section id="ab-team" style="background:var(--bg-2);">
   <div class="wrap">
     <div class="sec-head rv2 sec-lg">
       <div class="bar"></div>
-      <h2>能力养成 <small>How Ability Grows</small></h2>
-      <p>能力在持续行动、反馈和重新选择中形成。</p>
+      <h2>同行之人 <small>The Team</small></h2>
+      <p>教育、技术、语言三种背景。</p>
     </div>
 
-    <div class="ab-six rv2">
-      <div class="ab-s">
-        <span class="sk">阶段一</span>
-        <h3>认识自己</h3>
-        <p>通过兴趣、经历、能力画像与真实表现，看见当前起点。</p>
-      </div>
-      <div class="ab-s">
-        <span class="sk">阶段二</span>
-        <h3>明确方向</h3>
-        <p>连接未来领域和真实问题，形成值得持续投入的成长方向。</p>
-      </div>
-      <div class="ab-s">
-        <span class="sk">阶段三</span>
-        <h3>系统训练</h3>
-        <p>在结构化课程、教师指导与 AI 工具支持下学习方法、反复练习。</p>
-      </div>
-      <div class="ab-s">
-        <span class="sk">阶段四</span>
-        <h3>真实实践</h3>
-        <p>进入项目、展演、交流与协作场景，把能力转化为真实成果。</p>
-      </div>
-      <div class="ab-s">
-        <span class="sk">阶段五</span>
-        <h3>记录成长</h3>
-        <p>沉淀作品、过程与反馈，看见变化，也为下一步提供依据。</p>
-      </div>
-      <div class="ab-s">
-        <span class="sk">阶段六</span>
-        <h3>连接机会</h3>
-        <p>根据能力与方向，连接更适合的学习、展示、交流和发展机会。</p>
-      </div>
-    </div>
-
-    <div class="ab-sub rv2"><b>一路走来</b><span>四个阶段，每个阶段都有具体动作</span></div>
-    <div class="ab-line rv2">
-      <div class="ab-ln">
-        <b>看见差距</b>
-        <span>从真实活动现场，看见知识相近的孩子在提问、协作、表达和解决问题上的差异。</span>
-      </div>
-      <div class="ab-ln">
-        <b>走向训练</b>
-        <span>把一次活动中显现的能力，转化为可以持续训练的课程与方法。</span>
-      </div>
-      <div class="ab-ln">
-        <b>形成系统</b>
-        <span>把画像、方向、训练、实践和记录连接为完整成长路径。</span>
-      </div>
-      <div class="ab-ln">
-        <b>开放平台</b>
-        <span>把课程、工具、活动与支持能力开放给更多学校和教育机构。</span>
-      </div>
-    </div>
-
-    <div class="ab-sub rv2"><b>真实证据</b><span>只写已经发生、口径可查的事实</span></div>
-    <div class="ab-proof rv2">
-      <div class="ab-pf">
-        <span class="pk">连续承办</span>
-        <p>曹灿杯广东展区由我们<b>连续承办 12 年</b>，覆盖广东 21 个地级市并延伸至港澳，累计 <b>12,499 人次</b>上台。12 年同一团队承办，组别表与课程阶梯同期维护。</p>
-      </div>
-      <div class="ab-pf">
-        <span class="pk">全国晋级</span>
-        <p>华语辩论世界杯与亚青赛在广东启动首年，向全国赛阶段输送的参赛队伍<b>约占当年全国总量的四分之一</b>。</p>
-      </div>
-    </div>
-
-    <div class="ab-sub rv2"><b>同行之人</b><span>教育、技术、语言三种背景</span></div>
     <div class="team-grid">
       <article class="tm rv2">
         <span class="tm-n">01</span>
