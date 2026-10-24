@@ -1,0 +1,695 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>找合适机构｜未来领袖・教育合作联盟</title>
+<meta name="description" content="按地区和赛道筛选未来领袖・教育合作联盟的成员机构，登记联系方式后由客服专员确认需求并推荐合适的机构。">
+<meta name="keywords" content="找培训机构,语言艺术机构,思辨机构,教育合作联盟,广东教培机构">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png?v=cdfb3243">
+<link rel="icon" type="image/png" sizes="64x64" href="assets/favicon-64.png?v=f0acdc9c">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png?v=b6e8581d">
+<meta name="theme-color" content="#0B63C5">
+<link rel="stylesheet" href="assets/site.css?v=ed14315e">
+<script>document.documentElement.classList.remove('no-js');</script>
+<link rel="canonical" href="https://leadtheway.cn/find.html">
+<meta name="robots" content="index,follow">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="畅途 · 未来领袖">
+<meta property="og:title" content="找合适机构｜未来领袖・教育合作联盟">
+<meta property="og:description" content="按地区和赛道筛选联盟成员机构，登记后由客服专员对接。">
+<meta property="og:url" content="https://leadtheway.cn/find.html">
+<meta property="og:image" content="https://leadtheway.cn/assets/og-cover.png">
+<style>
+  /* ── 页头 ─────────────────────────────────────────────────── */
+  .fd-hero{padding:52px 0 30px;
+    background:radial-gradient(780px 380px at 88% -12%,var(--surface-3) 0%,rgba(234,244,254,0) 70%),var(--surface);}
+  .fd-hero h1{margin:14px 0 0;font-size:clamp(26px,3.4vw,37px);line-height:1.3;
+    letter-spacing:-.6px;color:var(--ink);}
+  .fd-hero .lead{margin:16px 0 0;max-width:720px;font-size:15.5px;line-height:1.82;color:var(--ink-2);}
+
+  /* ── 筛选条 ───────────────────────────────────────────────── */
+  .fd-filter{position:sticky;top:68px;z-index:40;padding:12px 0 10px;
+    background:rgba(255,255,255,.93);border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+    -webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);}
+  .fd-row{display:flex;align-items:flex-start;gap:12px;padding:4px 0;}
+  .fd-row + .fd-row{border-top:1px dashed var(--line);margin-top:3px;padding-top:8px;}
+  .fd-l{flex-shrink:0;width:42px;padding-top:7px;font-size:13px;font-weight:700;
+    color:var(--text-3);letter-spacing:.6px;}
+  .fd-opts{display:flex;flex-wrap:wrap;gap:6px;}
+  .fd-opts button{font:inherit;font-size:13px;line-height:1.5;padding:6px 13px;border-radius:8px;
+    cursor:pointer;border:1px solid transparent;background:transparent;color:var(--ink-2);
+    transition:background .16s,color .16s,border-color .16s;}
+  .fd-opts button:hover{background:var(--bg-2);color:var(--blue);}
+  .fd-opts button.on{background:var(--blue);border-color:var(--blue);color:#fff;font-weight:700;}
+  .fd-opts button:focus-visible{outline:2px solid var(--blue);outline-offset:2px;}
+
+  /* ── 名录 ─────────────────────────────────────────────────── */
+  .fd-list{padding:32px 0 8px;}
+  .fd-head{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;}
+  .fd-head h2{margin:0;font-size:22px;font-weight:800;color:var(--ink);letter-spacing:-.3px;}
+  .fd-count{font-size:13.5px;color:var(--text-3);}
+  .fd-count b{color:var(--blue);font-weight:800;font-size:15px;padding:0 2px;}
+  .fd-note{margin:10px 0 24px;font-size:12.5px;line-height:1.75;color:var(--text-3);}
+  .fd-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+  .fd-card{display:flex;flex-direction:column;padding:22px 24px 20px;border-radius:16px;
+    background:var(--surface);border:1px solid var(--line);
+    transition:border-color .2s,box-shadow .2s,transform .2s;}
+  .fd-card:hover{border-color:var(--border-strong);transform:translateY(-2px);
+    box-shadow:0 18px 40px -24px rgba(15,27,42,.42);}
+  .fd-card[hidden]{display:none;}
+  .fd-top{display:flex;align-items:center;gap:9px;margin-bottom:11px;}
+  .fd-tier{font-size:11px;font-weight:800;letter-spacing:.5px;padding:3px 9px;border-radius:6px;}
+  .fd-tier.t1{color:#7A3E00;background:#FFF4E4;border:1px solid #FFDBAD;}
+  .fd-tier.t2{color:var(--blue-700);background:#EAF3FE;border:1px solid #CFE4FB;}
+  .fd-tier.t3{color:#4B5563;background:#F3F5F8;border:1px solid #E2E7EF;}
+  .fd-loc{margin-left:auto;font-size:12.5px;color:var(--text-3);}
+  .fd-card h3{margin:0 0 10px;font-size:18px;font-weight:800;color:var(--ink);letter-spacing:-.2px;}
+  .fd-tags{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px;}
+  .fd-tags i{font-style:normal;font-size:12px;line-height:1.5;padding:3px 9px;border-radius:6px;
+    color:var(--blue-deep);background:rgba(11,99,197,.07);border:1px solid rgba(11,99,197,.16);}
+  .fd-card > p{margin:0 0 14px;font-size:13.5px;line-height:1.78;color:var(--text-2);}
+  .fd-meta{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-bottom:16px;
+    font-size:12.5px;color:var(--text-3);}
+  .fd-rate{font-weight:800;font-size:13.5px;color:#B45309;}
+  .fd-meta .sep{width:1px;height:11px;background:var(--border);}
+  .fd-card .btn{margin-top:auto;align-self:flex-start;}
+  .fd-empty{display:none;padding:56px 24px;text-align:center;border-radius:16px;
+    background:var(--bg-2);border:1px dashed var(--border-strong);}
+  .fd-empty.on{display:block;}
+  .fd-empty p{margin:0;font-size:14.5px;line-height:1.8;color:var(--text-2);}
+
+  /* ── 兜底留资 ─────────────────────────────────────────────── */
+  .fd-ask{padding:14px 0 64px;}
+  .fd-ask-in{display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap;
+    padding:26px 30px;border-radius:16px;background:linear-gradient(135deg,#F4F9FF,#EEF4FF);
+    border:1px solid var(--line);}
+  .fd-ask-in h3{margin:0 0 8px;font-size:17px;font-weight:800;color:var(--ink);}
+  .fd-ask-in p{margin:0;font-size:13.5px;line-height:1.75;color:var(--text-2);}
+
+  /* ── 登记表单 ─────────────────────────────────────────────── */
+  .fm-panel{max-width:620px;}
+  .fm{display:grid;grid-template-columns:1fr 1fr;gap:14px 16px;}
+  .fm[hidden]{display:none;}
+  .fm-f{display:flex;flex-direction:column;gap:7px;font-size:13px;font-weight:700;color:var(--ink-2);}
+  .fm-f.fm-wide{grid-column:1 / -1;}
+  .fm-f input,.fm-f select,.fm-f textarea{width:100%;font:inherit;font-size:14px;font-weight:400;
+    color:var(--ink);padding:10px 13px;border-radius:10px;border:1px solid var(--border);
+    background:var(--surface);transition:border-color .16s,box-shadow .16s;}
+  .fm-f input:focus,.fm-f select:focus,.fm-f textarea:focus{outline:0;border-color:var(--blue);
+    box-shadow:0 0 0 3px rgba(11,99,197,.14);}
+  .fm-f textarea{min-height:76px;line-height:1.7;resize:vertical;}
+  .fm-chips{display:flex;flex-wrap:wrap;gap:6px;}
+  .fm-chips button{font:inherit;font-size:12.5px;font-weight:600;line-height:1.5;padding:6px 11px;
+    border-radius:8px;cursor:pointer;color:var(--blue-deep);background:var(--surface);
+    border:1px solid var(--border);transition:.16s;}
+  .fm-chips button:hover{border-color:var(--blue);}
+  .fm-chips button.on{background:var(--blue);border-color:var(--blue);color:#fff;}
+  .fm-err{grid-column:1 / -1;margin:0;font-size:13px;color:#C81E1E;}
+  .fm-err[hidden]{display:none;}
+  .fm-act{grid-column:1 / -1;display:flex;gap:10px;margin-top:2px;}
+  .fm-done{text-align:center;padding:8px 0 4px;}
+  .fm-done[hidden]{display:none;}
+  .fm-tick{width:48px;height:48px;margin:0 auto 16px;border-radius:50%;display:flex;
+    align-items:center;justify-content:center;font-size:23px;font-weight:800;color:#fff;
+    background:linear-gradient(135deg,var(--blue),var(--blue-2));}
+  .fm-done h4{margin:0 0 10px;font-size:18px;font-weight:800;color:var(--ink);}
+  .fm-done p{margin:0 auto 22px;max-width:400px;font-size:13.5px;line-height:1.8;color:var(--text-2);}
+
+  @media (max-width:920px){
+    .fd-grid{grid-template-columns:1fr;}
+  }
+  @media (max-width:760px){
+    .fd-filter{top:64px;padding:10px 0 8px;}
+    .fd-row{flex-direction:column;gap:2px;}
+    .fd-l{width:auto;padding-top:0;font-size:12px;letter-spacing:.4px;}
+    .fd-opts{flex-wrap:nowrap;overflow-x:auto;padding-bottom:2px;
+      -webkit-overflow-scrolling:touch;scrollbar-width:none;}
+    .fd-opts::-webkit-scrollbar{display:none;}
+    .fd-opts button{flex-shrink:0;}
+    .fd-hero{padding:38px 0 24px;}
+    .fd-ask-in{padding:22px 20px;}
+    .fd-ask-in .btn{width:100%;justify-content:center;}
+  }
+  @media (max-width:560px){
+    .fm{grid-template-columns:1fr;}
+    .fm-f input,.fm-f select,.fm-f textarea{font-size:16px;}
+  }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="wrap">
+    <div><b>线上海选 11 月 8 日截止</b>　雏英杯 · 联合国 SDG 发言人</div>
+    <div><a href="activities.html">查看详情 →</a>　<a href="enroll.html">填写报名意向</a></div>
+  </div>
+</div>
+
+<header class="nav">
+  <div class="wrap">
+    <a href="index.html" class="brand" aria-label="畅途未来领袖 首页">
+      <img class="logo-img" src="assets/brand-lockup.png?v=a96b284a" alt="畅途未来领袖" width="172" height="48">
+    </a>
+    <nav class="nav-links" id="navLinks">
+      <a href="courses.html">课程与实践</a>
+      <a href="activities.html">活动与机会</a>
+      <a href="partner.html">机构合作</a>
+      <a href="about.html">关于畅途</a>
+      <a href="teacher/" class="m-only">教师工作台</a>
+    </nav>
+    <div class="nav-cta">
+      <a class="btn btn-sm nav-tool" href="teacher/">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2.5"></rect><path d="M3 10h18M9 10v10"></path></svg>
+        教师工作台
+      </a>
+      <button class="burger" id="burger" aria-label="展开菜单" aria-expanded="false" aria-controls="navLinks"><span></span></button>
+    </div>
+  </div>
+</header>
+
+<main>
+
+<section class="fd-hero">
+  <div class="wrap">
+    <div class="eyebrow"><i></i>找合适机构</div>
+    <h1>按地区和赛道，找一家本地的机构</h1>
+    <p class="lead">未来领袖・教育合作联盟的成员机构，覆盖广东 10 个城市。选好地区和方向，登记联系方式，客服专员确认孩子的年级与需求后推荐机构。</p>
+  </div>
+</section>
+
+<div class="fd-filter">
+  <div class="wrap">
+    <div class="fd-row">
+      <span class="fd-l">地区</span>
+      <div class="fd-opts" data-f="city">
+        <button type="button" class="on" data-v="">全部</button>
+        <button type="button" data-v="广州">广州</button>
+        <button type="button" data-v="深圳">深圳</button>
+        <button type="button" data-v="珠海">珠海</button>
+        <button type="button" data-v="佛山">佛山</button>
+        <button type="button" data-v="东莞">东莞</button>
+        <button type="button" data-v="中山">中山</button>
+        <button type="button" data-v="惠州">惠州</button>
+        <button type="button" data-v="汕头">汕头</button>
+        <button type="button" data-v="江门">江门</button>
+        <button type="button" data-v="湛江">湛江</button>
+      </div>
+    </div>
+    <div class="fd-row">
+      <span class="fd-l">赛道</span>
+      <div class="fd-opts" data-f="track">
+        <button type="button" class="on" data-v="">全部</button>
+        <button type="button" data-v="朗诵">朗诵</button>
+        <button type="button" data-v="主持">主持</button>
+        <button type="button" data-v="演讲">演讲</button>
+        <button type="button" data-v="辩论">辩论</button>
+        <button type="button" data-v="模联">模联</button>
+        <button type="button" data-v="学习方法">学习方法</button>
+        <button type="button" data-v="AI 与科创">AI 与科创</button>
+        <button type="button" data-v="商赛">商赛</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<section class="fd-list">
+  <div class="wrap">
+    <div class="fd-head">
+      <h2>机构名录</h2>
+      <span class="fd-count">共 <b id="fdCount">12</b> 家机构</span>
+    </div>
+    <p class="fd-note">测试数据：下列 12 家机构为示例，用于验证筛选与登记流程，正式上线时替换为联盟成员实名资料。</p>
+
+    <div class="fd-grid" id="fdGrid">
+
+      <article class="fd-card" data-city="广州" data-tracks="朗诵 主持 演讲">
+        <div class="fd-top">
+          <span class="fd-tier t1">领航伙伴</span>
+          <span class="fd-loc">广州 · 天河区</span>
+        </div>
+        <h3>星海语言艺术中心</h3>
+        <div class="fd-tags"><i>朗诵</i><i>主持</i><i>演讲</i></div>
+        <p>6–15 岁语言表达训练。教师 8 人，每年组织学员参加曹灿杯与省级展演。</p>
+        <div class="fd-meta">
+          <span class="fd-rate">★ 4.8</span><span>126 条评价</span>
+          <span class="sep"></span><span>在读 320 人</span>
+          <span class="sep"></span><span>办学 12 年</span>
+        </div>
+        <button class="btn btn-p btn-sm" type="button" data-inst="星海语言艺术中心">登记联系</button>
+      </article>
+
+      <article class="fd-card" data-city="深圳" data-tracks="辩论 模联 演讲">
+        <div class="fd-top">
+          <span class="fd-tier t1">领航伙伴</span>
+          <span class="fd-loc">深圳 · 南山区</span>
+        </div>
+        <h3>明道思辨学院</h3>
+        <div class="fd-tags"><i>辩论</i><i>模联</i><i>演讲</i></div>
+        <p>以赛事为教学主线，校内常设模拟赛。近三年带出 40 余名省级辩论赛选手。</p>
+        <div class="fd-meta">
+          <span class="fd-rate">★ 4.7</span><span>98 条评价</span>
+          <span class="sep"></span><span>在读 210 人</span>
+          <span class="sep"></span><span>办学 8 年</span>
+        </div>
+        <button class="btn btn-p btn-sm" type="button" data-inst="明道思辨学院">登记联系</button>
+      </article>
+
+      <article class="fd-card" data-city="东莞" data-tracks="朗诵 主持">
+        <div class="fd-top">
+          <span class="fd-tier t2">同行伙伴</span>
+          <span class="fd-loc">东莞 · 南城街道</span>
+        </div>
+        <h3>莞邑少年表达馆</h3>
+        <div class="fd-tags"><i>朗诵</i><i>主持</i></div>
+        <p>400㎡ 语言教室，按年龄分班，每班不超过 12 人，每周一次录音回课。</p>
+        <div class="fd-meta">
+          <span class="fd-rate">★ 4.6</span><span>64 条评价</span>
+          <span class="sep"></span><span>在读 130 人</span>
+          <span class="sep"></span><span>办学 6 年</span>
+        </div>
+        <button class="btn btn-p btn-sm" type="button" data-inst="莞邑少年表达馆">登记联系</button>
+      </article>
+
+      <article class="fd-card" data-city="佛山" data-tracks="朗诵">
+        <div class="fd-top">
+          <span class="fd-tier t2">同行伙伴</span>
+          <span class="fd-loc">佛山 · 禅城区</span>
+        </div>
+        <h3>佛山禅城朗读社</h3>
+        <div class="fd-tags"><i>朗诵</i></div>
+        <p>只做朗诵一条线，从发声到作品处理分四段训练，每段配一次舞台录音。</p>
+        <div class="fd-meta">
+          <span class="fd-rate">★ 4.5</span><span>41 条评价</span>
+          <span class="sep"></span><span>在读 88 人</span>
+          <span class="sep"></span><span>办学 5 年</span>
+        </div>
+        <button class="btn btn-p btn-sm" type="button" data-inst="佛山禅城朗读社">登记联系</button>
+      </article>
+
+      <article class="fd-card" data-city="中山" data-tracks="学习方法 演讲">
+        <div class="fd-top">
+          <span class="fd-tier t3">启程伙伴</span>
+          <span class="fd-loc">中山 · 石岐街道</span>
+        </div>
+        <h3>中山启行学习力中心</h3>
+        <div class="fd-tags"><i>学习方法</i><i>演讲</i></div>
+        <p>面向初高中学生做学习规划与复盘，每两周一次一对一面谈，家长可同步看记录。</p>
+        <div class="fd-meta">
+          <span class="fd-rate">★ 4.4</span><span>37 条评价</span>
+          <span class="sep"></span><span>在读 76 人</span>
+          <span class="sep"></span><span>办学 3 年</span>
+        </div>
+        <button class="btn btn-p btn-sm" type="button" data-inst="中山启行学习力中心">登记联系</button>
+      </article>
+
+      <article class="fd-card" data-city="珠海" data-tracks="演讲 主持">
+        <div class="fd-top">
+          <span class="fd-tier t2">同行伙伴</span>
+          <span class="fd-loc">珠海 · 香洲区</span>
+        </div>
+        <h3>珠海海畔双语演讲社</h3>
+        <div class="fd-tags"><i>演讲</i><i>主持</i></div>
+        <p>中英双语授课，每学期组织一次公开演讲会，家长可到场旁听。</p>
+        <div class="fd-meta">
+          <span class="fd-rate">★ 4.7</span><span>72 条评价</span>
+          <span class="sep"></span><span>在读 145 人</span>
+          <span class="sep"></span><span>办学 7 年</span>
+        </div>
+        <button class="btn btn-p btn-sm" type="button" data-inst="珠海海畔双语演讲社">登记联系</button>
+      </article>
+
+      <article class="fd-card" data-city="惠州" data-tracks="辩论">
+        <div class="fd-top">
+          <span class="fd-tier t3">启程伙伴</span>
+          <span class="fd-loc">惠州 · 惠城区</span>
+        </div>
+        <h3>惠州西湖辩论工坊</h3>
+        <div class="fd-tags"><i>辩论</i></div>
+        <p>面向初中以上学生，以政策辩为主，每周一次对抗训练，教练 2 人。</p>
+        <div class="fd-meta">
+          <span class="fd-rate">★ 4.3</span><span>29 条评价</span>
+          <span class="sep"></span><span>在读 54 人</span>
+          <span class="sep"></span><span>办学 2 年</span>
+        </div>
+        <button class="btn btn-p btn-sm" type="button" data-inst="惠州西湖辩论工坊">登记联系</button>
+      </article>
+
+      <article class="fd-card" data-city="汕头" data-tracks="主持 朗诵">
+        <div class="fd-top">
+          <span class="fd-tier t3">启程伙伴</span>
+          <span class="fd-loc">汕头 · 金平区</span>
+        </div>
+        <h3>汕头潮声主持艺术</h3>
+        <div class="fd-tags"><i>主持</i><i>朗诵</i></div>
+        <p>普通话正音与主持训练，与本地学校合作提供校园活动主持实践机会。</p>
+        <div class="fd-meta">
+          <span class="fd-rate">★ 4.5</span><span>46 条评价</span>
+          <span class="sep"></span><span>在读 92 人</span>
+          <span class="sep"></span><span>办学 4 年</span>
+        </div>
+        <button class="btn btn-p btn-sm" type="button" data-inst="汕头潮声主持艺术">登记联系</button>
+      </article>
+
+      <article class="fd-card" data-city="广州" data-tracks="AI 与科创 商赛">
+        <div class="fd-top">
+          <span class="fd-tier t2">同行伙伴</span>
+          <span class="fd-loc">广州 · 海珠区</span>
+        </div>
+        <h3>广州未来科创实验室</h3>
+        <div class="fd-tags"><i>AI 与科创</i><i>商赛</i></div>
+        <p>项目制科创课，学生按学期完成一个可演示的作品，并在校内路演。</p>
+        <div class="fd-meta">
+          <span class="fd-rate">★ 4.6</span><span>58 条评价</span>
+          <span class="sep"></span><span>在读 110 人</span>
+          <span class="sep"></span><span>办学 3 年</span>
+        </div>
+        <button class="btn btn-p btn-sm" type="button" data-inst="广州未来科创实验室">登记联系</button>
+      </article>
+
+      <article class="fd-card" data-city="深圳" data-tracks="模联 辩论">
+        <div class="fd-top">
+          <span class="fd-tier t1">领航伙伴</span>
+          <span class="fd-loc">深圳 · 福田区</span>
+        </div>
+        <h3>深圳模联研习社</h3>
+        <div class="fd-tags"><i>模联</i><i>辩论</i></div>
+        <p>常设中英文委员会，每年组织两次校际模联会议，指导教师 6 人。</p>
+        <div class="fd-meta">
+          <span class="fd-rate">★ 4.9</span><span>152 条评价</span>
+          <span class="sep"></span><span>在读 268 人</span>
+          <span class="sep"></span><span>办学 9 年</span>
+        </div>
+        <button class="btn btn-p btn-sm" type="button" data-inst="深圳模联研习社">登记联系</button>
+      </article>
+
+      <article class="fd-card" data-city="江门" data-tracks="演讲">
+        <div class="fd-top">
+          <span class="fd-tier t3">启程伙伴</span>
+          <span class="fd-loc">江门 · 蓬江区</span>
+        </div>
+        <h3>江门蓬江少年演说营</h3>
+        <div class="fd-tags"><i>演讲</i></div>
+        <p>周末营形式，每期 8 次课，结营安排一次面向家长的公开演说。</p>
+        <div class="fd-meta">
+          <span class="fd-rate">★ 4.2</span><span>22 条评价</span>
+          <span class="sep"></span><span>在读 40 人</span>
+          <span class="sep"></span><span>办学 2 年</span>
+        </div>
+        <button class="btn btn-p btn-sm" type="button" data-inst="江门蓬江少年演说营">登记联系</button>
+      </article>
+
+      <article class="fd-card" data-city="湛江" data-tracks="朗诵 主持">
+        <div class="fd-top">
+          <span class="fd-tier t3">启程伙伴</span>
+          <span class="fd-loc">湛江 · 赤坎区</span>
+        </div>
+        <h3>湛江赤坎语言艺术</h3>
+        <div class="fd-tags"><i>朗诵</i><i>主持</i></div>
+        <p>与本地 6 所小学合作开展课后语言社团，周末开设提高班。</p>
+        <div class="fd-meta">
+          <span class="fd-rate">★ 4.4</span><span>33 条评价</span>
+          <span class="sep"></span><span>在读 61 人</span>
+          <span class="sep"></span><span>办学 4 年</span>
+        </div>
+        <button class="btn btn-p btn-sm" type="button" data-inst="湛江赤坎语言艺术">登记联系</button>
+      </article>
+
+    </div>
+
+    <div class="fd-empty" id="fdEmpty">
+      <p>这个组合下暂时没有机构。换一个地区或赛道，或者留下联系方式让客服专员帮你找。</p>
+    </div>
+  </div>
+</section>
+
+<section class="fd-ask">
+  <div class="wrap">
+    <div class="fd-ask-in">
+      <div>
+        <h3>没有合适的机构</h3>
+        <p>留下孩子的年级、想学的方向和所在城市，客服专员按需求帮你找。</p>
+      </div>
+      <button class="btn btn-p" type="button" data-inst="">登记需求</button>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="f-top">
+      <div class="f-brand">
+        <div class="b">
+          <img src="assets/brand-lockup-white.png?v=7723b78c" alt="畅途未来领袖" width="157" height="44">
+        </div>
+        <p>畅途文化科技旗下青少年成长平台。广东曹灿杯承办团队。业务覆盖朗诵展演、思辨辩论、双语主持、国际演讲、破界三原力与破界 MUN 课程，以及语言 / 音乐类社会艺术水平考级服务。</p>
+      </div>
+      <div class="f-links">
+        <div class="f-col">
+          <b>项目</b>
+          <a href="caocan.html">曹灿杯朗诵展演</a>
+          <a href="debate.html">华语辩论世界杯</a>
+          <a href="bilingual.html">雏英杯双语主持</a>
+          <a href="sdg.html">联合国领袖发言人</a>
+        </div>
+        <div class="f-col">
+          <b>课程与认证</b>
+          <a href="matrix.html">教育矩阵</a>
+          <a href="sanyuanli.html">破界三原力</a>
+          <a href="mun.html">破界 MUN</a>
+          <a href="brtv.html">北京广播电视台考级</a>
+          <a href="zjcm.html">浙江音乐学院考级</a>
+        </div>
+        <div class="f-col">
+          <b>报名</b>
+          <a href="find.html">找合适机构</a>
+          <a href="enroll.html">报名咨询</a>
+          <a href="my.html">查看报名意向</a>
+          <a href="activities.html">近期活动</a>
+          <a href="index.html#faq">常见问题</a>
+        </div>
+        <div class="f-col">
+          <b>合作</b>
+          <a href="partner.html">教育合作联盟</a>
+          <a href="about.html">关于畅途</a>
+          <a href="teacher/">教师工作台</a>
+          <a href="index.html#contact">联系我们</a>
+        </div>
+      </div>
+    </div>
+    <p class="f-note">
+      机构说明：本页所列机构为未来领袖・教育合作联盟成员，独立经营并自行提供课程与服务；课程安排、收费与退费以各机构与家长签订的协议为准。登记信息仅用于本次需求对接与联络。当前为测试版本，机构资料为示例数据。
+    </p>
+    <div class="f-bottom">
+      <span>© 2026 畅途文化科技 · 未来领袖　保留所有权利</span>
+      <span>广东 · 广州　｜　咨询 180 3882 9260</span>
+    </div>
+  </div>
+</footer>
+
+<!-- ═════════ 登记弹窗 ═════════ -->
+<div class="mo" id="moForm" hidden>
+  <div class="mo-mask" data-mo-close></div>
+  <div class="mo-panel fm-panel" role="dialog" aria-modal="true" aria-labelledby="fmT" tabindex="-1">
+    <button class="mo-x" type="button" data-mo-close aria-label="关闭">×</button>
+    <h3 id="fmT">登记联系方式</h3>
+    <p class="mo-sub" id="fmFor">客服专员会在 1 个工作日内联系你，确认需求后推荐合适的机构。</p>
+
+    <form class="fm" id="fmForm" novalidate>
+      <label class="fm-f"><span>家长称呼</span>
+        <input id="fmName" name="name" type="text" maxlength="20" placeholder="如 王女士" autocomplete="name">
+      </label>
+      <label class="fm-f"><span>手机号</span>
+        <input id="fmPhone" name="phone" type="tel" inputmode="numeric" maxlength="11" placeholder="11 位手机号" autocomplete="tel">
+      </label>
+      <label class="fm-f"><span>孩子年级</span>
+        <select id="fmGrade" name="grade">
+          <option value="">请选择</option>
+          <option>幼儿园</option>
+          <option>小学 1–3 年级</option>
+          <option>小学 4–6 年级</option>
+          <option>初中</option>
+          <option>高中</option>
+        </select>
+      </label>
+      <div class="fm-f"><span>所在城市</span>
+        <select id="fmCity" name="city">
+          <option value="">请选择</option>
+          <option>广州</option><option>深圳</option><option>珠海</option><option>佛山</option>
+          <option>东莞</option><option>中山</option><option>惠州</option><option>汕头</option>
+          <option>江门</option><option>湛江</option><option>其他城市</option>
+        </select>
+      </div>
+      <div class="fm-f fm-wide"><span>想找的方向</span>
+        <div class="fm-chips" id="fmChips">
+          <button type="button" data-v="朗诵">朗诵</button>
+          <button type="button" data-v="主持">主持</button>
+          <button type="button" data-v="演讲">演讲</button>
+          <button type="button" data-v="辩论">辩论</button>
+          <button type="button" data-v="模联">模联</button>
+          <button type="button" data-v="学习方法">学习方法</button>
+          <button type="button" data-v="AI 与科创">AI 与科创</button>
+          <button type="button" data-v="商赛">商赛</button>
+        </div>
+      </div>
+      <label class="fm-f fm-wide"><span>补充说明</span>
+        <textarea id="fmNote" name="note" rows="3" maxlength="200" placeholder="孩子现在的情况、想解决的问题、方便联系的时间"></textarea>
+      </label>
+      <p class="fm-err" id="fmErr" role="alert" hidden></p>
+      <div class="fm-act">
+        <button class="btn btn-p" type="submit">提交登记</button>
+        <button class="btn btn-s" type="button" data-mo-close>取消</button>
+      </div>
+    </form>
+
+    <div class="fm-done" id="fmDone" hidden>
+      <div class="fm-tick" aria-hidden="true">✓</div>
+      <h4>已收到你的登记</h4>
+      <p>客服专员会在 1 个工作日内电话联系，确认孩子的年级、方向和上课区域，再推荐 2–3 家机构。</p>
+      <button class="btn btn-p" type="button" data-mo-close>知道了</button>
+    </div>
+  </div>
+</div>
+
+<script src="assets/modal.js?v=4a7722c8"></script>
+<script>
+(function(){
+  document.documentElement.classList.remove('no-js');
+
+  /* 导航 */
+  var burger=document.getElementById('burger'), nav=document.getElementById('navLinks');
+  if(burger&&nav){
+    burger.addEventListener('click',function(){
+      var open=nav.classList.toggle('open');
+      burger.setAttribute('aria-expanded',open?'true':'false');
+      burger.setAttribute('aria-label',open?'收起菜单':'展开菜单');
+    });
+    nav.addEventListener('click',function(e){
+      if(e.target.tagName==='A'&&window.innerWidth<=1180){nav.classList.remove('open');burger.setAttribute('aria-expanded','false');}
+    });
+  }
+
+  /* 筛选 */
+  var cards=[].slice.call(document.querySelectorAll('.fd-card'));
+  var groups=[].slice.call(document.querySelectorAll('.fd-opts'));
+  var countEl=document.getElementById('fdCount');
+  var emptyEl=document.getElementById('fdEmpty');
+  var state={city:'',track:''};
+
+  function apply(){
+    var n=0;
+    cards.forEach(function(c){
+      var okCity=!state.city||c.getAttribute('data-city')===state.city;
+      var okTrack=!state.track||(' '+c.getAttribute('data-tracks')+' ').indexOf(' '+state.track+' ')>-1;
+      var ok=okCity&&okTrack;
+      c.hidden=!ok;
+      if(ok) n++;
+    });
+    if(countEl) countEl.textContent=n;
+    if(emptyEl) emptyEl.classList.toggle('on',n===0);
+  }
+
+  groups.forEach(function(g){
+    g.addEventListener('click',function(e){
+      var b=e.target.closest('button');
+      if(!b||!g.contains(b)) return;
+      [].slice.call(g.querySelectorAll('button')).forEach(function(x){
+        x.classList.toggle('on',x===b);
+      });
+      state[g.getAttribute('data-f')]=b.getAttribute('data-v')||'';
+      apply();
+    });
+  });
+  apply();
+
+  /* 登记表单 */
+  var form=document.getElementById('fmForm');
+  var done=document.getElementById('fmDone');
+  var errEl=document.getElementById('fmErr');
+  var forEl=document.getElementById('fmFor');
+  var chips=document.getElementById('fmChips');
+  var KEY='changtu_find_leads_v1';
+  var picked=[];
+  var target='';
+
+  function resetForm(){
+    if(form){form.reset();form.hidden=false;}
+    if(done) done.hidden=true;
+    if(errEl) errEl.hidden=true;
+    picked=[];target='';
+    if(chips) [].slice.call(chips.querySelectorAll('button')).forEach(function(b){b.classList.remove('on');});
+    if(forEl) forEl.textContent='客服专员会在 1 个工作日内联系你，确认需求后推荐合适的机构。';
+  }
+
+  if(chips){
+    chips.addEventListener('click',function(e){
+      var b=e.target.closest('button');
+      if(!b) return;
+      var v=b.getAttribute('data-v');
+      var i=picked.indexOf(v);
+      if(i>-1){picked.splice(i,1);b.classList.remove('on');}
+      else{picked.push(v);b.classList.add('on');}
+    });
+  }
+
+  document.addEventListener('click',function(e){
+    var t=e.target;
+    if(!t||!t.closest) return;
+    var b=t.closest('[data-inst]');
+    if(!b) return;
+    resetForm();
+    target=b.getAttribute('data-inst')||'';
+    if(target&&forEl) forEl.textContent='登记后由客服专员对接：'+target;
+    if(state.track&&chips){
+      var c=chips.querySelector('button[data-v="'+state.track+'"]');
+      if(c){c.classList.add('on');picked.push(state.track);}
+    }
+    if(state.city){
+      var sel=document.getElementById('fmCity');
+      if(sel){sel.value=state.city;}
+    }
+    window.CTModal.open('moForm',b);
+    var first=document.getElementById('fmName');
+    if(first) setTimeout(function(){first.focus();},40);
+  });
+
+  function fail(msg){
+    if(!errEl) return;
+    errEl.textContent=msg;
+    errEl.hidden=false;
+  }
+
+  if(form){
+    form.addEventListener('submit',function(e){
+      e.preventDefault();
+      var name=document.getElementById('fmName').value.trim();
+      var phone=document.getElementById('fmPhone').value.replace(/[\s-]/g,'');
+      var grade=document.getElementById('fmGrade').value;
+      var city=document.getElementById('fmCity').value;
+      var note=document.getElementById('fmNote').value.trim();
+      if(!name){return fail('请填写家长称呼。');}
+      if(!/^1\d{10}$/.test(phone)){return fail('请填写 11 位手机号。');}
+      if(!grade){return fail('请选择孩子年级。');}
+      if(errEl) errEl.hidden=true;
+
+      var lead={
+        name:name,phone:phone,grade:grade,city:city,
+        tracks:picked.slice(),note:note,inst:target,
+        filterCity:state.city,filterTrack:state.track,
+        at:new Date().toISOString()
+      };
+      try{
+        var all=JSON.parse(localStorage.getItem(KEY)||'[]');
+        all.push(lead);
+        localStorage.setItem(KEY,JSON.stringify(all));
+      }catch(_){}
+
+      form.hidden=true;
+      if(done) done.hidden=false;
+    });
+  }
+})();
+</script>
+</body></html>

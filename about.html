@@ -6,11 +6,11 @@
 <title>关于畅途｜面向 AI 时代的青少年成长平台</title>
 <meta name="description" content="畅途为青少年提供从认识自己、形成能力到连接机会的成长路径，为学校和教育机构提供课程、活动、AI 工具与成长评价系统。">
 <meta name="keywords" content="畅途文化科技,未来领袖,关于畅途,青少年成长平台,破界三原力,破界MUN,广东曹灿杯承办">
-<link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
-<link rel="icon" type="image/png" sizes="64x64" href="assets/favicon-64.png">
-<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png?v=cdfb3243">
+<link rel="icon" type="image/png" sizes="64x64" href="assets/favicon-64.png?v=f0acdc9c">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png?v=b6e8581d">
 <meta name="theme-color" content="#0B63C5">
-<link rel="stylesheet" href="assets/site.css?v=391f7b3a">
+<link rel="stylesheet" href="assets/site.css?v=ed14315e">
 <link rel="stylesheet" href="assets/site-v2.css?v=729faea9">
 <script>document.documentElement.classList.remove('no-js');</script>
 <link rel="canonical" href="https://leadtheway.cn/about.html">
@@ -215,7 +215,7 @@
 <header class="nav">
   <div class="wrap">
     <a href="index.html" class="brand" aria-label="畅途未来领袖 首页">
-      <img class="logo-img" src="assets/brand-lockup.png" alt="畅途未来领袖" width="172" height="48">
+      <img class="logo-img" src="assets/brand-lockup.png?v=a96b284a" alt="畅途未来领袖" width="172" height="48">
     </a>
     <nav class="nav-links" id="navLinks">
       <a href="courses.html">课程与实践</a>
@@ -369,7 +369,7 @@
           <i>生涯探索</i><i>能力画像</i><i>成长规划</i><i>课程训练</i>
           <i>真实实践</i><i>成长记录</i><i>机会连接</i>
         </div>
-        <a class="btn btn-p btn-sm" href="index.html#path">查看成长路径 →</a>
+        <button class="btn btn-p btn-sm" type="button" data-mo="moStudent">了解更多</button>
       </article>
 
       <article class="ab-col is-inst">
@@ -379,12 +379,8 @@
         <div class="ab-chips">
           <i>课程体系</i><i>展演活动</i><i>AI 工具</i><i>师资支持</i><i>成长评价</i><i>运营支持</i>
         </div>
-        <a class="btn btn-o btn-sm" href="partner.html">查看培养系统 →</a>
+        <button class="btn btn-o btn-sm" type="button" data-mo="moInst">了解更多</button>
       </article>
-    </div>
-
-    <div class="prose rv2" style="max-width:820px;margin-top:24px;">
-      <p>学生的学习与实践形成真实成长证据，机构的课程与服务持续支持学生前进，两端共同构成一个长期运行的成长平台。</p>
     </div>
   </div>
 </section>
@@ -584,7 +580,7 @@
     <div class="f-top">
       <div class="f-brand">
         <div class="b">
-          <img src="assets/brand-lockup-white.png" alt="畅途未来领袖" width="157" height="44">
+          <img src="assets/brand-lockup-white.png?v=7723b78c" alt="畅途未来领袖" width="157" height="44">
         </div>
         <p>畅途文化科技旗下青少年成长平台。广东曹灿杯承办团队。业务覆盖朗诵展演、思辨辩论、双语主持、国际演讲、破界三原力与破界 MUN 课程，以及语言 / 音乐类社会艺术水平考级服务。</p>
       </div>
@@ -670,4 +666,57 @@
   }
 })();
 </script>
+
+<!-- ═════════ 入口弹窗 ═════════ -->
+<div class="mo" id="moStudent" hidden>
+  <div class="mo-mask" data-mo-close></div>
+  <div class="mo-panel" role="dialog" aria-modal="true" aria-labelledby="moStuT" tabindex="-1">
+    <button class="mo-x" type="button" data-mo-close aria-label="关闭">×</button>
+    <h3 id="moStuT">学生与家庭</h3>
+    <p class="mo-sub">手机上随时查看，或者找一家本地的合作联盟机构当面了解。</p>
+    <div class="mo-grid">
+      <div class="mo-card">
+        <span class="mo-k">微信扫码</span>
+        <h4>畅途小程序</h4>
+        <p>课程目录、活动报名、成长档案都在里面。</p>
+        <img class="mo-qr" src="assets/miniapp-qr.png?v=6c0116a8" alt="畅途小程序码" width="480" height="480">
+      </div>
+      <a class="mo-card" href="find.html">
+        <span class="mo-k">按地区 · 按赛道</span>
+        <h4>找合适机构</h4>
+        <p>合作联盟机构名录，登记联系方式后由客服专员对接。</p>
+        <div class="mo-cities">
+          <i>广州</i><i>深圳</i><i>珠海</i><i>佛山</i><i>东莞</i>
+          <i>中山</i><i>惠州</i><i>汕头</i><i>江门</i><i>湛江</i>
+        </div>
+        <span class="mo-go">进入机构名录 →</span>
+      </a>
+    </div>
+  </div>
+</div>
+
+<div class="mo" id="moInst" hidden>
+  <div class="mo-mask" data-mo-close></div>
+  <div class="mo-panel" role="dialog" aria-modal="true" aria-labelledby="moInstT" tabindex="-1">
+    <button class="mo-x" type="button" data-mo-close aria-label="关闭">×</button>
+    <h3 id="moInstT">学校与机构</h3>
+    <p class="mo-sub">已合作的机构直接进入教师工作台；正在了解合作方式的，先看三档方案与权益。</p>
+    <div class="mo-grid">
+      <a class="mo-card" href="teacher/">
+        <span class="mo-k">已合作机构</span>
+        <h4>教师工作台</h4>
+        <p>备课、排课、看学员记录，教案与课件按阶位取用。</p>
+        <span class="mo-go">进入教师工作台 →</span>
+      </a>
+      <a class="mo-card" href="partner.html">
+        <span class="mo-k">三档合作方案</span>
+        <h4>了解合作联盟</h4>
+        <p>启程伙伴免费，同行伙伴 5,000 元 / 年，领航伙伴 8,000 元 / 年。</p>
+        <span class="mo-go">查看合作权益 →</span>
+      </a>
+    </div>
+  </div>
+</div>
+
+<script src="assets/modal.js?v=4a7722c8"></script>
 </body></html>
