@@ -32,6 +32,9 @@
   .about-hero .lead{font-size:16.5px;color:var(--text-2);line-height:1.88;margin:0 0 12px;}
   .about-hero .lead-sub{margin:0;font-size:14px;color:var(--text-3);line-height:1.85;}
   .about-hero .hero-cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:26px;}
+  /* 数据带与首页同源同版式：五项一行，窄屏两列且末项占满 */
+  .about-hero .stats-band .stats{grid-template-columns:repeat(5,1fr);padding:36px 0;}
+  .about-hero .stats-band .stat span{font-size:12.5px;margin-top:4px;}
 
   /* 平台关系图：中心节点连接学生端与机构端 */
   .ab-rel{position:relative;display:flex;flex-direction:column;gap:14px;}
@@ -173,6 +176,7 @@
     .ab-j{grid-template-columns:1fr;gap:6px;}
     .team-grid{grid-template-columns:1fr;}
     .about-hero .stats-band .stats{grid-template-columns:repeat(2,1fr);row-gap:26px;}
+    .about-hero .stats-band .stat:last-child{grid-column:1/-1;}
     .ab-line{grid-template-columns:1fr;gap:0;}
     .ab-line::before{display:block;left:5px;right:auto;top:6px;bottom:22px;width:2px;height:auto;}
     .ab-ln{padding:0 0 18px 26px;}
@@ -236,10 +240,11 @@
         <p class="lead">为学生提供从认识自己、形成能力到连接机会的成长路径；为学校和教育机构提供课程、活动、AI 工具与成长评价系统。</p>
         <p class="lead-sub">我们从真实教育实践中形成方法，正在把经过区域验证的培养体系带向全国，并持续连接国际成长资源。</p>
         <div class="hero-cta">
-          <a class="btn btn-p" href="#ab-answer">查看畅途的答案
+          <a class="btn btn-p" href="courses.html">课程与实践
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg>
           </a>
-          <a class="btn btn-s" href="#ab-start">了解合作方式</a>
+          <a class="btn btn-s" href="activities.html">活动与机会</a>
+          <a class="btn btn-s" href="partner.html">机构合作</a>
         </div>
       </div>
 
@@ -264,10 +269,11 @@
 
   <div class="stats-band" style="background:var(--surface);margin-top:52px;">
     <div class="wrap stats">
-      <div class="stat"><b>12<i>年</i></b><span>连续承办广东曹灿杯，2014 年起每年一届</span></div>
-      <div class="stat"><b>21<i>市</i></b><span>实践覆盖广东全省，另含港澳合作场次</span></div>
-      <div class="stat"><b>909<i>家</i></b><span>累计服务广东合作机构</span></div>
-      <div class="stat"><b>12,499<i>人次</i></b><span>历届参赛学员，按参赛人次累计</span></div>
+      <div class="stat"><b>20<i>年</i></b><span>深耕青少年素质教育</span></div>
+      <div class="stat"><b>12<i>年</i></b><span>连续组织口碑展演活动</span></div>
+      <div class="stat"><b>1,000+<i>家</i></b><span>累计合作机构</span></div>
+      <div class="stat"><b>15,000+<i>人次</i></b><span>累计服务学员</span></div>
+      <div class="stat"><b>2<i>大区域</i></b><span>覆盖大湾区与长三角</span></div>
     </div>
   </div>
 </section>
