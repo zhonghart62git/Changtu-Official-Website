@@ -10,6 +10,11 @@
 .home .sec-head.sec-lg{margin-bottom:50px;}
 .home .sec-head.sec-lg h2{font-size:clamp(28px,3.9vw,44px);letter-spacing:-1px;line-height:1.24;}
 .home .sec-head.sec-lg p{font-size:16.5px;max-width:700px;}
+/* 导语先给一句判断，再展开做法。短句单独提出来加粗，长句紧跟其后，
+   间距压到 8px——两句是一段话，不是两段 */
+.home .sec-head.sec-lg p.sec-lead{font-size:21px;font-weight:700;color:var(--ink);
+  letter-spacing:-.4px;margin-bottom:0;}
+.home .sec-head.sec-lg p.sec-lead + p{margin-top:12px;font-size:15.5px;}
 
 .home .sec-head.sec-sm{margin-bottom:26px;}
 .home .sec-head.sec-sm .bar{width:30px;height:4px;margin-bottom:12px;}
@@ -158,6 +163,14 @@
 .oc li{font-size:12.5px;color:var(--text-3);line-height:1.9;padding-left:13px;position:relative;}
 .oc li::before{content:"";position:absolute;left:0;top:.72em;width:4px;height:4px;
   border-radius:50%;background:var(--blue-2);opacity:.6;}
+/* 标签条：作业记录 / 测试记录 / 复盘记录 这类并列项做成小标签。
+   原来这里是竖排三条带圆点的小字，一行并列项摆成三行会拉长卡片，
+   也看不出它们其实是同一层的东西。 */
+.oc-tags{display:flex;flex-wrap:wrap;gap:7px;margin-top:auto;padding-top:14px;
+  border-top:1px dashed var(--line);}
+.oc-tags span{padding:5px 11px;border-radius:8px;line-height:1.5;
+  background:rgba(11,99,197,.075);border:1px solid rgba(11,99,197,.18);
+  font-size:12.5px;font-weight:600;color:var(--blue-deep);letter-spacing:.2px;}
 
 /* 出口胶囊：六个可点的小药丸，替代六张大卡 */
 .exit{display:flex;flex-wrap:wrap;gap:10px;}
