@@ -9,7 +9,7 @@
 /* ── 1. 标题分级：让每屏不再一样重 ─────────────────────── */
 .home .sec-head.sec-lg{margin-bottom:50px;}
 .home .sec-head.sec-lg h2{font-size:clamp(28px,3.9vw,44px);letter-spacing:-1px;line-height:1.24;}
-.home .sec-head.sec-lg p{font-size:16.5px;max-width:660px;}
+.home .sec-head.sec-lg p{font-size:16.5px;max-width:700px;}
 
 .home .sec-head.sec-sm{margin-bottom:26px;}
 .home .sec-head.sec-sm .bar{width:30px;height:4px;margin-bottom:12px;}
@@ -42,6 +42,14 @@
 /* 四域色按 design-colors.css 的 --domain-* 走，表达力蓝 / 思辨力青 / 学习力琥珀 / 创造力紫。
    色只上图形（顶条、圆点、hover 描边），文字保持 ink —— 青与琥珀在 11–15px 文字上
    对比度只有 3.0–3.4:1，上文字会读不清。 */
+/* 引言首句是这一块的论点，比常规导语重一档 */
+.home .sec-head.sec-lg p.fc-lead{font-weight:600;color:var(--ink);}
+/* 四种能力的总纲：只给一句定义，细节留给下面的卡 */
+.fc-four{list-style:none;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:9px 28px;margin:20px 0 0;padding:0;}
+.fc-four li{font-size:13.5px;line-height:1.8;color:var(--ink-2);}
+.fc-four b{color:var(--ink);font-weight:700;}
+
 .ability-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;}
 .ab{display:flex;flex-direction:column;background:var(--surface);
   border:1px solid var(--line);border-top:3px solid var(--d,var(--blue));
@@ -56,20 +64,15 @@
 .ab .ab-k::before{content:"";display:inline-block;width:8px;height:8px;border-radius:50%;
   background:var(--d,var(--blue));margin-right:8px;vertical-align:1px;}
 .ab h3{font-size:21px;margin:9px 0 9px;letter-spacing:-.3px;}
-.ab .ab-core{font-size:14.5px;line-height:1.85;color:var(--ink-2);margin:0 0 16px;}
-.ab .ab-dirs{margin-top:auto;padding-top:14px;border-top:1px dashed var(--line);
-  font-size:12.5px;color:var(--text-3);line-height:1.85;}
-.ab .ab-dirs b{color:var(--ink-2);font-weight:600;}
+.ab .ab-core{font-size:14.5px;line-height:1.85;color:var(--ink-2);margin:0 0 16px;text-wrap:pretty;}
+.ab .ab-dirs{list-style:none;margin:auto 0 0;padding:14px 0 0;border-top:1px dashed var(--line);
+  font-size:12.5px;color:var(--ink-2);line-height:1.85;}
+.ab .ab-dirs li{display:grid;grid-template-columns:max-content minmax(0,1fr);gap:12px;}
+.ab .ab-dirs li+li{margin-top:2px;}
+.ab .ab-dirs b{color:var(--ink);font-weight:700;}
 .ab .soon{display:inline-block;margin-left:7px;padding:2px 8px;border-radius:20px;
   font-size:10.5px;font-weight:700;background:var(--bg-2);color:var(--text-3);
   border:1px solid var(--line);vertical-align:1px;}
-
-/* 培养逻辑收口：把「为什么必须是课程 + 活动」压成两行，不单独占一个区块 */
-.logic-note{margin-top:18px;padding:22px 26px;border-radius:14px;
-  background:linear-gradient(160deg,#FCFAFF 0%,var(--violet-tint) 100%);
-  border:1px solid var(--violet-line);}
-.logic-note p{margin:0;font-size:14px;line-height:1.9;color:var(--ink-2);}
-.logic-note b{color:var(--violet-700);}
 
 /* ── 5. 课程卡：只回答四件事 ───────────────────────────── */
 .cq{margin:18px 0 0;}
@@ -387,7 +390,7 @@
 
 /* ── 响应式 ───────────────────────────────────────────── */
 @media (max-width:1020px){
-  .ability-grid,.case-proof,.support,.steps3,.outcome{grid-template-columns:1fr;}
+  .ability-grid,.case-proof,.support,.steps3,.outcome,.fc-four{grid-template-columns:1fr;}
   .lesson-grid{grid-template-columns:1fr;}
   .ai3{grid-template-columns:1fr;}
   .a3{border-right:none;border-bottom:1px solid var(--violet-line);}
