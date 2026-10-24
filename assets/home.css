@@ -336,6 +336,8 @@
 .hs-intro{position:relative;display:flex;align-items:center;line-height:normal;}
 .hs-intro > .hero{width:100%;}
 .hs-intro .hero-lg{padding:46px 0 42px;}
+/* 第 1 屏的底和后五屏对齐成同一块浅冷白，只靠 aurora 的蓝紫光晕区分 */
+.hs-intro .hero{background:linear-gradient(135deg,#F6F9FF 0%,#EEF3FC 52%,#F4F2FD 100%);}
 /* 第 1 屏沿用 .hero 的方格底纹，但整块 banner 现在是浅色、后面五屏是纯渐变，
    网格留在第一屏会显得六屏两套底。这里压到只当一层很淡的质感，
    切换时看不出纹理由有到无。全站其他页的 hero 网格不动。 */
@@ -376,39 +378,54 @@
    容器比例一旦宽于 2.857，cover 就按高度缩放、左右裁切，图里的文字被切掉；
    按钮因为是 HTML 绝对定位反而完整，于是出现「按钮在、标题缺字」的错位。
    现在文案是真 HTML（永不裁、可选中、可读屏），图片只留赛事标识卡。 */
-/* 底色走浅色：每屏三段极浅的本屏主色（--c1/--c2/--c3）。
-   原来深底配白字，整块 banner 像一张深色海报；现在和第一屏的浅底连成一套，
-   六屏切换不会忽明忽暗。深底时靠白卡提亮分层，浅底时反过来——
-   卡片改成纯白 + 更实的投影，靠「更亮 + 浮起」站到背景前面。 */
+/* 六屏共用一套底：浅冷白 → 浅蓝灰 → 浅紫，五屏底色完全一致，
+   差别只落在光晕的色相上。底色一样，翻屏就不会忽明忽暗，
+   也不会出现「一屏粉、一屏蓝、一屏橙」那种各说各话。 */
 .hs-evslide{position:relative;display:flex;align-items:center;line-height:normal;
-  background:linear-gradient(112deg,var(--c1) 0%,var(--c2) 56%,var(--c3) 100%);}
-/* 底色本身已经有三段渐变，再叠网格就是三重纹理，卡和字都跟着脏。
-   这里只留两团白光：右上把标识卡后面提亮，左下压一点，让渐变有方向。 */
-.hs-glow{position:absolute;inset:0;pointer-events:none;
-  background:
-    radial-gradient(720px 420px at 88% 2%,rgba(255,255,255,.62),rgba(255,255,255,0) 68%),
-    radial-gradient(560px 360px at 0% 100%,rgba(255,255,255,.38),rgba(255,255,255,0) 74%);}
+  background:linear-gradient(135deg,#F6F9FF 0%,#EEF3FC 52%,#F4F2FD 100%);}
+/* 光晕照第 1 屏 aurora 的做法：几个大圆 + blur(90px)，色取本屏 logo 主色的提亮版
+   （用 logo 的深色去模糊，出来是灰雾，不是光）。
+   主光压在标识卡背后，玻璃卡才透得出来；第二团放左下给文字区一点环境光。
+   同一组透明度在五个色相上的视觉重量差很多——粉红往外扩、青蓝往里收，
+   所以每屏带一个 --ga 补偿，翻过去才是「一样亮的一团雾换了颜色」。 */
+.hs-glow{position:absolute;inset:0;pointer-events:none;overflow:hidden;
+  background:radial-gradient(560px 340px at 96% 104%,
+    rgba(var(--glow,11,99,197),calc(.14 * var(--ga,1))),
+    rgba(var(--glow,11,99,197),0) 70%);}
+.hs-glow::before,.hs-glow::after{content:"";position:absolute;border-radius:50%;
+  filter:blur(90px);}
+.hs-glow::before{width:560px;height:560px;right:2%;top:2%;
+  opacity:calc(.62 * var(--ga,1));
+  background:radial-gradient(circle,rgba(var(--glow,11,99,197),.5),
+    rgba(var(--glow,11,99,197),0) 68%);}
+.hs-glow::after{width:480px;height:480px;left:-8%;bottom:-34%;
+  opacity:calc(.4 * var(--ga,1));
+  background:radial-gradient(circle,rgba(var(--glow,11,99,197),.34),
+    rgba(var(--glow,11,99,197),0) 70%);}
 .hs-in{position:relative;z-index:1;width:100%;max-width:1160px;margin:0 auto;
   padding:40px 24px;display:flex;align-items:center;justify-content:space-between;gap:56px;}
 .hs-txt{min-width:0;max-width:620px;}
 /* 文字全部翻成深色。标题取本屏的深主色（--hk），和背景同一色相、
    亮度差拉到 8:1 以上；正文用站内墨色，不再用半透明白。 */
 .hs-k{display:inline-block;margin-bottom:16px;padding:6px 15px;border-radius:999px;
-  background:rgba(255,255,255,.9);border:1px solid rgba(15,27,42,.12);
+  background:rgba(255,255,255,.72);border:1px solid rgba(15,27,42,.09);
+  -webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);
   font-size:12.5px;font-weight:700;letter-spacing:1.4px;color:var(--hk,#0F1B2A);}
 .hs-h{margin:0 0 14px;font-size:38px;line-height:1.22;font-weight:800;
   color:var(--hk,#0F1B2A);letter-spacing:-.4px;}
 .hs-sub{margin:0 0 9px;font-size:17px;line-height:1.5;color:var(--ink-2,#3C4C63);}
 .hs-note{margin:0 0 26px;font-size:14px;line-height:1.6;color:#4E5F76;}
-/* 标识卡：整屏变浅之后，卡不能再靠「浅」提亮，改靠「白 + 浮起」。
-   卡底从纯白起，尾部淡淡带一点本屏主色（--fig2），投影加深到能压住浅背景。
-   活动标是主体、畅途是署名，层级靠尺寸拉开。 */
+/* 标识卡改磨砂玻璃：半透明白 + backdrop-blur，让身后的光晕透进来一层。
+   底色变浅之后纯白卡片和背景只差一个明度，卡会陷进去；玻璃卡靠
+   「透光 + 边缘高光」立起来，和光晕是一套东西，不是贴在上面的一张纸。 */
 .hs-fig{flex-shrink:0;width:400px;height:238px;border-radius:20px;
   display:flex;flex-direction:column;align-items:center;justify-content:center;
   padding:22px 26px 18px;
-  background:linear-gradient(158deg,#FFFFFF 0%,#FFFFFF 48%,var(--fig2,#F7FAFF) 100%);
+  background:rgba(255,255,255,.66);
+  -webkit-backdrop-filter:blur(26px) saturate(1.7);backdrop-filter:blur(26px) saturate(1.7);
   border:1px solid rgba(255,255,255,.92);
-  box-shadow:0 24px 50px -18px rgba(15,27,42,.32),0 3px 8px rgba(15,27,42,.06),inset 0 1px 0 #fff;}
+  box-shadow:0 22px 50px -20px rgba(15,27,42,.3),0 3px 8px rgba(15,27,42,.05),
+    inset 0 1px 0 rgba(255,255,255,.96);}
 .hs-fig .fig-mark{flex:1;display:flex;align-items:center;justify-content:center;
   width:100%;min-height:0;padding:2px 12px;}
 .hs-fig .fig-mark img{max-width:100%;max-height:100%;object-fit:contain;display:block;}
@@ -439,6 +456,10 @@
   .hs-fig .fig-sign{width:auto;height:100%;margin:0;padding:0 0 0 11px;
     border-top:0;border-left:1px solid rgba(15,27,42,.1);}
   .hs-fig .fig-sign img{height:19px;}
+  /* 光晕圆按桌面尺寸写，到 390 宽等于铺满整屏，整块 banner 变成一片色雾。
+     窄屏缩小半径并往卡片那一侧收，只让卡周围亮一圈。 */
+  .hs-glow::before{width:340px;height:340px;right:-14%;top:-10%;}
+  .hs-glow::after{width:300px;height:300px;left:-18%;bottom:-16%;}
 }
 
 @media (max-width:1020px){
