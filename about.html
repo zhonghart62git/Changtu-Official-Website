@@ -10,7 +10,7 @@
 <link rel="icon" type="image/png" sizes="64x64" href="assets/favicon-64.png?v=f0acdc9c">
 <link rel="apple-touch-icon" href="assets/apple-touch-icon.png?v=b6e8581d">
 <meta name="theme-color" content="#0B63C5">
-<link rel="stylesheet" href="assets/site.css?v=ed14315e">
+<link rel="stylesheet" href="assets/site.css?v=de9bc00f">
 <link rel="stylesheet" href="assets/site-v2.css?v=729faea9">
 <script>document.documentElement.classList.remove('no-js');</script>
 <link rel="canonical" href="https://leadtheway.cn/about.html">
@@ -117,9 +117,10 @@
   .ab-card .ck{font-size:11px;font-weight:800;letter-spacing:1.5px;color:var(--text-3);margin-bottom:10px;}
   .ab-card h3{font-size:19px;font-weight:800;color:var(--ink);margin:0 0 10px;letter-spacing:-.2px;}
   .ab-card p{margin:0 0 20px;font-size:14px;line-height:1.82;color:var(--text-2);}
-  .ab-card a{display:inline-flex;align-items:center;gap:6px;margin-top:auto;
+  .ab-card a,.ab-card button{display:inline-flex;align-items:center;gap:6px;margin-top:auto;
     font-size:14px;font-weight:700;color:var(--blue);}
-  .ab-card:hover a{gap:10px;}
+  .ab-card button{padding:0;border:0;background:none;font-family:inherit;cursor:pointer;align-self:flex-start;}
+  .ab-card:hover a,.ab-card:hover button{gap:10px;}
 
   .ab-tel{margin-top:22px;font-size:13.5px;color:var(--text-3);}
   .ab-tel a{color:var(--blue);font-weight:700;white-space:nowrap;}
@@ -319,7 +320,7 @@
         <h3>找到适合孩子的学习和实践路径</h3>
         <p>根据孩子的兴趣和现有基础，选择合适的课程与活动，并记录每个阶段的学习情况。</p>
         <div class="ab-chips">
-          <i>兴趣探索</i><i>能力评价</i><i>成长目标</i><i>课程训练</i>
+          <i>兴趣探索</i><i>成长评价</i><i>成长目标</i><i>课程训练</i>
           <i>活动实践</i><i>成长记录</i><i>活动机会</i>
         </div>
         <button class="btn btn-p btn-sm" type="button" data-mo="moStudent">了解更多</button>
@@ -384,7 +385,7 @@
         <span class="ck">学生家庭</span>
         <h3>找到成长方向</h3>
         <p>从认识自己开始，找到适合自己的成长方向。</p>
-        <a href="index.html#path">查看成长路径 →</a>
+        <button type="button" data-mo="moTest">查看成长路径 →</button>
       </article>
       <article class="ab-card">
         <span class="ck">教育机构</span>
@@ -487,6 +488,16 @@
 </script>
 
 <!-- ═════════ 入口弹窗 ═════════ -->
+<div class="mo" id="moTest" hidden>
+  <div class="mo-mask" data-mo-close></div>
+  <div class="mo-panel is-narrow" role="dialog" aria-modal="true" aria-labelledby="moTestT" tabindex="-1">
+    <button class="mo-x" type="button" data-mo-close aria-label="关闭">×</button>
+    <h3 id="moTestT">做一次能力测评</h3>
+    <p class="mo-sub">微信扫下面的小程序码，进入畅途小程序做测评。测完会看到兴趣倾向、当前能力表现和方向建议，结果存进成长档案。</p>
+    <img class="mo-qr" src="assets/miniapp-qr.png?v=6c0116a8" alt="畅途小程序码" width="480" height="480">
+  </div>
+</div>
+
 <div class="mo" id="moStudent" hidden>
   <div class="mo-mask" data-mo-close></div>
   <div class="mo-panel" role="dialog" aria-modal="true" aria-labelledby="moStuT" tabindex="-1">
