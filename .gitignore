@@ -1,2 +1,4 @@
 _preview*.html
+_pshot*.html
+_dbg*.html
 __pycache__/
