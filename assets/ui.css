@@ -49,7 +49,7 @@ header.nav{
   display:grid;place-items:center;box-shadow:0 4px 12px rgba(11,99,197,.28);
 }
 .logo .mark svg{width:20px;height:20px;stroke:var(--surface);fill:none;stroke-width:2.2;stroke-linejoin:round;}
-.logo .logo-img{height:34px;width:auto;display:block;flex:none;}
+.logo .logo-img{height:46px;width:auto;display:block;flex:none;}
 .logo small{display:block;font-size:11px;font-weight:500;color:var(--muted);letter-spacing:1.6px;line-height:1;}
 .nav-back{font-size:14px;color:var(--ink-2);display:inline-flex;align-items:center;gap:6px;}
 .nav-back:hover{color:var(--blue);}
@@ -286,8 +286,7 @@ hr.sep{border:none;border-top:1px solid var(--line);margin:22px 0;}
 @media (max-width:560px){
   .nav .wrap{height:62px;}
   .logo{gap:8px;font-size:16px;}
-  .logo .logo-img{height:30px;}
-  .logo small{font-size:9px;letter-spacing:.5px;white-space:nowrap;}
+  .logo .logo-img{height:36px;}
   .nav-back{white-space:nowrap;font-size:13px;}
 }
 @media (max-width:520px){
