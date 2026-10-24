@@ -40,8 +40,8 @@
 
 /* ── 4. 四大能力：从「分类目录」变成「培养框架」 ───────── */
 /* 四域色按 design-colors.css 的 --domain-* 走，表达力蓝 / 思辨力青 / 学习力琥珀 / 创造力紫。
-   色只上图形（顶条、圆点、hover 描边），文字保持 ink —— 青与琥珀在 11–15px 文字上
-   对比度只有 3.0–3.4:1，上文字会读不清。 */
+   卡片区色只上图形（顶条、圆点、hover 描边），文字保持 ink —— 青与琥珀在 11–15px 文字上
+   对比度只有 3.0–3.4:1。只有总纲这四条按用户要求直接上域色。 */
 /* 引言首句是这一块的论点，比常规导语重一档 */
 .home .sec-head.sec-lg p.fc-lead{font-weight:600;color:var(--ink);}
 /* 四种能力的总纲：只给一句定义，细节留给下面的卡 */
@@ -49,6 +49,11 @@
   gap:9px 28px;margin:20px 0 0;padding:0;}
 .fc-four li{font-size:13.5px;line-height:1.8;color:var(--ink-2);}
 .fc-four b{color:var(--ink);font-weight:700;}
+/* 四个能力名各自带本域颜色，和下面卡片的顶条、圆点对得上 */
+.fc-four li[data-d="expression"] b{color:var(--domain-expression);}
+.fc-four li[data-d="thinking"] b{color:var(--domain-thinking);}
+.fc-four li[data-d="learning"] b{color:var(--domain-learning);}
+.fc-four li[data-d="creativity"] b{color:var(--domain-creativity);}
 
 .ability-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;}
 .ab{display:flex;flex-direction:column;background:var(--surface);
@@ -73,6 +78,16 @@
 .ab .soon{display:inline-block;margin-left:7px;padding:2px 8px;border-radius:20px;
   font-size:10.5px;font-weight:700;background:var(--bg-2);color:var(--text-3);
   border:1px solid var(--line);vertical-align:1px;}
+
+/* 四张卡底部的方向区要跨卡对齐。
+   原来靠 .ab-dirs 的 margin-top:auto 各自贴底，方向条目少的那张卡虚线就落得更低，
+   同一行两卡的虚线不在一条线上。改成 subgrid：同一行两张卡共用四段行高，
+   虚线一律落在第四段的顶端，谁也不会掉下去。 */
+@supports (grid-template-rows:subgrid){
+  .ability-grid{row-gap:0;column-gap:16px;}
+  .ab{display:grid;grid-template-rows:subgrid;grid-row:span 4;margin-bottom:16px;}
+  .ab .ab-dirs{margin-top:0;}
+}
 
 /* ── 5. 课程卡：只回答四件事 ───────────────────────────── */
 .cq{margin:18px 0 0;}
