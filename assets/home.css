@@ -373,9 +373,24 @@
   color:#fff;letter-spacing:-.4px;}
 .hs-sub{margin:0 0 9px;font-size:17px;line-height:1.5;color:rgba(255,255,255,.9);}
 .hs-note{margin:0 0 26px;font-size:14px;line-height:1.6;color:rgba(255,255,255,.68);}
-.hs-fig{flex-shrink:0;width:400px;height:238px;border-radius:20px;background:#fff;
-  display:flex;align-items:center;justify-content:center;padding:30px;
-  box-shadow:0 24px 60px rgba(0,0,0,.3);}
+/* 标识卡：原来是死白卡片，项目标压上去像贴纸。改成极浅的活动主色渐变
+   （每屏 --fig1/--fig2 取本屏主色的浅色版），右上角叠一层白色光斑当纸面反光，
+   再压一道内白描边。底部用一条细线分出署名行，放畅途未来领袖的标识——
+   活动标是主体、畅途是署名，层级拉开就不抢。 */
+.hs-fig{flex-shrink:0;width:400px;height:238px;border-radius:20px;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  padding:22px 26px 18px;
+  background:
+    radial-gradient(120% 92% at 88% 4%,rgba(255,255,255,.98),rgba(255,255,255,0) 58%),
+    linear-gradient(155deg,var(--fig1,#F7FAFF) 0%,var(--fig2,#E7EFFB) 100%);
+  border:1px solid rgba(255,255,255,.62);
+  box-shadow:0 24px 60px rgba(0,0,0,.26),inset 0 1px 0 rgba(255,255,255,.9);}
+.hs-fig .fig-mark{flex:1;display:flex;align-items:center;justify-content:center;
+  width:100%;min-height:0;padding:2px 12px;}
+.hs-fig .fig-mark img{max-width:100%;max-height:100%;object-fit:contain;display:block;}
+.hs-fig .fig-sign{display:flex;align-items:center;justify-content:center;
+  width:100%;margin-top:12px;padding-top:11px;border-top:1px solid rgba(15,27,42,.1);}
+.hs-fig .fig-sign img{height:30px;width:auto;display:block;}
 .hs-fig img{max-width:100%;max-height:100%;object-fit:contain;display:block;}
 /* 按钮从绝对定位改回文档流，跟着文字走，不再压在图底 */
 .hs-evslide .hs-acts{position:static;padding:0;background:none;}
@@ -383,16 +398,23 @@
 @media (max-width:1020px){
   .hs-in{gap:32px;padding:34px 24px;}
   .hs-h{font-size:27px;}
-  .hs-fig{width:250px;height:164px;padding:18px;}
+  .hs-fig{width:250px;height:164px;padding:18px 18px 14px;}
+  .hs-fig .fig-sign{margin-top:9px;padding-top:8px;}
+  .hs-fig .fig-sign img{height:20px;}
 }
 @media (max-width:760px){
   .hs-in{flex-direction:column;align-items:flex-start;gap:16px;padding:26px 20px 24px;}
   .hs-h{font-size:22px;}
   .hs-sub{font-size:13.5px;}
   .hs-note{font-size:12px;margin-bottom:16px;}
-  /* 手机上标识卡缩成一小块，放最上面，不挤文字 */
-  .hs-fig{order:-1;align-self:flex-start;width:auto;height:60px;padding:10px 16px;border-radius:12px;}
-  .hs-fig img{max-width:170px;max-height:100%;}
+  /* 手机上卡缩成一条，两个标横排、中间一道竖线，署名小字省掉 */
+  .hs-fig{order:-1;align-self:flex-start;width:auto;height:62px;padding:9px 14px;
+    border-radius:14px;flex-direction:row;gap:13px;}
+  .hs-fig .fig-mark{flex:0 0 auto;width:auto;height:100%;}
+  .hs-fig .fig-mark img{max-width:150px;max-height:100%;}
+  .hs-fig .fig-sign{width:auto;height:100%;margin:0;padding:0 0 0 11px;
+    border-top:0;border-left:1px solid rgba(15,27,42,.1);}
+  .hs-fig .fig-sign img{height:19px;}
 }
 
 @media (max-width:1020px){
