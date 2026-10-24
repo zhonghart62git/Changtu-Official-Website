@@ -68,6 +68,14 @@
 
   window.CTModal = { open: open, close: close, bind: bind };
 
+  // 从 bfcache 返回时，滚动锁和开着的弹窗要复位，否则页面动不了
+  window.addEventListener('pageshow', function (e) {
+    if (!e.persisted) return;
+    [].slice.call(document.querySelectorAll('.mo')).forEach(function (mo) { mo.hidden = true; });
+    document.documentElement.style.overflow = '';
+    lastBtn = null;
+  });
+
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', bind);
   } else {
