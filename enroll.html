@@ -237,7 +237,7 @@
   </div>
 </footer>
 
-<script src="assets/store.js?v=96062564"></script>
+<script src="assets/store.js?v=352124e4"></script>
 <script>
 (function(){
   'use strict';
@@ -353,11 +353,13 @@
 
   function updateFee(){
     var f = state.fee;
-    $('feeShow').textContent = (f == null ? '—' : Number(f).toLocaleString('zh-CN'));
+    $('feeShow').textContent = (f == null ? '按简章' : Number(f).toLocaleString('zh-CN'));
     $('feeHint').textContent = state.actData
-      ? (state.actData.id === 'brtv' || state.actData.id === 'zjcm'
-          ? '按实际报考级别结算，最终以报名确认通知为准'
-          : '含评审、场地与证书；晋级下一阶段按通知另行缴纳')
+      ? (f == null
+          ? '费用按当期招生简章，提交后老师联系确认'
+          : (state.actData.id === 'brtv' || state.actData.id === 'zjcm'
+              ? '按实际报考级别结算，最终以报名确认通知为准'
+              : '含评审、场地与证书；晋级下一阶段按通知另行缴纳'))
       : '选择项目后显示';
   }
 
@@ -435,7 +437,7 @@
       document.querySelector('.step[data-s="2"]').classList.add('done');
       document.querySelector('.step[data-s="3"]').classList.add('done');
       $('doneCode').textContent = o.code;
-      $('doneMeta').innerHTML = esc(o.actName) + ' · ' + esc(o.group) + '<br>参考费用 <b style="color:var(--orange);">¥' + Number(o.fee).toLocaleString('zh-CN') + '</b>　报名人 ' + esc(o.student);
+      $('doneMeta').innerHTML = esc(o.actName) + ' · ' + esc(o.group) + '<br>参考费用 <b style="color:var(--orange);">' + (o.fee == null ? '按当期简章' : '¥' + Number(o.fee).toLocaleString('zh-CN')) + '</b>　报名人 ' + esc(o.student);
       $('doneWechat').textContent = CT.API.settings().wechat;
       $('payGuide').textContent = '请与招生老师确认费用及缴费方式。联系电话：180 3882 9260。';
       window.scrollTo({top:0, behavior:'smooth'});
@@ -467,7 +469,7 @@
       '城市：' + (o.city || '—') + (o.school ? '　学校：' + o.school : ''),
       o.teacher ? '推荐：' + o.teacher : '',
       o.note ? '备注：' + o.note : '',
-      '参考费用：¥' + Number(o.fee).toLocaleString('zh-CN'),
+      '参考费用：' + (o.fee == null ? '按当期简章' : '¥' + Number(o.fee).toLocaleString('zh-CN')),
       '请招生老师核对以上意向并确认报名安排。'
     ].filter(function(x){ return x; });
     copyText(lines.join('\n'), $('copyAll'), '复制报名意向', '已复制，去微信粘贴 ✓');

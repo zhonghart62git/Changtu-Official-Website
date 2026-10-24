@@ -65,6 +65,19 @@
       groups: ['启蒙级（一至三册）', '进阶级（四至六册）', '突破级（七至九册）'],
       items: ['思辨力', '表达力', '学习力'],
       note: '一学期 16 次课，含教材与阶段展演。早鸟与连报优惠以当期招生简章为准。'
+    },
+    {
+      // 费用未定：mun.html 的两个「立刻报名」按钮带 ?act=mun 进来，
+      // 目录里没有 mun 就会退回「请选择报名项目」，等于按钮点不通。
+      // fee 先留 null，页面显示「按当期简章」，拿到准数直接填这里。
+      id: 'mun', no: '08', name: '破界 MUN', cat: '模联赛道',
+      full: '破界 MUN · 六阶课程体系（L0–L5）',
+      fee: null, open: true,
+      groups: ['L0 观察员（12 课时）', 'L1 见习代表（16 课时）', 'L2 正式代表（24 课时）',
+               'L3 进阶代表（32 课时）', 'L4 竞赛代表（36 课时）', 'L5 主席团（36 课时）'],
+      items: ['研·议题国家', '辨·立场论证', '写·文件条款', '说·演讲结构',
+              '规·议事规则', '商·磋商结盟', '会·全真会议', '复·复盘归档'],
+      note: '中英双轨，唯一换轨点在 L2 结业。费用与开班时间按当期招生简章，提交后老师联系确认。'
     }
   ];
 
@@ -238,7 +251,10 @@
       if (!form.parent || !String(form.parent).trim()) return reject(new Error('请填写家长姓名。'));
       if (!form.group) return reject(new Error('请选择参赛组别。'));
 
-      var fee = Number(form.fee != null ? form.fee : act.fee) || 0;
+      // 费用未定的项目（fee 为 null）保留 null，不要折算成 0，
+      // 否则「按当期简章」会被记成 ¥0，在 my.html 与复制文案里都难看。
+      var rawFee = form.fee != null ? form.fee : act.fee;
+      var fee = rawFee == null ? null : (Number(rawFee) || 0);
       var order = {
         code: makeCode(db),
         act: act.id,

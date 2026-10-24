@@ -87,7 +87,7 @@
   </div>
 </footer>
 
-<script src="assets/store.js?v=96062564"></script>
+<script src="assets/store.js?v=352124e4"></script>
 <script>
 (function(){
   'use strict';
@@ -102,7 +102,8 @@
 
   /* 项目 id → 官网锚点 */
   var ANCHOR = { caocan:'caocan.html', debate:'debate.html', bilingual:'bilingual.html',
-                 sdg:'sdg.html', brtv:'brtv.html', zjcm:'zjcm.html', sanyuanli:'sanyuanli.html' };
+                 sdg:'sdg.html', brtv:'brtv.html', zjcm:'zjcm.html', sanyuanli:'sanyuanli.html',
+                 mun:'mun.html' };
   function anchorOf(id){ return ANCHOR[id] || 'index.html#matrix'; }
 
 
@@ -167,7 +168,7 @@
         '</div>' +
         '<div style="text-align:right;">' +
           '<div class="tiny muted">参考费用</div>' +
-          '<div style="font-size:22px;font-weight:800;letter-spacing:-.5px;color:' + (paid ? 'var(--ok)' : 'var(--orange)') + ';">¥' + money(o.fee) + '</div>' +
+          '<div style="font-size:22px;font-weight:800;letter-spacing:-.5px;color:' + (paid ? 'var(--ok)' : 'var(--orange)') + ';">' + (o.fee == null ? '按简章' : '¥' + money(o.fee)) + '</div>' +
         '</div>' +
       '</div>';
 
