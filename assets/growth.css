@@ -13,17 +13,6 @@
 .path-list .step.on .no{background:var(--sc);color:var(--surface);transform:scale(1.06);}
 .path-list .step.on .step-card{border-color:var(--border);box-shadow:var(--shadow);}
 
-/* PRD 的阶段「视觉」是三项顿号串（如「能力画像摘要、兴趣线索与观察记录」），
-   site.css 的 .step-out 是 flex + wrap，值一长就把标签挤成独立一行。
-   改成块级流，标签行内跟着文字走，换行自然落在标签后面。 */
-#path .step-out{display:block;}
-#path .step-out .k{display:inline-block;margin:0 6px 2px 0;}
-#path .step-out .v{display:inline;}
-
-@media (max-width:420px){
-  #path .step-out .v{font-size:12.5px;}
-}
-
 @media (prefers-reduced-motion:reduce){
   .path-list .step .no,.path-list .step.on .no{transition:none;}
   .path-list .step.on .no{transform:none;}
