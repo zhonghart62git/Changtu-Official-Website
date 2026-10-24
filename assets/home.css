@@ -41,19 +41,9 @@
 /* ── 4. 四大能力：从「分类目录」变成「培养框架」 ───────── */
 /* 四域色按 design-colors.css 的 --domain-* 走，表达力蓝 / 思辨力青 / 学习力琥珀 / 创造力紫。
    卡片区色只上图形（顶条、圆点、hover 描边），文字保持 ink —— 青与琥珀在 11–15px 文字上
-   对比度只有 3.0–3.4:1。只有总纲这四条按用户要求直接上域色。 */
+   对比度只有 3.0–3.4:1。 */
 /* 引言首句是这一块的论点，比常规导语重一档 */
 .home .sec-head.sec-lg p.fc-lead{font-weight:600;color:var(--ink);}
-/* 四种能力的总纲：只给一句定义，细节留给下面的卡 */
-.fc-four{list-style:none;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));
-  gap:9px 28px;margin:20px 0 0;padding:0;}
-.fc-four li{font-size:13.5px;line-height:1.8;color:var(--ink-2);}
-.fc-four b{color:var(--ink);font-weight:700;}
-/* 四个能力名各自带本域颜色，和下面卡片的顶条、圆点对得上 */
-.fc-four li[data-d="expression"] b{color:var(--domain-expression);}
-.fc-four li[data-d="thinking"] b{color:var(--domain-thinking);}
-.fc-four li[data-d="learning"] b{color:var(--domain-learning);}
-.fc-four li[data-d="creativity"] b{color:var(--domain-creativity);}
 
 .ability-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;}
 .ab{display:flex;flex-direction:column;background:var(--surface);
@@ -427,7 +417,7 @@
 
 /* ── 响应式 ───────────────────────────────────────────── */
 @media (max-width:1020px){
-  .ability-grid,.case-proof,.support,.steps3,.outcome,.fc-four{grid-template-columns:1fr;}
+  .ability-grid,.case-proof,.support,.steps3,.outcome{grid-template-columns:1fr;}
   .lesson-grid{grid-template-columns:1fr;}
   .ai3{grid-template-columns:1fr;}
   .a3{border-right:none;border-bottom:1px solid var(--violet-line);}
