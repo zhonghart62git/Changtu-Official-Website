@@ -32,6 +32,8 @@
   .about-hero .lead{font-size:16.5px;color:var(--text-2);line-height:1.88;margin:0 0 12px;}
   .about-hero .lead-sub{margin:0;font-size:14px;color:var(--text-3);line-height:1.85;}
   .about-hero .hero-cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:26px;}
+  /* 三个入口功能等价，视觉也等价：同色、同高、同宽 */
+  .about-hero .hero-cta .btn{flex:0 0 auto;min-width:140px;}
   /* 数据带与首页同源同版式：五项一行，窄屏两列且末项占满 */
   .about-hero .stats-band .stats{grid-template-columns:repeat(5,1fr);padding:36px 0;}
   .about-hero .stats-band .stat span{font-size:12.5px;margin-top:4px;}
@@ -240,9 +242,7 @@
         <p class="lead">为学生提供从认识自己、形成能力到连接机会的成长路径；为学校和教育机构提供课程、活动、AI 工具与成长评价系统。</p>
         <p class="lead-sub">我们从真实教育实践中形成方法，正在把经过区域验证的培养体系带向全国，并持续连接国际成长资源。</p>
         <div class="hero-cta">
-          <a class="btn btn-p" href="courses.html">课程与实践
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg>
-          </a>
+          <a class="btn btn-s" href="courses.html">课程与实践</a>
           <a class="btn btn-s" href="activities.html">活动与机会</a>
           <a class="btn btn-s" href="partner.html">机构合作</a>
         </div>
@@ -358,11 +358,11 @@
     <div class="ab-two rv2">
       <article class="ab-col">
         <span class="ck">学生与家庭</span>
-        <h3>看清自己并留下依据</h3>
-        <p>从兴趣与当前表现出发，定一条阶段目标，再用课程、AI 工具和真实场次把它走完，每一步都有记录。</p>
+        <h3>找到适合孩子的学习和实践路径</h3>
+        <p>根据孩子的兴趣和现有基础，选择合适的课程与活动，并记录每个阶段的学习情况。</p>
         <div class="ab-chips">
-          <i>生涯探索</i><i>能力画像</i><i>成长规划</i><i>课程训练</i>
-          <i>真实实践</i><i>成长记录</i><i>机会连接</i>
+          <i>兴趣探索</i><i>能力评价</i><i>成长目标</i><i>课程训练</i>
+          <i>活动实践</i><i>成长记录</i><i>活动机会</i>
         </div>
         <button class="btn btn-p btn-sm" type="button" data-mo="moStudent">了解更多</button>
       </article>
