@@ -86,13 +86,13 @@
     </div>
 
       <div class="field" id="f-group">
-        <label>参赛 / 报考组别<span class="req">*</span></label>
+        <label id="lbGroup">参赛 / 报考组别<span class="req">*</span></label>
         <select id="group"><option value="">请先选择报名项目</option></select>
         <div class="errmsg">请选择组别</div>
       </div>
 
       <div class="field" id="f-item">
-        <label>参赛类别 <span class="muted small">（可多选，不选则按项目默认）</span></label>
+        <label id="lbItem">参赛类别 <span class="muted small">（可多选，不选则按项目默认）</span></label>
         <div class="opts" id="itemOpts"></div>
       </div>
 
@@ -237,7 +237,7 @@
   </div>
 </footer>
 
-<script src="assets/store.js?v=352124e4"></script>
+<script src="assets/store.js?v=087e7e16"></script>
 <script>
 (function(){
   'use strict';
@@ -275,6 +275,21 @@
     return m ? m[1] : null;
   }
 
+  /* 赛事与课程是两套报名口径：一个按组别和场次走，一个按阶段和开班时间走。
+     同一张表单两套说法，选到课程类项目就把字换掉，免得家长看到「参赛」。 */
+  function words(a){
+    if (a && a.kind === 'course') {
+      return { group:'学习阶段', item:'学习模块', itemHint:'（可多选，不选则按阶段默认）',
+               ph:'请选择阶段', err:'请选择学习阶段',
+               lead:'选好阶段、填完信息提交，老师按阶段与开班时间联系确认。',
+               copyGroup:'学习阶段', copyItem:'学习模块' };
+    }
+    return { group:'参赛 / 报考组别', item:'参赛类别', itemHint:'（可多选，不选则按项目默认）',
+             ph:'请选择组别', err:'请选择组别',
+             lead:'选好组别、填完信息提交，老师按组别与场次联系确认。',
+             copyGroup:'组别', copyItem:'参赛项' };
+  }
+
   /* 专属报名：项目已由链接指定，藏掉选项目那一步，标题也换成这个活动 */
   function lockAct(){
     var a = state.actData;
@@ -294,7 +309,7 @@
     var h1 = document.querySelector('.pagehead h1');
     if (h1) h1.textContent = a.name + ' · 报名';
     var pp = document.querySelector('.pagehead p');
-    if (pp) pp.textContent = '正在报名：' + a.full + '。选好组别、填完信息提交，老师按组别与场次联系确认。';
+    if (pp) pp.textContent = '正在报名：' + a.full + '。' + words(a).lead;
     document.title = a.name + ' 报名｜畅途 · 未来领袖';
   }
 
@@ -328,13 +343,18 @@
     if (!a) return;
     state.act = id; state.actData = a; state.items = []; state.fee = a.fee;
 
-    // 组别
+    var w = words(a);
+    $('lbGroup').innerHTML = w.group + '<span class="req">*</span>';
+    $('lbItem').innerHTML = w.item + ' <span class="muted small">' + w.itemHint + '</span>';
+    $('f-group').querySelector('.errmsg').textContent = w.err;
+
+    // 组别 / 学习阶段
     var sel = $('group');
-    sel.innerHTML = '<option value="">请选择组别</option>' + a.groups.map(function(g){
+    sel.innerHTML = '<option value="">' + w.ph + '</option>' + a.groups.map(function(g){
       return '<option value="' + esc(g) + '">' + esc(g) + '</option>';
     }).join('');
 
-    // 类别
+    // 类别 / 学习模块
     $('itemOpts').innerHTML = a.items.map(function(it){
       return '<label class="opt" data-item="' + esc(it) + '"><input type="checkbox" value="' + esc(it) + '">' + esc(it) + '</label>';
     }).join('');
@@ -352,15 +372,20 @@
   }
 
   function updateFee(){
-    var f = state.fee;
+    var f = state.fee, a = state.actData;
     $('feeShow').textContent = (f == null ? '按简章' : Number(f).toLocaleString('zh-CN'));
-    $('feeHint').textContent = state.actData
-      ? (f == null
-          ? '费用按当期招生简章，提交后老师联系确认'
-          : (state.actData.id === 'brtv' || state.actData.id === 'zjcm'
-              ? '按实际报考级别结算，最终以报名确认通知为准'
-              : '含评审、场地与证书；晋级下一阶段按通知另行缴纳'))
-      : '选择项目后显示';
+    if (!a) {
+      $('feeHint').textContent = '选择项目后显示';
+    } else if (a.kind === 'course') {
+      // 课程的 note 本身就写了课时与优惠口径，比通用句准确
+      $('feeHint').textContent = a.note;
+    } else if (f == null) {
+      $('feeHint').textContent = '费用按当期招生简章，提交后老师联系确认';
+    } else if (a.id === 'brtv' || a.id === 'zjcm') {
+      $('feeHint').textContent = '按实际报考级别结算，最终以报名确认通知为准';
+    } else {
+      $('feeHint').textContent = '含评审、场地与证书；晋级下一阶段按通知另行缴纳';
+    }
   }
 
   $('itemOpts').addEventListener('click', function(e){
@@ -458,11 +483,12 @@
   $('copyAll').addEventListener('click', function(){
     if (!lastOrder) { alert('请先保存报名意向信息。'); return; }
     var o = lastOrder;
+    var w = words(state.acts.filter(function(x){ return x.id === o.act; })[0]);
     var lines = [
       '【畅途 · 未来领袖】意向编号 ' + o.code,
       '项目：' + o.actName,
-      '组别：' + o.group,
-      '参赛项：' + (o.item || '—'),
+      w.copyGroup + '：' + o.group,
+      w.copyItem + '：' + (o.item || '—'),
       '学员：' + o.student + (o.gender ? '（' + o.gender + '）' : '') + (o.age ? '　出生 ' + o.age : ''),
       '年级：' + (o.grade || '—'),
       '家长：' + o.parent + '　' + o.phone,

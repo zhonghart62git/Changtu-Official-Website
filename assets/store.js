@@ -60,6 +60,7 @@
     },
     {
       id: 'sanyuanli', no: '07', name: '破界三原力', cat: '能力底座',
+      kind: 'course',
       full: '破界三原力 · 课程体系（三级九册）',
       fee: 3980, open: true,
       groups: ['启蒙级（一至三册）', '进阶级（四至六册）', '突破级（七至九册）'],
@@ -71,6 +72,7 @@
       // 目录里没有 mun 就会退回「请选择报名项目」，等于按钮点不通。
       // fee 先留 null，页面显示「按当期简章」，拿到准数直接填这里。
       id: 'mun', no: '08', name: '破界 MUN', cat: '模联赛道',
+      kind: 'course',
       full: '破界 MUN · 六阶课程体系（L0–L5）',
       fee: null, open: true,
       groups: ['L0 观察员（12 课时）', 'L1 见习代表（16 课时）', 'L2 正式代表（24 课时）',
