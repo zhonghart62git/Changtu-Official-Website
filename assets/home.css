@@ -307,12 +307,19 @@
 /* ── 19b. 首屏与活动合并成一个 banner ──────────────────
    第 1 屏是平台定位（真 HTML，H1 仍是真文本），第 2–6 屏是活动图。
    整块通栏，首屏内容用 .wrap 对齐，和导航、下方各区块左右齐边。 */
-.hslider-hero{padding:0 0 10px;}
-.hslider-hero .hs-box{border-radius:0;box-shadow:none;background:#F4F9FF;}
+/* 整块通栏，首屏内容用 .wrap 对齐，和导航、下方各区块左右齐边。
+   原来是深底，底部留 10px 白缝当分隔；现在 banner 变浅，白缝反而把两块切开
+   显得悬空，改成贴住下面的白区，用一条 1px 线收边。 */
+.hslider-hero{padding:0;border-bottom:1px solid rgba(15,27,42,.08);}
+.hslider-hero .hs-box{border-radius:0;box-shadow:none;background:#F7FAFE;}
 .hslider-hero .hs-track{align-items:stretch;}
 .hs-intro{position:relative;display:flex;align-items:center;line-height:normal;}
 .hs-intro > .hero{width:100%;}
 .hs-intro .hero-lg{padding:46px 0 42px;}
+/* 第 1 屏沿用 .hero 的方格底纹，但整块 banner 现在是浅色、后面五屏是纯渐变，
+   网格留在第一屏会显得六屏两套底。这里压到只当一层很淡的质感，
+   切换时看不出纹理由有到无。全站其他页的 hero 网格不动。 */
+.hs-intro .hero::before{opacity:.14;}
 
 /* ── 19c. 活动 banner 的两个按钮 ─────────────────────────
    图里不再烤 CTA，两个按钮是真链接，可聚焦、可读屏。
@@ -327,14 +334,17 @@
   height:40px;padding:0 22px;border-radius:999px;white-space:nowrap;
   font-size:14.5px;font-weight:700;letter-spacing:.3px;text-decoration:none;
   transition:background .2s,border-color .2s;}
-.hs-btn-line{color:#fff;background:rgba(255,255,255,.14);
-  border:1px solid rgba(255,255,255,.58);}
-.hs-btn-line:hover{background:rgba(255,255,255,.26);border-color:#fff;}
-.hs-btn-fill{color:#fff;background:var(--orange,#FF7A1A);
-  border:1px solid var(--orange,#FF7A1A);
-  box-shadow:0 8px 20px -8px rgba(255,122,26,.7);}
-.hs-btn-fill:hover{background:#ff8a38;border-color:#ff8a38;}
-.hs-btn:focus-visible{outline:2px solid #fff;outline-offset:2px;}
+/* 按钮也跟着翻面。浅底上「点击报名」用本屏深主色实底，
+   五屏颜色不同但都是深色，动作识别不变；橙色退出 banner。
+   次按钮改白底 + 墨色字，边框压到能看见但不抢。 */
+.hs-btn-line{color:var(--hk,#0F1B2A);background:rgba(255,255,255,.92);
+  border:1px solid rgba(15,27,42,.16);}
+.hs-btn-line:hover{background:#fff;border-color:var(--hk,#0F1B2A);}
+.hs-btn-fill{color:#fff;background:var(--hk,#0F1B2A);
+  border:1px solid var(--hk,#0F1B2A);
+  box-shadow:0 10px 22px -10px rgba(15,27,42,.55);}
+.hs-btn-fill:hover{filter:brightness(1.16);}
+.hs-btn:focus-visible{outline:2px solid var(--hk,#0F1B2A);outline-offset:3px;}
 @media (max-width:760px){
   .hs-acts{padding:12px 5% 14px;gap:8px;}
   .hs-btn{height:36px;padding:0 16px;font-size:13.5px;}
@@ -346,35 +356,39 @@
    容器比例一旦宽于 2.857，cover 就按高度缩放、左右裁切，图里的文字被切掉；
    按钮因为是 HTML 绝对定位反而完整，于是出现「按钮在、标题缺字」的错位。
    现在文案是真 HTML（永不裁、可选中、可读屏），图片只留赛事标识卡。 */
+/* 底色走浅色：每屏三段极浅的本屏主色（--c1/--c2/--c3）。
+   原来深底配白字，整块 banner 像一张深色海报；现在和第一屏的浅底连成一套，
+   六屏切换不会忽明忽暗。深底时靠白卡提亮分层，浅底时反过来——
+   卡片改成纯白 + 更实的投影，靠「更亮 + 浮起」站到背景前面。 */
 .hs-evslide{position:relative;display:flex;align-items:center;line-height:normal;
   background:linear-gradient(112deg,var(--c1) 0%,var(--c2) 56%,var(--c3) 100%);}
+/* 底色本身已经有三段渐变，再叠网格就是三重纹理，卡和字都跟着脏。
+   这里只留两团白光：右上把标识卡后面提亮，左下压一点，让渐变有方向。 */
 .hs-glow{position:absolute;inset:0;pointer-events:none;
   background:
-    radial-gradient(720px 400px at 84% 16%,rgba(255,255,255,.20),transparent 70%),
-    radial-gradient(560px 380px at 6% 92%,rgba(120,220,255,.16),transparent 72%),
-    repeating-linear-gradient(58deg,rgba(255,255,255,.045) 0 2px,transparent 2px 26px);}
+    radial-gradient(720px 420px at 88% 2%,rgba(255,255,255,.62),rgba(255,255,255,0) 68%),
+    radial-gradient(560px 360px at 0% 100%,rgba(255,255,255,.38),rgba(255,255,255,0) 74%);}
 .hs-in{position:relative;z-index:1;width:100%;max-width:1160px;margin:0 auto;
   padding:40px 24px;display:flex;align-items:center;justify-content:space-between;gap:56px;}
 .hs-txt{min-width:0;max-width:620px;}
+/* 文字全部翻成深色。标题取本屏的深主色（--hk），和背景同一色相、
+   亮度差拉到 8:1 以上；正文用站内墨色，不再用半透明白。 */
 .hs-k{display:inline-block;margin-bottom:16px;padding:6px 15px;border-radius:999px;
-  background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.34);
-  font-size:12.5px;font-weight:700;letter-spacing:1.4px;color:#fff;}
+  background:rgba(255,255,255,.9);border:1px solid rgba(15,27,42,.12);
+  font-size:12.5px;font-weight:700;letter-spacing:1.4px;color:var(--hk,#0F1B2A);}
 .hs-h{margin:0 0 14px;font-size:38px;line-height:1.22;font-weight:800;
-  color:#fff;letter-spacing:-.4px;}
-.hs-sub{margin:0 0 9px;font-size:17px;line-height:1.5;color:rgba(255,255,255,.9);}
-.hs-note{margin:0 0 26px;font-size:14px;line-height:1.6;color:rgba(255,255,255,.68);}
-/* 标识卡：原来是死白卡片，项目标压上去像贴纸。改成极浅的活动主色渐变
-   （每屏 --fig1/--fig2 取本屏主色的浅色版），右上角叠一层白色光斑当纸面反光，
-   再压一道内白描边。底部用一条细线分出署名行，放畅途未来领袖的标识——
-   活动标是主体、畅途是署名，层级拉开就不抢。 */
+  color:var(--hk,#0F1B2A);letter-spacing:-.4px;}
+.hs-sub{margin:0 0 9px;font-size:17px;line-height:1.5;color:var(--ink-2,#3C4C63);}
+.hs-note{margin:0 0 26px;font-size:14px;line-height:1.6;color:#4E5F76;}
+/* 标识卡：整屏变浅之后，卡不能再靠「浅」提亮，改靠「白 + 浮起」。
+   卡底从纯白起，尾部淡淡带一点本屏主色（--fig2），投影加深到能压住浅背景。
+   活动标是主体、畅途是署名，层级靠尺寸拉开。 */
 .hs-fig{flex-shrink:0;width:400px;height:238px;border-radius:20px;
   display:flex;flex-direction:column;align-items:center;justify-content:center;
   padding:22px 26px 18px;
-  background:
-    radial-gradient(120% 92% at 88% 4%,rgba(255,255,255,.98),rgba(255,255,255,0) 58%),
-    linear-gradient(155deg,var(--fig1,#F7FAFF) 0%,var(--fig2,#E7EFFB) 100%);
-  border:1px solid rgba(255,255,255,.62);
-  box-shadow:0 24px 60px rgba(0,0,0,.26),inset 0 1px 0 rgba(255,255,255,.9);}
+  background:linear-gradient(158deg,#FFFFFF 0%,#FFFFFF 48%,var(--fig2,#F7FAFF) 100%);
+  border:1px solid rgba(255,255,255,.92);
+  box-shadow:0 24px 50px -18px rgba(15,27,42,.32),0 3px 8px rgba(15,27,42,.06),inset 0 1px 0 #fff;}
 .hs-fig .fig-mark{flex:1;display:flex;align-items:center;justify-content:center;
   width:100%;min-height:0;padding:2px 12px;}
 .hs-fig .fig-mark img{max-width:100%;max-height:100%;object-fit:contain;display:block;}
