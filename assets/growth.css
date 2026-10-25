@@ -1,7 +1,7 @@
 /* ==========================================================================
    成长路径块（首页 #path）—— 复用 site.css 里已有的 .path-list 组件，
-   这里只补一样 site.css 没有的：滚动到位时站点圆环点亮。
-   组件本体（四列栅格 / 轨道渐变 / 站点圆环 / 卡片 / 三档响应式）全在 site.css 274–325 行与 452/500 段。
+   这里只补 site.css 没有的两样：① 滚动到位时站点圆环点亮 ② 「拿到」那行的行内排版。
+   组件本体（三列栅格 / 轨道渐变 / 站点圆环 / 卡片 / 三档响应式）全在 site.css 274–340 行与 452/500 段。
    区块底色与分隔线归 site.css 的 #path 一条规则管，别在这里重复写，两处写会打架。
    ========================================================================== */
 
@@ -10,6 +10,16 @@
 .path-list .step .no{transition:background .3s,color .3s,transform .3s,box-shadow .3s;}
 .path-list .step.on .no{background:var(--sc);color:var(--surface);transform:scale(1.06);}
 .path-list .step.on .step-card{border-color:var(--border);box-shadow:var(--shadow);}
+
+/* 「拿到」那一行是三四个顿号串，site.css 的 .step-out 是 flex + wrap，
+   值一长就把标签挤成独立一行。改成块级流，标签行内跟着文字走，换行自然落在标签后面。 */
+#path .step-out{display:block;}
+#path .step-out .k{display:inline-block;margin:0 6px 2px 0;}
+#path .step-out .v{display:inline;}
+
+@media (max-width:420px){
+  #path .step-out .v{font-size:12.5px;}
+}
 
 @media (prefers-reduced-motion:reduce){
   .path-list .step .no,.path-list .step.on .no{transition:none;}
