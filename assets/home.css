@@ -160,9 +160,10 @@
   border:1px solid var(--line);border-radius:16px;padding:24px 22px;}
 .oc .oc-k{font-size:11.5px;letter-spacing:1.5px;color:var(--blue-700);font-weight:700;}
 .oc h3{font-size:18px;margin:9px 0 10px;letter-spacing:-.2px;}
-/* 成长档案两张卡去掉了 01/02 小标签，标题成为卡片第一行，字号提一档补上那一行的分量。
-   其他页的 .oc 仍带小标签，保持 18px 不动。 */
-#archive .oc h3{font-size:clamp(20px,2.6vw,24px);margin:0 0 12px;letter-spacing:-.4px;}
+/* 去掉 01/02 序号后，类别词（学习记录 / 成长记忆）升为卡片标题，下面那行黑色标题回到 18px。
+   其他页的 .oc 仍带 01/02 小标签，保持 11.5px + 18px 不动。 */
+#archive .oc-k{font-size:clamp(20px,2.6vw,24px);letter-spacing:-.4px;line-height:1.32;}
+#archive .oc h3{margin:8px 0 10px;}
 .oc p{font-size:13.5px;line-height:1.8;color:var(--ink-2);margin:0 0 14px;}
 .oc ul{list-style:none;margin:0;padding:13px 0 0;border-top:1px dashed var(--line);margin-top:auto;}
 .oc li{font-size:12.5px;color:var(--text-3);line-height:1.9;padding-left:13px;position:relative;}
@@ -233,7 +234,8 @@
 .support{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;}
 .sp{display:flex;flex-direction:column;background:var(--surface);
   border:1px solid var(--line);border-radius:16px;padding:24px 22px;}
-.sp .sp-k{font-size:11.5px;letter-spacing:1.5px;color:var(--blue-700);font-weight:700;}
+/* 去掉 01/02 序号后，类别词（教学与练习 / 获客与社媒运营）升为卡片标题 */
+.sp .sp-k{font-size:clamp(20px,2.6vw,24px);letter-spacing:-.4px;line-height:1.32;color:var(--blue-700);font-weight:700;}
 .sp h3{font-size:18px;margin:9px 0 10px;letter-spacing:-.2px;}
 .sp p{font-size:13.5px;line-height:1.8;color:var(--ink-2);margin:0 0 13px;}
 /* 正文成了卡里最后一项，底部那 13px 会让留白比顶部多出一截 */
