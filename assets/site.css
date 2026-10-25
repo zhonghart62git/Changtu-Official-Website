@@ -268,7 +268,8 @@ td em{font-style:normal;font-size:12.5px;color:var(--muted);}
 .q span{display:block;font-size:12px;color:var(--muted);margin-top:8px;line-height:1.6;}
 
 /* ===== 成长路径 ===== */
-#path{background:var(--bg-2);border-top:1px solid var(--line);}
+/* 白底：上下邻块都是 bg-2，靠底色差断块，不再画分隔线 */
+#path{background:var(--surface);}
 /* ===== 成长路径：一条轨道，三个站点 ===== */
 .path{position:relative;}
 .path-list{list-style:none;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px;position:relative;}
@@ -290,7 +291,7 @@ td em{font-style:normal;font-size:12.5px;color:var(--muted);}
   width:44px;height:44px;border-radius:50%;display:grid;place-items:center;
   background:var(--surface);border:2px solid var(--sc);color:var(--ink);
   font-weight:800;font-size:13px;letter-spacing:.02em;
-  box-shadow:0 0 0 6px var(--bg-2),0 8px 18px rgba(8,66,127,.10);
+  box-shadow:0 0 0 6px var(--surface),0 8px 18px rgba(8,66,127,.10);
   transition:background .22s,color .22s,transform .22s;
 }
 .step::before{
@@ -299,10 +300,12 @@ td em{font-style:normal;font-size:12.5px;color:var(--muted);}
 }
 .step:hover .no{background:var(--sc);color:var(--surface);transform:scale(1.07);}
 /* 阶段卡片 */
+/* 阶段卡片：白底上靠细边 + 轻影立起来，不能只靠边框，会显得空 */
 .step-card{
   position:relative;flex:1 1 auto;display:flex;flex-direction:column;overflow:hidden;
   background:var(--surface);border:1px solid var(--line);border-radius:var(--r);
-  padding:19px 20px 17px;transition:transform .24s,box-shadow .24s,border-color .24s;
+  padding:19px 20px 17px;box-shadow:var(--shadow-sm);
+  transition:transform .24s,box-shadow .24s,border-color .24s;
 }
 .step-card::before{
   content:"";position:absolute;left:0;right:0;top:0;height:3px;
