@@ -71,6 +71,8 @@ header.nav{
 .btn-s{background:var(--surface);color:var(--ink);border-color:var(--line);}
 .btn-s:hover{border-color:var(--blue);color:var(--blue);transform:translateY(-2px);}
 .btn-sm{padding:9px 18px;font-size:13.5px;}
+/* 键盘走到按钮时要看得见。浏览器默认的黑色描边落在蓝底上很难看，统一成深蓝 */
+.btn:focus-visible{outline:2px solid var(--blue-deep);outline-offset:3px;}
 .burger{display:none;width:42px;height:42px;border:1px solid var(--line);background:var(--surface);border-radius:12px;align-items:center;justify-content:center;cursor:pointer;}
 .burger span{display:block;width:18px;height:2px;background:var(--ink);position:relative;border-radius:2px;}
 .burger span::before,.burger span::after{content:"";position:absolute;left:0;width:18px;height:2px;background:var(--ink);border-radius:2px;}
@@ -446,28 +448,32 @@ summary::after{content:"+";font-size:20px;color:var(--blue);font-weight:400;line
 details[open] summary::after{transform:rotate(45deg);}
 details .ans{padding:0 0 18px;font-size:14.3px;color:var(--ink-2);border-top:1px dashed var(--line);padding-top:14px;}
 
-/* ===== 联系 ===== */
+/* ===== 末屏转化区 =====
+   全站只有这一个主按钮。电话是辅助信息，排在按钮下方，不并排成第二个按钮。 */
 #contact{background:radial-gradient(700px 360px at 88% 8%,var(--surface-3) 0%,rgba(234,244,254,0) 70%),
   radial-gradient(600px 320px at 4% 92%,var(--surface-3) 0%,rgba(234,244,254,0) 72%),
   var(--surface);
   border-top:1px solid var(--line);}
-.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center;}
-.contact-info{display:grid;gap:14px;margin-top:26px;}
-.ci{display:flex;gap:14px;align-items:flex-start;}
-.ci .ic{width:40px;height:40px;border-radius:12px;background:var(--tint);color:var(--blue);display:flex;align-items:center;justify-content:center;flex-shrink:0;}
-.ci .ic svg{width:19px;height:19px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
-.ci b{display:block;font-size:14px;color:var(--muted);font-weight:500;}
-.ci span{font-size:16.5px;font-weight:700;color:var(--ink);letter-spacing:.3px;}
-.ci .gh-list{display:flex;flex-direction:column;gap:3px;margin-top:4px;}
-.ci .gh-list i{font-style:normal;font-size:15.5px;font-weight:700;color:var(--ink);letter-spacing:.2px;line-height:1.45;display:flex;align-items:baseline;}
-.ci .gh-list i::before{content:"";width:5px;height:5px;border-radius:50%;background:var(--brand);flex:none;margin-right:8px;transform:translateY(-1px);}
-.ct-card{background:linear-gradient(150deg,var(--blue-deep),var(--blue) 58%,var(--blue-2));border-radius:20px;padding:38px 34px;color:var(--surface);box-shadow:0 24px 52px rgba(8,66,127,.28);position:relative;overflow:hidden;}
-.ct-card::after{content:"";position:absolute;right:-60px;bottom:-70px;width:230px;height:230px;border-radius:50%;background:rgba(255,255,255,.08);}
-.ct-card h3{font-size:26px;line-height:1.45;letter-spacing:-.3px;}
-.ct-card .ln{width:44px;height:4px;border-radius:2px;background:var(--brand);margin:18px 0;}
-.ct-card p{font-size:14.5px;color:var(--surface-3);position:relative;}
-.ct-card .quote{margin-top:22px;padding-top:18px;border-top:1px solid rgba(255,255,255,.18);font-size:14px;color:var(--surface);font-weight:600;}
-.ct-card .btns{display:flex;gap:12px;flex-wrap:wrap;margin-top:24px;position:relative;}
+.cta{max-width:640px;margin:0 auto;text-align:center;}
+.cta .eyebrow{margin-bottom:18px;}
+.cta h2{font-size:clamp(25px,3.1vw,36px);line-height:1.3;letter-spacing:-.5px;margin:0;}
+.cta-d{margin:16px auto 0;max-width:560px;font-size:15px;line-height:1.85;color:var(--ink-2);}
+.cta-act{margin-top:30px;}
+.cta-act .btn{padding:15px 44px;font-size:16px;min-height:52px;}
+.cta-tel{margin-top:28px;display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:4px 18px;}
+.cta-tel span{font-size:13px;color:var(--muted);}
+.cta-tel a{display:inline-flex;align-items:center;font-size:15px;font-weight:700;color:var(--ink);letter-spacing:.3px;
+  padding:6px 2px;border-bottom:1px solid var(--line);transition:color .18s,border-color .18s;}
+.cta-tel a:hover{color:var(--blue);border-color:var(--blue);}
+/* 手机上号码是并排两个胶囊：15px 粗体加 2px 下划线只有 27px 高，点不准。
+   提示语独占一行，两个号码平分剩余宽度，点按区 44px 起。 */
+@media (max-width:560px){
+  .cta-tel{gap:9px;margin-top:24px;}
+  .cta-tel span{flex:0 0 100%;text-align:center;}
+  .cta-tel a{flex:1 1 0;justify-content:center;min-height:44px;padding:0 10px;font-size:15px;
+    border:1px solid var(--line);border-radius:22px;background:var(--surface);}
+  .cta-act .btn{width:100%;}
+}
 
 /* ===== Footer ===== */
 footer{background:var(--brand-hover);color:rgba(255,255,255,.78);padding:46px 0 30px;font-size:13.5px;}
@@ -509,7 +515,6 @@ html.no-js .rv{opacity:1;transform:none;}
   .biz .wrap,.biz.flip .wrap{grid-template-columns:1fr;gap:30px;}
   .biz.flip .biz-copy{order:0;}
   .biz.flip .biz-body{order:0;}
-  .contact-grid{grid-template-columns:1fr;gap:32px;}
   .stats{grid-template-columns:repeat(2,1fr);gap:22px 8px;}
   .stat:nth-child(3)::before{display:none;}
   .nav-links{display:none;}
@@ -557,7 +562,6 @@ html.no-js .rv{opacity:1;transform:none;}
   .topbar{clip-path:none;}
   .formula{padding:22px 18px;border-radius:14px;}
   .bt-wrap{padding:20px 16px 16px;}
-  .ct-card{padding:30px 24px;}
   .f-links{gap:32px;}
   .stat+.stat::before{display:none;}
   .sec-head{margin-bottom:32px;}
@@ -572,7 +576,7 @@ html.no-js .rv{opacity:1;transform:none;}
 
 
 /* 移动端：允许 grid / flex 子项收缩，避免宽表格把整页撑出横向滚动 */
-.biz .wrap > *,.biz-body > *,.panel > *,.contact-grid > *,.tier-cards > *{min-width:0;}
+.biz .wrap > *,.biz-body > *,.panel > *,.tier-cards > *{min-width:0;}
 .table-scroll{max-width:100%;}
 /* ===== 报名入口 ===== */
 .biz-cta{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-top:26px;}
@@ -994,3 +998,95 @@ a.mo-card:hover .mo-go{color:var(--blue-deep);}
   .mo-qr{width:130px;height:130px;}
 }
 @media (prefers-reduced-motion:reduce){.mo-panel{animation:none;}}
+
+/* ===== 留资表单（.fm） =====
+   首页「预约沟通」与 find.html「登记联系方式」共用。默认单列，
+   find.html 的双列版加 .is-two 覆盖——单列是新的默认，双列是例外。
+   所有控件高度不低于 44px，手机上点得准。 */
+.fm-panel{max-width:560px;}
+.fm{display:grid;gap:16px;}
+.fm.is-two{grid-template-columns:1fr 1fr;gap:14px 16px;}
+.fm[hidden]{display:none;}
+.fm-f{display:flex;flex-direction:column;gap:7px;font-size:13px;font-weight:700;color:var(--ink-2);}
+.fm-f.fm-wide{grid-column:1 / -1;}
+/* 标签里的必填星号与「选填」标记：星号只做视觉标记，语义由 required 属性承担 */
+.fm-req{font-style:normal;color:var(--danger);margin-left:2px;}
+.fm-opt{font-style:normal;font-size:11.5px;font-weight:500;color:var(--muted);margin-left:6px;}
+.fm-f input,.fm-f select,.fm-f textarea{width:100%;font:inherit;font-size:14px;font-weight:400;
+  color:var(--ink);min-height:44px;padding:11px 13px;border-radius:10px;border:1px solid var(--border);
+  background:var(--surface);transition:border-color .16s,box-shadow .16s;}
+.fm-f input:focus,.fm-f select:focus,.fm-f textarea:focus{outline:0;border-color:var(--blue);
+  box-shadow:0 0 0 3px rgba(11,99,197,.14);}
+.fm-f textarea{min-height:84px;line-height:1.7;resize:vertical;}
+/* 单选卡片：三个咨询类型竖排，整块可点，原生 radio 负责键盘与读屏 */
+.fm-picks{display:grid;gap:9px;}
+.fm-pick{position:relative;display:flex;align-items:center;gap:11px;
+  min-height:48px;padding:12px 15px;border-radius:12px;cursor:pointer;
+  border:1px solid var(--border);background:var(--surface);
+  font-size:14.5px;font-weight:600;color:var(--ink-2);transition:.16s;}
+.fm-pick:hover{border-color:var(--blue);}
+.fm-pick input{position:absolute;width:1px;height:1px;opacity:0;pointer-events:none;}
+.fm-pick i{width:18px;height:18px;border-radius:50%;border:2px solid var(--border-strong);
+  flex:none;display:flex;align-items:center;justify-content:center;transition:.16s;}
+.fm-pick.on{border-color:var(--blue);background:var(--blue-50);color:var(--blue-deep);
+  box-shadow:0 0 0 3px rgba(11,99,197,.1);}
+.fm-pick.on i{border-color:var(--blue);background:var(--blue);}
+.fm-pick.on i::after{content:"";width:6px;height:6px;border-radius:50%;background:#fff;}
+.fm-pick input:focus-visible ~ i{box-shadow:0 0 0 3px rgba(11,99,197,.3);}
+/* 多选标签：checkbox 藏起来，label 自己就是按钮。
+   find.html 的登记表单用的是 button 版（JS 直接切 .on），两套共用同一套外观。 */
+.fm-chips{display:flex;flex-wrap:wrap;gap:8px;}
+.fm-chip,
+.fm-chips button{position:relative;display:inline-flex;align-items:center;
+  min-height:38px;padding:8px 15px;border-radius:20px;cursor:pointer;
+  font:inherit;font-size:13px;font-weight:600;color:var(--blue-deep);line-height:1.5;
+  border:1px solid var(--border);background:var(--surface);transition:.16s;}
+.fm-chip:hover,
+.fm-chips button:hover{border-color:var(--blue);}
+.fm-chip input{position:absolute;width:1px;height:1px;opacity:0;pointer-events:none;}
+.fm-chip.on,
+.fm-chips button.on{background:var(--blue);border-color:var(--blue);color:#fff;}
+.fm-chip:focus-within,
+.fm-chips button:focus-visible{box-shadow:0 0 0 3px rgba(11,99,197,.24);}
+/* 字段级错误：贴着字段下方，改了就消失 */
+.fm-e,
+.fm-err{margin:0;font-size:12.5px;line-height:1.6;color:var(--danger);}
+.fm-e[hidden],
+.fm-err[hidden]{display:none;}
+.fm-f.is-err input,.fm-f.is-err textarea{border-color:var(--danger);}
+.fm-hint{margin:0;font-size:12px;font-weight:400;color:var(--muted);}
+.fm-count{margin:0;align-self:flex-end;font-size:11.5px;font-weight:400;color:var(--muted);}
+/* 提交级错误：网络或存储失败时出现在表单顶部，内容一个字都不清 */
+.fm-alert{margin:0;padding:11px 14px;border-radius:10px;font-size:13px;line-height:1.7;
+  color:#8A1418;background:#FDECEC;border:1px solid #F5C2C4;}
+.fm-alert[hidden]{display:none;}
+.fm-act{display:flex;gap:10px;margin-top:4px;}
+.fm-act .btn{min-height:48px;font-size:15px;}
+/* 只有一个提交按钮时铺满整行；find.html 是「提交 + 取消」两个，保持各自宽度 */
+.fm-act .btn:only-child{width:100%;}
+.fm-act .btn[disabled]{opacity:.62;cursor:not-allowed;transform:none;box-shadow:none;}
+/* 双列版（find.html）里整行独占的部件 */
+.fm.is-two .fm-act,
+.fm.is-two .fm-err{grid-column:1 / -1;}
+.fm-note{margin:0;font-size:12px;line-height:1.7;color:var(--muted);text-align:center;}
+/* 成功态 */
+.fm-done{text-align:center;padding:8px 0 4px;}
+.fm-done[hidden]{display:none;}
+.fm-tick{width:48px;height:48px;margin:0 auto 16px;border-radius:50%;display:flex;
+  align-items:center;justify-content:center;font-size:23px;font-weight:800;color:#fff;
+  background:linear-gradient(135deg,var(--blue),var(--blue-2));}
+.fm-done h4{margin:0 0 10px;font-size:18px;font-weight:800;color:var(--ink);}
+.fm-done p{margin:0 auto 22px;max-width:400px;font-size:13.5px;line-height:1.8;color:var(--text-2);}
+.fm-branch{display:grid;gap:16px;}
+.fm-branch[hidden]{display:none;}
+
+/* 移动端：表单弹窗铺满整屏，键盘弹起时也不挤 */
+@media (max-width:640px){
+  .mo.is-full{padding:0;}
+  .mo.is-full .mo-panel{max-width:none;max-height:none;height:100%;border-radius:0;
+    padding:20px 18px 30px;animation:none;}
+  .mo.is-full .mo-x{top:10px;right:10px;width:44px;height:44px;font-size:22px;}
+  .fm{grid-template-columns:1fr;gap:16px;}
+  .fm-f input,.fm-f select,.fm-f textarea{font-size:16px;}
+}
+

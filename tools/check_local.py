@@ -54,6 +54,13 @@ CASE_H3 = {
     '获客有方向，内容有素材',
 }
 
+# 首页末屏转化区的主标题（2026-10-25 用户定稿）：「咨询项目或洽谈合作」9 字。
+# 4 字规则管的是区块标题，末屏这块是页面的收尾主标题，要与副标题、正文连读成一句，
+# 压到 4 字反而丢信息。用户给了原文，按原文放行。
+H2_EXEMPT = {
+    '咨询项目或洽谈合作',
+}
+
 
 def head_issues(s):
     out = []
@@ -67,7 +74,7 @@ def head_issues(s):
         if not t:
             continue
         han = len(re.findall(r'[\u4e00-\u9fff]', t))
-        if tag == 'h2' and han > 4:
+        if tag == 'h2' and han > 4 and t not in H2_EXEMPT:
             out.append('标题超长 h2 %d 字「%s」' % (han, t[:22]))
         if re.search(r'[，。；]', t) and t not in CASE_H3:
             out.append('标题带句读 %s「%s」' % (tag, t[:22]))

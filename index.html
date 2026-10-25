@@ -24,7 +24,7 @@
   "knowsAbout": ["青少年语言艺术","辩论与思辨训练","中英双语主持","模拟联合国","社会艺术水平考级","青少年领导力培养"]
 }
 </script>
-<link rel="stylesheet" href="assets/site.css?v=76afa125">
+<link rel="stylesheet" href="assets/site.css?v=b9c95a23">
 <link rel="stylesheet" href="assets/site-v2.css?v=729faea9">
 <link rel="stylesheet" href="assets/growth.css?v=e686c542">
 <link rel="stylesheet" href="assets/home.css?v=8319169a">
@@ -478,44 +478,17 @@
 <!-- ============ 行动入口 ============ -->
 <section id="contact">
   <div class="wrap">
-    <div class="contact-grid">
-      <div class="rv2">
-        <div class="sec-head" style="margin-bottom:0;">
-          <div class="bar"></div>
-          <h2>联系我们 <small>Contact</small></h2>
-          <p>把学生年龄段、想开的课、场地和老师人数发给我们，我们回一份具体的开班建议：开哪阶、配什么材料、多久能上台。</p>
-        </div>
-        <div class="contact-info">
-          <div class="ci">
-            <div class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 2 .7 2.9a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.2-1.2a2 2 0 0 1 2.1-.5c.9.3 1.9.6 2.9.7a2 2 0 0 1 1.7 2z"></path></svg></div>
-            <div><b>咨询电话（微信同号）</b><span>180 3882 9261<br>180 3882 9262</span></div>
-          </div>
-          <div class="ci">
-            <div class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="4"></rect><path d="M8 10v7M8 7v.01M12 17v-4a2 2 0 0 1 4 0v4"></path></svg></div>
-            <div>
-              <b>公众号</b>
-              <span class="gh-list"><i>畅途未来领袖</i><i>华语辩论世界杯广东赛区</i><i>广东曹灿杯</i></span>
-            </div>
-          </div>
-          <div class="ci">
-            <div class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="3" width="16" height="18" rx="3"></rect><path d="M10 18h4"></path></svg></div>
-            <div>
-              <b>小程序与工作台</b>
-              <span>微信搜索「畅途未来领袖」进入小程序；老师用 <a href="teacher/" style="color:var(--blue);font-weight:600;">教师工作台</a> 备课、排课、看学员记录。</span>
-            </div>
-          </div>
-        </div>
+    <div class="cta rv2">
+      <span class="eyebrow"><i></i>联系我们</span>
+      <h2>咨询项目或洽谈合作</h2>
+      <p class="cta-d">想了解孩子适合哪些课程和活动，或有学校、机构、场地及活动合作需求，请留下联系方式。工作人员会根据您的情况与您沟通。</p>
+      <div class="cta-act">
+        <button class="btn btn-p" type="button" id="ctaLead" data-mo="moLead">预约沟通</button>
       </div>
-      <div class="ct-card rv2">
-        <h3>成长阶梯</h3>
-        <div class="ln"></div>
-        <p>12 年只做青少年素质教育。从一场朗诵展演，做到四大能力框架、三力九册、六阶 MUN、四类赛事、两类考级。</p>
-        <div class="quote">拆 Bug，少点瞎努力 ~</div>
-        <div class="btns">
-          <a class="btn btn-o" href="enroll.html">填写报名意向</a>
-          <a class="btn btn-s" href="tel:18038829261">电话咨询</a>
-          <a class="btn btn-s" href="sanyuanli-course.html" style="background:rgba(255,255,255,.12);color:var(--surface);border-color:rgba(255,255,255,.28);">看课程样例</a>
-        </div>
+      <div class="cta-tel">
+        <span>也可直接致电</span>
+        <a href="tel:18038829261">180 3882 9261</a>
+        <a href="tel:18038829262">180 3882 9262</a>
       </div>
     </div>
   </div>
@@ -694,5 +667,265 @@
   </div>
 </div>
 
+<!-- ═════════ 预约沟通表单 ═════════
+     桌面居中弹窗（560px），手机上铺满整屏。单列、字段标签常显、必填带星号。 -->
+<div class="mo is-full" id="moLead" hidden>
+  <div class="mo-mask" data-mo-close></div>
+  <div class="mo-panel fm-panel" role="dialog" aria-modal="true" aria-labelledby="leadT" tabindex="-1">
+    <button class="mo-x" type="button" data-mo-close aria-label="关闭">×</button>
+    <h3 id="leadT">预约沟通</h3>
+    <p class="mo-sub" id="leadSub">选择您想咨询的内容，留下联系方式。工作人员会与您联系。</p>
+
+    <form class="fm" id="leadForm" novalidate>
+      <div class="fm-f" data-f="intent">
+        <span class="fm-l">您想咨询什么？<i class="fm-req" aria-hidden="true">*</i></span>
+        <div class="fm-picks" id="leadPicks">
+          <label class="fm-pick"><input type="radio" name="intent" value="child" required><i aria-hidden="true"></i><span>孩子的课程或活动</span></label>
+          <label class="fm-pick"><input type="radio" name="intent" value="school" required><i aria-hidden="true"></i><span>学校或机构合作</span></label>
+          <label class="fm-pick"><input type="radio" name="intent" value="venue" required><i aria-hidden="true"></i><span>场地或活动合作</span></label>
+        </div>
+        <span class="fm-e" data-e="intent" hidden></span>
+      </div>
+
+      <!-- 分支：孩子的课程或活动 -->
+      <div class="fm-branch" id="leadChild" hidden>
+        <label class="fm-f" data-f="age">
+          <span class="fm-l">孩子的年龄或年级<i class="fm-req" aria-hidden="true">*</i></span>
+          <input id="leadAge" name="age" type="text" maxlength="30" placeholder="例如：11 岁，小学五年级" autocomplete="off">
+          <span class="fm-e" data-e="age" hidden></span>
+        </label>
+        <div class="fm-f">
+          <span class="fm-l">想了解什么？<em class="fm-opt">选填</em></span>
+          <div class="fm-chips" id="leadTopics">
+            <label class="fm-chip"><input type="checkbox" value="课程训练"><span>课程训练</span></label>
+            <label class="fm-chip"><input type="checkbox" value="近期活动"><span>近期活动</span></label>
+            <label class="fm-chip"><input type="checkbox" value="能力测评"><span>能力测评</span></label>
+            <label class="fm-chip"><input type="checkbox" value="暂不确定"><span>暂不确定</span></label>
+          </div>
+        </div>
+      </div>
+
+      <!-- 分支：学校或机构合作 / 场地或活动合作 -->
+      <div class="fm-branch" id="leadPartner" hidden>
+        <label class="fm-f" data-f="org">
+          <span class="fm-l">单位名称<i class="fm-req" aria-hidden="true">*</i></span>
+          <input id="leadOrg" name="org" type="text" maxlength="40" autocomplete="organization">
+          <span class="fm-e" data-e="org" hidden></span>
+        </label>
+        <label class="fm-f">
+          <span class="fm-l">合作需求<em class="fm-opt">选填</em></span>
+          <textarea id="leadNeed" name="need" rows="3" maxlength="200" placeholder="请简单说明希望合作的内容"></textarea>
+          <span class="fm-count" id="leadNeedCount">0 / 200</span>
+        </label>
+      </div>
+
+      <label class="fm-f" data-f="name">
+        <span class="fm-l">怎么称呼您？<i class="fm-req" aria-hidden="true">*</i></span>
+        <input id="leadName" name="name" type="text" maxlength="20" placeholder="如 王女士" autocomplete="name">
+        <span class="fm-e" data-e="name" hidden></span>
+      </label>
+
+      <label class="fm-f" data-f="phone">
+        <span class="fm-l">手机号<i class="fm-req" aria-hidden="true">*</i></span>
+        <input id="leadPhone" name="phone" type="tel" inputmode="numeric" maxlength="11" placeholder="11 位手机号" autocomplete="tel">
+        <span class="fm-hint">用于工作人员与您联系</span>
+        <span class="fm-e" data-e="phone" hidden></span>
+      </label>
+
+      <p class="fm-alert" id="leadAlert" role="alert" hidden></p>
+
+      <div class="fm-act">
+        <button class="btn btn-p" type="submit" id="leadSubmit">请联系我</button>
+      </div>
+      <p class="fm-note">信息仅用于本次咨询与后续沟通。</p>
+    </form>
+
+    <div class="fm-done" id="leadDone" hidden>
+      <div class="fm-tick" aria-hidden="true">✓</div>
+      <h4>已收到您的需求</h4>
+      <p>工作人员会通过您填写的手机号与您联系。</p>
+      <button class="btn btn-p" type="button" data-mo-close>知道了</button>
+    </div>
+  </div>
+</div>
+
+<script src="assets/lead.js?v=8d4e88eb"></script>
 <script src="assets/modal.js?v=ca40bbb1"></script>
+<script>
+/* 预约沟通表单：分支显示、逐字段校验、提交三态、埋点。
+   校验规则与提交动作都在 assets/lead.js（CT.Lead），这里只管界面。 */
+(function(){
+  var form=document.getElementById('leadForm');
+  if(!form||!window.CT||!CT.Lead) return;
+
+  var done=document.getElementById('leadDone'),
+      alertEl=document.getElementById('leadAlert'),
+      subEl=document.getElementById('leadSub'),
+      btn=document.getElementById('leadSubmit'),
+      picks=document.getElementById('leadPicks'),
+      topicsBox=document.getElementById('leadTopics'),
+      childBox=document.getElementById('leadChild'),
+      partnerBox=document.getElementById('leadPartner'),
+      ageEl=document.getElementById('leadAge'),
+      orgEl=document.getElementById('leadOrg'),
+      nameEl=document.getElementById('leadName'),
+      phoneEl=document.getElementById('leadPhone'),
+      needEl=document.getElementById('leadNeed'),
+      countEl=document.getElementById('leadNeedCount');
+
+  var intent='', busy=false;
+
+  function track(n,p){ if(CT.track) CT.track(n,p); }
+  function box(name){ return form.querySelector('[data-f="'+name+'"]'); }
+  function errEl(name){ return form.querySelector('[data-e="'+name+'"]'); }
+  function inputOf(name){ return form.querySelector('[data-f="'+name+'"] input, [data-f="'+name+'"] textarea'); }
+
+  function showErr(name,msg){
+    var b=box(name), e=errEl(name);
+    if(b) b.classList.add('is-err');
+    if(e){ e.textContent=msg; e.hidden=false; }
+  }
+  function clearErr(name){
+    var b=box(name), e=errEl(name);
+    if(b) b.classList.remove('is-err');
+    if(e){ e.textContent=''; e.hidden=true; }
+  }
+  function clearAll(){
+    ['intent','age','org','name','phone'].forEach(clearErr);
+    alertEl.hidden=true;
+  }
+  function setBusy(on){
+    busy=on;
+    btn.disabled=on;
+    btn.textContent=on?'正在提交':'请联系我';
+    form.setAttribute('aria-busy',on?'true':'false');
+  }
+
+  /* 入口埋点：主按钮被点开的那一刻 */
+  var cta=document.getElementById('ctaLead');
+  if(cta) cta.addEventListener('click',function(){
+    track('final_cta_click',{where:'index#contact'});
+    track('lead_form_open',{where:'index#contact'});
+  });
+
+  /* 咨询类型：三个单选卡片，切换时显示对应分支 */
+  picks.addEventListener('change',function(e){
+    var r=e.target;
+    if(!r||r.type!=='radio') return;
+    intent=r.value;
+    [].slice.call(picks.querySelectorAll('.fm-pick')).forEach(function(p){
+      p.classList.toggle('on',p.querySelector('input').checked);
+    });
+    childBox.hidden=(intent!=='child');
+    partnerBox.hidden=(intent==='child');
+    clearErr('intent');
+    clearErr('age');
+    clearErr('org');
+    track('lead_intent_select',{intent:intent,label:CT.Lead.INTENTS[intent]||''});
+  });
+
+  /* 多选标签 */
+  topicsBox.addEventListener('change',function(e){
+    var c=e.target;
+    if(!c||c.type!=='checkbox') return;
+    var lab=c.parentNode;
+    if(lab&&lab.classList) lab.classList.toggle('on',c.checked);
+  });
+
+  /* 输入即清错 */
+  [[ageEl,'age'],[orgEl,'org'],[nameEl,'name']].forEach(function(p){
+    p[0].addEventListener('input',function(){ clearErr(p[1]); });
+  });
+  phoneEl.addEventListener('input',function(){
+    var v=phoneEl.value.replace(/\D/g,'').slice(0,11);
+    if(v!==phoneEl.value) phoneEl.value=v;
+    clearErr('phone');
+  });
+  needEl.addEventListener('input',function(){
+    countEl.textContent=needEl.value.length+' / 200';
+  });
+
+  function collect(){
+    var topics=[].slice.call(topicsBox.querySelectorAll('input:checked')).map(function(i){ return i.value; });
+    return {
+      intent:intent,
+      age:ageEl.value,
+      topics:topics,
+      org:orgEl.value,
+      need:needEl.value,
+      name:nameEl.value,
+      phone:phoneEl.value
+    };
+  }
+
+  form.addEventListener('submit',function(e){
+    e.preventDefault();
+    if(busy) return;
+    clearAll();
+
+    var data=collect();
+    var fields=CT.Lead.validate(data);
+    var keys=Object.keys(fields);
+    if(keys.length){
+      keys.forEach(function(k){ showErr(k,fields[k]); });
+      track('lead_form_error',{reason:'invalid',field:keys[0]});
+      var f=inputOf(keys[0]);
+      if(f) f.focus();
+      return;
+    }
+
+    setBusy(true);
+    track('lead_form_submit',{intent:data.intent});
+
+    CT.Lead.submit(data,{source:'index#contact'}).then(function(){
+      track('lead_form_success',{intent:data.intent});
+      form.hidden=true;
+      /* 已经提交完了，引导文案留着会跟结果打架，收起 */
+      subEl.hidden=true;
+      done.hidden=false;
+      var b=done.querySelector('.btn');
+      if(b) b.focus();
+    }).catch(function(err){
+      var isField=!!(err&&err.fields);
+      track('lead_form_error',{reason:isField?'invalid':'submit',message:err&&err.message});
+      setBusy(false);
+
+      if(isField){
+        var ks=Object.keys(err.fields);
+        ks.forEach(function(k){ showErr(k,err.fields[k]); });
+        var f2=inputOf(ks[0]);
+        if(f2) f2.focus();
+        return;
+      }
+
+      /* 提交失败：内容一个字都不清，按钮改成「重新提交」 */
+      var msg=String(err&&err.message||'提交失败，请稍后重试').replace(/。$/,'');
+      alertEl.textContent=msg+'。填写的内容已保留。';
+      alertEl.hidden=false;
+      btn.textContent='重新提交';
+      alertEl.scrollIntoView({block:'nearest'});
+    });
+  });
+
+  /* 关掉弹窗就复位，下次打开是干净的空白表单 */
+  function reset(){
+    form.reset();
+    form.hidden=false;
+    done.hidden=true;
+    subEl.hidden=false;
+    intent='';
+    [].slice.call(picks.querySelectorAll('.fm-pick')).forEach(function(p){ p.classList.remove('on'); });
+    [].slice.call(topicsBox.querySelectorAll('.fm-chip')).forEach(function(c){ c.classList.remove('on'); });
+    childBox.hidden=true;
+    partnerBox.hidden=true;
+    countEl.textContent='0 / 200';
+    clearAll();
+    setBusy(false);
+  }
+
+  document.addEventListener('ctmodal:close',function(e){
+    if(e.detail&&e.detail.id==='moLead') reset();
+  });
+})();
+</script>
 </body></html>
