@@ -949,6 +949,11 @@ html.no-js .rv{opacity:1;transform:none;}
 /* 只放一个二维码时用窄版，别留两列的空档 */
 .mo-panel.is-narrow{max-width:400px;text-align:center;}
 .mo-panel.is-narrow .mo-qr{width:200px;height:200px;margin-top:22px;}
+/* 窄版弹窗的正文一律左对齐，标题、二维码与图片说明保持居中。
+   居中排版适合短标题，长句在 400px 里折行会把断句切碎。 */
+.mo-panel.is-narrow .mo-sub,
+.mo-panel.is-narrow .mo-tel-lead,
+.mo-panel.is-narrow .mo-tel{text-align:left;}
 /* 窄版弹窗里连排的说明段：段间 10px，末段不再留白 */
 .mo-panel.is-narrow .mo-sub{margin-bottom:10px;}
 .mo-panel.is-narrow .mo-sub:last-of-type{margin-bottom:0;}
