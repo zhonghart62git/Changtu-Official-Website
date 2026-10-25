@@ -30,8 +30,14 @@
 .home .hero-lg h1{font-size:clamp(26px,3.6vw,46px);line-height:1.16;letter-spacing:-1.4px;margin:22px 0 0;}
 .home .hero-lg .lead{font-size:16px;max-width:540px;line-height:1.9;}
 .home .hero-lg .hero-cta{margin-top:32px;gap:12px;}
-/* 三个入口功能等价，视觉也等价：同底色、同宽度，不给某一个加权重 */
-.home .hero-lg .hero-cta .btn{flex:0 0 auto;min-width:140px;}
+/* 三个入口功能等价，视觉也等价：同底色、同宽度，不给某一个加权重。
+   做成轻玻璃胶囊（控制层，不是内容层），落在浅蓝首屏上比纯白更贴。 */
+.home .hero-lg .hero-cta .btn{flex:0 0 auto;min-width:140px;
+  background:rgba(255,255,255,.72);
+  -webkit-backdrop-filter:blur(10px) saturate(1.4);backdrop-filter:blur(10px) saturate(1.4);
+  border-color:rgba(11,99,197,.20);color:var(--blue-deep);}
+.home .hero-lg .hero-cta .btn:hover{background:rgba(255,255,255,.94);border-color:var(--brand-blue);
+  color:var(--brand-blue);}
 
 /* 能力环的成品图四周自带留白，桌面端左右各外扩 5%，让环的视觉直径
    与原来那版矢量环一致，不会被留白衬小 */
@@ -53,18 +59,25 @@
 .home .sec-head.sec-lg p.fc-lead{font-weight:600;color:var(--ink);}
 
 .ability-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;}
-.ab{display:flex;flex-direction:column;background:var(--surface);
-  border:1px solid var(--line);border-top:3px solid var(--d,var(--blue));
-  border-radius:16px;padding:24px 26px 22px;
-  transition:border-color .2s,transform .2s,box-shadow .2s;}
+/* 四张能力卡：底色接近白，只在顶部透一层 4% 的本域色做「局部浅光」，
+   顶条与圆点用满色域色。域色不上正文，青和琥珀在 11–15px 上只有 3.0–3.4:1。 */
+.ab{position:relative;display:flex;flex-direction:column;
+  background:linear-gradient(180deg,color-mix(in srgb,var(--d,#0B63C5) 4%,#fff) 0%,var(--surface) 46%),var(--surface);
+  border:1px solid var(--border-primary);border-top:3px solid var(--d,var(--brand-blue));
+  border-radius:var(--r);padding:24px 26px 22px;
+  transition:border-color var(--dur) var(--ease),transform var(--dur) var(--ease),box-shadow var(--dur) var(--ease);}
 .ab[data-d="expression"]{--d:var(--domain-expression);--d-tint:var(--domain-expression-tint);}
 .ab[data-d="thinking"]{--d:var(--domain-thinking);--d-tint:var(--domain-thinking-tint);}
 .ab[data-d="learning"]{--d:var(--domain-learning);--d-tint:var(--domain-learning-tint);}
 .ab[data-d="creativity"]{--d:var(--domain-creativity);--d-tint:var(--domain-creativity-tint);}
-.ab:hover{border-color:var(--d,var(--blue));transform:translateY(-2px);box-shadow:0 14px 34px rgba(8,66,127,.08);}
+/* 悬停时卡片按自己那一域的色泛光，不统一成蓝色——这样四张卡一眼能分出彼此 */
+.ab:hover{transform:translateY(-3px);
+  border-color:color-mix(in srgb,var(--d,var(--brand-blue)) 42%,transparent);
+  box-shadow:0 18px 40px -22px color-mix(in srgb,var(--d,var(--brand-blue)) 55%,transparent);}
 .ab .ab-k{font-size:11.5px;letter-spacing:1.5px;color:var(--text-3);font-weight:700;}
 .ab .ab-k::before{content:"";display:inline-block;width:8px;height:8px;border-radius:50%;
-  background:var(--d,var(--blue));margin-right:8px;vertical-align:1px;}
+  background:var(--d,var(--brand-blue));margin-right:8px;vertical-align:1px;
+  box-shadow:0 0 0 3px color-mix(in srgb,var(--d,var(--brand-blue)) 16%,transparent);}
 .ab h3{font-size:21px;margin:9px 0 9px;letter-spacing:-.3px;}
 .ab .ab-core{font-size:14.5px;line-height:1.85;color:var(--ink-2);margin:0 0 16px;text-wrap:pretty;}
 .ab .ab-dirs{list-style:none;margin:auto 0 0;padding:14px 0 0;border-top:1px dashed var(--line);
@@ -96,20 +109,20 @@
 
 /* ── 6. 五步链：目标 → 任务 → 支持 → 应用 → 反馈 ────────── */
 .flow{display:flex;flex-direction:column;border:1px solid var(--line);
-  border-radius:16px;overflow:hidden;background:var(--surface);}
+  border-radius:var(--r);overflow:hidden;background:var(--surface);}
 .fl{display:grid;grid-template-columns:158px 1fr;gap:22px;padding:18px 24px;
   border-bottom:1px solid var(--line);align-items:baseline;}
 .fl:last-child{border-bottom:none;}
 .fl .fn{display:flex;align-items:center;gap:9px;font-size:13px;font-weight:800;
-  color:var(--violet-700);letter-spacing:.2px;margin:0;}
+  color:var(--blue-deep);letter-spacing:.2px;margin:0;}
 .fl .fn i{font-style:normal;width:20px;height:20px;border-radius:50%;flex-shrink:0;
   display:flex;align-items:center;justify-content:center;
-  background:var(--violet-tint);color:var(--violet-700);font-size:10.5px;font-weight:800;}
+  background:var(--blue-50);color:var(--blue-deep);font-size:10.5px;font-weight:800;}
 .fl .fd{font-size:14px;line-height:1.82;color:var(--ink-2);}
 .fl .fd b{color:var(--ink);}
 
 /* ── 7. 一节课 90 分钟三段 + 教案页示意 ─────────────────── */
-.lesson{border:1px solid var(--line);border-radius:16px;overflow:hidden;background:var(--surface);}
+.lesson{border:1px solid var(--line);border-radius:var(--r);overflow:hidden;background:var(--surface);}
 .lesson-top{display:flex;flex-wrap:wrap;gap:8px 14px;align-items:baseline;
   padding:18px 22px;background:var(--bg-2);border-bottom:1px solid var(--line);}
 .lesson-top h3{font-size:16px;margin:0;letter-spacing:-.2px;}
@@ -141,7 +154,7 @@
 
 /* ── 8. AI 三方分工：AI 做什么 / 学生做什么 / 老师怎样支持 ── */
 .ai3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));
-  border:1px solid var(--violet-line);border-radius:16px;overflow:hidden;
+  border:1px solid var(--violet-line);border-radius:var(--r);overflow:hidden;
   background:linear-gradient(160deg,#FCFAFF 0%,var(--violet-tint) 100%);}
 .a3{padding:24px 22px;border-right:1px solid var(--violet-line);}
 .a3:last-child{border-right:none;}
@@ -157,7 +170,7 @@
 #projects{scroll-margin-top:86px;}
 .outcome{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;}
 .oc{display:flex;flex-direction:column;background:var(--surface);
-  border:1px solid var(--line);border-radius:16px;padding:24px 22px;}
+  border:1px solid var(--line);border-radius:var(--r);padding:24px 22px;}
 .oc .oc-k{font-size:11.5px;letter-spacing:1.5px;color:var(--blue-700);font-weight:700;}
 .oc h3{font-size:18px;margin:9px 0 10px;letter-spacing:-.2px;}
 /* 去掉 01/02 序号后，类别词（学习记录 / 成长记忆）升为卡片标题，下面那行黑色标题回到 18px。
@@ -207,20 +220,20 @@
 /* ── 10. 学员与赛事案例：三张引述卡 ─────────────────────── */
 .stories{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px;align-items:stretch;}
 .sc{display:flex;flex-direction:column;background:var(--surface);border:1px solid var(--line);
-  border-radius:16px;overflow:hidden;box-shadow:0 1px 2px rgba(8,66,127,.04);
+  border-radius:var(--r);overflow:hidden;box-shadow:0 1px 2px rgba(11,99,197,.04);
   transition:transform .24s,box-shadow .24s,border-color .24s;}
-.sc:hover{transform:translateY(-3px);border-color:var(--border);box-shadow:0 16px 34px rgba(8,66,127,.10);}
+.sc:hover{transform:translateY(-3px);border-color:rgba(11,99,197,.28);box-shadow:var(--shadow-lg);}
 .sc-media{position:relative;aspect-ratio:1/1;overflow:hidden;background:var(--bg-2);}
 .sc-media img{width:100%;height:100%;object-fit:cover;display:block;}
 /* 暂无现场照的那张：用赛事标识拼一块版式占位，不做成假照片 */
 .sc-media--tile{display:flex;align-items:center;justify-content:center;
-  background:linear-gradient(135deg,#F4F9FF,#E6F0FC 58%,#EFE9FD);}
+  background:linear-gradient(135deg,var(--surface-2),var(--surface-3) 58%,var(--domain-creativity-soft));}
 .sc-tile{display:flex;flex-direction:column;align-items:center;gap:14px;}
 .sc-tile img{width:auto;height:60px;object-fit:contain;mix-blend-mode:multiply;}
 .sc-tile span{font-size:12.5px;font-weight:700;letter-spacing:3px;color:var(--blue-700);opacity:.66;}
 
 .sc-body{display:flex;flex-direction:column;flex:1;padding:20px 22px 22px;}
-.sc-k{font-size:11.5px;font-weight:800;letter-spacing:1.5px;color:var(--violet-600);}
+.sc-k{font-size:11.5px;font-weight:800;letter-spacing:1.5px;color:var(--brand-blue);}
 .sc h3{font-size:17.5px;line-height:1.5;margin:9px 0 11px;letter-spacing:-.2px;color:var(--ink);}
 /* 三列时标题放不下一行，就在逗号处断：后半句整块不可拆，
    否则浏览器会按字数平均，把「一步步」「体验」这类词拆到两行。 */
@@ -233,7 +246,7 @@
 /* ── 11. 机构与教师支持 ────────────────────────────────── */
 .support{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;}
 .sp{display:flex;flex-direction:column;background:var(--surface);
-  border:1px solid var(--line);border-radius:16px;padding:24px 22px;}
+  border:1px solid var(--line);border-radius:var(--r);padding:24px 22px;}
 /* 去掉 01/02 序号后，类别词（教学与练习 / 获客与社媒运营）升为卡片标题 */
 .sp .sp-k{font-size:clamp(20px,2.6vw,24px);letter-spacing:-.4px;line-height:1.32;color:var(--blue-700);font-weight:700;}
 .sp h3{font-size:18px;margin:9px 0 10px;letter-spacing:-.2px;}
@@ -250,7 +263,7 @@
   color:var(--blue);letter-spacing:.5px;}
 .s3 h3{font-size:16.5px;margin:0 0 8px;letter-spacing:-.2px;}
 .s3 p{font-size:13.5px;line-height:1.8;color:var(--ink-2);margin:0;}
-.s3 .so{display:block;margin-top:11px;font-size:12.5px;font-weight:700;color:var(--violet-600);}
+.s3 .so{display:block;margin-top:11px;font-size:12.5px;font-weight:700;color:var(--blue-deep);}
 
 /* 联盟：一行说完，权益在合作页展开 */
 /* 联盟条：左列「是谁 + 说明」，右列「多少钱 + 两个动作」。
@@ -261,7 +274,7 @@
 .alliance{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:start;
   gap:14px 34px;padding:30px 32px;border-radius:18px;
   background:linear-gradient(135deg,var(--blue-deep) 0%,var(--blue) 100%);
-  border:none;box-shadow:0 18px 40px rgba(8,66,127,.24);}
+  border:none;box-shadow:0 18px 40px rgba(11,99,197,.24);}
 .alliance .al-t{grid-column:1;grid-row:1;font-size:21px;font-weight:800;letter-spacing:-.3px;color:#fff;}
 .alliance .al-d{grid-column:1;grid-row:2;font-size:13.5px;color:rgba(255,255,255,.85);line-height:1.78;}
 .alliance .al-p{grid-column:2;grid-row:1;display:flex;flex-wrap:wrap;gap:8px;justify-content:flex-end;}
@@ -290,14 +303,14 @@
    桌面用 2000×700 图，手机换 900×640 图。5 秒自动切，
    悬停/聚焦暂停，可点圆点、箭头、触屏左右滑、键盘左右键。 */
 .hslider{position:relative;padding:26px 0 8px;}
-.hs-box{position:relative;border-radius:20px;overflow:hidden;
+.hs-box{position:relative;border-radius:var(--r-lg);overflow:hidden;
   background:var(--blue-900,#08427F);
-  box-shadow:0 18px 46px -18px rgba(8,66,127,.42);}
+  box-shadow:0 18px 46px -18px rgba(11,99,197,.42);}
 .hs-track{display:flex;width:100%;
   transition:transform .62s cubic-bezier(.22,.61,.36,1);will-change:transform;}
 .hs-slide{flex:0 0 100%;display:block;text-decoration:none;line-height:0;}
 .hs-slide img{width:100%;height:auto;display:block;}
-.hs-slide:focus-visible{outline:3px solid var(--orange,#FF7A1A);outline-offset:-3px;}
+.hs-slide:focus-visible{outline:3px solid var(--brand-blue);outline-offset:-3px;}
 
 /* 控件按 TDesign Swiper 的规范：贴在 banner 底部居中，细圆点 + 细箭头。
    整条做成玻璃胶囊，浅底深底都读得清，不用跟着当前屏换配色
@@ -307,22 +320,22 @@
   background:rgba(255,255,255,.56);
   border:1px solid rgba(255,255,255,.66);
   -webkit-backdrop-filter:blur(12px) saturate(1.5);backdrop-filter:blur(12px) saturate(1.5);
-  box-shadow:0 4px 16px rgba(8,66,127,.10);
+  box-shadow:0 4px 16px rgba(11,99,197,.10);
   pointer-events:none;}
 .hs-bar > *{pointer-events:auto;}
 
 .hs-dots{display:flex;align-items:center;gap:6px;padding:0 2px;}
 .hs-dots button{width:6px;height:6px;padding:0;border:0;border-radius:3px;
-  background:rgba(8,66,127,.32);cursor:pointer;
+  background:rgba(11,99,197,.32);cursor:pointer;
   transition:width .25s ease,background .25s ease;}
-.hs-dots button:hover{background:rgba(8,66,127,.46);}
+.hs-dots button:hover{background:rgba(11,99,197,.46);}
 .hs-dots button.on{width:18px;background:var(--blue,#0B63C5);}
 
 .hs-nav{flex-shrink:0;width:26px;height:26px;padding:0;cursor:pointer;
   display:flex;align-items:center;justify-content:center;
-  border:0;border-radius:50%;background:rgba(8,66,127,.08);color:var(--blue-900,#08427F);
+  border:0;border-radius:50%;background:rgba(11,99,197,.08);color:var(--blue-900,#08427F);
   transition:background .2s ease,transform .15s ease;}
-.hs-nav:hover{background:rgba(8,66,127,.18);}
+.hs-nav:hover{background:rgba(11,99,197,.18);}
 .hs-nav:active{transform:scale(.92);}
 .hs-nav:focus-visible{outline:2px solid var(--blue,#0B63C5);outline-offset:2px;}
 
@@ -343,14 +356,14 @@
 /* 整块通栏，首屏内容用 .wrap 对齐，和导航、下方各区块左右齐边。
    原来是深底，底部留 10px 白缝当分隔；现在 banner 变浅，白缝反而把两块切开
    显得悬空，改成贴住下面的白区，用一条 1px 线收边。 */
-.hslider-hero{padding:0;border-bottom:1px solid rgba(15,27,42,.08);}
-.hslider-hero .hs-box{border-radius:0;box-shadow:none;background:#F7FAFE;}
+.hslider-hero{padding:0;border-bottom:1px solid var(--border-primary);}
+.hslider-hero .hs-box{border-radius:0;box-shadow:none;background:var(--page-background);}
 .hslider-hero .hs-track{align-items:stretch;}
 .hs-intro{position:relative;display:flex;align-items:center;line-height:normal;}
 .hs-intro > .hero{width:100%;}
 .hs-intro .hero-lg{padding:46px 0 42px;}
 /* 第 1 屏的底和后五屏对齐成同一块浅冷白，只靠 aurora 的蓝紫光晕区分 */
-.hs-intro .hero{background:linear-gradient(135deg,#F6F9FF 0%,#EEF3FC 52%,#F4F2FD 100%);}
+.hs-intro .hero{background:linear-gradient(135deg,#FBFCFF 0%,var(--page-background) 52%,#F7F6FE 100%);}
 /* 第 1 屏沿用 .hero 的方格底纹，但整块 banner 现在是浅色、后面五屏是纯渐变，
    网格留在第一屏会显得六屏两套底。这里压到只当一层很淡的质感，
    切换时看不出纹理由有到无。全站其他页的 hero 网格不动。 */
@@ -373,11 +386,11 @@
    五屏颜色不同但都是深色，动作识别不变；橙色退出 banner。
    次按钮改白底 + 墨色字，边框压到能看见但不抢。 */
 .hs-btn-line{color:var(--hk,#0F1B2A);background:rgba(255,255,255,.92);
-  border:1px solid rgba(15,27,42,.16);}
+  border:1px solid rgba(16,36,62,.16);}
 .hs-btn-line:hover{background:#fff;border-color:var(--hk,#0F1B2A);}
 .hs-btn-fill{color:#fff;background:var(--hk,#0F1B2A);
   border:1px solid var(--hk,#0F1B2A);
-  box-shadow:0 10px 22px -10px rgba(15,27,42,.55);}
+  box-shadow:0 10px 22px -10px rgba(16,36,62,.55);}
 .hs-btn-fill:hover{filter:brightness(1.16);}
 .hs-btn:focus-visible{outline:2px solid var(--hk,#0F1B2A);outline-offset:3px;}
 @media (max-width:760px){
@@ -395,7 +408,7 @@
    差别只落在光晕的色相上。底色一样，翻屏就不会忽明忽暗，
    也不会出现「一屏粉、一屏蓝、一屏橙」那种各说各话。 */
 .hs-evslide{position:relative;display:flex;align-items:center;line-height:normal;
-  background:linear-gradient(135deg,#F6F9FF 0%,#EEF3FC 52%,#F4F2FD 100%);}
+  background:linear-gradient(135deg,#FBFCFF 0%,var(--page-background) 52%,#F7F6FE 100%);}
 /* 光晕照第 1 屏 aurora 的做法：几个大圆 + blur(90px)，色取本屏 logo 主色的提亮版
    （用 logo 的深色去模糊，出来是灰雾，不是光）。
    主光压在标识卡背后，玻璃卡才透得出来；第二团放左下给文字区一点环境光。
@@ -421,7 +434,7 @@
 /* 文字全部翻成深色。标题取本屏的深主色（--hk），和背景同一色相、
    亮度差拉到 8:1 以上；正文用站内墨色，不再用半透明白。 */
 .hs-k{display:inline-block;margin-bottom:16px;padding:6px 15px;border-radius:999px;
-  background:rgba(255,255,255,.72);border:1px solid rgba(15,27,42,.09);
+  background:rgba(255,255,255,.72);border:1px solid rgba(16,36,62,.09);
   -webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);
   font-size:12.5px;font-weight:700;letter-spacing:1.4px;color:var(--hk,#0F1B2A);}
 .hs-h{margin:0 0 14px;font-size:38px;line-height:1.22;font-weight:800;
@@ -437,13 +450,13 @@
   background:rgba(255,255,255,.66);
   -webkit-backdrop-filter:blur(26px) saturate(1.7);backdrop-filter:blur(26px) saturate(1.7);
   border:1px solid rgba(255,255,255,.92);
-  box-shadow:0 22px 50px -20px rgba(15,27,42,.3),0 3px 8px rgba(15,27,42,.05),
+  box-shadow:0 22px 50px -20px rgba(16,36,62,.3),0 3px 8px rgba(16,36,62,.05),
     inset 0 1px 0 rgba(255,255,255,.96);}
 .hs-fig .fig-mark{flex:1;display:flex;align-items:center;justify-content:center;
   width:100%;min-height:0;padding:2px 12px;}
 .hs-fig .fig-mark img{max-width:100%;max-height:100%;object-fit:contain;display:block;}
 .hs-fig .fig-sign{display:flex;align-items:center;justify-content:center;
-  width:100%;margin-top:12px;padding-top:11px;border-top:1px solid rgba(15,27,42,.1);}
+  width:100%;margin-top:12px;padding-top:11px;border-top:1px solid rgba(16,36,62,.1);}
 .hs-fig .fig-sign img{height:30px;width:auto;display:block;}
 .hs-fig img{max-width:100%;max-height:100%;object-fit:contain;display:block;}
 /* 按钮从绝对定位改回文档流，跟着文字走，不再压在图底 */
@@ -467,7 +480,7 @@
   .hs-fig .fig-mark{flex:0 0 auto;width:auto;height:100%;}
   .hs-fig .fig-mark img{max-width:150px;max-height:100%;}
   .hs-fig .fig-sign{width:auto;height:100%;margin:0;padding:0 0 0 11px;
-    border-top:0;border-left:1px solid rgba(15,27,42,.1);}
+    border-top:0;border-left:1px solid rgba(16,36,62,.1);}
   .hs-fig .fig-sign img{height:19px;}
   /* 光晕圆按桌面尺寸写，到 390 宽等于铺满整屏，整块 banner 变成一片色雾。
      窄屏缩小半径并往卡片那一侧收，只让卡周围亮一圈。 */
@@ -538,7 +551,7 @@
    避免读者以为畅途只卖两门课。 */
 .cat-map{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin:0 0 24px;}
 .cat-col{background:var(--surface,#fff);border:1px solid var(--line,#E3ECF6);
-  border-top:3px solid var(--d,var(--blue));border-radius:16px;padding:16px 18px 14px;}
+  border-top:3px solid var(--d,var(--blue));border-radius:var(--r);padding:16px 18px 14px;}
 .cat-col[data-d="expression"]{--d:var(--domain-expression);--d-tint:var(--domain-expression-tint);}
 .cat-col[data-d="thinking"]{--d:var(--domain-thinking);--d-tint:var(--domain-thinking-tint);}
 .cat-col[data-d="learning"]{--d:var(--domain-learning);--d-tint:var(--domain-learning-tint);}
@@ -551,10 +564,10 @@
 .cat-row b{font-size:13.5px;color:var(--ink,#0F1B2A);font-weight:700;}
 .cat-row span{font-size:12px;color:var(--ink-2,#3C4C63);line-height:1.62;}
 .cat-chips{display:flex;flex-wrap:wrap;gap:5px;margin:2px 0 10px;}
-.cat-chips span{font-size:12px;color:#64748B;background:#F1F5FB;border-radius:20px;padding:3px 9px;white-space:nowrap;}
-.cat-note{margin:0;font-size:12px;color:#94A3B8;line-height:1.6;}
+.cat-chips span{font-size:12px;color:var(--text-2);background:var(--surface-2);border-radius:20px;padding:3px 9px;white-space:nowrap;}
+.cat-note{margin:0;font-size:12px;color:var(--text-3);line-height:1.6;}
 .cat-col.is-soon{background:#FAFCFF;border-style:dashed;}
-.cat-col.is-soon h3{color:#94A3B8;}
+.cat-col.is-soon h3{color:var(--text-3);}
 @media (max-width:1020px){.cat-map{grid-template-columns:repeat(2,1fr);}}
 @media (max-width:560px){.cat-map{grid-template-columns:1fr;}}
 

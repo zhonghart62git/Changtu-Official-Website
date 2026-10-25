@@ -21,13 +21,15 @@
   --domain-creativity: #7B3FE4;
   --domain-creativity-tint: #F3EEFF;
   --surface: #FFFFFF;
-  --surface-2: #F6FAFF;
+  --surface-2: #F7FAFE;
   --surface-3: #EAF4FE;
-  --text: #0F1B2A;
-  --text-2: #3C4C63;
-  --text-3: #78879C;
-  --border: #E3ECF6;
-  --border-strong: #CBD5E1;
+  --text: #10243E;
+  --text-2: #50657B;
+  /* 规范给的 muted 是 #718399，对白底只有 3.88:1，12–13px 小字不到 AA 的 4.5:1。
+     同一色相往下压一档到 #62758B 是 4.75:1，色相没变，小字才敢用它。 */
+  --text-3: #62758B;
+  --border: rgba(11,99,197,.14);
+  --border-strong: rgba(11,99,197,.28);
   --success: #0AB67D;
   --warning: #D97706;
   --danger: #E5484D;
@@ -85,4 +87,33 @@
   --warn-bg: var(--domain-learning-tint);
   --bad: var(--danger);
   --bad-bg: var(--accent-tint);
+
+  /* ────────────────────────────────────────────────────────────
+     视觉升级语义层（2026-10-26）
+     上面是原始色阶，这里是按用途取名的语义令牌。
+     页面样式只认这一层，以后调整色阶不必再改组件。
+     ──────────────────────────────────────────────────────────── */
+  --brand-blue: #0B63C5;
+  --brand-purple: #7B3FE4;
+
+  --page-background: #F7FAFE;
+  --surface-primary: #FFFFFF;
+  --surface-translucent: rgba(255,255,255,.88);
+
+  --text-primary: #10243E;
+  --text-secondary: #50657B;
+  --text-muted: #62758B;
+
+  --border-primary: rgba(11,99,197,.14);
+  --border-highlight: rgba(123,63,228,.18);
+
+  --shadow-primary: rgba(11,99,197,.10);
+  --glow-blue: rgba(11,99,197,.14);
+  --glow-purple: rgba(123,63,228,.10);
+
+  /* 四能力的浅底色，按规范统一叫 soft；原来的 -tint 保留给既有样式用 */
+  --domain-expression-soft: #EAF4FE;
+  --domain-thinking-soft: #E6F7F7;
+  --domain-learning-soft: #FEF3E2;
+  --domain-creativity-soft: #F3EEFF;
 }

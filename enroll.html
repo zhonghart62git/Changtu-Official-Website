@@ -10,7 +10,7 @@
 <link rel="icon" type="image/png" sizes="64x64" href="assets/favicon-64.png?v=f0acdc9c">
 <link rel="apple-touch-icon" href="assets/apple-touch-icon.png?v=b6e8581d">
 <meta name="theme-color" content="#0B63C5">
-<link rel="stylesheet" href="assets/ui.css?v=0c94d3ac">
+<link rel="stylesheet" href="assets/ui.css?v=ef3416e9">
 <!-- domain-seo:start -->
 <link rel="canonical" href="https://leadtheway.cn/enroll.html">
 <meta name="robots" content="noindex,follow">
@@ -81,7 +81,7 @@
     </div>
 
     <div class="card card-pad mb18">
-      <div class="sect-title"><h2>② 填信息</h2><span>带 <b style="color:var(--orange)">*</b> 为必填</span>
+      <div class="sect-title"><h2>② 填信息</h2><span>带 <b style="color:var(--brand-blue)">*</b> 为必填</span>
     </div>
 
       <div class="field" id="f-group">
@@ -236,6 +236,7 @@
   </div>
 </footer>
 
+<script src="assets/chrome.js?v=775567a9"></script>
 <script src="assets/store.js?v=bc0c8894"></script>
 <script>
 (function(){
@@ -461,7 +462,7 @@
       document.querySelector('.step[data-s="2"]').classList.add('done');
       document.querySelector('.step[data-s="3"]').classList.add('done');
       $('doneCode').textContent = o.code;
-      $('doneMeta').innerHTML = esc(o.actName) + ' · ' + esc(o.group) + '<br>参考费用 <b style="color:var(--orange);">' + (o.fee == null ? '按当期简章' : '¥' + Number(o.fee).toLocaleString('zh-CN')) + '</b>　报名人 ' + esc(o.student);
+      $('doneMeta').innerHTML = esc(o.actName) + ' · ' + esc(o.group) + '<br>参考费用 <b style="color:var(--brand-hover);">' + (o.fee == null ? '按当期简章' : '¥' + Number(o.fee).toLocaleString('zh-CN')) + '</b>　报名人 ' + esc(o.student);
       $('doneWechat').textContent = CT.API.settings().wechat;
       $('payGuide').textContent = '请与招生老师确认费用及缴费方式。联系电话：180 3882 9261。';
       window.scrollTo({top:0, behavior:'smooth'});

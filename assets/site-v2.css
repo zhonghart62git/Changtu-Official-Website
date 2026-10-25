@@ -9,60 +9,45 @@
 :root{
   /* 颜色令牌（--brand / --blue-* / --violet-* / --domain-* / 语义层）
      已统一由 design-colors.css 提供，经 site.css 首行 @import 引入。
-     这里只保留与颜色无关的版式令牌。 */
+     圆角、阴影、动效令牌由 site.css 的 :root 统一给出，这里不再重复定义——
+     两处各写一套时，本文件会盖掉 site.css，同一组件在两类页面里圆角不一样。 */
   --violet-2:var(--violet-400);
-  --r-sm:10px; --r-md:16px; --r-lg:24px; --r-xl:32px; --r-pill:30px;
-  --shadow-sm:0 2px 8px rgba(8,66,127,.06);
-  --shadow-md:0 8px 26px rgba(8,66,127,.08);
-  --shadow-lg:0 20px 60px rgba(8,66,127,.12);
-  --shadow-violet:0 20px 56px rgba(123,63,228,.16);
-  --ease:cubic-bezier(.22,.61,.36,1);
-  --dur-fast:160ms; --dur:240ms; --dur-slow:420ms;
 }
 
 /* ============================================================
    1. 未来感的五个手法（全部在浅色下成立）
    ============================================================ */
 
-/* ① 低饱和光斑：浅色下制造"空气感" */
+/* ① 低饱和光斑：浅色下制造"空气感"
+   静态，不漂移。持续移动的背景会一直抢注意力，规范里也明确不要「持续漂浮」。
+   蓝是主光，紫只做边缘次级光，两者都不铺满屏。 */
 .aurora{position:absolute;inset:0;overflow:hidden;pointer-events:none;z-index:0;}
 .aurora i{
   position:absolute;display:block;border-radius:50%;
-  filter:blur(80px);opacity:.5;
+  filter:blur(90px);
 }
-.aurora .a1{width:620px;height:620px;left:-8%;top:-26%;
-  background:radial-gradient(circle,rgba(30,155,232,.34),rgba(30,155,232,0) 70%);
-  animation:drift1 26s ease-in-out infinite;}
-.aurora .a2{width:520px;height:520px;right:-6%;top:-14%;
-  background:radial-gradient(circle,rgba(123,63,228,.30),rgba(123,63,228,0) 70%);
-  animation:drift2 32s ease-in-out infinite;}
-.aurora .a3{width:460px;height:460px;right:22%;bottom:-30%;
-  background:radial-gradient(circle,rgba(30,155,232,.20),rgba(30,155,232,0) 70%);
-  animation:drift1 38s ease-in-out infinite reverse;}
-@keyframes drift1{0%,100%{transform:translate3d(0,0,0)}50%{transform:translate3d(38px,-26px,0)}}
-@keyframes drift2{0%,100%{transform:translate3d(0,0,0)}50%{transform:translate3d(-32px,30px,0)}}
+.aurora .a1{width:680px;height:680px;left:-10%;top:-30%;opacity:.42;
+  background:radial-gradient(circle,rgba(11,99,197,.22),rgba(11,99,197,0) 70%);}
+.aurora .a2{width:420px;height:420px;right:-4%;top:-12%;opacity:.30;
+  background:radial-gradient(circle,rgba(123,63,228,.16),rgba(123,63,228,0) 70%);}
+.aurora .a3{width:460px;height:460px;right:24%;bottom:-32%;opacity:.22;
+  background:radial-gradient(circle,rgba(11,99,197,.14),rgba(11,99,197,0) 70%);}
 
-/* ② 渐变描边：卡片边缘一圈流动彩线 */
+/* ② 渐变描边：卡片边缘一圈细彩线，蓝多紫少 */
 .edge-grad{position:relative;}
 .edge-grad::before{
   content:"";position:absolute;inset:0;border-radius:inherit;padding:1px;
-  background:linear-gradient(135deg,var(--blue-300),var(--violet-300) 50%,var(--blue-200));
+  background:linear-gradient(135deg,var(--blue-200),var(--violet-200) 55%,var(--blue-100));
   -webkit-mask:linear-gradient(var(--text) 0 0) content-box,linear-gradient(var(--text) 0 0);
   -webkit-mask-composite:xor;mask-composite:exclude;
-  pointer-events:none;opacity:.9;
+  pointer-events:none;opacity:.8;
 }
 
-/* ③ 渐变标题：只给一个词，不给整句 */
-.grad-blue{
-  background:linear-gradient(112deg,var(--blue-700) 0%,var(--blue) 42%,var(--blue-2) 100%);
-  -webkit-background-clip:text;background-clip:text;
-  -webkit-text-fill-color:transparent;color:transparent;
-}
-.grad-violet{
-  background:linear-gradient(112deg,var(--violet-deep) 0%,var(--violet) 48%,var(--violet-2) 100%);
-  -webkit-background-clip:text;background-clip:text;
-  -webkit-text-fill-color:transparent;color:transparent;
-}
+/* ③ 渐变标题：只给一个词，不给整句。
+   但渐变文字在浅底上对比度随位置浮动，读起来发虚，规范明确不要——
+   类名保留（matrix / mun 在用），改成实体品牌蓝。 */
+.grad-blue{color:var(--brand-blue);background:none;-webkit-text-fill-color:currentColor;}
+.grad-violet{color:var(--brand-purple);background:none;-webkit-text-fill-color:currentColor;}
 
 /* ④ 大圆角 + 柔影 由令牌承担 */
 
@@ -110,7 +95,7 @@ html.no-js .rv2{opacity:1;transform:none;}
   display:flex;flex-direction:column;gap:12px;
   transition:transform var(--dur) var(--ease),box-shadow var(--dur) var(--ease),border-color var(--dur) var(--ease);
 }
-.id-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg);border-color:var(--blue-200);}
+.id-card:hover{transform:translateY(-3px);box-shadow:var(--shadow-lg);border-color:var(--blue-200);}
 .id-card .num{
   font-family:var(--font-num,inherit);font-size:13px;font-weight:700;letter-spacing:1.6px;
   color:var(--blue-400);
@@ -141,7 +126,7 @@ html.no-js .rv2{opacity:1;transform:none;}
    8. 小程序码
    ============================================================ */
 .qr-band{
-  background:linear-gradient(120deg,var(--blue-950) 0%,var(--blue-900) 46%,var(--violet-900) 100%);
+  background:linear-gradient(120deg,#062E5B 0%,var(--brand-hover) 52%,#0B3A6E 100%);
   border-radius:var(--r-xl);padding:44px 44px;color:var(--surface);
   display:grid;grid-template-columns:1fr auto;gap:36px;align-items:center;
   position:relative;overflow:hidden;
@@ -195,7 +180,7 @@ html.no-js .rv2{opacity:1;transform:none;}
   border-radius:var(--r-lg);padding:30px 26px 26px;display:flex;flex-direction:column;gap:10px;
   transition:transform var(--dur) var(--ease),box-shadow var(--dur) var(--ease),border-color var(--dur) var(--ease);
 }
-.tier2:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg);}
+.tier2:hover{transform:translateY(-3px);box-shadow:var(--shadow-lg);}
 .tier2 .tname{font-size:19px;font-weight:800;letter-spacing:-.2px;}
 .tier2 .tsub{font-size:12px;letter-spacing:1.3px;text-transform:uppercase;color:var(--text-3);}
 .tier2 .tprice{font-size:30px;font-weight:800;letter-spacing:-1px;line-height:1.1;margin:6px 0 2px;}
@@ -365,11 +350,10 @@ html.no-js .rv2{opacity:1;transform:none;}
   gap:5px;padding:20px 8px;
 }
 .mun-lv b{
-  font-size:26px;font-weight:800;letter-spacing:-.5px;
-  background:linear-gradient(135deg,var(--blue-700),var(--violet-700));
-  -webkit-background-clip:text;background-clip:text;color:transparent;
+  font-size:26px;font-weight:800;letter-spacing:-.5px;color:var(--brand-blue);
+  background:none;-webkit-text-fill-color:currentColor;
 }
-.mun-lv span{font-size:11px;color:var(--text-3);white-space:nowrap;}
+.mun-lv span{font-size:11px;color:var(--text-2);white-space:nowrap;}
 .mun-body{padding:20px 22px;display:flex;flex-direction:column;gap:11px;}
 .mun-h{display:flex;align-items:center;gap:12px;flex-wrap:wrap;}
 .mun-h h3{font-size:18px;margin:0;color:var(--text);letter-spacing:-.2px;}
@@ -441,7 +425,7 @@ html.no-js .rv2{opacity:1;transform:none;}
 }
 .module-item:hover{transform:translateY(-2px);box-shadow:var(--shadow-sm);}
 .module-item b{
-  font-size:11.5px;font-weight:800;letter-spacing:1px;color:var(--blue-500);
+  font-size:11.5px;font-weight:800;letter-spacing:1px;color:var(--brand-blue);
 }
 .module-item h3{font-size:15px;margin:0;color:var(--text);}
 .module-item p{margin:0;font-size:12.5px;color:var(--text-3);line-height:1.65;}
@@ -453,7 +437,7 @@ html.no-js .rv2{opacity:1;transform:none;}
 /* 三力映射表里的 CPU/GPU/OS 小标 */
 .cpu{
   display:inline-block;margin-left:7px;font-size:10px;font-weight:700;
-  color:var(--blue-500);letter-spacing:.6px;vertical-align:middle;
+  color:var(--brand-blue);letter-spacing:.6px;vertical-align:middle;
 }
 
 @media (max-width:760px){

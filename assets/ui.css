@@ -1,4 +1,4 @@
-@import url("./design-colors.css?v=31fe4493");
+@import url("./design-colors.css?v=e91cb406");
 /* 畅途 · 未来领袖 —— 报名 / 场次 / 后台 公共样式
  * 配色与官网 index.html 完全一致
  */
@@ -11,13 +11,21 @@
   --ok:var(--success);--ok-bg:var(--surface-3);
   --warn:var(--warning);--warn-bg:var(--surface-3);
   --bad:var(--danger);--bad-bg:var(--surface-3);
-  --r:16px;--shadow:0 8px 26px rgba(8,66,127,.08);--shadow-lg:0 20px 56px rgba(8,66,127,.14);
+  /* 圆角、阴影、动效时长与 site.css 同一套值。报名页和官网是两种页面，
+     但同一个按钮在两边不该是两种圆角。 */
+  --r-sm:14px;--r:18px;--r-md:18px;--r-lg:24px;--r-xl:32px;--r-pill:30px;
+  --shadow-sm:0 2px 6px rgba(11,99,197,.06);
+  --shadow-md:0 8px 24px -10px rgba(11,99,197,.16);
+  --shadow:0 10px 30px -12px rgba(11,99,197,.18);
+  --shadow-lg:0 20px 48px -18px rgba(11,99,197,.24);
+  --ease:cubic-bezier(.22,.61,.36,1);
+  --dur-fast:160ms;--dur:220ms;--dur-slow:320ms;
 }
 *{margin:0;padding:0;box-sizing:border-box;}
 body{
-  font-family:"Noto Sans SC","PingFang SC","Microsoft YaHei","Helvetica Neue",Arial,sans-serif;
-  color:var(--ink);background:var(--bg-2);line-height:1.75;font-size:16px;
-  -webkit-font-smoothing:antialiased;
+  font-family:"PingFang SC","Noto Sans SC","Microsoft YaHei","Helvetica Neue",-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;
+  color:var(--ink);background:var(--page-background);line-height:1.75;font-size:16px;
+  -webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;text-rendering:optimizeLegibility;
 }
 a{text-decoration:none;color:inherit;}
 img,svg{max-width:100%;}
@@ -27,8 +35,8 @@ h1,h2,h3,h4,p,li,span,b,strong,td,th{overflow-wrap:break-word;}
 
 /* ===== 顶栏 ===== */
 .bar{
-  background:linear-gradient(90deg,var(--blue-deep),var(--blue) 55%,var(--blue-2));
-  color:var(--surface-3);font-size:13px;
+  background:linear-gradient(90deg,#0A3566 0%,var(--brand-hover) 55%,#0B3A6E 100%);
+  color:rgba(255,255,255,.9);font-size:13px;letter-spacing:.2px;
 }
 .bar .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;height:38px;}
 .bar b{color:var(--surface);font-weight:600;}
@@ -36,10 +44,19 @@ h1,h2,h3,h4,p,li,span,b,strong,td,th{overflow-wrap:break-word;}
 .bar a{color:var(--surface);border-bottom:1px solid rgba(255,255,255,.45);}
 .bar a:hover{border-color:var(--surface);}
 
+/* 轻度 Liquid Glass，与全站导航同一套参数。滚动后加深（.is-scrolled 由 chrome.js 挂） */
 header.nav{
-  position:sticky;top:0;z-index:60;background:rgba(255,255,255,.9);
-  backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);
-  border-bottom:1px solid var(--line);
+  position:sticky;top:0;z-index:60;background:rgba(255,255,255,.72);
+  -webkit-backdrop-filter:blur(20px) saturate(1.8);backdrop-filter:blur(20px) saturate(1.8);
+  border-bottom:1px solid var(--border-primary);
+  box-shadow:0 8px 24px -22px var(--shadow-primary);
+  transition:background var(--dur) var(--ease),box-shadow var(--dur) var(--ease);
+}
+header.nav.is-scrolled{background:rgba(255,255,255,.93);
+  box-shadow:0 12px 32px -20px rgba(11,99,197,.30);}
+header.nav::after{
+  content:"";position:absolute;left:0;right:0;top:0;height:1px;pointer-events:none;
+  background:linear-gradient(90deg,transparent 0%,rgba(123,63,228,.20) 28%,rgba(11,99,197,.24) 68%,transparent 100%);
 }
 .nav .wrap{display:flex;align-items:center;justify-content:space-between;height:66px;gap:20px;}
 .logo{display:flex;align-items:center;gap:10px;font-weight:800;font-size:17px;letter-spacing:.4px;}
@@ -55,9 +72,10 @@ header.nav{
 .nav-back:hover{color:var(--blue);}
 
 /* ===== 页头 ===== */
-.pagehead{padding:52px 0 34px;background:radial-gradient(900px 340px at 12% -30%,rgba(30,155,232,.16),transparent 60%),
-  radial-gradient(700px 300px at 92% -20%,rgba(255,122,26,.13),transparent 62%),
-  var(--surface);border-bottom:1px solid var(--line);}
+.pagehead{padding:52px 0 34px;
+  background:radial-gradient(820px 360px at 10% -32%,rgba(11,99,197,.13),transparent 62%),
+  radial-gradient(640px 300px at 94% -18%,rgba(123,63,228,.08),transparent 64%),
+  var(--surface);border-bottom:1px solid var(--border-primary);}
 .pagehead .kicker{font-size:12px;font-weight:800;letter-spacing:2.4px;color:var(--blue);text-transform:uppercase;}
 .pagehead h1{font-size:clamp(26px,3.6vw,38px);line-height:1.28;margin:10px 0 10px;letter-spacing:-.4px;}
 .pagehead p{color:var(--ink-2);font-size:15.5px;max-width:680px;}
@@ -100,20 +118,30 @@ header.nav{
 .opt.on::after{content:"";width:6px;height:6px;border-radius:50%;background:var(--blue);}
 
 /* ===== 按钮 ===== */
+/* 与 site.css 的按钮同一套：主按钮实体蓝、次强调浅蓝底深蓝字。
+   橙色在官网是学习力的域色，不当通用强调色用，这里同理。 */
 .btn{
   display:inline-flex;align-items:center;justify-content:center;gap:8px;
-  padding:12px 26px;border-radius:999px;font-size:15px;font-weight:700;font-family:inherit;
-  border:1.5px solid transparent;cursor:pointer;transition:transform .16s,box-shadow .16s,background .16s;
-  white-space:nowrap;
+  padding:12px 26px;border-radius:var(--r-pill);font-size:15px;font-weight:600;font-family:inherit;
+  border:1px solid transparent;cursor:pointer;line-height:1.4;white-space:nowrap;
+  transition:transform var(--dur) var(--ease),box-shadow var(--dur) var(--ease),
+             background-color var(--dur) var(--ease),border-color var(--dur) var(--ease),color var(--dur) var(--ease);
 }
-.btn:active{transform:translateY(1px);}
-.btn-p{background:linear-gradient(135deg,var(--blue),var(--blue-2));color:var(--surface);box-shadow:0 10px 24px rgba(11,99,197,.26);}
-.btn-p:hover{box-shadow:0 14px 30px rgba(11,99,197,.34);}
-.btn-o{background:linear-gradient(135deg,var(--orange),var(--orange-2));color:var(--surface);box-shadow:0 10px 24px rgba(255,122,26,.28);}
-.btn-s{background:var(--surface);color:var(--blue);border-color:var(--line);box-shadow:var(--shadow);}
-.btn-s:hover{border-color:var(--blue-2);}
-.btn-ghost{background:transparent;color:var(--ink-2);border-color:var(--line);}
-.btn-ghost:hover{border-color:var(--blue-2);color:var(--blue);}
+.btn:active{transform:translateY(0);}
+/* 焦点环与 site.css 一致：主按钮白圈 + 蓝圈，键盘用户才看得到 */
+.btn:focus-visible{outline:2px solid var(--brand-blue);outline-offset:2px;}
+.btn-p:focus-visible{outline:none;box-shadow:0 0 0 2px #fff,0 0 0 4px var(--brand-blue);}
+a:focus-visible{outline:2px solid var(--brand-blue);outline-offset:3px;border-radius:4px;}
+.btn-p{background:var(--brand-blue);color:#fff;box-shadow:0 8px 20px -10px rgba(11,99,197,.55);}
+.btn-p:hover{background:var(--brand-hover);transform:translateY(-2px);
+  box-shadow:0 12px 26px -12px rgba(11,99,197,.6),0 0 0 4px var(--glow-purple);}
+.btn-o{background:var(--blue-50);color:var(--blue-deep);border-color:rgba(11,99,197,.22);}
+.btn-o:hover{background:var(--blue-100);border-color:var(--brand-blue);transform:translateY(-2px);}
+.btn-s{background:var(--surface);color:var(--ink);border-color:var(--border-primary);}
+.btn-s:hover{border-color:var(--brand-blue);color:var(--brand-blue);transform:translateY(-2px);
+  box-shadow:0 10px 22px -14px var(--shadow-primary);}
+.btn-ghost{background:transparent;color:var(--ink-2);border-color:var(--border-primary);}
+.btn-ghost:hover{border-color:var(--brand-blue);color:var(--brand-blue);}
 .btn-sm{padding:8px 16px;font-size:13.5px;}
 .btn-lg{padding:15px 40px;font-size:16.5px;}
 .btn-block{display:flex;width:100%;}
@@ -142,11 +170,11 @@ header.nav{
 .step{display:flex;align-items:center;gap:9px;font-size:13.5px;color:var(--muted);}
 .step .dot{
   width:26px;height:26px;border-radius:50%;display:grid;place-items:center;font-size:12.5px;font-weight:800;
-  background:var(--surface-3);color:var(--muted);flex:none;
+  background:var(--surface-3);color:var(--ink-2);flex:none;
 }
 .step.on{color:var(--blue-deep);font-weight:700;}
 .step.on .dot{background:var(--blue);color:var(--surface);}
-.step.done .dot{background:var(--ok-bg);color:var(--ok);}
+.step.done .dot{background:#E6F7F7;color:#0B7F52;}
 .step-line{flex:1;height:2px;background:var(--line);margin:0 12px;min-width:20px;}
 
 /* ===== 场次卡 ===== */
@@ -230,7 +258,7 @@ table.tb .mono{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size
 /* ===== 弹层 ===== */
 .modal{
   position:fixed;inset:0;z-index:200;display:none;align-items:center;justify-content:center;
-  background:rgba(8,66,127,.5);backdrop-filter:blur(3px);padding:20px;
+  background:rgba(11,99,197,.5);backdrop-filter:blur(3px);padding:20px;
 }
 .modal.on{display:flex;}
 .modal-box{

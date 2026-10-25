@@ -10,7 +10,7 @@
 <link rel="icon" type="image/png" sizes="64x64" href="assets/favicon-64.png?v=f0acdc9c">
 <link rel="apple-touch-icon" href="assets/apple-touch-icon.png?v=b6e8581d">
 <meta name="theme-color" content="#0B63C5">
-<link rel="stylesheet" href="assets/site.css?v=b9c95a23">
+<link rel="stylesheet" href="assets/site.css?v=6ddaa172">
 <script>document.documentElement.classList.remove('no-js');</script>
 <link rel="canonical" href="https://leadtheway.cn/find.html">
 <meta name="robots" content="index,follow">
@@ -82,7 +82,7 @@
   /* ── 兜底留资 ─────────────────────────────────────────────── */
   .fd-ask{padding:14px 0 64px;}
   .fd-ask-in{display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap;
-    padding:26px 30px;border-radius:16px;background:linear-gradient(135deg,#F4F9FF,#EEF4FF);
+    padding:26px 30px;border-radius:var(--r);background:linear-gradient(135deg,var(--surface-2),var(--surface-3));
     border:1px solid var(--line);}
   .fd-ask-in h3{margin:0 0 8px;font-size:17px;font-weight:800;color:var(--ink);}
   .fd-ask-in p{margin:0;font-size:13.5px;line-height:1.75;color:var(--text-2);}
@@ -100,8 +100,11 @@
     .fd-filter{top:64px;padding:10px 0 8px;}
     .fd-row{flex-direction:column;gap:2px;}
     .fd-l{width:auto;padding-top:0;font-size:12px;letter-spacing:.4px;}
-    .fd-opts{flex-wrap:nowrap;overflow-x:auto;padding-bottom:2px;
-      -webkit-overflow-scrolling:touch;scrollbar-width:none;}
+    /* .fd-row 是 align-items:flex-start，列方向下交叉轴就是水平方向，
+       不给宽度的话 .fd-opts 会按内容宽度（约 535px）排，直接撑破视口。
+       给满宽 + max-width 之后 overflow-x 才真的在容器里滚。 */
+    .fd-opts{flex-wrap:nowrap;overflow-x:auto;width:100%;max-width:100%;min-width:0;
+      padding-bottom:2px;-webkit-overflow-scrolling:touch;scrollbar-width:none;}
     .fd-opts::-webkit-scrollbar{display:none;}
     .fd-opts button{flex-shrink:0;}
     .fd-hero{padding:38px 0 24px;}
@@ -529,6 +532,7 @@
   </div>
 </div>
 
+<script src="assets/chrome.js?v=775567a9"></script>
 <script src="assets/modal.js?v=ca40bbb1"></script>
 <script>
 (function(){

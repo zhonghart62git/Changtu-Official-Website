@@ -34,10 +34,10 @@
 /* ===== 项目卡（活动与机会页预览） ===== */
 .pj-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;}
 .pj-card{display:flex;flex-direction:column;padding:22px 22px 20px;
-  background:var(--surface);border:1px solid var(--line);border-radius:16px;
+  background:var(--surface);border:1px solid var(--line);border-radius:var(--r);
   transition:border-color .18s,box-shadow .18s,transform .18s;}
 .pj-card:hover{border-color:var(--border-strong);transform:translateY(-2px);
-  box-shadow:0 18px 40px -26px rgba(15,27,42,.4);}
+  box-shadow:0 18px 40px -26px rgba(16,36,62,.4);}
 .pj-card h3{margin:12px 0 10px;font-size:17px;font-weight:800;color:var(--ink);
   line-height:1.45;letter-spacing:-.2px;}
 .pj-meta{margin:0 0 6px;font-size:13px;line-height:1.7;color:var(--text-2);}
@@ -100,7 +100,7 @@
 .pj-filter[hidden]{display:none;}
 
 /* ===== 空态 ===== */
-.pj-empty{padding:52px 24px;text-align:center;border-radius:16px;
+.pj-empty{padding:52px 24px;text-align:center;border-radius:var(--r);
   background:var(--bg-2);border:1px dashed var(--border-strong);
   font-size:14px;line-height:1.85;color:var(--text-2);}
 .pj-empty a{color:var(--blue);font-weight:700;}
