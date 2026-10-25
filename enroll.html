@@ -185,7 +185,7 @@
 
     <p class="tiny muted center-t" style="line-height:1.9;">
       保存后，可复制意向并联系招生老师。<br>
-      咨询电话 <a href="tel:18038829260" style="color:var(--blue);font-weight:700;">180 3882 9260</a> / <a href="tel:18038829261" style="color:var(--blue);font-weight:700;">180 3882 9261</a>
+      咨询电话 <a href="tel:18038829261" style="color:var(--blue);font-weight:700;">180 3882 9261</a> / <a href="tel:18038829262" style="color:var(--blue);font-weight:700;">180 3882 9262</a>
     </p>
   </div>
 
@@ -208,7 +208,7 @@
         <svg viewBox="0 0 24 24"><path d="M12 9v5M12 17.5v.5"/><path d="M10.3 3.9L2.6 17.2A1.9 1.9 0 0 0 4.3 20h15.4a1.9 1.9 0 0 0 1.7-2.8L13.7 3.9a1.9 1.9 0 0 0-3.4 0z"/></svg>
         <div>
           <b>联系招生老师确认报名</b><br>
-          <span class="small">点下面<b>「复制报名意向」</b>，粘贴发到招生微信 <b id="doneWechat">—</b>（手机号可搜），或直接致电 <b>180 3882 9260</b>。请老师确认费用、场次与后续安排。</span>
+          <span class="small">点下面<b>「复制报名意向」</b>，粘贴发到招生微信 <b id="doneWechat">—</b>（手机号可搜），或直接致电 <b>180 3882 9261</b>。请老师确认费用、场次与后续安排。</span>
         </div>
       </div>
 
@@ -236,7 +236,7 @@
   </div>
 </footer>
 
-<script src="assets/store.js?v=087e7e16"></script>
+<script src="assets/store.js?v=bc0c8894"></script>
 <script>
 (function(){
   'use strict';
@@ -463,7 +463,7 @@
       $('doneCode').textContent = o.code;
       $('doneMeta').innerHTML = esc(o.actName) + ' · ' + esc(o.group) + '<br>参考费用 <b style="color:var(--orange);">' + (o.fee == null ? '按当期简章' : '¥' + Number(o.fee).toLocaleString('zh-CN')) + '</b>　报名人 ' + esc(o.student);
       $('doneWechat').textContent = CT.API.settings().wechat;
-      $('payGuide').textContent = '请与招生老师确认费用及缴费方式。联系电话：180 3882 9260。';
+      $('payGuide').textContent = '请与招生老师确认费用及缴费方式。联系电话：180 3882 9261。';
       window.scrollTo({top:0, behavior:'smooth'});
     }).catch(function(err){
       alert(err.message || '保存失败，请稍后重试。');

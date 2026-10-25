@@ -105,11 +105,11 @@
 
   var DEFAULT_SETTINGS = {
     brand: '畅途 · 未来领袖',
-    tel: '180 3882 9260',
-    tel2: '180 3882 9261',
+    tel: '180 3882 9261',
+    tel2: '180 3882 9262',
     payee: '广州畅途文化科技有限公司',
     payNote: '转账请务必备注「订单号 + 学员姓名」，到账后 1 个工作日内后台确认。',
-    wechat: '18038829260',
+    wechat: '18038829261',
     enrollOpen: true,
     adminPass: 'changtu2026'
   };
