@@ -29,7 +29,9 @@
    14em ≤ 667px → 46px */
 .home .hero-lg h1{font-size:clamp(26px,3.6vw,46px);line-height:1.16;letter-spacing:-1.4px;margin:22px 0 0;}
 .home .hero-lg .lead{font-size:16px;max-width:540px;line-height:1.9;}
-.home .hero-lg .hero-cta{margin-top:32px;}
+.home .hero-lg .hero-cta{margin-top:32px;gap:12px;}
+/* 三个入口功能等价，视觉也等价：同底色、同宽度，不给某一个加权重 */
+.home .hero-lg .hero-cta .btn{flex:0 0 auto;min-width:140px;}
 
 /* 能力环的成品图四周自带留白，桌面端左右各外扩 5%，让环的视觉直径
    与原来那版矢量环一致，不会被留白衬小 */

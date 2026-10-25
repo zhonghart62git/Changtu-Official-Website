@@ -946,8 +946,11 @@ html.no-js .rv{opacity:1;transform:none;}
 /* 只放一个二维码时用窄版，别留两列的空档 */
 .mo-panel.is-narrow{max-width:400px;text-align:center;}
 .mo-panel.is-narrow .mo-qr{width:200px;height:200px;margin-top:22px;}
-.mo-panel.is-narrow .mo-sub{margin-bottom:0;}
-.mo-tel{margin:20px 0 0;font-size:17px;font-weight:800;line-height:1.9;letter-spacing:-.2px;}
+/* 窄版弹窗里连排的说明段：段间 10px，末段不再留白 */
+.mo-panel.is-narrow .mo-sub{margin-bottom:10px;}
+.mo-panel.is-narrow .mo-sub:last-of-type{margin-bottom:0;}
+.mo-tel-lead{margin:20px 0 0;font-size:13px;color:var(--text-3);}
+.mo-tel{margin:8px 0 0;font-size:17px;font-weight:800;line-height:1.9;letter-spacing:-.2px;}
 .mo-tel a{color:var(--blue);}
 .mo-tel a:hover{color:var(--blue-deep);}
 @keyframes moIn{from{opacity:0;transform:translateY(14px) scale(.985);}to{opacity:1;transform:none;}}
@@ -970,6 +973,7 @@ a.mo-card:hover{border-color:var(--blue);background:var(--surface);transform:tra
 .mo-card p{margin:0;font-size:13.5px;line-height:1.78;color:var(--text-2);}
 .mo-qr{display:block;width:148px;height:148px;margin:16px auto 0;padding:6px;
   border-radius:10px;background:#fff;border:1px solid var(--line);}
+.mo-qr-note{margin:12px 0 0;font-size:13px;font-weight:700;color:var(--text-2);letter-spacing:.2px;}
 .mo-go{margin-top:auto;padding-top:16px;font-size:13.5px;font-weight:700;color:var(--blue);}
 a.mo-card:hover .mo-go{color:var(--blue-deep);}
 .mo-cities{display:flex;flex-wrap:wrap;gap:6px;margin-top:15px;}
