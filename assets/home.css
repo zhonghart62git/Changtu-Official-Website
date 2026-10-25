@@ -256,15 +256,21 @@
 /* 联盟条：左列「是谁 + 说明」，右列「多少钱 + 两个动作」。
    原来 flex 一行硬塞（标题 + 说明 + 三档 + 一个按钮），说明被挤成三行；
    改成 grid 之后说明拿到整行宽度，价格与按钮也各归各位。 */
+/* 联盟条是这一块唯一的转化入口，做成深色条：整页浅底里它一眼能看见，
+   深蓝底也把三个价位和「查看合作权益」推成视觉重点。 */
 .alliance{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:start;
-  gap:12px 34px;padding:26px 28px;border-radius:16px;
-  background:var(--surface);border:1px solid var(--line);}
-.alliance .al-t{grid-column:1;grid-row:1;font-size:15.5px;font-weight:800;letter-spacing:-.2px;}
-.alliance .al-d{grid-column:1;grid-row:2;font-size:13.5px;color:var(--ink-2);line-height:1.78;}
+  gap:14px 34px;padding:30px 32px;border-radius:18px;
+  background:linear-gradient(135deg,var(--blue-deep) 0%,var(--blue) 100%);
+  border:none;box-shadow:0 18px 40px rgba(8,66,127,.24);}
+.alliance .al-t{grid-column:1;grid-row:1;font-size:21px;font-weight:800;letter-spacing:-.3px;color:#fff;}
+.alliance .al-d{grid-column:1;grid-row:2;font-size:13.5px;color:rgba(255,255,255,.85);line-height:1.78;}
 .alliance .al-p{grid-column:2;grid-row:1;display:flex;flex-wrap:wrap;gap:8px;justify-content:flex-end;}
-.alliance .al-p span{font-size:12.5px;font-weight:600;color:var(--blue-700);
-  background:var(--bg-2);border:1px solid var(--line);border-radius:20px;padding:5px 12px;}
-.alliance .al-act{grid-column:2;grid-row:2;display:flex;flex-wrap:wrap;gap:10px;justify-content:flex-end;}
+.alliance .al-p span{font-size:12.5px;font-weight:600;color:#fff;
+  background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.3);border-radius:20px;padding:5px 12px;}
+.alliance .al-act{grid-column:2;grid-row:2;display:flex;flex-wrap:wrap;gap:10px;justify-content:flex-end;align-items:end;}
+/* 蓝按钮落在蓝底上会融进去，反过来做白底蓝字 */
+.alliance .btn-p{background:#fff;color:var(--blue-deep);box-shadow:0 8px 20px rgba(3,26,52,.28);}
+.alliance .btn-p:hover{background:#EAF2FC;color:var(--blue-deep);transform:translateY(-1px);}
 
 /* ── 13. 占位素材标记 ───────────────────────────────────
    用户要求先用编的素材占位，晚些替换真素材。占位必须一眼能认出来，
