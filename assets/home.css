@@ -160,6 +160,9 @@
   border:1px solid var(--line);border-radius:16px;padding:24px 22px;}
 .oc .oc-k{font-size:11.5px;letter-spacing:1.5px;color:var(--blue-700);font-weight:700;}
 .oc h3{font-size:18px;margin:9px 0 10px;letter-spacing:-.2px;}
+/* 成长档案两张卡去掉了 01/02 小标签，标题成为卡片第一行，字号提一档补上那一行的分量。
+   其他页的 .oc 仍带小标签，保持 18px 不动。 */
+#archive .oc h3{font-size:clamp(20px,2.6vw,24px);margin:0 0 12px;letter-spacing:-.4px;}
 .oc p{font-size:13.5px;line-height:1.8;color:var(--ink-2);margin:0 0 14px;}
 .oc ul{list-style:none;margin:0;padding:13px 0 0;border-top:1px dashed var(--line);margin-top:auto;}
 .oc li{font-size:12.5px;color:var(--text-3);line-height:1.9;padding-left:13px;position:relative;}
