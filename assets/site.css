@@ -1,4 +1,4 @@
-@import url("./design-colors.css?v=e91cb406");
+@import url("./design-colors.css?v=84b19e9b");
 :root{
   --blue:var(--brand);--blue-2:var(--focus);--blue-deep:var(--brand-hover);
   --tint:var(--surface-3);--tint-2:var(--surface-2);
@@ -26,8 +26,61 @@
   --hairline-soft:rgba(11,99,197,.07);
   --inset-hi:inset 0 1px 0 rgba(255,255,255,.92);
 
+  /* ────────────────────────────────────────────────────────────
+     Liquid Glass 三级表面（2026-10-26 第三轮）
+     之前的面板只有半透明底、没有背景模糊，二级卡片干脆是纯白实心，
+     所以看上去仍是"白纸贴卡片"。这里把玻璃拆成三层，每层各自给
+     透明度、模糊、边缘高光和内反射，底色才真的能透进来。
+     模糊强度按层级递减：大面板最强，卡片次之，标签几乎不模糊。
+     ──────────────────────────────────────────────────────────── */
+  /* Level 1：一级板块容器。46% 白是压出来的下限——
+     再低，长段落正文后面透出的蓝会让整块面板发灰；
+     再高，冰蓝就透不进来，又退回"白卡片"。 */
+  --glass-1-bg:rgba(255,255,255,.38);
+  --glass-1-bg-alt:rgba(252,254,255,.44);
+  --glass-1-blur:blur(22px) saturate(1.30);
+  --glass-1-edge:rgba(255,255,255,.78);
+  /* Level 2：二级内容卡片。
+     这里有一个反直觉的点：卡片必须比面板"更透"，不是"更白"。
+     两块半透明白是叠加的——面板 46% + 卡片 56%，合起来 76%，
+     结果卡片区比面板区更接近纯白，层级反而消失了。
+     降到 42% 之后，卡片比面板透，靠"更亮的边缘 + 更强的内高光"分离，
+     这才是玻璃片压在玻璃板上的样子，而不是白纸压白纸。
+     卡片仍不挂 backdrop-filter：它嵌在已经模糊过的面板里，
+     再各自模糊一次等于同一块区域算两遍，滚动会掉帧。 */
+  --glass-2-bg:rgba(255,255,255,.34);
+  --glass-2-bg-hover:rgba(255,255,255,.54);
+  --glass-2-edge:rgba(255,255,255,.88);
+  /* Level 3：标签、按钮、小型控件 */
+  --glass-3-bg:rgba(255,255,255,.34);
+  --glass-3-edge:rgba(255,255,255,.78);
+
+  /* 玻璃的内反射：顶部一道亮线、底部一道极淡的冷色回光，
+     合起来才像一块有厚度的材料，而不是一张半透明纸。 */
+  --glass-inner:inset 0 1px 0 rgba(255,255,255,.95),inset 0 -1px 0 rgba(190,220,255,.28);
+  --glass-inner-strong:inset 0 1px 0 rgba(255,255,255,1),inset 0 0 0 1px rgba(255,255,255,.18);
+  /* 蓝色环境阴影 + 一点紫的反射。不用灰黑，灰黑一压上去就成了后台组件。
+
+     阴影最前面那圈 0 0 0 1px 的淡蓝是这一版加的，它干的是"描边"的活：
+     卡片的边框是白色半透明，压在浅冰蓝面板上等于没有边——
+     白对白，人眼分不出来，卡片就散在面板里。
+     外面再套一圈 7% 的蓝，边界才立得住。这圈蓝不参与模糊，
+     所以它和 backdrop-filter 的观感无关，纯靠色差。 */
+  --glass-shadow:0 0 0 1px rgba(11,99,197,.055),0 1px 2px rgba(16,36,62,.04),
+    0 26px 60px -34px rgba(11,99,197,.50);
+  --glass-shadow-hover:0 0 0 1px rgba(123,63,228,.14),0 2px 4px rgba(16,36,62,.05),
+    0 34px 72px -34px rgba(11,99,197,.58);
+  --glass-shadow-sm:0 0 0 1px rgba(11,99,197,.075),0 1px 2px rgba(16,36,62,.04),
+    0 14px 30px -20px rgba(11,99,197,.36);
+
+  /* 主按钮的蓝→青蓝轻渐变。终点 #0A7CA8 不是随便挑的：
+     白字压在上面 4.71:1，过 AA；再亮一点（比如 #0E8FBF）就掉到 4.0，
+     按钮上那行字会发虚。所以"轻渐变"的边界是算出来的，不是调出来的。 */
+  --btn-grad:linear-gradient(100deg,#0B63C5 0%,#0D6FB4 48%,#0A7CA8 100%);
+  --btn-grad-hover:linear-gradient(100deg,#0A57AD 0%,#0B63A6 48%,#086D95 100%);
+
   --ease:cubic-bezier(.22,.61,.36,1);
-  --dur-fast:160ms;--dur:220ms;--dur-slow:320ms;
+  --dur-fast:160ms;--dur:220ms;--dur-slow:280ms;
 }
 *{margin:0;padding:0;box-sizing:border-box;}
 html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;background:var(--page-background);}
@@ -42,16 +95,42 @@ body{
    参考图的共同底子是「页面坐在一片光场里」，不是白纸上贴卡片。
    这里做成一层固定在视口的光场，内容在上面滚动——光场不动，
    页面才有纵深，也不会因为每个区块各画一遍渐变而在接缝处断掉。
-   蓝是主光（右上最亮），紫只在左下和右上各一层很淡的次级光。
-   全部落在 z-index:-1，不参与命中测试，也不影响任何文字对比度。 */
+   蓝是主光（右上最亮），紫只在左上和左下各一层很淡的次级光。
+   全部落在 z-index:-1，不参与命中测试，也不影响任何文字对比度。
+
+   三层叠加：光晕（体积）→ 细环（结构，参考图里那些半透明圆环）
+   → 纵向冷白渐变（底）。环只有 1px 宽、7% 不透明度，
+   作用是给背景一点"人工结构"的暗示，不是装饰花纹。 */
 body::before{
   content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;
   background:
-    radial-gradient(1240px 800px at 78% -14%,rgba(11,99,197,.20) 0%,rgba(11,99,197,0) 64%),
-    radial-gradient(900px 640px at 4% 2%,rgba(123,63,228,.10) 0%,rgba(123,63,228,0) 66%),
-    radial-gradient(1080px 820px at 100% 52%,rgba(11,99,197,.13) 0%,rgba(11,99,197,0) 68%),
-    radial-gradient(940px 740px at -8% 90%,rgba(123,63,228,.09) 0%,rgba(123,63,228,0) 70%),
-    linear-gradient(178deg,#F2F7FE 0%,#E7F0FC 44%,#EFF6FF 100%);
+    /* 细环：右上一大一小，左下一大，构成不对称的空间刻度 */
+    radial-gradient(circle at 86% 6%,rgba(11,99,197,0) 0 519px,rgba(11,99,197,.085) 520px 521px,rgba(11,99,197,0) 522px),
+    radial-gradient(circle at 86% 6%,rgba(11,99,197,0) 0 679px,rgba(11,99,197,.055) 680px 681px,rgba(11,99,197,0) 682px),
+    radial-gradient(circle at -6% 88%,rgba(123,63,228,0) 0 439px,rgba(123,63,228,.065) 440px 441px,rgba(123,63,228,0) 442px),
+    /* 局部光斑：四团 420–620px 的高饱和光，散布在视口的四个位置。
+       这一组是"玻璃有没有东西可透"的关键——之前全是 1000px 级的平缓大渐变，
+       透过面板只是一层均匀的雾，看不出后面有光在流动。
+       小半径 + 高饱和的光斑被 blur 之后仍然留下可辨认的色块形状，
+       面板滚过去时，色块会在玻璃下面移动。 */
+    radial-gradient(520px 420px at 14% 22%,rgba(11,99,197,.40) 0%,rgba(11,99,197,0) 68%),
+    radial-gradient(460px 380px at 88% 34%,rgba(34,184,232,.36) 0%,rgba(34,184,232,0) 70%),
+    radial-gradient(420px 360px at 26% 72%,rgba(123,63,228,.30) 0%,rgba(123,63,228,0) 72%),
+    radial-gradient(560px 420px at 74% 88%,rgba(11,99,197,.32) 0%,rgba(11,99,197,0) 70%),
+    /* 光晕：蓝主光右上、蓝副光右中、紫左上、紫左下。
+       强度整体提一档（.22→.28 / .14→.19 / .12→.16 / .10→.14）：
+       面板是 50% 白 + 22px 模糊，光太弱的话透上来只剩一层灰白，
+       玻璃和"白卡片"就看不出区别。光必须先够重，玻璃才有东西可透。 */
+    radial-gradient(1240px 800px at 78% -14%,rgba(11,99,197,.28) 0%,rgba(11,99,197,0) 64%),
+    radial-gradient(900px 640px at 2% 0%,rgba(123,63,228,.16) 0%,rgba(123,63,228,0) 66%),
+    radial-gradient(1080px 820px at 100% 52%,rgba(11,99,197,.19) 0%,rgba(11,99,197,0) 68%),
+    radial-gradient(940px 740px at -8% 90%,rgba(123,63,228,.14) 0%,rgba(123,63,228,0) 70%),
+    /* 一条横贯的冷光带，把上下两半的明度差开 */
+    linear-gradient(184deg,rgba(255,255,255,.5) 0%,rgba(255,255,255,0) 38%,rgba(11,99,197,.07) 78%,rgba(255,255,255,.26) 100%),
+    /* 底色：冷白 → 冰蓝 → 冷白。整体压深一档（#F3F8FE→#EAF2FD 等），
+       中间那一档从 #E4EEFC 压到 #D8E7F9，才是参考图那种"冰"的蓝，
+       不是"加了一点蓝的白"。 */
+    linear-gradient(178deg,#EAF2FD 0%,#D8E7F9 44%,#E4EFFC 100%);
 }
 /* 极细颗粒：大面积渐变在 8bit 屏上会出现色带，一层 1.5% 的噪点就能压掉，
    顺带让白面看起来有材质而不是纯色块。固定尺寸小图平铺，开销可忽略。 */
@@ -79,20 +158,32 @@ h1,h2,h3,h4,p,li,dd,dt,span,b,strong{overflow-wrap:break-word;}
 .topbar a:hover{border-color:var(--surface);}
 
 /* ===== 导航 =====
-   轻度 Liquid Glass：半透明冷白 + 背景模糊 + 1px 蓝边。
-   滚动后提高不透明度（.is-scrolled 由 assets/chrome.js 挂），保证滚动时菜单依然清楚。 */
+   轻度 Liquid Glass。之前是 72% 白，压在同样是浅色的首屏上，
+   透出来的还是浅色，看上去就是一块纯白板。
+   这里把底色降到 46%，模糊提到 24px——模糊要够强，
+   底下的光场才会被"搅"成一层有纵深的雾，而不是原样透上来。 */
 header.nav{
   position:sticky;top:0;z-index:60;
-  background:rgba(255,255,255,.72);
-  -webkit-backdrop-filter:blur(20px) saturate(1.8);
-  backdrop-filter:blur(20px) saturate(1.8);
-  border-bottom:1px solid var(--border-primary);
-  box-shadow:0 8px 24px -22px var(--shadow-primary);
+  /* 46% 白 + 24px 模糊，在浅冰蓝背景上合成出来是 #F5F9FE——和纯白只差 4 个色阶，
+     看上去仍是一条白板。改成"顶部冷蓝、底部转白"的竖向渐变：
+     光从上方来，玻璃条的上沿应该比下沿更冷，这一条渐变就是玻璃的朝向。
+     色值不用压得太狠，62% 的 #E2EFFD 已经足够让导航和下面的面板分开。 */
+  background:linear-gradient(180deg,rgba(226,239,253,.66) 0%,rgba(255,255,255,.40) 100%);
+  -webkit-backdrop-filter:blur(24px) saturate(1.55);
+  backdrop-filter:blur(24px) saturate(1.55);
+  border-bottom:1px solid rgba(255,255,255,.55);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.85),0 10px 30px -26px rgba(11,99,197,.5);
   transition:background var(--dur) var(--ease),box-shadow var(--dur) var(--ease);
 }
+/* 滚动后加厚：内容从底下划过时，半透明的底会让菜单字和正文打架，
+   提到 88% 保证可读。模糊同步收一点，避免两层强模糊叠出雾面灰。
+   底色仍保留一点冷蓝（#E8F2FE），不然一滚动导航就从"冰蓝玻璃"变回白板。 */
 header.nav.is-scrolled{
-  background:rgba(255,255,255,.93);
-  box-shadow:0 12px 32px -20px rgba(11,99,197,.30);
+  background:linear-gradient(180deg,rgba(232,242,254,.90) 0%,rgba(255,255,255,.88) 100%);
+  -webkit-backdrop-filter:blur(28px) saturate(1.4);
+  backdrop-filter:blur(28px) saturate(1.4);
+  border-bottom-color:rgba(11,99,197,.12);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.95),0 14px 36px -24px rgba(11,99,197,.42);
 }
 /* 顶沿一道极淡的蓝紫光。只做边缘 1px，不铺面，也不压文字对比度 */
 header.nav::after{
@@ -119,20 +210,35 @@ header.nav::after{
   transition:transform var(--dur) var(--ease),box-shadow var(--dur) var(--ease),
              background-color var(--dur) var(--ease),border-color var(--dur) var(--ease),color var(--dur) var(--ease);
 }
-/* 主按钮用实体蓝，不用渐变：渐变蓝在浅底上会发灰，实体色才压得住「唯一主行动」。
-   hover 只加一层很淡的紫光，面积小，不改变按钮本身的蓝。 */
-.btn-p{background:var(--brand-blue);color:#fff;box-shadow:0 8px 20px -10px rgba(11,99,197,.55);}
-.btn-p:hover{background:var(--brand-hover);transform:translateY(-2px);
-  box-shadow:0 12px 26px -12px rgba(11,99,197,.6),0 0 0 4px var(--glow-purple);}
-.btn-p:active{transform:translateY(0);box-shadow:0 6px 14px -10px rgba(11,99,197,.55);}
+/* 主按钮：品牌蓝到青蓝的轻渐变。
+   之前是实体蓝，理由是"渐变在浅底上会发灰"。那条顾虑成立的前提是
+   渐变跨越明度——从深蓝到亮青，中间就会灰。这里改成同明度带内的
+   色相微移（蓝 → 青蓝），明度只掉 4%，所以既不发灰，也看得出是玻璃质感的按钮。 */
+.btn-p{background:var(--btn-grad);color:#fff;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.28),0 10px 24px -12px rgba(11,99,197,.62);}
+.btn-p:hover{background:var(--btn-grad-hover);transform:translateY(-2px);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.34),0 14px 30px -12px rgba(11,99,197,.66),
+    0 0 0 4px var(--glow-purple);}
+.btn-p:active{transform:translateY(0);box-shadow:inset 0 1px 0 rgba(255,255,255,.2),
+  0 6px 14px -10px rgba(11,99,197,.55);}
 /* 次强调：浅蓝底 + 深蓝字。原来这里是橙色实心，橙色和四个能力域没有关系，
    放在全站当通用强调色会把主色稀释掉，改成蓝的同色系深浅。 */
 .btn-o{background:var(--blue-50);color:var(--blue-deep);border-color:rgba(11,99,197,.22);}
 .btn-o:hover{background:var(--blue-100);border-color:var(--brand-blue);color:var(--blue-deep);
   transform:translateY(-2px);box-shadow:0 10px 22px -14px var(--shadow-primary);}
-.btn-s{background:var(--surface);color:var(--ink);border-color:var(--border-primary);}
-.btn-s:hover{border-color:var(--brand-blue);color:var(--brand-blue);transform:translateY(-2px);
-  box-shadow:0 10px 22px -14px var(--shadow-primary);}
+/* 次级按钮：透明玻璃。首屏那三个入口原来是不透明白底 + 灰边，
+   在光场里像三块贴纸。改成 42% 白 + 12px 模糊 + 白色边缘高光，
+   底下的光能透上来，按钮就成了"浮在光里的玻璃片"。 */
+.btn-s{
+  background:rgba(255,255,255,.42);color:var(--ink);
+  border-color:rgba(255,255,255,.78);
+  -webkit-backdrop-filter:blur(12px) saturate(1.2);
+  backdrop-filter:blur(12px) saturate(1.2);
+  box-shadow:var(--glass-inner),0 10px 26px -20px rgba(11,99,197,.55);
+}
+.btn-s:hover{border-color:rgba(11,99,197,.34);color:var(--brand-blue);transform:translateY(-2px);
+  background:rgba(255,255,255,.62);
+  box-shadow:var(--glass-inner-strong),0 14px 30px -18px rgba(11,99,197,.5);}
 .btn-sm{padding:9px 18px;font-size:13.5px;}
 /* 键盘走到按钮时要看得见。浏览器默认的黑色描边落在蓝底上很难看，统一成深蓝 */
 /* 焦点环：深蓝 outline 压在主蓝按钮上几乎看不出来，所以主按钮改成
@@ -213,22 +319,33 @@ h1 em{font-style:normal;white-space:nowrap;color:var(--brand-blue);
 section{padding:88px 0;}
 section[id]{scroll-margin-top:86px;}
 
-/* 区块容器化。
-   参考图里没有一个是「白底 + 一条条色带」——每个板块都是一整块浮在光场上的面板，
-   板块之间留缝，光场从缝里透出来，页面才有前后关系。
-   这里用半透明白做面板：光场从面板底下透上来一层很淡的色，
-   所以既保住了正文对比度（等效底仍在 #F8FBFF 附近），又不像纯白纸片。
-   不加 backdrop-filter：光场本身是平滑的，模糊看不出差别，只白付滚动开销。 */
+/* 区块容器化 —— Level 1 玻璃。
+   参考图里没有一个是「白底 + 一条条色带」——每个板块都是一整块浮在光场上的玻璃面板。
+   这一层必须同时具备六件事，缺一样就不像玻璃：
+   ① 半透明底（46%，光场能透进来）
+   ② backdrop-filter 真模糊（否则底色透进来是"平"的，只是变浅，不是玻璃）
+   ③ 1px 半透明白边 + 顶部内高光（边缘折射）
+   ④ 底部极淡冷色回光（材料有厚度）
+   ⑤ 蓝色环境阴影（不是灰黑投影）
+   ⑥ 顶部 150px 的垂向高光（被上方光源照到）
+   第 7 层是本轮新加的：面板左上角一团冰蓝、右下角一团淡紫。
+   没有它，面板就是一整片均匀的白——均匀的白正是"白卡片"的特征。
+   有了这团光，面板自己就有了方向，光从左上来、往右下衰减，
+   和参考图里那种"玻璃被斜照到"的观感一致。
+   模糊只挂在这一层。二级卡片嵌在已经模糊过的面板里，再各自模糊一次
+   等于同一块像素算两遍，滚动会掉帧——这是刻意的取舍，不是漏写。 */
 main > section:not(.hslider){
-  position:relative;width:calc(100% - 56px);max-width:1360px;margin:0 auto 26px;
+  position:relative;width:calc(100% - 56px);max-width:1360px;margin:0 auto 30px;
   border-radius:var(--r-panel);
-  /* 顶部 180px 一道从白到透明的垂向高光：面板像被上方光源照到，
-     不是一块均匀的白板。这一层只在面板自己身上，不叠到内容上。 */
   background:
-    linear-gradient(180deg,rgba(255,255,255,.55) 0%,rgba(255,255,255,0) 180px),
-    rgba(255,255,255,.62);
-  border:1px solid rgba(255,255,255,.94);
-  box-shadow:var(--inset-hi),0 1px 2px rgba(16,36,62,.04),0 40px 84px -56px rgba(11,99,197,.42);
+    linear-gradient(180deg,rgba(255,255,255,.42) 0%,rgba(255,255,255,0) 150px),
+    radial-gradient(880px 520px at 8% -12%,rgba(34,184,232,.13) 0%,rgba(34,184,232,0) 72%),
+    radial-gradient(760px 460px at 104% 108%,rgba(123,63,228,.09) 0%,rgba(123,63,228,0) 74%),
+    var(--glass-1-bg);
+  -webkit-backdrop-filter:var(--glass-1-blur);
+  backdrop-filter:var(--glass-1-blur);
+  border:1px solid var(--glass-1-edge);
+  box-shadow:var(--glass-inner),var(--glass-shadow);
   /* overflow:clip 而不是 hidden：hidden 会生成滚动容器，
      面板里的 position:sticky（机构名录的筛选条）就再也贴不住视口。
      clip 只裁剪、不建滚动容器，圆角能裁住，sticky 照常工作。 */
@@ -237,8 +354,20 @@ main > section:not(.hslider){
 /* 隔一块换一次底，靠明暗差断块，不靠分割线 */
 main > section:nth-of-type(even):not(.hslider){
   background:
-    linear-gradient(180deg,rgba(255,255,255,.55) 0%,rgba(255,255,255,0) 180px),
-    rgba(251,253,255,.70);}
+    linear-gradient(180deg,rgba(255,255,255,.42) 0%,rgba(255,255,255,0) 150px),
+    radial-gradient(880px 520px at 92% -12%,rgba(11,99,197,.12) 0%,rgba(11,99,197,0) 72%),
+    radial-gradient(720px 440px at -4% 108%,rgba(34,184,232,.09) 0%,rgba(34,184,232,0) 74%),
+    var(--glass-1-bg-alt);}
+
+/* 不支持 backdrop-filter 时（老 Firefox / 关掉硬件加速）退成更实的底，
+   宁可少一点玻璃感，也不能让正文压在一层透光的浅色上看不清。 */
+@supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){
+  main > section:not(.hslider){
+    background:
+      linear-gradient(180deg,rgba(255,255,255,.7) 0%,rgba(255,255,255,0) 190px),
+      rgba(250,252,255,.90);
+  }
+}
 
 .sec-head{max-width:780px;margin-bottom:46px;}
 /* 标题前那道短线：蓝色打底，末端收进紫。全站紫只在这种几像素的装饰上出现 */
@@ -278,16 +407,22 @@ main > section:nth-of-type(even):not(.hslider){
    光直接写在 background 里而不是用 ::before 铺一层：
    绝对定位的伪元素会盖在正文上面，哪怕是 5% 的蓝也会把对比度往下拖。 */
 #why{background:
-  linear-gradient(180deg,rgba(255,255,255,.55) 0%,rgba(255,255,255,0) 180px),
-  radial-gradient(780px 440px at 94% -8%,rgba(11,99,197,.075) 0%,rgba(11,99,197,0) 70%),
-  rgba(255,255,255,.62);}
+  linear-gradient(180deg,rgba(255,255,255,.42) 0%,rgba(255,255,255,0) 150px),
+  radial-gradient(880px 520px at 8% -12%,rgba(34,184,232,.13) 0%,rgba(34,184,232,0) 72%),
+  radial-gradient(780px 440px at 94% -8%,rgba(11,99,197,.09) 0%,rgba(11,99,197,0) 70%),
+  var(--glass-1-bg);}
 #archive{background:
-  linear-gradient(180deg,rgba(255,255,255,.55) 0%,rgba(255,255,255,0) 180px),
-  radial-gradient(720px 420px at 2% 104%,rgba(123,63,228,.07) 0%,rgba(123,63,228,0) 72%),
-  rgba(251,253,255,.70);}
+  linear-gradient(180deg,rgba(255,255,255,.42) 0%,rgba(255,255,255,0) 150px),
+  radial-gradient(760px 460px at 104% 108%,rgba(123,63,228,.09) 0%,rgba(123,63,228,0) 74%),
+  radial-gradient(720px 420px at 2% 104%,rgba(123,63,228,.085) 0%,rgba(123,63,228,0) 72%),
+  var(--glass-1-bg-alt);}
 
 /* ===== 业务矩阵 ===== */
-#matrix{background:transparent;}
+/* 这里原来写的是 background:transparent，本意是"别盖住面板"，
+   但它是 id 选择器，特异性高于 main > section，等于把面板的玻璃底整条清掉，
+   只剩 backdrop-filter 在模糊背景——那一块就变成了纯蓝色块，
+   比周围的浅白面板深一大截。删掉，让它继承面板。 */
+
 .matrix{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
 .m-card.wide{
   grid-column:1/-1;flex-direction:row;align-items:center;gap:22px;
@@ -437,43 +572,76 @@ td em{font-style:normal;font-size:12.5px;color:var(--muted);}
 .step:nth-child(1){--sc:var(--blue-800);--sc-ink:var(--blue-800);--sc-soft:var(--surface-3);}
 .step:nth-child(2){--sc:var(--brand-hover);--sc-ink:var(--brand-hover);--sc-soft:var(--surface-3);}
 .step:nth-child(3){--sc:var(--brand-blue);--sc-ink:var(--brand-blue);--sc-soft:var(--surface-3);}
-/* 轨道逐段铺：每段从本站连到下一站，颜色从深蓝一路走到品牌蓝，收在最后一站 */
+/* 轨道逐段铺：每段从本站连到下一站，颜色从深蓝一路走到品牌蓝，收在最后一站。
+   加一层同色外发光，让轨道看起来是"亮着的"，不是画上去的一条线。
+   发光用 blur 而不是加粗——加粗会把三个站点的间距读窄。 */
 .step::after{
   content:"";position:absolute;left:22px;right:-20px;top:21px;height:2px;border-radius:2px;
+  box-shadow:0 0 10px 0 rgba(11,99,197,.34);
 }
 .step:nth-child(1)::after{background:linear-gradient(90deg,var(--blue-800),var(--brand-hover));}
-.step:nth-child(2)::after{background:linear-gradient(90deg,var(--brand-hover),var(--brand-blue));}
+.step:nth-child(2)::after{background:linear-gradient(90deg,var(--brand-hover),#1E8FDE);}
 /* 第三站是终点，后面不再铺轨道 */
 .step:nth-child(3)::after{display:none;}
-/* 站点圆环 + 站台到卡片的连接线 */
+/* 站点圆环：冰蓝发光圆点。
+   原来是实白底 + 2px 域色边，白圈实心，在光场上就是一个洞。
+   现在做成玻璃珠：半透明白底 + 8px 模糊 + 内高光，
+   外面套两圈光环（6px 近白、10px 冰蓝）——近白那圈同时负责遮住穿过来的轨道。
+   光环用 box-shadow 画，不额外加 DOM。 */
 .step .no{
   position:absolute;left:0;top:0;z-index:1;
   width:44px;height:44px;border-radius:50%;display:grid;place-items:center;
-  background:var(--surface);border:2px solid var(--sc);color:var(--ink);
+  background:rgba(255,255,255,.58);
+  -webkit-backdrop-filter:blur(8px) saturate(1.4);backdrop-filter:blur(8px) saturate(1.4);
+  border:2px solid var(--sc);color:var(--ink);
   font-weight:800;font-size:13px;letter-spacing:.02em;
-  box-shadow:0 0 0 6px var(--surface),0 0 0 10px rgba(11,99,197,.06),0 8px 18px rgba(11,99,197,.10);
-  transition:background var(--dur) var(--ease),color var(--dur) var(--ease),transform var(--dur) var(--ease),box-shadow var(--dur) var(--ease);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,1),
+    0 0 0 6px rgba(255,255,255,.82),
+    0 0 0 10px rgba(11,99,197,.10),
+    0 0 18px 2px rgba(30,143,222,.26),
+    0 8px 20px rgba(11,99,197,.14);
+  transition:background var(--dur) var(--ease),color var(--dur) var(--ease),
+             transform var(--dur) var(--ease),box-shadow var(--dur) var(--ease);
 }
-/* 终点站（成长沉淀）多一圈很淡的紫光。只做高光，节点本身仍是蓝的 */
-.step:nth-child(3) .no{box-shadow:0 0 0 6px var(--surface),0 0 0 10px rgba(123,63,228,.10),0 8px 18px rgba(11,99,197,.12);}
+/* 终点站（成长沉淀）多一圈紫高光。节点本身仍是蓝的，紫只在光环上——
+   这一站的语义是"收束"，紫是收束色，不是第五个能力域。 */
+.step:nth-child(3) .no{
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,1),
+    0 0 0 6px rgba(255,255,255,.82),
+    0 0 0 10px rgba(123,63,228,.16),
+    0 0 22px 3px rgba(123,63,228,.30),
+    0 8px 20px rgba(11,99,197,.16);
+}
 .step::before{
   content:"";position:absolute;left:21px;top:44px;width:2px;height:16px;opacity:.45;
   background:linear-gradient(180deg,var(--sc) 0%,var(--sc) 55%,transparent 100%);
 }
-.step:hover .no{background:var(--sc);color:var(--surface);transform:scale(1.07);}
-/* 阶段卡片 */
-/* 阶段卡片：白底上靠细边 + 轻影立起来，不能只靠边框，会显得空 */
+.step:hover .no{background:var(--sc);color:var(--surface);transform:scale(1.07);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.34),
+    0 0 0 6px rgba(255,255,255,.82),
+    0 0 0 10px rgba(11,99,197,.14),
+    0 0 22px 3px color-mix(in srgb,var(--sc) 42%,transparent),
+    0 10px 22px rgba(11,99,197,.18);}
+/* 阶段卡片：Level 2 玻璃。底透、模糊挂在父面板上，这里只补内高光和蓝调阴影。
+   顶条 3px 本段色 → 透明，和四能力卡是同一套语言。 */
 .step-card{
   position:relative;flex:1 1 auto;display:flex;flex-direction:column;overflow:hidden;
-  background:var(--surface);border:1px solid var(--hairline);border-radius:var(--r-card);
-  padding:22px 22px 20px;box-shadow:var(--inset-hi),var(--elev-1);
-  transition:transform var(--dur) var(--ease),box-shadow var(--dur) var(--ease),border-color var(--dur) var(--ease);
+  background:var(--glass-2-bg);border:1px solid var(--glass-2-edge);border-radius:var(--r-card);
+  padding:22px 22px 20px;box-shadow:var(--glass-inner),var(--glass-shadow-sm);
+  transition:transform var(--dur) var(--ease),box-shadow var(--dur) var(--ease),
+             border-color var(--dur) var(--ease),background var(--dur) var(--ease);
 }
 .step-card::before{
   content:"";position:absolute;left:0;right:0;top:0;height:3px;
-  background:linear-gradient(90deg,var(--sc),transparent);
+  background:linear-gradient(90deg,var(--sc) 0%,color-mix(in srgb,var(--sc) 55%,transparent) 48%,transparent 100%);
+  box-shadow:0 0 18px 1px color-mix(in srgb,var(--sc) 38%,transparent);
 }
-.step:hover .step-card{transform:translateY(-4px);box-shadow:var(--inset-hi),var(--elev-3);border-color:rgba(11,99,197,.22);}
+.step:hover .step-card{transform:translateY(-4px);background:var(--glass-2-bg-hover);
+  box-shadow:var(--glass-inner-strong),var(--glass-shadow-hover);
+  border-color:rgba(255,255,255,.92);}
 .step-top{display:flex;align-items:baseline;gap:9px;margin-bottom:7px;}
 .step-top h3{font-size:20px;letter-spacing:-.4px;}
 /* p 的下边距是按钮的保底间距：内容少的卡靠 margin-top:auto 把按钮推到底，内容满的卡也不会贴在一起 */
@@ -482,15 +650,17 @@ td em{font-style:normal;font-size:12.5px;color:var(--muted);}
 .step-btn{
   display:inline-flex;align-items:center;gap:6px;align-self:flex-start;margin-top:auto;
   padding:9px 17px;border-radius:30px;font-size:13px;font-weight:600;color:var(--surface);
-  background:var(--brand-blue);
-  box-shadow:0 6px 16px -8px rgba(11,99,197,.55);
+  background:var(--btn-grad);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.26),0 6px 16px -8px rgba(11,99,197,.55);
   transition:transform var(--dur) var(--ease),box-shadow var(--dur) var(--ease),background var(--dur) var(--ease);
 }
-.step-btn:hover{transform:translateY(-2px);background:var(--brand-hover);box-shadow:0 10px 22px -10px rgba(11,99,197,.6);}
+.step-btn:hover{transform:translateY(-2px);background:var(--btn-grad-hover);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.3),0 10px 22px -10px rgba(11,99,197,.6);}
 .step-btn svg{width:12px;height:12px;}
 
 /* ===== 机构合作 ===== */
-#partner{background:transparent;}
+/* 同 #matrix：transparent 会清掉面板玻璃底，只剩模糊后的蓝背景。
+   删掉，继承面板。 */
 /* 三档卡片
    三档的绿 #12BF7A / 金 #C08A16 来自联盟海报，是档位标识，不是通用强调色，
    所以只留在顶条、圆点、按钮和价格数字上；卡片底回到白，顶部透 5% 本档色做浅光。
@@ -603,37 +773,84 @@ button.tc-cta{border:0;font-family:inherit;cursor:pointer;width:100%;}
 .partner-cta .btn{flex:none;}
 
 /* ===== FAQ =====
-   实体浅色底，不用玻璃。条目之间靠间距和细边分隔，展开时只加深边框和阴影。 */
+   折叠项做成轻薄玻璃（Level 3）：44% 白 + 10px 模糊。
+   这里刻意用比一级面板更低的模糊——FAQ 是密集的文字列表，
+   模糊太强会让每一条的边界都糊在一起，读起来分不清行。
+   展开态不靠加深边框，而是三件事同时发生：底色提亮、内高光加强、
+   边框换成蓝紫双色渐变。三个信号一起给，展开的那条才明显"浮起来"。 */
 #faq{border-top:0;}
 .faq{max-width:840px;margin:0 auto;display:flex;flex-direction:column;gap:12px;}
-details{background:var(--surface);border:1px solid var(--border-primary);border-radius:var(--r-sm);padding:0 20px;
-  transition:border-color var(--dur) var(--ease),box-shadow var(--dur) var(--ease);}
-details:hover{border-color:rgba(123,63,228,.24);}
-details[open]{border-color:rgba(11,99,197,.28);box-shadow:var(--shadow-md);}
+details{
+  position:relative;
+  background:rgba(255,255,255,.44);
+  -webkit-backdrop-filter:blur(10px) saturate(1.2);backdrop-filter:blur(10px) saturate(1.2);
+  border:1px solid rgba(255,255,255,.70);border-radius:var(--r-sm);padding:0 20px;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.9),0 10px 26px -22px rgba(11,99,197,.4);
+  transition:background var(--dur) var(--ease),border-color var(--dur) var(--ease),
+             box-shadow var(--dur) var(--ease);
+}
+details:hover{background:rgba(255,255,255,.62);border-color:rgba(123,63,228,.26);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.95),0 14px 30px -22px rgba(11,99,197,.46);}
+/* 展开态：底色提到 76%，边缘叠蓝 + 紫两道——
+   1px 蓝描边负责"选中"，外面再套 1px 极淡紫晕负责"亮了一下"。
+   不用 border-image 渐变：渐变边框配 backdrop-filter 时，
+   border-box 那层会把模糊结果裁掉一半，边缘会出现一条硬缝。 */
+details[open]{
+  background:rgba(255,255,255,.76);
+  border-color:rgba(11,99,197,.32);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,1),
+    inset 0 0 0 1px rgba(255,255,255,.55),
+    0 20px 44px -26px rgba(11,99,197,.5),
+    0 0 0 1px rgba(123,63,228,.14);
+}
 summary{
   list-style:none;cursor:pointer;padding:18px 0;font-size:15.5px;font-weight:600;color:var(--text-primary);
   display:flex;align-items:center;justify-content:space-between;gap:16px;
 }
 summary::-webkit-details-marker{display:none;}
-summary::after{content:"+";font-size:20px;color:var(--brand-blue);font-weight:400;line-height:1;
-  transition:transform var(--dur) var(--ease);flex-shrink:0;}
-details[open] summary::after{transform:rotate(45deg);}
+/* 展开图标：一个细玻璃圆，里面的 + 会转成 ×。
+   原来是一个裸的 + 号，压在玻璃条上像没画完。 */
+summary::after{
+  content:"+";font-size:17px;font-weight:400;line-height:1;
+  width:24px;height:24px;flex-shrink:0;
+  display:grid;place-items:center;border-radius:50%;
+  color:var(--brand-blue);
+  background:rgba(255,255,255,.5);
+  border:1px solid rgba(11,99,197,.18);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.9);
+  transition:transform var(--dur) var(--ease),background var(--dur) var(--ease),
+             border-color var(--dur) var(--ease),color var(--dur) var(--ease);
+}
+details[open] summary::after{transform:rotate(45deg);background:rgba(11,99,197,.10);
+  border-color:rgba(11,99,197,.30);}
+details:hover summary::after{border-color:rgba(11,99,197,.30);}
 summary:focus-visible{outline:2px solid var(--brand-blue);outline-offset:2px;border-radius:6px;}
 details .ans{padding:0 0 18px;font-size:14.3px;line-height:1.8;color:var(--ink-2);
-  border-top:1px solid var(--border-primary);padding-top:14px;}
+  border-top:1px solid rgba(11,99,197,.10);padding-top:14px;}
 
 /* ===== 末屏转化区 =====
    全站只有这一个主按钮。电话是辅助信息，排在按钮下方，不并排成第二个按钮。
-   底色从冷白收到接近纯白，顶部一团蓝光把视线聚到中间，紫只在底沿做一层薄边光。 */
-/* 末屏现在是面板，底色要跟着面板走：光留着，实底交给面板。
-   原来那条 border-top 在面板里会变成一条悬空的横线，去掉。 */
+   这里是整页的视觉落点，所以光要压得比任何一块都重：
+   顶部一盏居中的蓝色聚光（视线被拉到标题上），
+   底沿一层紫（收束色，暗示"到这里结束"），中间再套一道很淡的细环，
+   把内容框在一个圆里，而不是让它散在一片渐变上。
+   底色只留 30%，剩下交给下面那层玻璃面板——面板的模糊会把聚光揉开，
+   自己再铺 72% 白就等于把面板材质整个盖掉了。 */
 #contact{
   background:
-    linear-gradient(180deg,rgba(255,255,255,.55) 0%,rgba(255,255,255,0) 180px),
-    radial-gradient(660px 380px at 50% -10%,rgba(11,99,197,.11) 0%,rgba(11,99,197,0) 68%),
-    radial-gradient(540px 320px at 50% 114%,rgba(123,63,228,.07) 0%,rgba(123,63,228,0) 70%),
-    rgba(255,255,255,.72);
+    linear-gradient(180deg,rgba(255,255,255,.5) 0%,rgba(255,255,255,0) 190px),
+    radial-gradient(760px 460px at 50% -18%,rgba(11,99,197,.20) 0%,rgba(11,99,197,0) 66%),
+    radial-gradient(420px 300px at 50% 8%,rgba(34,184,232,.14) 0%,rgba(34,184,232,0) 70%),
+    radial-gradient(600px 340px at 50% 116%,rgba(123,63,228,.11) 0%,rgba(123,63,228,0) 72%),
+    rgba(255,255,255,.30);
   border-top:0;}
+/* 细环：只在转化区中央出现一圈，1px、7%，作用是给聚光一个边界 */
+#contact::after{
+  content:"";position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);
+  width:min(760px,86%);aspect-ratio:1;border-radius:50%;pointer-events:none;
+  background:radial-gradient(circle,rgba(11,99,197,0) 0 49.7%,rgba(11,99,197,.07) 49.85% 50%,rgba(11,99,197,0) 50.15%);
+}
 .cta{max-width:640px;margin:0 auto;text-align:center;}
 .cta .eyebrow{margin-bottom:18px;}
 .cta h2{font-size:clamp(26px,3.3vw,42px);line-height:1.26;letter-spacing:-1px;margin:0;color:var(--text-primary);}
@@ -657,9 +874,18 @@ details .ans{padding:0 0 18px;font-size:14.3px;line-height:1.8;color:var(--ink-2
 
 /* ===== Footer =====
    深蓝收尾。整页都是浅底，页脚是唯一的大面积深色块，作用是给出边界和分量，
-   不是「深色科技风」——里面的文字全部白系，对比度 6.9:1 以上。 */
+   不是「深色科技风」——里面的文字全部白系，对比度 6.9:1 以上。
+   这里做「深蓝玻璃」：主色仍是深品牌蓝（实底，保证白字对比度稳定），
+   但在顶部叠一道从透明到深蓝的过渡，让上方冷白的页面"渗"进页脚上沿，
+   再补一道 1px 内高光和右上角一团很淡的蓝紫光——
+   看上去是上方光场被页脚挡住、光从边缘折过去，而不是两块色块硬拼。 */
 footer{position:relative;color:rgba(255,255,255,.78);padding:48px 0 30px;font-size:13.5px;
-  background:linear-gradient(168deg,#0B3A6E 0%,var(--brand-hover) 50%,#062E5B 100%);}
+  background:
+    radial-gradient(720px 300px at 88% -20%,rgba(34,184,232,.16) 0%,rgba(34,184,232,0) 68%),
+    radial-gradient(520px 260px at 6% 0%,rgba(123,63,228,.14) 0%,rgba(123,63,228,0) 72%),
+    linear-gradient(180deg,rgba(255,255,255,.10) 0%,rgba(255,255,255,0) 120px),
+    linear-gradient(168deg,#0B3A6E 0%,var(--brand-hover) 50%,#062E5B 100%);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.20);}
 /* 顶沿一道蓝紫细线，把页脚和上面的冷白分开 */
 footer::before{content:"";position:absolute;left:0;right:0;top:0;height:1px;
   background:linear-gradient(90deg,transparent 0%,rgba(123,63,228,.45) 22%,rgba(11,99,197,.55) 62%,transparent 100%);}
@@ -1206,11 +1432,22 @@ a.mo-card:hover .mo-go{color:var(--blue-deep);}
 /* 标签里的必填星号与「选填」标记：星号只做视觉标记，语义由 required 属性承担 */
 .fm-req{font-style:normal;color:var(--danger);margin-left:2px;}
 .fm-opt{font-style:normal;font-size:11.5px;font-weight:500;color:var(--muted);margin-left:6px;}
+/* 控件：浅玻璃质感。弹窗面板本身保留实白（表单主体必须透光率稳定，
+   半透明面板会让输入框里的字和背后的页面混在一起），
+   所以玻璃感只做在控件上：半透明白底 + 顶部内高光 + 一道极短的冷影，
+   看上去像面板上凹下去的一格玻璃槽，而不是一张贴上去的白纸。 */
 .fm-f input,.fm-f select,.fm-f textarea{width:100%;font:inherit;font-size:14px;font-weight:400;
-  color:var(--ink);min-height:44px;padding:11px 13px;border-radius:10px;border:1px solid var(--border);
-  background:var(--surface);transition:border-color .16s,box-shadow .16s;}
+  color:var(--ink);min-height:44px;padding:11px 13px;border-radius:10px;
+  border:1px solid rgba(11,99,197,.15);
+  background:rgba(255,255,255,.72);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.95),inset 0 -1px 0 rgba(190,220,255,.22),
+    0 1px 2px rgba(16,36,62,.03);
+  transition:border-color .16s,box-shadow .16s,background .16s;}
+.fm-f input:hover,.fm-f select:hover,.fm-f textarea:hover{border-color:rgba(11,99,197,.26);
+  background:rgba(255,255,255,.86);}
 .fm-f input:focus,.fm-f select:focus,.fm-f textarea:focus{outline:0;border-color:var(--blue);
-  box-shadow:0 0 0 3px rgba(11,99,197,.14);}
+  background:#fff;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,1),0 0 0 3px rgba(11,99,197,.14);}
 .fm-f textarea{min-height:84px;line-height:1.7;resize:vertical;}
 /* 单选卡片：三个咨询类型竖排，整块可点，原生 radio 负责键盘与读屏 */
 .fm-picks{display:grid;gap:9px;}
@@ -1284,3 +1521,77 @@ a.mo-card:hover .mo-go{color:var(--blue-deep);}
   .fm-f input,.fm-f select,.fm-f textarea{font-size:16px;}
 }
 
+
+/* ==========================================================================
+   玻璃的降级与动效偏好（2026-10-26 第三轮）
+   Liquid Glass 的代价是 backdrop-filter：每挂一个就多一次全屏采样。
+   下面四段按"代价从高到低"依次关掉，保证任何设备上页面都能读、都能滚。
+   ========================================================================== */
+
+/* ① 不支持 backdrop-filter（老 Firefox、关了硬件加速的 Windows）
+   退成更实的底。宁可少一点玻璃感，也不能让正文压在一层透光的浅色上。
+   section 上的那条降级写在上面的区块样式里，这里补齐其余控件。 */
+@supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){
+  header.nav{background:rgba(255,255,255,.94);}
+  header.nav.is-scrolled{background:rgba(255,255,255,.98);}
+  .btn-s,.home .hero-lg .hero-cta .btn{background:rgba(255,255,255,.94);}
+  details{background:rgba(255,255,255,.88);}
+  details[open]{background:#fff;}
+  .step .no{background:#fff;}
+}
+
+/* ② 窄屏：模糊半径砍到 12px。
+   移动端 GPU 的填充率只有桌面几分之一，22px 的模糊在 390px 宽上
+   换算成像素总量并不比桌面少多少，但算力差一大截，滚动会掉帧。
+   12px 在手机上肉眼已经分辨不出和 22px 的差别。 */
+@media (max-width:760px){
+  main > section:not(.hslider){
+    -webkit-backdrop-filter:blur(12px) saturate(1.15);
+    backdrop-filter:blur(12px) saturate(1.15);
+    background:
+      linear-gradient(180deg,rgba(255,255,255,.66) 0%,rgba(255,255,255,0) 150px),
+      rgba(255,255,255,.68);
+  }
+  main > section:nth-of-type(even):not(.hslider){
+    background:
+      linear-gradient(180deg,rgba(255,255,255,.66) 0%,rgba(255,255,255,0) 150px),
+      rgba(252,254,255,.72);
+  }
+  header.nav{
+    -webkit-backdrop-filter:blur(14px) saturate(1.3);
+    backdrop-filter:blur(14px) saturate(1.3);
+  }
+  .btn-s,.home .hero-lg .hero-cta .btn{
+    -webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);
+  }
+  details{-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);}
+  /* 转化区那圈细环在 390px 上会被裁成半圆，直接不画 */
+  #contact::after{display:none;}
+}
+
+/* ③ 用户在系统里要求"降低透明度"（macOS / Windows 的辅助功能）
+   这是明确的偏好信号，直接给实底，不商量。 */
+@media (prefers-reduced-transparency:reduce){
+  main > section:not(.hslider),
+  main > section:nth-of-type(even):not(.hslider){background:#FAFCFF;
+    -webkit-backdrop-filter:none;backdrop-filter:none;}
+  header.nav,header.nav.is-scrolled{background:#fff;-webkit-backdrop-filter:none;backdrop-filter:none;}
+  .btn-s,.home .hero-lg .hero-cta .btn{background:#fff;-webkit-backdrop-filter:none;backdrop-filter:none;}
+  details,details[open]{background:#fff;-webkit-backdrop-filter:none;backdrop-filter:none;}
+  .sc,.ab,.oc,.sp,.s3,.step-card,.flow,.lesson{background:#fff;}
+}
+
+/* ④ 要求减少动态效果
+   所有位移动效归零，只留颜色和阴影的瞬时切换——
+   完全去掉过渡会让 hover 变成硬切，反而更刺眼。 */
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{
+    animation-duration:.01ms !important;animation-iteration-count:1 !important;
+    transition-duration:.01ms !important;scroll-behavior:auto !important;
+  }
+  .sc:hover,.ab:hover,.sp:hover,.step:hover .step-card,.step:hover .no,
+  .hs-fig:hover,.btn:hover,.btn-s:hover,.step-btn:hover,.hs-dots button.on{
+    transform:none !important;
+  }
+  .rv,.rv2{opacity:1 !important;transform:none !important;}
+}

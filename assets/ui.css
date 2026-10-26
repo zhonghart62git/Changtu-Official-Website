@@ -1,4 +1,4 @@
-@import url("./design-colors.css?v=e91cb406");
+@import url("./design-colors.css?v=84b19e9b");
 /* 畅途 · 未来领袖 —— 报名 / 场次 / 后台 公共样式
  * 配色与官网 index.html 完全一致
  */
@@ -19,7 +19,7 @@
   --shadow:0 10px 30px -12px rgba(11,99,197,.18);
   --shadow-lg:0 20px 48px -18px rgba(11,99,197,.24);
   --ease:cubic-bezier(.22,.61,.36,1);
-  --dur-fast:160ms;--dur:220ms;--dur-slow:320ms;
+  --dur-fast:160ms;--dur:220ms;--dur-slow:280ms;
   /* 表面材质与 site.css 同一套。报名页是独立样式表，
      少这几个令牌的话卡片在两边会是两种浮起程度。 */
   --r-card:20px;--r-panel:32px;
@@ -28,6 +28,28 @@
   --elev-3:0 6px 14px rgba(16,36,62,.06),0 48px 92px -42px rgba(11,99,197,.44);
   --hairline:rgba(11,99,197,.10);--hairline-soft:rgba(11,99,197,.07);
   --inset-hi:inset 0 1px 0 rgba(255,255,255,.92);
+  /* Liquid Glass 三级表面，与 site.css 逐项对齐。
+     报名页只引 ui.css，少一组令牌的话，从官网点进报名页
+     卡片会突然变回"白纸"，玻璃就断在跳转处。 */
+  --glass-1-bg:rgba(255,255,255,.38);
+  --glass-1-bg-alt:rgba(252,254,255,.44);
+  --glass-1-blur:blur(22px) saturate(1.30);
+  --glass-1-edge:rgba(255,255,255,.78);
+  --glass-2-bg:rgba(255,255,255,.34);
+  --glass-2-bg-hover:rgba(255,255,255,.54);
+  --glass-2-edge:rgba(255,255,255,.88);
+  --glass-3-bg:rgba(255,255,255,.34);
+  --glass-3-edge:rgba(255,255,255,.78);
+  --glass-inner:inset 0 1px 0 rgba(255,255,255,.95),inset 0 -1px 0 rgba(190,220,255,.28);
+  --glass-inner-strong:inset 0 1px 0 rgba(255,255,255,1),inset 0 0 0 1px rgba(255,255,255,.18);
+  --glass-shadow:0 0 0 1px rgba(11,99,197,.055),0 1px 2px rgba(16,36,62,.04),
+    0 26px 60px -34px rgba(11,99,197,.50);
+  --glass-shadow-hover:0 0 0 1px rgba(123,63,228,.14),0 2px 4px rgba(16,36,62,.05),
+    0 34px 72px -34px rgba(11,99,197,.58);
+  --glass-shadow-sm:0 0 0 1px rgba(11,99,197,.075),0 1px 2px rgba(16,36,62,.04),
+    0 14px 30px -20px rgba(11,99,197,.36);
+  --btn-grad:linear-gradient(100deg,#0B63C5 0%,#0D6FB4 48%,#0A7CA8 100%);
+  --btn-grad-hover:linear-gradient(100deg,#0A57AD 0%,#0B63A6 48%,#086D95 100%);
 }
 *{margin:0;padding:0;box-sizing:border-box;}
 html{background:var(--page-background);}
@@ -37,15 +59,21 @@ body{
   -webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;text-rendering:optimizeLegibility;
 }
 /* 与官网同一层光场。报名页只引 ui.css，不引 site.css，
-   光场得在这里再写一遍，否则从官网点进来会觉得换了一套配色。 */
+   光场得在这里再写一遍，否则从官网点进来会觉得换了一套配色。
+   细环与底色与 site.css 逐值对齐——两边差一档明度，
+   跳转时就会看到背景"闪一下"。 */
 body::before{
   content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;
   background:
-    radial-gradient(1240px 800px at 78% -14%,rgba(11,99,197,.20) 0%,rgba(11,99,197,0) 64%),
-    radial-gradient(900px 640px at 4% 2%,rgba(123,63,228,.10) 0%,rgba(123,63,228,0) 66%),
-    radial-gradient(1080px 820px at 100% 52%,rgba(11,99,197,.13) 0%,rgba(11,99,197,0) 68%),
-    radial-gradient(940px 740px at -8% 90%,rgba(123,63,228,.09) 0%,rgba(123,63,228,0) 70%),
-    linear-gradient(178deg,#F2F7FE 0%,#E7F0FC 44%,#EFF6FF 100%);
+    radial-gradient(circle at 86% 6%,rgba(11,99,197,0) 0 519px,rgba(11,99,197,.085) 520px 521px,rgba(11,99,197,0) 522px),
+    radial-gradient(circle at 86% 6%,rgba(11,99,197,0) 0 679px,rgba(11,99,197,.055) 680px 681px,rgba(11,99,197,0) 682px),
+    radial-gradient(circle at -6% 88%,rgba(123,63,228,0) 0 439px,rgba(123,63,228,.065) 440px 441px,rgba(123,63,228,0) 442px),
+    radial-gradient(1240px 800px at 78% -14%,rgba(11,99,197,.28) 0%,rgba(11,99,197,0) 64%),
+    radial-gradient(900px 640px at 2% 0%,rgba(123,63,228,.16) 0%,rgba(123,63,228,0) 66%),
+    radial-gradient(1080px 820px at 100% 52%,rgba(11,99,197,.19) 0%,rgba(11,99,197,0) 68%),
+    radial-gradient(940px 740px at -8% 90%,rgba(123,63,228,.14) 0%,rgba(123,63,228,0) 70%),
+    linear-gradient(184deg,rgba(255,255,255,.5) 0%,rgba(255,255,255,0) 38%,rgba(11,99,197,.07) 78%,rgba(255,255,255,.26) 100%),
+    linear-gradient(178deg,#EAF2FD 0%,#D8E7F9 44%,#E4EFFC 100%);
 }
 a{text-decoration:none;color:inherit;}
 img,svg{max-width:100%;}
@@ -66,14 +94,16 @@ h1,h2,h3,h4,p,li,span,b,strong,td,th{overflow-wrap:break-word;}
 
 /* 轻度 Liquid Glass，与全站导航同一套参数。滚动后加深（.is-scrolled 由 chrome.js 挂） */
 header.nav{
-  position:sticky;top:0;z-index:60;background:rgba(255,255,255,.72);
-  -webkit-backdrop-filter:blur(20px) saturate(1.8);backdrop-filter:blur(20px) saturate(1.8);
-  border-bottom:1px solid var(--border-primary);
-  box-shadow:0 8px 24px -22px var(--shadow-primary);
+  position:sticky;top:0;z-index:60;background:rgba(255,255,255,.46);
+  -webkit-backdrop-filter:blur(24px) saturate(1.55);backdrop-filter:blur(24px) saturate(1.55);
+  border-bottom:1px solid rgba(255,255,255,.55);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.85),0 10px 30px -26px rgba(11,99,197,.5);
   transition:background var(--dur) var(--ease),box-shadow var(--dur) var(--ease);
 }
-header.nav.is-scrolled{background:rgba(255,255,255,.93);
-  box-shadow:0 12px 32px -20px rgba(11,99,197,.30);}
+header.nav.is-scrolled{background:rgba(255,255,255,.76);
+  -webkit-backdrop-filter:blur(28px) saturate(1.4);backdrop-filter:blur(28px) saturate(1.4);
+  border-bottom-color:rgba(11,99,197,.12);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.95),0 14px 36px -24px rgba(11,99,197,.42);}
 header.nav::after{
   content:"";position:absolute;left:0;right:0;top:0;height:1px;pointer-events:none;
   background:linear-gradient(90deg,transparent 0%,rgba(123,63,228,.20) 28%,rgba(11,99,197,.24) 68%,transparent 100%);
@@ -102,9 +132,16 @@ header.nav::after{
 .pagehead h1{font-size:clamp(26px,3.6vw,38px);line-height:1.28;margin:10px 0 10px;letter-spacing:-.4px;}
 .pagehead p{color:var(--ink-2);font-size:15.5px;max-width:680px;}
 
-/* ===== 卡片 ===== */
-.card{background:var(--surface);border:1px solid var(--hairline);border-radius:var(--r-card);
-  box-shadow:var(--inset-hi),var(--elev-1);}
+/* ===== 卡片 =====
+   Level 2 玻璃：半透明底 + 内高光 + 蓝调阴影。
+   报名页没有一级玻璃面板包着，所以这里不挂 backdrop-filter——
+   卡片直接落在光场上，模糊会把光场糊成一片均匀的雾，反而失去纵深。
+   靠 62% 白 + 内高光 + 白描边做出材料感就够了。 */
+.card{background:var(--glass-2-bg);border:1px solid var(--glass-2-edge);border-radius:var(--r-card);
+  box-shadow:var(--glass-inner),var(--glass-shadow-sm);}
+/* 不支持 backdrop-filter 的浏览器：报名页本来就没挂模糊，无需降级。
+   这条只为让 .card 在极老引擎上也有不透明的底可读。 */
+@supports not (background:rgba(255,255,255,.5)){.card{background:#fff;}}
 .card-pad{padding:26px 26px;}
 .sect{padding:34px 0 60px;}
 .sect-title{display:flex;align-items:center;justify-content:space-between;gap:14px;margin:0 0 16px;}

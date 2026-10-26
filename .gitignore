@@ -1,4 +1,8 @@
 _preview*.html
 _pshot*.html
 _dbg*.html
+_ovf*.html
+_probe*.html
+_vshot_*.html
+_m.html
 __pycache__/

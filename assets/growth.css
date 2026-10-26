@@ -1,15 +1,41 @@
 /* ==========================================================================
    成长路径块（首页 #path）—— 复用 site.css 里已有的 .path-list 组件，
    这里只补一样 site.css 没有的：滚动到位时站点圆环点亮。
-   组件本体（三列栅格 / 轨道渐变 / 站点圆环 / 卡片 / 三档响应式）全在 site.css 274–330 行与 452/500 段。
+   组件本体（三列栅格 / 轨道渐变 / 站点圆环 / 卡片 / 三档响应式）全在 site.css。
    区块底色与分隔线归 site.css 的 #path 一条规则管，别在这里重复写，两处写会打架。
    ========================================================================== */
 
-/* 滚动到位：圆环由描边转实心，卡片抬起一档。
-   不用动画也能读，所以 prefers-reduced-motion 下直接给终态。 */
+/* 滚动到位：圆环点亮。
+   原来点亮 = 换成深蓝实心，整颗球变沉，和旁边发光的轨道不是一回事。
+   现在点亮 = 保留深蓝作为可读性的底（白字压在上面 5.8:1），
+   但加两件事让它"亮"起来：底本身带一点青蓝偏移（不是纯品牌蓝），
+   外面套三层冰蓝光——6px 近白隔开轨道、10px 冰蓝圈、26px 的柔光。
+   光比球本身更重要：三个球是靠这三层光被读成"点亮"的，不是靠颜色变深。 */
 .path-list .step .no{transition:background .3s,color .3s,transform .3s,box-shadow .3s;}
-.path-list .step.on .no{background:var(--sc);color:var(--surface);transform:scale(1.06);}
-.path-list .step.on .step-card{border-color:var(--border);box-shadow:var(--shadow);}
+.path-list .step.on .no{
+  background:linear-gradient(158deg,var(--sc) 0%,color-mix(in srgb,var(--sc) 74%,#22B8E8) 100%);
+  color:var(--surface);transform:scale(1.06);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.44),
+    0 0 0 6px rgba(255,255,255,.84),
+    0 0 0 10px rgba(34,184,232,.18),
+    0 0 26px 6px rgba(34,184,232,.44),
+    0 10px 22px rgba(11,99,197,.20);
+}
+/* 终点站（成长沉淀）的光换成紫。三站里只有这一站收束，
+   紫在这里是"归档"的意思，不是第五个能力域。 */
+.path-list .step.on:nth-child(3) .no{
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.44),
+    0 0 0 6px rgba(255,255,255,.84),
+    0 0 0 10px rgba(123,63,228,.18),
+    0 0 26px 6px rgba(123,63,228,.42),
+    0 10px 22px rgba(11,99,197,.20);
+}
+.path-list .step.on .step-card{
+  border-color:rgba(255,255,255,.94);
+  box-shadow:var(--glass-inner-strong),var(--glass-shadow-hover);
+}
 
 @media (prefers-reduced-motion:reduce){
   .path-list .step .no,.path-list .step.on .no{transition:none;}
