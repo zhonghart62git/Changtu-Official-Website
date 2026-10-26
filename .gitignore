@@ -8,3 +8,6 @@ _cc_*.html
 _vshot_*.html
 _m.html
 __pycache__/
+
+# 检查脚本生成的临时页，一律不入库（正式页面不以 _ 开头）
+_*.html

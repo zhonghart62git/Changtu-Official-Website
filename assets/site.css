@@ -989,10 +989,28 @@ footer::before{content:"";position:absolute;left:0;right:0;top:0;height:1px;
 .f-brand .b{display:flex;align-items:center;margin-bottom:14px;color:var(--surface);}
 .f-brand .b img{height:44px;width:auto;display:block;flex-shrink:0;}
 .f-brand p{font-size:13px;line-height:1.85;color:rgba(255,255,255,.78);}
-.f-links{display:flex;gap:52px;flex-wrap:wrap;}
+/* 页脚四列：桌面固定四列、手机两列。
+   原来是 flex + wrap，列数和换行位置跟着视口漂，同一组内容在 1024 上会掉成 3+2；
+   换成 grid 之后列数由样式决定，列宽按内容自然撑开，四列顶端对齐。 */
+.f-links{
+  display:grid;
+  grid-template-columns:repeat(4,minmax(0,max-content));
+  justify-content:space-between;
+  gap:0 32px;
+  align-items:start;
+  flex:1 1 420px;
+  min-width:0;
+}
+.f-col{min-width:0;}
 .f-col b{display:block;color:var(--surface);font-size:13.5px;margin-bottom:12px;font-weight:600;}
-.f-col a{display:block;font-size:13px;color:rgba(255,255,255,.78);margin-bottom:9px;transition:color .2s;}
-.f-col a:hover{color:var(--surface);}
+.f-col a,.f-col button{display:block;font-size:13px;color:rgba(255,255,255,.78);margin-bottom:9px;transition:color .2s;}
+/* 「学生小程序」开的是弹窗，用 button 不用 a：空链接会让键盘和读屏都以为它是跳转 */
+.f-col button{
+  appearance:none;border:0;background:transparent;padding:0;width:100%;
+  font:inherit;font-size:13px;line-height:inherit;text-align:left;cursor:pointer;
+}
+.f-col a:hover,.f-col button:hover{color:var(--surface);}
+.f-col button:focus-visible{outline:2px solid rgba(255,255,255,.72);outline-offset:3px;border-radius:3px;}
 .f-bottom{padding-top:22px;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;font-size:12.5px;color:rgba(255,255,255,.66);}
 .f-note{font-size:12px;color:rgba(255,255,255,.66);line-height:1.9;padding-top:14px;max-width:900px;}
 
@@ -1069,7 +1087,7 @@ html.no-js .rv{opacity:1;transform:none;}
   .topbar{clip-path:none;}
   .formula{padding:22px 18px;border-radius:14px;}
   .bt-wrap{padding:20px 16px 16px;}
-  .f-links{gap:32px;}
+  .f-links{grid-template-columns:repeat(2,minmax(0,max-content));justify-content:start;gap:0 28px;}
   .stat+.stat::before{display:none;}
   .sec-head{margin-bottom:32px;}
   thead th,tbody td{padding:12px 13px;}
