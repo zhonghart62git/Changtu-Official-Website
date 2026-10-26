@@ -24,11 +24,25 @@
   "knowsAbout": ["青少年语言艺术","辩论与思辨训练","中英双语主持","模拟联合国","社会艺术水平考级","青少年领导力培养"]
 }
 </script>
-<link rel="stylesheet" href="assets/site.css?v=6927ed57">
+<link rel="stylesheet" href="assets/site.css?v=f74bcb85">
 <link rel="stylesheet" href="assets/site-v2.css?v=dafb8324">
 <link rel="stylesheet" href="assets/growth.css?v=164ba357">
 <link rel="stylesheet" href="assets/home.css?v=4477b289">
 <script>document.documentElement.classList.remove('no-js');</script>
+<noscript><style>
+/* 折叠和分组都靠脚本，脚本不在时两条路都断了。
+   这里把两组问答一起铺开、答案全部展开，十条内容一条不丢；
+   分组按钮不能点，就换成两行小标签，说明每一组是给谁看的。 */
+.qa-sw{display:none;}
+.qa-p[hidden]{display:block !important;}
+.qa-p+.qa-p{margin-top:30px;}
+.qa-p::before{display:block;margin:0 0 10px 2px;font-size:13px;font-weight:700;color:var(--ink-2);}
+.qa-p[data-key="school"]::before{content:"机构与教师";}
+.qa-p[data-key="family"]::before{content:"家庭与学生";}
+.qa-a{grid-template-rows:1fr !important;}
+.qa-ic{display:none;}
+.qa-q{cursor:default;}
+</style></noscript>
 <link rel="canonical" href="https://leadtheway.cn/">
 <meta name="robots" content="index,follow">
 <meta property="og:type" content="website">
@@ -446,31 +460,118 @@
   </div>
 </section>
 
-<!-- ============ 7. 常见问题 ============ -->
+<!-- ============ 7. 常见问题 ============
+     两组人群共用一套条目结构与渲染逻辑，只有内容不同。
+     面板初始全部展开（不加 is-js 时保持展开），无脚本也能读完十条；
+     脚本接管后加 is-js，才收成一次只开一条的折叠态。 -->
 <section id="faq">
   <div class="wrap">
     <div class="sec-head center rv2">
       <div class="bar"></div>
-      <h2>问得最多 <small>FAQ</small></h2>
-      <p>机构决定合作前，通常先问这四个。</p>
+      <h2>常见问题 <small>FAQ</small></h2>
+      <p>关于课程合作与孩子学习</p>
     </div>
-    <div class="faq">
-      <details class="rv2">
-        <summary>跟你们合作，机构具体拿到什么？</summary>
-        <div class="ans">三类成品：开课前拿到教案、课件、物料包、课表模板；开课中拿到五天师训，覆盖八个模块的教学法、规则口令、批改标准与录像回看法；结课后拿到备赛排期、会务清单、评分量规与复盘表。加上赛事名额与场次。</div>
-      </details>
-      <details class="rv2">
-        <summary>机构没有课程研发能力，能开课吗？</summary>
-        <div class="ans">能。三原力九册和 MUN 六阶都是成品教案，每册写清可验收的课堂动作与交付要求。师训的模块结构六阶一致，老师学会一套就能带全部阶位，换阶不换脑。同行伙伴及以上档位含教材包和免费师训名额。</div>
-      </details>
-      <details class="rv2">
-        <summary>参加活动，一定要报课程吗？</summary>
-        <div class="ans">活动与课程可以并行：活动给真实场合和截止日期，课程把能力练出来。可以只参加活动，也可以只上课。</div>
-      </details>
-      <details class="rv2">
-        <summary>孩子零基础，能直接参赛吗？</summary>
-        <div class="ans">能报名。三原力 L1（7–9 岁）和 MUN L0（小 2–3）为零基础设计，每册都安排了一次真实实践，从校内场到区域场。</div>
-      </details>
+
+    <div class="qa rv2" id="qa">
+      <div class="qa-sw" role="tablist" aria-label="选择提问人群">
+        <button class="qa-tab" type="button" role="tab" id="qaTab1" data-key="school" aria-controls="qaPanel1" aria-selected="true">机构与教师</button>
+        <button class="qa-tab" type="button" role="tab" id="qaTab2" data-key="family" aria-controls="qaPanel2" aria-selected="false" tabindex="-1">家庭与学生</button>
+      </div>
+
+      <div class="qa-p" role="tabpanel" id="qaPanel1" data-key="school" aria-labelledby="qaTab1">
+        <div class="qa-list">
+          <div class="qa-i">
+            <button class="qa-q" type="button" id="qaQ11" aria-expanded="false" aria-controls="qaA11">
+              <span class="qa-qt">跟畅途合作，机构具体拿到什么？</span><span class="qa-ic" aria-hidden="true"></span>
+            </button>
+            <div class="qa-a" id="qaA11">
+              <div class="qa-a-in"><p>三类成品。开课前拿到教案、课件、物料包与课表模板；开课中拿到五天师训，覆盖八个模块的教学法、规则口令、批改标准与录像回看法；结课后拿到备赛排期、会务清单、评分量规与复盘表。赛事名额与场次按合作档位安排。</p></div>
+            </div>
+          </div>
+          <div class="qa-i">
+            <button class="qa-q" type="button" id="qaQ12" aria-expanded="false" aria-controls="qaA12">
+              <span class="qa-qt">机构没有课程研发能力，能开课吗？</span><span class="qa-ic" aria-hidden="true"></span>
+            </button>
+            <div class="qa-a" id="qaA12">
+              <div class="qa-a-in"><p>能。破界三原力九册与破界 MUN 六阶都是成品教案，每册写清可验收的课堂动作与交付要求。师训的模块结构六阶一致，老师学会一套就能带全部阶位。同行伙伴及以上档位含教材包与免费师训名额。</p></div>
+            </div>
+          </div>
+          <div class="qa-i">
+            <button class="qa-q" type="button" id="qaQ13" aria-expanded="false" aria-controls="qaA13">
+              <span class="qa-qt">独立教师或工作室，可以合作吗？</span><span class="qa-ic" aria-hidden="true"></span>
+            </button>
+            <div class="qa-a" id="qaA13">
+              <div class="qa-a-in"><p>可以。教育合作联盟对机构、独立教师和工作室开放，三档合作方案都能选：启程伙伴免费，同行伙伴 5,000 元 / 年，领航伙伴 8,000 元 / 年。合作方案决定教学与练习、获客与社媒运营两类工具的使用范围和师训名额。</p></div>
+            </div>
+          </div>
+          <div class="qa-i">
+            <button class="qa-q" type="button" id="qaQ14" aria-expanded="false" aria-controls="qaA14">
+              <span class="qa-qt">师训怎么安排，老师需要脱产几天？</span><span class="qa-ic" aria-hidden="true"></span>
+            </button>
+            <div class="qa-a" id="qaA14">
+              <div class="qa-a-in"><p>五天，八个模块。内容覆盖教学法、规则口令、批改标准与录像回看法，按阶位递进，模块结构保持一致。同行伙伴及以上档位含免费师训名额，开班时间与工作人员确认。</p></div>
+            </div>
+          </div>
+          <div class="qa-i">
+            <button class="qa-q" type="button" id="qaQ15" aria-expanded="false" aria-controls="qaA15">
+              <span class="qa-qt">招生和社媒内容，畅途管吗？</span><span class="qa-ic" aria-hidden="true"></span>
+            </button>
+            <div class="qa-a" id="qaA15">
+              <div class="qa-a-in"><p>畅途提供获客智能体与社媒运营智能体：前者辅助梳理目标人群、活动方案和沟通内容，后者辅助选题、撰写初稿和整理素材。机构审核调整后自主使用，本地经营与服务的主动权在机构。</p></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="qa-p" role="tabpanel" id="qaPanel2" data-key="family" aria-labelledby="qaTab2" hidden>
+        <div class="qa-list">
+          <div class="qa-i">
+            <button class="qa-q" type="button" id="qaQ21" aria-expanded="false" aria-controls="qaA21">
+              <span class="qa-qt">孩子零基础，能直接报名吗？</span><span class="qa-ic" aria-hidden="true"></span>
+            </button>
+            <div class="qa-a" id="qaA21">
+              <div class="qa-a-in"><p>能。破界三原力 L1（7–9 岁）与破界 MUN L0 为零基础设计，每册安排一次真实实践，从校内场到区域场。</p></div>
+            </div>
+          </div>
+          <div class="qa-i">
+            <button class="qa-q" type="button" id="qaQ22" aria-expanded="false" aria-controls="qaA22">
+              <span class="qa-qt">参加活动，一定要报课程吗？</span><span class="qa-ic" aria-hidden="true"></span>
+            </button>
+            <div class="qa-a" id="qaA22">
+              <div class="qa-a-in"><p>可以只参加活动，也可以只上课。活动给真实场合和截止日期，课程把能力练出来，两件事可以并行。</p></div>
+            </div>
+          </div>
+          <div class="qa-i">
+            <button class="qa-q" type="button" id="qaQ23" aria-expanded="false" aria-controls="qaA23">
+              <span class="qa-qt">上课地点和时间怎么安排？</span><span class="qa-ic" aria-hidden="true"></span>
+            </button>
+            <div class="qa-a" id="qaA23">
+              <div class="qa-a-in"><p>教学点在天河与越秀。班期按学期排，具体上课时间与工作人员确认后安排。</p></div>
+            </div>
+          </div>
+          <div class="qa-i">
+            <button class="qa-q" type="button" id="qaQ24" aria-expanded="false" aria-controls="qaA24">
+              <span class="qa-qt">怎么知道孩子适合哪个方向？</span><span class="qa-ic" aria-hidden="true"></span>
+            </button>
+            <div class="qa-a" id="qaA24">
+              <div class="qa-a-in"><p>先做能力测评，看兴趣倾向与当前能力，再结合想练的方向选课程。测评在小程序里完成，结果存进成长档案，后续的课堂记录和活动反馈也归到同一份档案里。</p></div>
+            </div>
+          </div>
+          <div class="qa-i">
+            <button class="qa-q" type="button" id="qaQ25" aria-expanded="false" aria-controls="qaA25">
+              <span class="qa-qt">学完能看到什么？</span><span class="qa-ic" aria-hidden="true"></span>
+            </button>
+            <div class="qa-a" id="qaA25">
+              <div class="qa-a-in"><p>四类成长成果：作品、过程记录与反馈、观点变化、自主性。课堂有记录，活动有评分与复盘表，攒起来就是孩子的成长档案。</p></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="qa-more">
+        <p>还有其他问题？欢迎联系我们</p>
+        <button class="btn btn-p btn-sm" type="button" data-mo="moLead" data-qa-cta data-intent="school">咨询课程合作</button>
+      </div>
     </div>
   </div>
 </section>
@@ -927,6 +1028,103 @@
   document.addEventListener('ctmodal:close',function(e){
     if(e.detail&&e.detail.id==='moLead') reset();
   });
+})();
+</script>
+<script>
+/* 常见问题：两组切换 + 单开折叠。
+   两组面板结构完全一致，这里只认 .qa-tab / .qa-i 两类节点，
+   加第三条问答组不用改脚本。
+   收起用 grid-template-rows 0fr → 1fr，比 max-height 猜一个数稳：
+   长答案不会在动画末尾突然跳一下。
+   收起的答案加 inert，Tab 键跳不进去，读屏也不会念到折叠的内容。 */
+(function(){
+  var qa=document.getElementById('qa');
+  if(!qa) return;
+
+  var tabs=[].slice.call(qa.querySelectorAll('.qa-tab')),
+      panels=[].slice.call(qa.querySelectorAll('.qa-p')),
+      sw=qa.querySelector('.qa-sw'),
+      cta=qa.querySelector('[data-qa-cta]'),
+      LABEL={school:'咨询课程合作',family:'咨询学习方向'},
+      INTENT={school:'school',family:'child'};
+
+  function items(box){ return [].slice.call(box.querySelectorAll('.qa-i')); }
+
+  function setItem(it,on){
+    var q=it.querySelector('.qa-q'), a=it.querySelector('.qa-a');
+    it.classList.toggle('is-open',on);
+    q.setAttribute('aria-expanded',on?'true':'false');
+    if(on) a.removeAttribute('inert'); else a.setAttribute('inert','');
+  }
+
+  /* idx 传 -1 就是全部收起 */
+  function openOnly(list,idx){
+    list.forEach(function(it,i){ setItem(it,i===idx); });
+  }
+
+  function pick(key,focus){
+    tabs.forEach(function(t){
+      var on=t.getAttribute('data-key')===key;
+      t.setAttribute('aria-selected',on?'true':'false');
+      t.tabIndex=on?0:-1;
+      if(on&&focus) t.focus();
+    });
+    panels.forEach(function(p){
+      var on=p.getAttribute('data-key')===key;
+      p.hidden=!on;
+      if(on) openOnly(items(p),0);
+    });
+    if(cta){
+      cta.textContent=LABEL[key]||LABEL.school;
+      cta.setAttribute('data-intent',INTENT[key]||INTENT.school);
+    }
+  }
+
+  /* 初始化：首条展开，其余收起并置 inert（Tab 跳不进去，读屏不念折叠内容）。 */
+  panels.forEach(function(p){ openOnly(items(p),0); });
+
+  qa.addEventListener('click',function(e){
+    var t=e.target;
+    var tab=t.closest&&t.closest('.qa-tab');
+    if(tab){ pick(tab.getAttribute('data-key'),false); return; }
+
+    var q=t.closest&&t.closest('.qa-q');
+    if(!q||!qa.contains(q)) return;
+    var it=q.parentNode, list=items(it.parentNode),
+        open=it.classList.contains('is-open');
+    openOnly(list,open?-1:list.indexOf(it));
+  });
+
+  /* 分组按钮按 tablist 的键盘约定走：左右切、Home/End 到两端 */
+  if(sw){
+    sw.addEventListener('keydown',function(e){
+      var i=tabs.indexOf(document.activeElement);
+      if(i<0) return;
+      var n=-1;
+      if(e.key==='ArrowRight'||e.key==='ArrowDown') n=(i+1)%tabs.length;
+      else if(e.key==='ArrowLeft'||e.key==='ArrowUp') n=(i-1+tabs.length)%tabs.length;
+      else if(e.key==='Home') n=0;
+      else if(e.key==='End') n=tabs.length-1;
+      if(n<0) return;
+      e.preventDefault();
+      pick(tabs[n].getAttribute('data-key'),true);
+    });
+  }
+
+  /* 咨询按钮带上当前分组的意图，弹窗打开后把对应单选点亮。
+     延一帧是因为弹窗的开关由 modal.js 另挂一个监听，
+     不依赖两个监听谁先注册。 */
+  if(cta){
+    cta.addEventListener('click',function(){
+      var v=cta.getAttribute('data-intent');
+      setTimeout(function(){
+        var r=document.querySelector('#leadPicks input[value="'+v+'"]');
+        if(!r) return;
+        r.checked=true;
+        r.dispatchEvent(new Event('change',{bubbles:true}));
+      },0);
+    });
+  }
 })();
 </script>
 </body></html>

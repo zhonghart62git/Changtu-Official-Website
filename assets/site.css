@@ -731,8 +731,7 @@ button.tc-cta{border:0;font-family:inherit;cursor:pointer;width:100%;}
    模糊太强会让每一条的边界都糊在一起，读起来分不清行。
    展开态不靠加深边框，而是三件事同时发生：底色提亮、内高光加强、
    边框换成蓝紫双色渐变。三个信号一起给，展开的那条才明显"浮起来"。 */
-#faq{border-top:0;}
-.faq{max-width:840px;margin:0 auto;display:flex;flex-direction:column;gap:12px;}
+#faq{border-top:0;padding:72px 0;}
 details{
   position:relative;
   background:rgba(255,255,255,.44);
@@ -781,6 +780,140 @@ details:hover summary::after{border-color:rgba(11,99,197,.30);}
 summary:focus-visible{outline:2px solid var(--brand-blue);outline-offset:2px;border-radius:6px;}
 details .ans{padding:0 0 18px;font-size:14.3px;line-height:1.8;color:var(--ink-2);
   border-top:1px solid rgba(11,99,197,.10);padding-top:14px;}
+
+/* ===== 常见问题：分组问答 =====
+   两组人群各五条，共用一套条目样式与一段渲染逻辑，只有内容不同。
+   条目沿用轻薄玻璃（44% 白 + 10px 模糊）：这里是一列密集的文字行，
+   模糊再强一点，每条的上边缘就糊在一起，读起来分不清行。
+   展开态同时给三个信号——底色提亮、内高光加强、蓝边外再套一圈淡紫——
+   三个一起给，展开的那条才浮得起来。 */
+.qa{max-width:960px;margin:0 auto;}
+
+/* 分组切换：一枚玻璃托盘里嵌两段。
+   选中项走品牌蓝的深浅渐变、白字；未选中项只留文字色、无底。
+   这样一眼先看清"当前在看哪一组"，再往下读问题。 */
+.qa-sw{
+  display:flex;gap:4px;width:fit-content;max-width:100%;margin:0 auto 30px;padding:4px;
+  border-radius:var(--r-pill);
+  background:rgba(255,255,255,.42);
+  border:1px solid var(--glass-2-edge);
+  box-shadow:var(--glass-inner),var(--glass-shadow-sm);
+  -webkit-backdrop-filter:blur(12px) saturate(1.2);backdrop-filter:blur(12px) saturate(1.2);
+}
+.qa-tab{
+  appearance:none;border:0;cursor:pointer;font:inherit;
+  font-size:15px;font-weight:600;line-height:1;color:var(--ink-2);
+  padding:13px 26px;border-radius:var(--r-pill);white-space:nowrap;
+  background:transparent;
+  transition:background var(--dur) var(--ease),color var(--dur) var(--ease),
+             box-shadow var(--dur) var(--ease);
+}
+.qa-tab:hover{color:var(--ink);background:rgba(255,255,255,.72);}
+.qa-tab[aria-selected="true"]{
+  color:#fff;
+  background:linear-gradient(158deg,var(--brand-blue) 0%,var(--brand-hover) 100%);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.30),0 8px 18px -12px rgba(11,99,197,.95);
+}
+.qa-tab[aria-selected="true"]:hover{
+  color:#fff;
+  background:linear-gradient(158deg,var(--brand-blue) 0%,var(--brand-hover) 100%);
+}
+.qa-tab:focus-visible{outline:2px solid var(--brand-blue);outline-offset:3px;}
+
+.qa-p[hidden]{display:none;}
+.qa-list{display:flex;flex-direction:column;gap:12px;}
+
+.qa-i{
+  position:relative;
+  background:rgba(255,255,255,.44);
+  -webkit-backdrop-filter:blur(10px) saturate(1.2);backdrop-filter:blur(10px) saturate(1.2);
+  border:1px solid rgba(255,255,255,.70);
+  border-radius:var(--r-sm);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.9),0 10px 26px -22px rgba(11,99,197,.4);
+  transition:background var(--dur) var(--ease),border-color var(--dur) var(--ease),
+             box-shadow var(--dur) var(--ease);
+}
+.qa-i:hover{background:rgba(255,255,255,.62);border-color:rgba(123,63,228,.26);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.95),0 14px 30px -22px rgba(11,99,197,.46);}
+/* 展开态：底色提到 76%，1px 蓝边负责"选中"，外面再套 1px 极淡紫晕负责"亮了一下"。
+   不用 border-image 画渐变边：它和 backdrop-filter 一起用时，
+   border-box 那层会把模糊结果裁掉一半，边缘留下一条硬缝。 */
+.qa-i.is-open{
+  background:rgba(255,255,255,.76);
+  border-color:rgba(11,99,197,.32);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,1),
+    inset 0 0 0 1px rgba(255,255,255,.55),
+    0 20px 44px -26px rgba(11,99,197,.5),
+    0 0 0 1px rgba(123,63,228,.14);
+}
+
+.qa-q{
+  width:100%;display:flex;align-items:center;justify-content:space-between;gap:18px;
+  appearance:none;border:0;background:transparent;cursor:pointer;text-align:left;
+  font:inherit;font-size:17.5px;font-weight:600;line-height:1.55;color:var(--text-primary);
+  padding:22px 24px;border-radius:inherit;
+}
+.qa-q:focus-visible{outline:2px solid var(--brand-blue);outline-offset:-3px;}
+/* 长问题自然折行，右侧图标不被挤扁 */
+.qa-qt{flex:1 1 auto;min-width:0;overflow-wrap:break-word;text-wrap:pretty;}
+
+/* 状态图标：一根横线一根竖线，展开时竖线收掉，+ 变成 −。
+   不用「+ 旋转 45 度变 ×」：那是"关闭"的意思，这里是"收起来"。 */
+.qa-ic{
+  position:relative;flex:0 0 26px;width:26px;height:26px;border-radius:50%;
+  background:rgba(255,255,255,.5);border:1px solid rgba(11,99,197,.18);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.9);
+  transition:background var(--dur) var(--ease),border-color var(--dur) var(--ease);
+}
+.qa-ic::before,.qa-ic::after{
+  content:"";position:absolute;left:50%;top:50%;border-radius:1px;
+  background:var(--brand-blue);
+  transition:transform 200ms var(--ease),opacity 200ms var(--ease);
+}
+.qa-ic::before{width:11px;height:1.5px;transform:translate(-50%,-50%);}
+.qa-ic::after{width:1.5px;height:11px;transform:translate(-50%,-50%);}
+.qa-i.is-open .qa-ic{background:rgba(11,99,197,.10);border-color:rgba(11,99,197,.30);}
+.qa-i.is-open .qa-ic::after{transform:translate(-50%,-50%) scaleY(0);opacity:0;}
+.qa-q:hover .qa-ic{border-color:rgba(11,99,197,.30);}
+
+/* 答案用 grid-template-rows 0fr → 1fr 收起。
+   比给 max-height 猜一个数字稳：长答案不会在动画末尾突然跳一下。
+   收起是默认态、展开才加类，所以首帧就是对的——
+   反过来的写法（默认展开、脚本再收）会让十条答案在首帧一起播收起动画。
+   没有脚本时由 head 里的 noscript 把 0fr 改成 1fr，十条答案全部展开，一条不丢。 */
+.qa-a{display:grid;grid-template-rows:0fr;transition:grid-template-rows 200ms var(--ease);}
+.qa-i.is-open .qa-a{grid-template-rows:1fr;}
+/* 这里必须是 overflow:hidden，不能换成 clip。
+   clip 只裁画面，不改变自动最小尺寸——0fr 那一行仍按内容撑开，收不起来。
+   内边距一律写在 p 上，不写在收起的这一层：
+   写在收起层，收起后还会留一条 22px 的空档。 */
+.qa-a-in{overflow:hidden;}
+.qa-a-in p{font-size:15.5px;line-height:1.8;color:var(--ink-2);text-wrap:pretty;
+  padding:0 24px 22px;}
+.qa-a-in p+p{margin-top:10px;}
+
+/* 列表底部：一句提示 + 一个按钮。按钮的目标随当前分组变，
+   两个分组都能一步走到留资弹窗，不需要额外的中转页。 */
+.qa-more{
+  display:flex;align-items:center;justify-content:center;gap:18px;flex-wrap:wrap;
+  margin-top:26px;padding:20px 24px;
+  background:rgba(255,255,255,.38);
+  border:1px solid var(--glass-2-edge);border-radius:var(--r-card);
+  box-shadow:var(--glass-inner),var(--glass-shadow-sm);
+}
+.qa-more p{margin:0;font-size:15px;color:var(--ink-2);}
+.qa-more .btn{flex:none;}
+
+@media (max-width:760px){
+  #faq{padding:46px 0;}
+  .qa-sw{width:100%;margin-bottom:22px;}
+  .qa-tab{flex:1 1 0;padding:12px 8px;font-size:14px;}
+  .qa-q{padding:17px 18px;font-size:16px;gap:12px;}
+  .qa-a-in p{padding:0 18px 18px;font-size:15px;}
+  .qa-more{flex-direction:column;align-items:stretch;gap:12px;padding:18px;text-align:center;}
+  .qa-more .btn{width:100%;justify-content:center;}
+}
 
 /* ===== 末屏转化区 =====
    全站只有这一个主按钮。电话是辅助信息，排在按钮下方，不并排成第二个按钮。
@@ -1500,6 +1633,8 @@ a.mo-card:hover .mo-go{color:var(--blue-deep);}
   .btn-s,.home .hero-lg .hero-cta .btn{background:rgba(255,255,255,.94);}
   details{background:rgba(255,255,255,.88);}
   details[open]{background:#fff;}
+  .qa-i,.qa-sw{background:rgba(255,255,255,.90);}
+  .qa-i.is-open{background:#fff;}
   .step .no{background:#fff;}
 }
 
@@ -1516,6 +1651,8 @@ a.mo-card:hover .mo-go{color:var(--blue-deep);}
     -webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);
   }
   details{-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);}
+  .qa-i{-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);}
+  .qa-sw{-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);}
   /* 转化区那圈细环在 390px 上会被裁成半圆，直接不画 */
   #contact::after{display:none;}
 }
@@ -1526,6 +1663,7 @@ a.mo-card:hover .mo-go{color:var(--blue-deep);}
   header.nav,header.nav.is-scrolled{background:#fff;-webkit-backdrop-filter:none;backdrop-filter:none;}
   .btn-s,.home .hero-lg .hero-cta .btn{background:#fff;-webkit-backdrop-filter:none;backdrop-filter:none;}
   details,details[open]{background:#fff;-webkit-backdrop-filter:none;backdrop-filter:none;}
+  .qa-i,.qa-i.is-open,.qa-sw{background:#fff;-webkit-backdrop-filter:none;backdrop-filter:none;}
   .sc,.ab,.oc,.sp,.s3,.step-card,.flow,.lesson{background:#fff;}
 }
 
