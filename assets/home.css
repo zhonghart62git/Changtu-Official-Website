@@ -57,9 +57,12 @@
 }
 
 /* ── 3. 数据条：让数字当主角 ─────────────────────────────
-   五项并列，一屏读完：时间 → 纵深 → 机构 → 人数 → 地域。 */
-.home .stats-band .stats{grid-template-columns:repeat(5,1fr);padding:40px 0;}
-.home .stats-band .stat b{font-size:clamp(28px,3.1vw,42px);}
+   五项并列，一屏读完：时间 → 纵深 → 机构 → 人数 → 地域。
+   内边距与玻璃框在文件后半段（.home .stats-band 那组规则里）。 */
+.home .stats-band .stats{grid-template-columns:repeat(5,minmax(0,1fr));}
+/* 上限 36px：42px 下「15,000+人次」有 200px 宽，超过等分列的内容宽 160px，
+   会把第四列撑宽、五列不再等分。36px 刚好装得下。 */
+.home .stats-band .stat b{font-size:clamp(26px,2.9vw,36px);}
 .home .stats-band .stat span{font-size:12.5px;margin-top:8px;}
 
 /* ── 4. 四大能力：从「分类目录」变成「培养框架」 ───────── */
@@ -695,8 +698,13 @@
      宽度上限压住，避免整块 banner 被拉得太高。 */
   .hs-intro .hero-visual{max-width:280px;margin:0 auto;}
   /* 五项数据两列排，最后一项独占一行居中，避免落单在左格 */
-  .home .stats-band .stats{grid-template-columns:repeat(2,1fr);}
+  .home .stats-band .stats{grid-template-columns:repeat(2,minmax(0,1fr));}
   .home .stats-band .stat:last-child{grid-column:1/-1;}
+  /* 两列之后每列只有半屏宽，36px 的「15,000+人次」比列还宽，
+     会压到隔壁那组；标签 12.5px 也放不下「连续组织口碑展演活动」，
+     会折成两行。按视口宽度缩放，390 下数字 24px、标签 11.5px。 */
+  .home .stats-band .stat b{font-size:clamp(24px,4vw,32px);}
+  .home .stats-band .stat span{font-size:11.5px;}
   /* 控件贴在 banner 底部，首屏要给圆点留出落位，否则压在能力环上 */
   .hs-intro .hero-lg{padding-bottom:56px;}
 }
@@ -804,10 +812,10 @@
   box-shadow:var(--glass-inner),var(--glass-shadow-sm);
 }
 .home .stats-band .stats{
-  padding:34px 0;border-top:0;border-bottom:0;
+  padding-top:34px;padding-bottom:34px;border-top:0;border-bottom:0;
 }
 @media (max-width:760px){
   /* 和 .wrap 的内容宽保持一致（窄屏 wrap 的内边距也是 24） */
   .home .stats-band{width:calc(100% - 48px);}
-  .home .stats-band .stats{padding:26px 0;}
+  .home .stats-band .stats{padding-top:26px;padding-bottom:26px;}
 }

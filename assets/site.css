@@ -291,24 +291,29 @@ h1 em{font-style:normal;white-space:nowrap;color:var(--brand-blue);
 .hero-visual{position:relative;display:flex;align-items:center;justify-content:center;}
 .hero-visual img{width:100%;height:auto;display:block;}
 
-/* ===== 数据条 ===== */
+/* ===== 数据条 =====
+   五组数字各占等宽的一列、组内居中。
+
+   左对齐试过：五组起点严格等距，但内容长短差三倍，右边缘参差，
+   「20年」右边空 169px、「15,000+人次」右边只剩 0，读起来是
+   一排越来越挤的洞。居中后每组以自己的列中心对齐，列心等距 222px。
+
+   栏间原来那条发丝竖线删掉了。竖线只能落在列边界上，而列宽相等、
+   内容长短不等，于是它离左边的数字一百多像素、离右边的只有二十几，
+   看起来不是分隔，是贴着数字的一道缝。玻璃框已经把五组收成一个整体，
+   内部再切五刀是双重分隔——分组靠留白。
+
+   minmax(0,1fr) 而不是 1fr：1fr 的最小尺寸是 auto，内容撑不下时
+   那一列会被撑宽（「15,000+人次」把第四列撑到 252，其余压到 214）。 */
 .stats-band{background:transparent;}
-.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:0;padding:38px 0;
+.stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:0;padding:38px 0;
   border-top:1px solid var(--hairline);border-bottom:1px solid var(--hairline);}
-/* 数字左对齐、栏间一条发丝竖线。居中的五组数字读起来像标语，
-   左对齐之后才像一份可核对的记录；竖线只做分隔，不加重。 */
-.stat{text-align:left;padding:0 26px;position:relative;}
-.stat:first-child{padding-left:0;}
-.stat + .stat::before{
-  content:"";position:absolute;left:0;top:1px;bottom:1px;width:1px;
-  background:linear-gradient(180deg,transparent,var(--hairline) 16%,var(--hairline) 84%,transparent);
-}
+.stat{text-align:center;padding:0 22px;}
 /* 数字用实体深蓝，不用渐变字——渐变让笔画粗细看起来不匀，数字反而变轻。 */
-/* 窄屏两列时，行首那一格不该有竖线——它是上一行的延续，不是新栏的开头 */
+/* 窄屏两列。左右内边距压到 12px：留 14px 时列内容宽 119，
+   最长的标签「连续组织口碑展演活动」正好卡在临界线，折成两行。 */
 @media (max-width:760px){
-  .stat{padding:0 16px;}
-  .stat:nth-child(odd){padding-left:0;}
-  .stat:nth-child(odd)::before{display:none;}
+  .stat{padding:0 12px;}
 }
 .stat b{display:block;font-size:clamp(26px,2.6vw,36px);font-weight:800;letter-spacing:-1.1px;
   line-height:1.1;font-variant-numeric:tabular-nums;color:var(--brand-hover);white-space:nowrap;}
@@ -1040,8 +1045,7 @@ html.no-js .rv{opacity:1;transform:none;}
   .biz .wrap,.biz.flip .wrap{grid-template-columns:1fr;gap:30px;}
   .biz.flip .biz-copy{order:0;}
   .biz.flip .biz-body{order:0;}
-  .stats{grid-template-columns:repeat(2,1fr);gap:22px 8px;}
-  .stat:nth-child(3)::before{display:none;}
+  .stats{grid-template-columns:repeat(2,minmax(0,1fr));gap:22px 0;}
   .nav-links{display:none;}
   .nav-links.open{
     display:flex;flex-direction:column;align-items:flex-start;gap:0;

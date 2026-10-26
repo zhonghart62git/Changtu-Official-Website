@@ -10,7 +10,7 @@
 <link rel="icon" type="image/png" sizes="64x64" href="assets/favicon-64.png?v=f0acdc9c">
 <link rel="apple-touch-icon" href="assets/apple-touch-icon.png?v=b6e8581d">
 <meta name="theme-color" content="#0B63C5">
-<link rel="stylesheet" href="assets/site.css?v=606522ed">
+<link rel="stylesheet" href="assets/site.css?v=0a2746ae">
 <link rel="stylesheet" href="assets/site-v2.css?v=dafb8324">
 <script>document.documentElement.classList.remove('no-js');</script>
 <link rel="canonical" href="https://leadtheway.cn/about.html">
@@ -39,13 +39,19 @@
   /* 数字带和首页同一套玻璃：半透明 + 白边 + 内高光 + 蓝影。
      原来是内联的 var(--surface) 实白，压在连续光场上就是一条硬边白带。 */
   .about-hero .stats-band{
+    /* 宽度取 .wrap 的内容宽（1160 − 两侧各 24 = 1112），和首页数字带同一把尺子。
+       原来它铺满 .about-hero（1440 下 1353 宽），玻璃框比里面的内容宽出 193px，
+       五组数字缩在框中间，左右各空 96px，看着像框大内容小。 */
+    width:min(1112px,calc(100% - 48px));margin-left:auto;margin-right:auto;
     background:rgba(255,255,255,.34);
     border:1px solid var(--glass-2-edge);
     border-radius:var(--r-card);
     box-shadow:var(--glass-inner),var(--glass-shadow-sm);
   }
-  .about-hero .stats-band .stats{grid-template-columns:repeat(5,1fr);padding:36px 0;
-    border-top:0;border-bottom:0;}
+  /* 五列等分用 minmax(0,1fr)，1fr 会被「15,000+人次」撑宽；
+     上下内边距单独写，padding 简写会清掉 .wrap 的左右 24px。 */
+  .about-hero .stats-band .stats{grid-template-columns:repeat(5,minmax(0,1fr));
+    padding-top:36px;padding-bottom:36px;border-top:0;border-bottom:0;}
   .about-hero .stats-band .stat span{font-size:12.5px;margin-top:4px;}
 
   /* 平台关系图：中心节点连接学生端与机构端 */
@@ -150,7 +156,7 @@
     .ab-ax::before{top:4px;left:0;}
     .ab-j{grid-template-columns:1fr;gap:6px;}
     .team-grid{grid-template-columns:1fr;}
-    .about-hero .stats-band .stats{grid-template-columns:repeat(2,1fr);row-gap:26px;}
+    .about-hero .stats-band .stats{grid-template-columns:repeat(2,minmax(0,1fr));row-gap:26px;}
     .about-hero .stats-band .stat:last-child{grid-column:1/-1;}
   }
 </style>
