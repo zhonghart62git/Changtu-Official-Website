@@ -11,7 +11,8 @@
 <meta name="theme-color" content="#0B63C5">
 <link rel="stylesheet" href="assets/site.css?v=fcd42be1">
 <link rel="stylesheet" href="assets/home.css?v=0fa4bc18">
-<link rel="stylesheet" href="assets/projects.css?v=8a5d9998">
+<link rel="stylesheet" href="assets/projects.css?v=c5f72cec">
+<link rel="stylesheet" href="assets/catalog.css?v=aaabcc08">
 <link rel="canonical" href="https://leadtheway.cn/activities.html">
 <meta name="robots" content="index,follow">
 <meta property="og:type" content="website">
@@ -27,7 +28,7 @@
 <meta name="twitter:image" content="https://leadtheway.cn/assets/og-cover.png">
 <script>document.documentElement.classList.remove('no-js');</script>
 </head>
-<body class="page-activities">
+<body class="page-activities v2">
 
 <header class="nav">
   <div class="wrap">
@@ -53,10 +54,13 @@
 
 <main>
 
-<section class="pg-hero">
+<section class="v2-hero v2-hero-act">
   <div class="wrap">
-    <div class="eyebrow"><i></i>未来领袖</div>
-    <h1>活动与机会 <small>Opportunities</small></h1>
+    <div class="v2-hero-copy">
+      <h1>活动与机会</h1>
+      <p class="lead">发现赛事、展演、研学与考级活动。</p>
+    </div>
+    <figure class="img-ph" data-img="C"></figure>
   </div>
 </section>
 
@@ -73,63 +77,62 @@
   </div>
 </div>
 
+<!-- 精选：只取「报名中」的活动，按开始日期排，最多三条。
+     一条都没有时整节隐藏（projects.js 里判断），不留空框。 -->
+<section class="feat-sec" id="featured" hidden>
+  <div class="wrap">
+    <div class="v2-sec-head">
+      <h2>精选活动</h2>
+    </div>
+    <div class="feat-grid" id="featWrap"></div>
+  </div>
+</section>
+
 <section class="act-sec" id="competition">
   <div class="wrap">
-    <div class="sec-head rv2">
-      <div class="bar"></div>
-      <h2>赛事 <small>Competitions</small></h2>
-      <p>演讲、辩论、模拟联合国、SDG 主题表达等项目。</p>
+    <div class="cat-head">
+      <h2>赛事</h2>
+      <a class="cat-more" href="activities-competition.html">查看全部
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg>
+      </a>
     </div>
-    <div class="act-sub rv2"><b>近期赛事</b></div>
     <div data-cat="competition"></div>
-    <a class="act-more" href="activities-competition.html">查看全部赛事
-      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg>
-    </a>
   </div>
 </section>
 
 <section class="act-sec" id="showcase">
   <div class="wrap">
-    <div class="sec-head rv2">
-      <div class="bar"></div>
-      <h2>展演 <small>Showcases</small></h2>
-      <p>主持、朗诵、音乐及其他舞台展示项目。</p>
+    <div class="cat-head">
+      <h2>展演</h2>
+      <a class="cat-more" href="activities-showcase.html">查看全部
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg>
+      </a>
     </div>
-    <div class="act-sub rv2"><b>近期展演</b></div>
     <div data-cat="showcase"></div>
-    <a class="act-more" href="activities-showcase.html">查看全部展演
-      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg>
-    </a>
   </div>
 </section>
 
 <section class="act-sec" id="tour">
   <div class="wrap">
-    <div class="sec-head rv2">
-      <div class="bar"></div>
-      <h2>研学 <small>Study Tours</small></h2>
-      <p>高校、企业、场馆及城市主题研学项目。</p>
+    <div class="cat-head">
+      <h2>研学</h2>
+      <a class="cat-more" href="activities-tour.html">查看全部
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg>
+      </a>
     </div>
-    <div class="act-sub rv2"><b>近期研学</b></div>
     <div data-cat="tour"></div>
-    <a class="act-more" href="activities-tour.html">查看全部研学
-      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg>
-    </a>
   </div>
 </section>
 
 <section class="act-sec" id="grading">
   <div class="wrap">
-    <div class="sec-head rv2">
-      <div class="bar"></div>
-      <h2>考级 <small>Grading</small></h2>
-      <p>语言、音乐等专业等级测评。</p>
+    <div class="cat-head">
+      <h2>考级</h2>
+      <a class="cat-more" href="activities-grading.html">查看全部
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg>
+      </a>
     </div>
-    <div class="act-sub rv2"><b>近期考级</b></div>
     <div data-cat="grading"></div>
-    <a class="act-more" href="activities-grading.html">查看全部考级
-      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg>
-    </a>
   </div>
 </section>
 
@@ -210,10 +213,12 @@
 })();
 </script>
 <script src="assets/chrome.js?v=775567a9"></script>
-<script src="assets/projects.js?v=2659d5f6"></script>
+<script src="assets/media.js?v=5a76ed16"></script>
+<script src="assets/projects.js?v=1de5573e"></script>
 <script>
 /* 类型筛选。
    点胶囊只留对应那一节，不跳页面；「全部」复位。
+   精选区横跨四类，筛到某一类时一起收起。
    滚动位置在胶囊下面时先退回胶囊——筛完之后页面变短，
    浏览器会把视口夹到新底部，用户会莫名其妙停在报名 CTA 上。
    带 hash 进来（activities.html#tour）直接落到那一类。 */
@@ -222,6 +227,7 @@
   if(!pill) return;
   var btns=[].slice.call(pill.querySelectorAll('button[data-filter]'));
   var secs=[].slice.call(document.querySelectorAll('main .act-sec[id]'));
+  var feat=document.getElementById('featured');
   if(!btns.length||!secs.length) return;
 
   function apply(f){
@@ -229,6 +235,7 @@
       b.setAttribute('aria-pressed', b.getAttribute('data-filter')===f?'true':'false');
     });
     secs.forEach(function(s){ s.hidden = (f!=='all' && s.id!==f); });
+    if(feat) feat.hidden = (f!=='all') || feat.hasAttribute('data-empty');
   }
 
   pill.addEventListener('click',function(e){

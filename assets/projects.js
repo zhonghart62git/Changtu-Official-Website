@@ -184,6 +184,53 @@
       '<a href="tel:18038829261">180 3882 9261</a>。</div>';
   }
 
+  /* ---------- 活动与机会页：精选 ----------
+     只用「报名中」的活动，按开始日期排，最多三条。
+     一条都没有就整节隐藏——没有数据就不出精选区，不凑数。 */
+
+  var ICON_CAL = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="5" width="17" height="15" rx="2.4"/><path d="M8 3v4M16 3v4M3.5 10h17"/></svg>';
+  var ICON_PIN = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s6.5-6 6.5-11a6.5 6.5 0 0 0-13 0C5.5 15 12 21 12 21z"/><circle cx="12" cy="10" r="2.4"/></svg>';
+  var ARROW = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg>';
+
+  function featured(n) {
+    return sortAll(LIST.filter(function (p) { return p.status === 'open'; })).slice(0, n || 3);
+  }
+
+  function featCard(p, isMain) {
+    return '<article class="feat-card' + (isMain ? ' feat-main' : '') + '">' +
+      (isMain ? '<figure class="img-ph" data-img="D1"></figure>' : '') +
+      '<div class="feat-body">' +
+        '<span class="pj-st" data-s="' + p.status + '">' + STATUS[p.status].label + '</span>' +
+        '<h3>' + p.name + '</h3>' +
+        '<p class="feat-meta">' +
+          '<span>' + ICON_CAL + p.time + '</span>' +
+          '<span>' + ICON_PIN + p.city + '</span>' +
+        '</p>' +
+        '<a class="feat-go" href="' + p.href + '">查看活动详情' + ARROW + '</a>' +
+      '</div>' +
+    '</article>';
+  }
+
+  function mountFeatured() {
+    var host = document.getElementById('featWrap');
+    if (!host) return;
+    var sec = document.getElementById('featured');
+    var items = featured(3);
+
+    if (!items.length) {
+      if (sec) { sec.hidden = true; sec.setAttribute('data-empty', '1'); }
+      return;
+    }
+
+    var side = items.slice(1);
+    host.innerHTML = featCard(items[0], true) +
+      (side.length ? '<div class="feat-side">' +
+        side.map(function (p) { return featCard(p, false); }).join('') + '</div>' : '');
+    host.classList.toggle('is-single', !side.length);
+    if (sec) sec.hidden = false;
+    if (global.CTMedia) global.CTMedia.mount(host);
+  }
+
   /* ---------- 活动与机会页：每类前 3 条预览 ---------- */
 
   function mountPreview() {
@@ -195,8 +242,7 @@
       })).slice(0, 3);
 
       if (!live.length) {
-        box.innerHTML = '<div class="pj-empty">' + c.name +
-          '暂时没有开放场次，新的场次会在这里更新。</div>';
+        box.innerHTML = '<div class="pj-empty">暂无开放报名的' + c.name + '活动。</div>';
         return;
       }
       box.innerHTML = '<div class="pj-grid">' + live.map(card).join('') + '</div>';
@@ -314,13 +360,16 @@
   }
 
   function boot() {
-    if (document.body.classList.contains('page-activities')) mountPreview();
+    if (document.body.classList.contains('page-activities')) {
+      mountFeatured();
+      mountPreview();
+    }
     var host = document.querySelector('[data-pj-cat]');
     if (host) mountCategory(host.getAttribute('data-pj-cat'));
   }
 
   global.CTProjects = {
-    cats: CATS, status: STATUS, list: LIST,
+    cats: CATS, status: STATUS, list: LIST, featured: featured,
     sortAll: sortAll, mountPreview: mountPreview, mountCategory: mountCategory
   };
 

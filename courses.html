@@ -10,7 +10,7 @@
 <link rel="apple-touch-icon" href="assets/apple-touch-icon.png?v=b6e8581d">
 <meta name="theme-color" content="#0B63C5">
 <link rel="stylesheet" href="assets/site.css?v=fcd42be1">
-<link rel="stylesheet" href="assets/home.css?v=0fa4bc18">
+<link rel="stylesheet" href="assets/catalog.css?v=aaabcc08">
 <link rel="canonical" href="https://leadtheway.cn/courses.html">
 <meta name="robots" content="index,follow">
 <meta property="og:type" content="website">
@@ -25,7 +25,7 @@
 <meta name="twitter:description" content="畅途未来领袖为机构、独立教师与工作室提供六门课程与配套教学材料、师资培训、教学与练习工具。">
 <meta name="twitter:image" content="https://leadtheway.cn/assets/og-cover.png">
 </head>
-<body class="page-courses">
+<body class="page-courses v2">
 
 <header class="nav">
   <div class="wrap">
@@ -51,73 +51,129 @@
 
 <main>
 
-<section class="pg-hero">
+<!-- 首屏：左文右图，45 / 55。右边是图片位 A（3:2 课程场景主视觉） -->
+<section class="v2-hero">
   <div class="wrap">
-    <div class="eyebrow"><i></i>未来领袖 · 课程与实践 Curriculum</div>
-    <h1>课程与实践</h1>
-    <p class="lead">畅途未来领袖为机构、独立教师与工作室提供课程内容、教学材料与 AI 工具，支持日常教学与学生练习。</p>
+    <div class="v2-hero-copy">
+      <h1>课程与实践</h1>
+      <p class="lead">围绕表达、思辨与综合能力培养，提供课程内容、教学资源与实践支持。</p>
+      <div class="v2-hero-acts">
+        <a class="btn btn-p" href="#catalog">查看课程</a>
+        <a class="btn btn-s" href="#support">教学支持</a>
+      </div>
+    </div>
+    <figure class="img-ph" data-img="A"></figure>
   </div>
 </section>
 
-<!-- 课程概览：六门课，只写名称与一句话。
-     适用学段、单元目录、学习目标这些在各自详情页里，本页不展开。 -->
-<section class="pg-sec" id="catalog">
+<!-- 课程体系：图 + 名称 + 一句话。
+     只有模拟联合国、思考表达与自主学习有详情页，整张卡可点；
+     其余四门没有详情页，做成不可点的 article，也不挂「查看详情」四个字。 -->
+<section class="v2-sec" id="catalog">
   <div class="wrap">
-    <div class="sec-head rv2">
-      <div class="bar"></div>
-      <h2>课程概览 <small>Courses</small></h2>
-      <p class="crs-series">畅途未来领袖课程系列</p>
+    <div class="v2-sec-head">
+      <h2>课程体系</h2>
     </div>
-    <div class="support rv2">
-      <article class="sp is-plain">
-        <h3>中英双语主持</h3>
-        <p>从开场介绍到现场应变，练习主持表达与搭档配合。</p>
+    <div class="crs-grid">
+
+      <article class="crs-card">
+        <figure class="img-ph" data-img="B1"></figure>
+        <div class="crs-body">
+          <h3>中英双语主持</h3>
+          <p>从开场介绍到现场应变，练习主持表达与搭档配合。</p>
+        </div>
       </article>
-      <article class="sp is-plain">
-        <h3>中文演讲</h3>
-        <p>组织观点与材料，清楚、有依据地面向听众表达。</p>
+
+      <article class="crs-card">
+        <figure class="img-ph" data-img="B2"></figure>
+        <div class="crs-body">
+          <h3>中文演讲</h3>
+          <p>组织观点与材料，清楚、有依据地面向听众表达。</p>
+        </div>
       </article>
-      <article class="sp is-plain">
-        <h3>英语交流与演讲</h3>
-        <p>从日常交流到观点演讲，提供全英与中英双语教材。</p>
+
+      <article class="crs-card">
+        <figure class="img-ph" data-img="B3"></figure>
+        <div class="crs-body">
+          <h3>英语交流与演讲</h3>
+          <p>从日常交流到观点演讲，提供全英与中英双语教材。</p>
+        </div>
       </article>
-      <article class="sp is-plain">
-        <h3>逻辑思维与辩论</h3>
-        <p>通过讨论与辩论，练习提出理由、判断证据和回应不同意见。</p>
+
+      <article class="crs-card">
+        <figure class="img-ph" data-img="B4"></figure>
+        <div class="crs-body">
+          <h3>逻辑思维与辩论</h3>
+          <p>通过讨论与辩论，练习提出理由、判断证据和回应不同意见。</p>
+        </div>
       </article>
-      <article class="sp is-plain">
-        <h3>模拟联合国</h3>
-        <p>围绕国际议题开展研究、立场表达与协商合作。</p>
-        <a href="mun.html">查看课程详情 →</a>
-      </article>
-      <article class="sp is-plain">
-        <h3>思考、表达与自主学习</h3>
-        <p>通过主题任务，练习信息判断、沟通表达与学习方法。</p>
-        <a href="sanyuanli.html">查看课程详情 →</a>
-      </article>
+
+      <a class="crs-card" href="mun.html">
+        <figure class="img-ph" data-img="B5"></figure>
+        <div class="crs-body">
+          <h3>模拟联合国</h3>
+          <p>围绕国际议题开展研究、立场表达与协商合作。</p>
+          <span class="crs-go">查看课程详情
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg>
+          </span>
+        </div>
+      </a>
+
+      <a class="crs-card" href="sanyuanli.html">
+        <figure class="img-ph" data-img="B6"></figure>
+        <div class="crs-body">
+          <h3>思考、表达与自主学习</h3>
+          <p>通过主题任务，练习信息判断、沟通表达与学习方法。</p>
+          <span class="crs-go">查看课程详情
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg>
+          </span>
+        </div>
+      </a>
+
     </div>
   </div>
 </section>
 
-<section class="pg-sec">
+<!-- 教学支持：整条淡蓝色带，左边标题与说明，右边三行模块。
+     和上面的白卡形成一次换气，不再用三张和课程卡一样大的白块。 -->
+<section class="v2-band" id="support">
   <div class="wrap">
-    <div class="sec-head rv2">
-      <div class="bar"></div>
-      <h2>教学支持 <small>Support</small></h2>
+    <div class="sup-intro">
+      <h2>教学支持</h2>
+      <p>提供备课、课堂教学与学生练习所需的配套支持。</p>
     </div>
-    <div class="support rv2">
-      <article class="sp is-plain">
-        <h3>配套教学材料</h3>
-        <p>课件、教案、逐字稿与练习材料，支持教师备课和课堂教学。</p>
-      </article>
-      <article class="sp is-plain">
-        <h3>师资培训</h3>
-        <p>围绕课程方法、课堂组织与学生反馈，帮助教师开展教学。</p>
-      </article>
-      <article class="sp is-plain">
-        <h3>教学与练习工具</h3>
-        <p>教师端支持备课、授课与作业点评，学生小程序支持自主练习。</p>
-      </article>
+    <div class="sup-list">
+
+      <div class="sup-row">
+        <span class="sup-ico" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5V5a2 2 0 0 1 2-2h13v13.5H6.5A2.5 2.5 0 0 0 4 19z"/><path d="M8 7.5h7"/></svg>
+        </span>
+        <div>
+          <h3>配套教学材料</h3>
+          <p>课件、教案、逐字稿及练习材料。</p>
+        </div>
+      </div>
+
+      <div class="sup-row">
+        <span class="sup-ico" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3.2"/><path d="M3.2 19.6a5.8 5.8 0 0 1 11.6 0"/><path d="M16 5.6a3.2 3.2 0 0 1 0 5.6"/><path d="M17.4 14.4a5.2 5.2 0 0 1 3.4 4.8"/></svg>
+        </span>
+        <div>
+          <h3>师资培训</h3>
+          <p>围绕课程教学与课堂实施提供培训支持。</p>
+        </div>
+      </div>
+
+      <div class="sup-row">
+        <span class="sup-ico" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="12" rx="2.2"/><path d="M9 20h6M12 16v4"/></svg>
+        </span>
+        <div>
+          <h3>教学与练习工具</h3>
+          <p>支持教师教学管理及学生自主练习。</p>
+        </div>
+      </div>
+
     </div>
   </div>
 </section>
@@ -280,6 +336,7 @@
 </script>
 <script src="assets/chrome.js?v=775567a9"></script>
 <script src="assets/growth.js?v=0b06fe75"></script>
+<script src="assets/media.js?v=5a76ed16"></script>
 
 <!-- 学生小程序：页脚「学生小程序」开这个弹窗 -->
 <div class="mo" id="moStu" hidden>

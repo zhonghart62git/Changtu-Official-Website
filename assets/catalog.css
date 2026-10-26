@@ -1,0 +1,273 @@
+/* 畅途 · 课程与实践 / 活动与机会：平面化改版
+   只被 courses.html 与 activities.html 引用，样式全部挂在 .v2 下
+   （body 上多一个 class），四个 activities-*.html 分类页不受影响。
+
+   为什么另起一套表面：
+   全站其余页面是「固定光场 + 半透玻璃面板」。这两页的主体是六张课程卡和
+   四类活动卡，卡片密度高，玻璃叠玻璃之后边界糊在一起，卡片之间也看不出层级。
+   这两页改成冷白底 + 白卡 + 实边：卡片和底色差 3 个色阶，边界靠 1px 线，
+   不靠模糊和投影。这是这两页的取舍，不是全站换风格。
+   ——所以所有规则都以 .v2 开头，删除 .v2 即回到原样。 */
+
+.v2{
+  /* 表面 */
+  --pg-bg:#F7F9FC;
+  --pg-alt:#EDF4FB;
+  --card:#FFFFFF;
+  --edge:#DFE8F2;
+  --edge-soft:#EAF1F8;
+  /* 文字 */
+  --t1:#122B45;
+  --t2:#40566F;
+  --t3:#71839A;
+  /* 圆角 */
+  --r-lg:20px;
+  --r-md:16px;
+  --r-sm:12px;
+}
+
+/* 底：这两页不要光场和噪点，留一张干净的冷白 */
+body.v2{background:var(--pg-bg);}
+body.v2::before,body.v2::after{display:none;}
+
+/* 首屏那两个按钮是页内跳转，滚过去要顺 */
+@media (prefers-reduced-motion:no-preference){
+  html:has(body.v2){scroll-behavior:smooth;}
+}
+
+/* 容器：内容 1200，两侧 40 安全边距（1280 - 80） */
+.v2 .wrap{max-width:1280px;padding:0 40px;}
+.v2 main > section{width:100%;max-width:1280px;}
+/* 通栏色带要自己取消宽度约束，里面的 .wrap 再收回来 */
+.v2 main > section.v2-band{width:100%;max-width:100%;}
+
+/* 顶栏：玻璃条换成白条 + 发丝线。扁平页面上一块半透明渐变会显得脏 */
+.v2 header.nav{background:rgba(255,255,255,.94);-webkit-backdrop-filter:blur(14px);
+  backdrop-filter:blur(14px);border-bottom:1px solid var(--edge);box-shadow:none;}
+.v2 header.nav.is-scrolled{background:rgba(255,255,255,.98);border-bottom-color:var(--edge);box-shadow:none;}
+.v2 header.nav::after{display:none;}
+
+/* ===== 按钮 =====
+   .btn-s 原本是 42% 白玻璃，在冷白底上几乎和底同色，只剩一个看不见的白边。
+   这一页给它实底 + 实边。主按钮的蓝色渐变保留（品牌色），投影收小。 */
+.v2 .btn-s{background:#fff;border-color:var(--edge);box-shadow:none;color:var(--t1);}
+.v2 .btn-s:hover{background:#fff;border-color:var(--blue);color:var(--blue);transform:none;box-shadow:none;}
+.v2 .btn-p{box-shadow:0 8px 18px -12px rgba(11,99,197,.55);}
+.v2 .btn-p:hover{transform:none;box-shadow:0 10px 22px -12px rgba(11,99,197,.6);}
+
+/* ===== 图片位 =====
+   一个空盒子 + 一行 data-img，内容由 media.js 渲染。
+   比例写在 CSS 里当兜底（JS 没跑也有正确高度），media.js 拿到配置后会再写一次。
+   真图走 object-fit:cover，尺寸由盒子决定，换图不改布局。 */
+.img-ph{
+  position:relative;display:block;margin:0;overflow:hidden;
+  background:#E9F1F9;border:1px solid var(--edge);border-radius:var(--r-lg);
+  aspect-ratio:4 / 3;
+}
+.img-ph[data-img="A"],.img-ph[data-img="C"]{aspect-ratio:3 / 2;}
+.img-ph[data-img="D1"]{aspect-ratio:16 / 9;}
+.img-ph img{width:100%;height:100%;display:block;object-fit:cover;}
+.img-ph .ph-in{
+  position:absolute;inset:0;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;gap:4px;padding:16px;text-align:center;
+  color:#4E6A86;   /* 占位文字是给开发看的，但仍要过对比度：这组在 #E9F1F9 上是 5.1:1 */
+}
+.img-ph .ph-ico{display:block;width:26px;height:26px;margin-bottom:6px;opacity:.75;}
+.img-ph .ph-ico svg{width:100%;height:100%;display:block;}
+.img-ph b{font-size:11.5px;font-weight:800;letter-spacing:1.2px;opacity:.85;}
+.img-ph .ph-label{font-size:12.5px;font-weight:600;line-height:1.5;}
+.img-ph i{font-size:11.5px;font-style:normal;line-height:1.5;opacity:.8;}
+
+/* ===== 首屏 =====
+   左右双栏 45 / 55。上内边距 64，下边距交给区块间距统一给，
+   不再靠空白把首屏撑到一屏高。 */
+.v2-hero{padding:64px 0 0;}
+.v2-hero .wrap{display:grid;grid-template-columns:minmax(0,45fr) minmax(0,55fr);
+  gap:56px;align-items:center;}
+.v2-hero h1{margin:0;font-size:clamp(34px,3.6vw,48px);line-height:1.18;
+  letter-spacing:-1.2px;font-weight:800;color:var(--t1);}
+.v2-hero .lead{margin-top:18px;max-width:520px;font-size:16px;line-height:1.85;
+  color:var(--t2);text-wrap:pretty;}
+.v2-hero-acts{display:flex;flex-wrap:wrap;gap:12px;margin-top:30px;}
+.v2-hero .img-ph{border-radius:var(--r-lg);}
+
+/* 活动页首屏比课程页矮一档：这一页要尽快露出分类条和活动 */
+.v2-hero-act{padding:44px 0 36px;}
+.v2-hero-act .wrap{grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:48px;}
+.v2-hero-act h1{font-size:clamp(30px,3vw,40px);}
+.v2-hero-act .lead{margin-top:14px;}
+
+/* ===== 区块头 =====
+   课程页只有「课程体系」「教学支持」两个标题，活动页是四个分类名。
+   中文标题 30px，不再挂英文微标签。 */
+.v2 h2{margin:0;font-size:clamp(24px,2.4vw,30px);line-height:1.3;
+  letter-spacing:-.7px;font-weight:800;color:var(--t1);}
+/* 区块间距 72：只写在相邻元素的一侧，两边各加一次 padding 会变成 144 */
+.v2-sec{padding:0;}
+.page-courses main > section + section{margin-top:72px;}
+.v2-sec-head{display:flex;align-items:baseline;justify-content:space-between;
+  gap:20px;margin-bottom:28px;}
+
+/* ===== 课程卡 =====
+   图在上、字在下，同一张卡里，中间不留缝。
+   有详情页的整张卡是 <a>；没有详情页的是 <article>，外观一致但不可点，
+   也不给「查看课程详情」这几个字——不放假入口。 */
+.crs-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px;}
+.crs-card{
+  display:flex;flex-direction:column;overflow:hidden;text-decoration:none;color:inherit;
+  background:var(--card);border:1px solid var(--edge);border-radius:var(--r-md);
+  transition:transform .18s ease,box-shadow .18s ease,border-color .18s ease;
+}
+.crs-card .img-ph{border:0;border-radius:0;}
+.crs-card .img-ph img{transition:transform .35s ease;}
+.crs-card:hover{transform:translateY(-3px);border-color:#CBDCEC;
+  box-shadow:0 18px 34px -26px rgba(18,43,69,.55);}
+.crs-card:hover .img-ph img{transform:scale(1.04);}
+.crs-card:focus-visible{outline:2px solid var(--blue);outline-offset:3px;}
+.crs-body{display:flex;flex-direction:column;flex:1;padding:20px 20px 22px;}
+.crs-body h3{margin:0;font-size:19px;font-weight:700;line-height:1.4;
+  letter-spacing:-.2px;color:var(--t1);}
+.crs-body p{margin:8px 0 0;font-size:14px;line-height:1.75;color:var(--t2);text-wrap:pretty;}
+.crs-go{display:inline-flex;align-items:center;gap:6px;margin-top:auto;padding-top:16px;
+  font-size:13.5px;font-weight:700;color:var(--blue);transition:gap .16s;}
+.crs-card:hover .crs-go{gap:10px;}
+
+/* ===== 教学支持 =====
+   一整条淡蓝色带，作为六张白卡之后的视觉换气。
+   左边标题与说明，右边三行模块，行间一条发丝线，不再用三张和课程卡一样大的白块。 */
+.v2-band{background:var(--pg-alt);border-top:1px solid var(--edge);border-bottom:1px solid var(--edge);}
+#support{padding:64px 0;}
+#support .wrap{display:grid;grid-template-columns:minmax(0,.78fr) minmax(0,1.22fr);gap:64px;}
+#support .sup-intro p{margin-top:16px;max-width:360px;font-size:15px;line-height:1.85;color:var(--t2);}
+.sup-row{display:grid;grid-template-columns:40px minmax(0,1fr);gap:16px;
+  padding:22px 0;border-top:1px solid rgba(18,43,69,.09);}
+.sup-row:first-child{border-top:0;padding-top:0;}
+.sup-row:last-child{padding-bottom:0;}
+.sup-ico{display:flex;align-items:center;justify-content:center;width:40px;height:40px;
+  border-radius:var(--r-sm);background:#fff;border:1px solid var(--edge);color:var(--blue);}
+.sup-ico svg{width:19px;height:19px;display:block;}
+.sup-row h3{margin:0;font-size:16.5px;font-weight:700;line-height:1.45;color:var(--t1);letter-spacing:-.1px;}
+.sup-row p{margin:6px 0 0;font-size:14px;line-height:1.75;color:var(--t2);text-wrap:pretty;}
+
+/* ===== 活动页：分类条 =====
+   原来是一颗玻璃胶囊，居中飘在光场里，往下滚还压在卡片上。
+   这里做成一条实底白条，通栏、贴住顶栏，滚动时内容从它下面整齐划过去。 */
+.v2 .act-nav{
+  position:sticky;top:68px;z-index:50;
+  width:100%;max-width:100%;margin:0;padding:0;
+  background:#fff;border-bottom:1px solid var(--edge);
+  box-shadow:0 1px 0 rgba(18,43,69,.02);
+  pointer-events:auto;
+}
+.v2 .act-nav .wrap{display:flex;align-items:center;padding:0 40px;
+  overflow-x:auto;scrollbar-width:none;}
+.v2 .act-nav .wrap::-webkit-scrollbar{display:none;}
+.v2 .act-pill{display:flex;align-items:center;gap:4px;padding:9px 0;
+  background:none;border:0;box-shadow:none;-webkit-backdrop-filter:none;backdrop-filter:none;
+  overflow:visible;width:auto;pointer-events:auto;}
+.v2 .act-pill > button{
+  padding:9px 18px;border-radius:9px;font-size:14.5px;font-weight:600;line-height:1.5;
+  color:var(--t2);background:none;border:0;cursor:pointer;white-space:nowrap;
+  transition:background .16s,color .16s;
+}
+.v2 .act-pill > button:hover{background:var(--pg-alt);color:var(--blue);}
+.v2 .act-pill > button[aria-pressed="true"]{background:var(--blue);color:#fff;box-shadow:none;}
+.v2 .act-pill > button:focus-visible{outline:2px solid var(--blue);outline-offset:2px;}
+
+/* ===== 活动页：精选 =====
+   一大两小。只有存在「报名中」的活动时才出现，一条都没有时整节隐藏
+   （隐藏逻辑在 projects.js，不在这里留空框）。 */
+.feat-sec{padding:64px 0 0;}
+.feat-grid{display:grid;grid-template-columns:minmax(0,55fr) minmax(0,45fr);gap:20px;}
+/* 只有一条可推荐活动时，主卡独占整行，右边不留空列 */
+.feat-grid.is-single{grid-template-columns:1fr;}
+/* 右边两张卡等分主卡的高度，两张卡底部对齐，不然右栏会比左边短一截 */
+.feat-side{display:grid;gap:20px;grid-auto-rows:1fr;align-content:stretch;}
+.feat-card{display:flex;flex-direction:column;overflow:hidden;
+  background:var(--card);border:1px solid var(--edge);border-radius:var(--r-md);
+  transition:border-color .18s ease,box-shadow .18s ease;}
+.feat-card:hover{border-color:#CBDCEC;box-shadow:0 18px 34px -26px rgba(18,43,69,.5);}
+.feat-card .img-ph{border:0;border-radius:0;}
+.feat-body{display:flex;flex-direction:column;flex:1;padding:20px 22px 22px;}
+.feat-main .feat-body{padding:22px 24px 24px;}
+.feat-card h3{margin:12px 0 0;font-size:18px;font-weight:700;line-height:1.45;
+  letter-spacing:-.2px;color:var(--t1);}
+.feat-main h3{font-size:21px;}
+.feat-meta{margin:10px 0 0;display:flex;flex-wrap:wrap;gap:6px 18px;
+  font-size:13.5px;line-height:1.6;color:var(--t2);}
+.feat-meta span{display:inline-flex;align-items:center;gap:6px;}
+.feat-meta svg{width:14px;height:14px;flex:none;color:var(--t3);}
+.feat-go{display:inline-flex;align-items:center;gap:6px;margin-top:auto;padding-top:18px;
+  font-size:13.5px;font-weight:700;color:var(--blue);text-decoration:none;transition:gap .16s;}
+.feat-card:hover .feat-go{gap:10px;}
+
+/* ===== 活动页：四个分类 =====
+   分类名与「查看全部」同一行，下面直接是卡片。
+   不再有「近期赛事」这种副标题，也不再挂英文微标签。 */
+.v2 .act-sec{padding:64px 0 0;}
+.v2 .act-sec[hidden]{display:none;}
+.cat-head{display:flex;align-items:baseline;justify-content:space-between;gap:20px;
+  margin-bottom:22px;padding-bottom:14px;border-bottom:1px solid var(--edge-soft);}
+.cat-more{display:inline-flex;align-items:center;gap:6px;font-size:13.5px;font-weight:700;
+  color:var(--blue);text-decoration:none;white-space:nowrap;transition:gap .16s;}
+.cat-more:hover{gap:10px;}
+
+/* 活动卡：信息型，不配图。状态在最上，名称，时间地点，报名截止，入口 */
+.v2 .pj-grid{gap:20px;}
+.v2 .pj-card{padding:20px 20px 18px;background:var(--card);border:1px solid var(--edge);
+  border-radius:var(--r-md);box-shadow:none;transition:border-color .18s ease,box-shadow .18s ease;}
+.v2 .pj-card:hover{transform:none;background:var(--card);border-color:#CBDCEC;
+  box-shadow:0 18px 34px -26px rgba(18,43,69,.5);}
+.v2 .pj-card h3{margin:12px 0 10px;font-size:17px;line-height:1.45;color:var(--t1);}
+.v2 .pj-meta{font-size:13px;line-height:1.7;color:var(--t2);}
+/* --t3 (#71839A) 在白卡上只有 3.88:1，12.5px 正文不够，这里压深一档到 5.4:1 */
+.v2 .pj-dl{font-size:12.5px;line-height:1.7;color:#566B82;}
+.v2 .pj-go{font-size:13.5px;}
+
+/* 空态：一行字，不再占一张卡的高度 */
+.v2 .pj-empty{padding:0;background:none;border:0;box-shadow:none;text-align:left;
+  font-size:14px;line-height:1.8;color:#566B82;}
+.v2 .pj-empty a{color:var(--blue);}
+
+/* ===== 活动页：咨询 =====
+   保留原有入口，只把玻璃换成白卡 */
+.v2 .pg-cta-sec{padding:72px 0 80px;}
+.v2 .pg-cta-sec .pg-cta{background:#fff;border:1px solid var(--edge);border-radius:var(--r-lg);
+  box-shadow:none;padding:30px 34px;}
+.v2 .pg-cta-sec b{color:var(--t1);}
+.v2 .pg-cta-sec span{color:var(--t2);}
+
+/* ===== 响应式 ===== */
+@media (max-width:1023px){
+  .v2 .wrap{padding:0 32px;}
+  .v2-hero .wrap{grid-template-columns:minmax(0,48fr) minmax(0,52fr);gap:36px;}
+  .crs-grid{grid-template-columns:repeat(2,minmax(0,1fr));}
+  #support .wrap{grid-template-columns:1fr;gap:32px;}
+  .v2 .act-nav .wrap{padding:0 32px;}
+  .feat-grid{grid-template-columns:1fr;}
+  .feat-side{grid-template-columns:1fr 1fr;}
+}
+@media (max-width:767px){
+  .v2 .wrap{padding:0 20px;}
+  .v2-hero{padding:36px 0 0;}
+  .v2-hero-act{padding:32px 0 28px;}
+  .v2-hero .wrap{grid-template-columns:1fr;gap:28px;}
+  .v2-hero h1{font-size:clamp(30px,8vw,38px);letter-spacing:-.8px;}
+  .v2-hero .lead{font-size:15px;}
+  .v2-hero-acts{margin-top:24px;}
+  .v2-hero-acts .btn{flex:1;min-width:0;padding:11px 16px;font-size:14.5px;}
+  .page-courses main > section + section{margin-top:48px;}
+  .v2-sec{padding:0;}
+  #support{padding:48px 0;}
+  .crs-grid{grid-template-columns:1fr;gap:16px;}
+  .v2 .act-nav{top:68px;}
+  .v2 .act-nav .wrap{padding:0 20px;}
+  .v2 .act-pill{gap:2px;}
+  .v2 .act-pill > button{flex:none;padding:8px 12px;font-size:14px;}
+  .feat-sec{padding:44px 0 0;}
+  .feat-side{grid-template-columns:1fr;}
+  .v2 .act-sec{padding:44px 0 0;}
+  .v2 .pj-grid{grid-template-columns:1fr;}
+  .v2 .pg-cta-sec{padding:52px 0 60px;}
+  .v2 .pg-cta-sec .pg-cta{padding:22px 20px;}
+}
