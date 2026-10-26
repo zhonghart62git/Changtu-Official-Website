@@ -792,13 +792,15 @@ details .ans{padding:0 0 18px;font-size:14.3px;line-height:1.8;color:var(--ink-2
    模糊再强一点，每条的上边缘就糊在一起，读起来分不清行。
    展开态同时给三个信号——底色提亮、内高光加强、蓝边外再套一圈淡紫——
    三个一起给，展开的那条才浮得起来。 */
-.qa{max-width:960px;margin:0 auto;}
+/* 板块头改成左对齐之后，问答块也跟着靠左：
+   标题和列表左边缘对齐，否则标题在左边、内容在中间，两者对不上。 */
+.qa{max-width:960px;margin:0;}
 
 /* 分组切换：一枚玻璃托盘里嵌两段。
    选中项走品牌蓝的深浅渐变、白字；未选中项只留文字色、无底。
    这样一眼先看清"当前在看哪一组"，再往下读问题。 */
 .qa-sw{
-  display:flex;gap:4px;width:fit-content;max-width:100%;margin:0 auto 30px;padding:4px;
+  display:flex;gap:4px;width:fit-content;max-width:100%;margin:0 0 30px;padding:4px;
   border-radius:var(--r-pill);
   background:rgba(255,255,255,.42);
   border:1px solid var(--glass-2-edge);
@@ -938,25 +940,25 @@ details .ans{padding:0 0 18px;font-size:14.3px;line-height:1.8;color:var(--ink-2
   width:min(760px,86%);aspect-ratio:1;border-radius:50%;pointer-events:none;
   background:radial-gradient(circle,rgba(11,99,197,0) 0 49.7%,rgba(11,99,197,.07) 49.85% 50%,rgba(11,99,197,0) 50.15%);
 }
-.cta{max-width:640px;margin:0 auto;text-align:center;}
-.cta .eyebrow{margin-bottom:18px;}
-.cta h2{font-size:clamp(26px,3.3vw,42px);line-height:1.26;letter-spacing:-1px;margin:0;color:var(--text-primary);}
-.cta-d{margin:16px auto 0;max-width:560px;font-size:15px;line-height:1.85;color:var(--ink-2);}
-.cta-act{margin-top:30px;}
-.cta-act .btn{padding:15px 44px;font-size:16px;min-height:52px;}
-.cta-tel{margin-top:28px;display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:4px 18px;}
-.cta-tel span{font-size:13px;color:var(--muted);}
-.cta-tel a{display:inline-flex;align-items:center;font-size:15px;font-weight:700;color:var(--ink);letter-spacing:.3px;
+/* 联系板块：标题区交还给 .sec-head.sec-lg，和上面「机构支持」同一套。
+   原来这里是独立的 .cta 组件——居中、640px 宽、胶囊标签、字号自定，
+   整页走到最后突然换了一套排版语言。 */
+#contact .cta-act{margin-top:34px;}
+#contact .cta-act .btn{padding:15px 44px;font-size:16px;min-height:52px;}
+#contact .cta-tel{margin-top:24px;display:flex;flex-wrap:wrap;align-items:center;
+  justify-content:flex-start;gap:4px 18px;}
+#contact .cta-tel span{font-size:13px;color:var(--muted);}
+#contact .cta-tel a{display:inline-flex;align-items:center;font-size:15px;font-weight:700;color:var(--ink);letter-spacing:.3px;
   padding:6px 2px;border-bottom:1px solid var(--border-primary);transition:color var(--dur) var(--ease),border-color var(--dur) var(--ease);}
-.cta-tel a:hover{color:var(--brand-blue);border-color:var(--brand-blue);}
+#contact .cta-tel a:hover{color:var(--brand-blue);border-color:var(--brand-blue);}
 /* 手机上号码是并排两个胶囊：15px 粗体加 2px 下划线只有 27px 高，点不准。
    提示语独占一行，两个号码平分剩余宽度，点按区 44px 起。 */
 @media (max-width:560px){
-  .cta-tel{gap:9px;margin-top:24px;}
-  .cta-tel span{flex:0 0 100%;text-align:center;}
-  .cta-tel a{flex:1 1 0;justify-content:center;min-height:44px;padding:0 10px;font-size:15px;
+  #contact .cta-tel{gap:9px;margin-top:22px;}
+  #contact .cta-tel span{flex:0 0 100%;}
+  #contact .cta-tel a{flex:1 1 0;justify-content:center;min-height:44px;padding:0 10px;font-size:15px;
     border:1px solid var(--border-primary);border-radius:22px;background:var(--surface);}
-  .cta-act .btn{width:100%;}
+  #contact .cta-act .btn{width:100%;}
 }
 
 /* ===== Footer =====
