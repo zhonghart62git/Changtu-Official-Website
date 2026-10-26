@@ -1441,6 +1441,21 @@ html.no-js .rv{opacity:1;transform:none;}
 .pg-cta-sec span{display:block;margin-top:6px;font-size:14px;color:var(--ink-2);}
 .pg-cta-acts{display:flex;flex-wrap:wrap;gap:12px;flex:none;}
 
+/* ===== 研学营页 =====
+   营地事实用 .mini 铺成六格。.mini 本来是 .panel 里的统计小块，
+   底色是实白 --surface-2；这一页整页都是玻璃，六块实白会显得比卡片还重，
+   所以只在本页换成半透白。不加 backdrop-filter：底是平滑渐变，
+   模糊看不出差别，六层全屏采样不值得。 */
+.page-tour .tour-facts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;}
+.page-tour .tour-facts .mini{padding:18px 20px;
+  background:var(--glass-2-bg);border:1px solid var(--glass-2-edge);box-shadow:var(--glass-inner);}
+.page-tour .tour-facts .mini b{font-size:19px;letter-spacing:-.4px;}
+/* 口径说明跟在卡片后面，字号压到正文之下，不抢费用清单 */
+.page-tour .tour-note{margin-top:16px;font-size:12.5px;line-height:1.8;color:var(--muted);text-wrap:pretty;}
+@media (max-width:760px){
+  .page-tour .tour-facts{grid-template-columns:repeat(2,minmax(0,1fr));}
+}
+
 /* 首页把这两块从三列/四列收成两列 */
 .outcome.is-two{grid-template-columns:repeat(2,minmax(0,1fr));}
 .support.is-two{grid-template-columns:repeat(2,minmax(0,1fr));}
