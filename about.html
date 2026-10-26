@@ -10,7 +10,7 @@
 <link rel="icon" type="image/png" sizes="64x64" href="assets/favicon-64.png?v=f0acdc9c">
 <link rel="apple-touch-icon" href="assets/apple-touch-icon.png?v=b6e8581d">
 <meta name="theme-color" content="#0B63C5">
-<link rel="stylesheet" href="assets/site.css?v=d4e27a49">
+<link rel="stylesheet" href="assets/site.css?v=6927ed57">
 <link rel="stylesheet" href="assets/site-v2.css?v=dafb8324">
 <script>document.documentElement.classList.remove('no-js');</script>
 <link rel="canonical" href="https://leadtheway.cn/about.html">
@@ -23,9 +23,10 @@
 <meta property="og:image" content="https://leadtheway.cn/assets/og-cover.png">
 <style>
   /* ── 00 关于畅途 ─────────────────────────────────────────────── */
-  .about-hero{position:relative;overflow:hidden;padding:64px 0 0;
-    background:radial-gradient(820px 420px at 84% -14%,var(--surface-3) 0%,rgba(234,244,254,0) 70%),
-               radial-gradient(680px 380px at 2% 104%,var(--surface-3) 0%,rgba(234,244,254,0) 72%),var(--surface);}
+  /* 整页只剩一张底。这一块原来自己铺了 var(--surface) 白底，
+     在连续光场上就是一块硬边矩形——左右两侧还会露出底色。
+     光晕一并去掉：它原本是压在白底上做层次的，底下换成光场之后是重复的。 */
+  .about-hero{position:relative;padding:64px 0 0;}
   .about-hero .wrap{position:relative;z-index:1;}
   .about-hero .ah-grid{display:grid;grid-template-columns:minmax(0,1fr) 440px;gap:56px;align-items:center;}
   .about-hero h1{font-size:clamp(27px,3.4vw,42px);line-height:1.32;letter-spacing:-.8px;font-weight:800;margin:18px 0 18px;}
@@ -35,7 +36,16 @@
   /* 三个入口功能等价，视觉也等价：同色、同高、同宽 */
   .about-hero .hero-cta .btn{flex:0 0 auto;min-width:140px;}
   /* 数据带与首页同源同版式：五项一行，窄屏两列且末项占满 */
-  .about-hero .stats-band .stats{grid-template-columns:repeat(5,1fr);padding:36px 0;}
+  /* 数字带和首页同一套玻璃：半透明 + 白边 + 内高光 + 蓝影。
+     原来是内联的 var(--surface) 实白，压在连续光场上就是一条硬边白带。 */
+  .about-hero .stats-band{
+    background:rgba(255,255,255,.34);
+    border:1px solid var(--glass-2-edge);
+    border-radius:var(--r-card);
+    box-shadow:var(--glass-inner),var(--glass-shadow-sm);
+  }
+  .about-hero .stats-band .stats{grid-template-columns:repeat(5,1fr);padding:36px 0;
+    border-top:0;border-bottom:0;}
   .about-hero .stats-band .stat span{font-size:12.5px;margin-top:4px;}
 
   /* 平台关系图：中心节点连接学生端与机构端 */
@@ -226,7 +236,7 @@
     </div>
   </div>
 
-  <div class="stats-band" style="background:var(--surface);margin-top:52px;">
+  <div class="stats-band" style="margin-top:52px;">
     <div class="wrap stats">
       <div class="stat"><b>20<i>年</i></b><span>深耕青少年素质教育</span></div>
       <div class="stat"><b>12<i>年</i></b><span>连续组织口碑展演活动</span></div>

@@ -409,6 +409,13 @@
 .hs-track{display:flex;width:100%;
   transition:transform .62s cubic-bezier(.22,.61,.36,1);will-change:transform;}
 .hs-slide{flex:0 0 100%;display:block;text-decoration:none;line-height:0;}
+/* 首屏的底铺满整块轮播。
+   原来 .hs-intro .hero 有自己的实底，但 .hero 比 .hs-slide 矮 250px 左右，
+   实底在中间就断了，看起来像页面被切了一刀。
+   改成 flex 撑满，实底一直铺到轮播底边，和圆角容器对齐。 */
+.hs-slide.hs-intro{display:flex;flex-direction:column;}
+.hs-slide.hs-intro > .hero{flex:1 1 auto;display:flex;flex-direction:column;justify-content:center;}
+.hs-slide.hs-intro > .hero > .wrap{width:100%;}
 .hs-slide img{width:100%;height:auto;display:block;}
 .hs-slide:focus-visible{outline:3px solid var(--brand-blue);outline-offset:-3px;}
 
@@ -492,7 +499,7 @@
   radial-gradient(860px 600px at -4% 100%,rgba(11,99,197,.15) 0%,rgba(11,99,197,0) 70%),
   radial-gradient(1800px 620px at 40% -34%,rgba(11,99,197,.22) 0%,rgba(11,99,197,.06) 52%,rgba(11,99,197,0) 76%),
   radial-gradient(900px 420px at 96% -20%,rgba(123,63,228,.14) 0%,rgba(123,63,228,0) 72%),
-  linear-gradient(178deg,#E6F0FC 0%,#E9F2FD 54%,#F1F7FF 100%);}
+  linear-gradient(178deg,#E3EEFC 0%,#D9E7FA 54%,#E0EDFC 100%);}
 /* 第 1 屏沿用 .hero 的方格底纹，但整块 banner 现在是浅色、后面五屏是纯渐变，
    网格留在第一屏会显得六屏两套底。这里压到只当一层很淡的质感，
    切换时看不出纹理由有到无。全站其他页的 hero 网格不动。 */
@@ -783,7 +790,9 @@
    上下那两条发丝线去掉，否则玻璃边上会多出两条横线。 */
 .home .stats-band{
   width:calc(100% - 56px);max-width:1300px;margin:0 auto;
-  background:var(--glass-2-bg);
+  /* 34% 而不是卡片的 44%：这条带子正好压在光场最亮的一团蓝光上，
+     同样白度在这里会比下面的案例卡亮一大截，看上去像一块贴上去的白板。 */
+  background:rgba(255,255,255,.34);
   border:1px solid var(--glass-2-edge);
   border-radius:var(--r-card);
   box-shadow:var(--glass-inner),var(--glass-shadow-sm);

@@ -48,11 +48,11 @@
      这才是玻璃片压在玻璃板上的样子，而不是白纸压白纸。
      卡片仍不挂 backdrop-filter：它嵌在已经模糊过的面板里，
      再各自模糊一次等于同一块区域算两遍，滚动会掉帧。 */
-  --glass-2-bg:rgba(255,255,255,.34);
-  --glass-2-bg-hover:rgba(255,255,255,.54);
+  --glass-2-bg:rgba(255,255,255,.44);
+  --glass-2-bg-hover:rgba(255,255,255,.62);
   --glass-2-edge:rgba(255,255,255,.88);
   /* Level 3：标签、按钮、小型控件 */
-  --glass-3-bg:rgba(255,255,255,.34);
+  --glass-3-bg:rgba(255,255,255,.40);
   --glass-3-edge:rgba(255,255,255,.78);
 
   /* 玻璃的内反射：顶部一道亮线、底部一道极淡的冷色回光，
@@ -130,7 +130,7 @@ body::before{
     /* 底色：冷白 → 冰蓝 → 冷白。整体压深一档（#F3F8FE→#EAF2FD 等），
        中间那一档从 #E4EEFC 压到 #D8E7F9，才是参考图那种"冰"的蓝，
        不是"加了一点蓝的白"。 */
-    linear-gradient(178deg,#EAF2FD 0%,#D8E7F9 44%,#E4EFFC 100%);
+    linear-gradient(178deg,#DFEBFB 0%,#C6DAF5 44%,#D2E3FA 100%);
 }
 /* 极细颗粒：大面积渐变在 8bit 屏上会出现色带，一层 1.5% 的噪点就能压掉，
    顺带让白面看起来有材质而不是纯色块。固定尺寸小图平铺，开销可忽略。 */
@@ -319,54 +319,16 @@ h1 em{font-style:normal;white-space:nowrap;color:var(--brand-blue);
 section{padding:88px 0;}
 section[id]{scroll-margin-top:86px;}
 
-/* 区块容器化 —— Level 1 玻璃。
-   参考图里没有一个是「白底 + 一条条色带」——每个板块都是一整块浮在光场上的玻璃面板。
-   这一层必须同时具备六件事，缺一样就不像玻璃：
-   ① 半透明底（46%，光场能透进来）
-   ② backdrop-filter 真模糊（否则底色透进来是"平"的，只是变浅，不是玻璃）
-   ③ 1px 半透明白边 + 顶部内高光（边缘折射）
-   ④ 底部极淡冷色回光（材料有厚度）
-   ⑤ 蓝色环境阴影（不是灰黑投影）
-   ⑥ 顶部 150px 的垂向高光（被上方光源照到）
-   第 7 层是本轮新加的：面板左上角一团冰蓝、右下角一团淡紫。
-   没有它，面板就是一整片均匀的白——均匀的白正是"白卡片"的特征。
-   有了这团光，面板自己就有了方向，光从左上来、往右下衰减，
-   和参考图里那种"玻璃被斜照到"的观感一致。
-   模糊只挂在这一层。二级卡片嵌在已经模糊过的面板里，再各自模糊一次
-   等于同一块像素算两遍，滚动会掉帧——这是刻意的取舍，不是漏写。 */
+/* 区块不做成面板。
+   上一版每个板块是一整块玻璃，滚起来能看到一条条 30px 的缝——
+   底色被切成一段一段，读起来像"一叠卡片"，不是"一张底图"。
+   参考图的底是一整张连续的光场，内容浮在上面；
+   而且板块内部已经有玻璃卡（案例卡、能力卡、档案卡、FAQ 条目），
+   外层再套一层玻璃就是两层容器，正好把底色的连续性切断。
+   所以这里只剩宽度约束和板块间距，背景全部交还给 body::before 那张光场。
+   顺带的好处：整页少掉十几个 backdrop-filter 图层，滚动更省。 */
 main > section:not(.hslider){
-  position:relative;width:calc(100% - 56px);max-width:1360px;margin:0 auto 30px;
-  border-radius:var(--r-panel);
-  background:
-    linear-gradient(180deg,rgba(255,255,255,.42) 0%,rgba(255,255,255,0) 150px),
-    radial-gradient(880px 520px at 8% -12%,rgba(34,184,232,.13) 0%,rgba(34,184,232,0) 72%),
-    radial-gradient(760px 460px at 104% 108%,rgba(123,63,228,.09) 0%,rgba(123,63,228,0) 74%),
-    var(--glass-1-bg);
-  -webkit-backdrop-filter:var(--glass-1-blur);
-  backdrop-filter:var(--glass-1-blur);
-  border:1px solid var(--glass-1-edge);
-  box-shadow:var(--glass-inner),var(--glass-shadow);
-  /* overflow:clip 而不是 hidden：hidden 会生成滚动容器，
-     面板里的 position:sticky（机构名录的筛选条）就再也贴不住视口。
-     clip 只裁剪、不建滚动容器，圆角能裁住，sticky 照常工作。 */
-  overflow:clip;
-}
-/* 隔一块换一次底，靠明暗差断块，不靠分割线 */
-main > section:nth-of-type(even):not(.hslider){
-  background:
-    linear-gradient(180deg,rgba(255,255,255,.42) 0%,rgba(255,255,255,0) 150px),
-    radial-gradient(880px 520px at 92% -12%,rgba(11,99,197,.12) 0%,rgba(11,99,197,0) 72%),
-    radial-gradient(720px 440px at -4% 108%,rgba(34,184,232,.09) 0%,rgba(34,184,232,0) 74%),
-    var(--glass-1-bg-alt);}
-
-/* 不支持 backdrop-filter 时（老 Firefox / 关掉硬件加速）退成更实的底，
-   宁可少一点玻璃感，也不能让正文压在一层透光的浅色上看不清。 */
-@supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){
-  main > section:not(.hslider){
-    background:
-      linear-gradient(180deg,rgba(255,255,255,.7) 0%,rgba(255,255,255,0) 190px),
-      rgba(250,252,255,.90);
-  }
+  position:relative;width:calc(100% - 56px);max-width:1360px;margin:0 auto;
 }
 
 .sec-head{max-width:780px;margin-bottom:46px;}
@@ -406,22 +368,14 @@ main > section:nth-of-type(even):not(.hslider){
    让视觉重量在长页里有个起伏。不再整块换底色——那会把面板材质打断。
    光直接写在 background 里而不是用 ::before 铺一层：
    绝对定位的伪元素会盖在正文上面，哪怕是 5% 的蓝也会把对比度往下拖。 */
-#why{background:
-  linear-gradient(180deg,rgba(255,255,255,.42) 0%,rgba(255,255,255,0) 150px),
-  radial-gradient(880px 520px at 8% -12%,rgba(34,184,232,.13) 0%,rgba(34,184,232,0) 72%),
-  radial-gradient(780px 440px at 94% -8%,rgba(11,99,197,.09) 0%,rgba(11,99,197,0) 70%),
-  var(--glass-1-bg);}
-#archive{background:
-  linear-gradient(180deg,rgba(255,255,255,.42) 0%,rgba(255,255,255,0) 150px),
-  radial-gradient(760px 460px at 104% 108%,rgba(123,63,228,.09) 0%,rgba(123,63,228,0) 74%),
-  radial-gradient(720px 420px at 2% 104%,rgba(123,63,228,.085) 0%,rgba(123,63,228,0) 72%),
-  var(--glass-1-bg-alt);}
+/* #why / #archive 原来各带一层局部光晕，现在也交还给光场。
+   光晕画在 section 上会被 section 的盒子边界裁断——那又是一条看不见的横线。
+   整个页面只有一张光场，它在 body::before 上、固定不动，滚动时内容从它上面划过去。 */
 
 /* ===== 业务矩阵 ===== */
-/* 这里原来写的是 background:transparent，本意是"别盖住面板"，
-   但它是 id 选择器，特异性高于 main > section，等于把面板的玻璃底整条清掉，
-   只剩 backdrop-filter 在模糊背景——那一块就变成了纯蓝色块，
-   比周围的浅白面板深一大截。删掉，让它继承面板。 */
+/* 这一块曾经写过 background:transparent，当时是为了"别盖住面板"，
+   但 id 选择器的特异性高于 main > section，会把面板的玻璃底整条清掉。
+   现在面板本身已经取消，transparent 也就不必再写。 */
 
 .matrix{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
 .m-card.wide{
@@ -501,11 +455,10 @@ main > section:nth-of-type(even):not(.hslider){
 .biz.orange .chip{background:var(--surface-3);color:var(--warning);border-color:var(--border);}
 
 /* ===== 三原力 ===== */
-#sanyuanli{background:
-  radial-gradient(800px 400px at 12% 0%,rgba(11,99,197,.055) 0%,rgba(11,99,197,0) 66%),
-  radial-gradient(700px 400px at 92% 96%,rgba(123,63,228,.05) 0%,rgba(123,63,228,0) 68%),
-  transparent;
-  border-top:0;}
+/* 原来这里有两团很淡的局部光，中心压在板块的 0% 和 96% 上——
+   光在板块边缘是满值，边界处突然消失，就是一条看不清但感觉得到的横线。
+   光场已经是一整张，板块不再自己画光。 */
+#sanyuanli{border-top:0;}
 .formula{
   display:flex;align-items:center;justify-content:center;gap:14px;flex-wrap:wrap;
   background:linear-gradient(135deg,var(--blue-deep),var(--blue) 58%,var(--blue-2));
@@ -838,16 +791,23 @@ details .ans{padding:0 0 18px;font-size:14.3px;line-height:1.8;color:var(--ink-2
    底色只留 30%，剩下交给下面那层玻璃面板——面板的模糊会把聚光揉开，
    自己再铺 72% 白就等于把面板材质整个盖掉了。 */
 #contact{
-  /* 末屏是整页的视觉落点，光必须比别的板块重一档：
-     顶部一团 30% 的品牌蓝从上方压下来，中间补一层青，
-     底部再兜一层紫。最后那层实底已经去掉了——
-     留着它，光全被自己压平，末屏就和其他板块一样平。 */
-  background:
-    linear-gradient(180deg,rgba(255,255,255,.26) 0%,rgba(255,255,255,0) 150px),
-    radial-gradient(760px 460px at 50% -18%,rgba(11,99,197,.30) 0%,rgba(11,99,197,0) 66%),
-    radial-gradient(420px 300px at 50% 6%,rgba(34,184,232,.20) 0%,rgba(34,184,232,0) 70%),
-    radial-gradient(600px 340px at 50% 116%,rgba(123,63,228,.18) 0%,rgba(123,63,228,0) 72%);
+  /* 末屏的光放在 ::before 上、尺寸超出区块本身。
+     原因很简单：光如果画在 section 的 background 里，就一定被 padding box 裁断，
+     半径再大也只是把那条硬边推到看不见的地方。
+     画在伪元素上就能溢出到相邻板块，渐变在 78% 处归零，
+     和上面的 FAQ 之间没有任何可见的分界——这才是"一整张底图"。
+     ::after 留给那圈细环，两件事分开写，互不干扰。 */
+  position:relative;
   border-top:0;}
+#contact::before{
+  content:"";position:absolute;left:50%;top:48%;transform:translate(-50%,-50%);
+  width:1400px;height:980px;pointer-events:none;z-index:0;
+  background:
+    radial-gradient(closest-side,rgba(11,99,197,.26) 0%,rgba(11,99,197,.09) 48%,rgba(11,99,197,0) 78%),
+    radial-gradient(closest-side at 38% 62%,rgba(123,63,228,.15) 0%,rgba(123,63,228,0) 72%);
+}
+/* 光在内容下面。不写这条，伪元素会盖住标题和按钮。 */
+#contact > .wrap{position:relative;z-index:1;}
 /* 细环：只在转化区中央出现一圈，1px、7%，作用是给聚光一个边界 */
 #contact::after{
   content:"";position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);
@@ -1548,18 +1508,6 @@ a.mo-card:hover .mo-go{color:var(--blue-deep);}
    换算成像素总量并不比桌面少多少，但算力差一大截，滚动会掉帧。
    12px 在手机上肉眼已经分辨不出和 22px 的差别。 */
 @media (max-width:760px){
-  main > section:not(.hslider){
-    -webkit-backdrop-filter:blur(12px) saturate(1.15);
-    backdrop-filter:blur(12px) saturate(1.15);
-    background:
-      linear-gradient(180deg,rgba(255,255,255,.66) 0%,rgba(255,255,255,0) 150px),
-      rgba(255,255,255,.68);
-  }
-  main > section:nth-of-type(even):not(.hslider){
-    background:
-      linear-gradient(180deg,rgba(255,255,255,.66) 0%,rgba(255,255,255,0) 150px),
-      rgba(252,254,255,.72);
-  }
   header.nav{
     -webkit-backdrop-filter:blur(14px) saturate(1.3);
     backdrop-filter:blur(14px) saturate(1.3);
@@ -1575,9 +1523,6 @@ a.mo-card:hover .mo-go{color:var(--blue-deep);}
 /* ③ 用户在系统里要求"降低透明度"（macOS / Windows 的辅助功能）
    这是明确的偏好信号，直接给实底，不商量。 */
 @media (prefers-reduced-transparency:reduce){
-  main > section:not(.hslider),
-  main > section:nth-of-type(even):not(.hslider){background:#FAFCFF;
-    -webkit-backdrop-filter:none;backdrop-filter:none;}
   header.nav,header.nav.is-scrolled{background:#fff;-webkit-backdrop-filter:none;backdrop-filter:none;}
   .btn-s,.home .hero-lg .hero-cta .btn{background:#fff;-webkit-backdrop-filter:none;backdrop-filter:none;}
   details,details[open]{background:#fff;-webkit-backdrop-filter:none;backdrop-filter:none;}

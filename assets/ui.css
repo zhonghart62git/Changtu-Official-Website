@@ -35,10 +35,10 @@
   --glass-1-bg-alt:rgba(252,254,255,.44);
   --glass-1-blur:blur(22px) saturate(1.30);
   --glass-1-edge:rgba(255,255,255,.78);
-  --glass-2-bg:rgba(255,255,255,.34);
-  --glass-2-bg-hover:rgba(255,255,255,.54);
+  --glass-2-bg:rgba(255,255,255,.44);
+  --glass-2-bg-hover:rgba(255,255,255,.62);
   --glass-2-edge:rgba(255,255,255,.88);
-  --glass-3-bg:rgba(255,255,255,.34);
+  --glass-3-bg:rgba(255,255,255,.40);
   --glass-3-edge:rgba(255,255,255,.78);
   --glass-inner:inset 0 1px 0 rgba(255,255,255,.95),inset 0 -1px 0 rgba(190,220,255,.28);
   --glass-inner-strong:inset 0 1px 0 rgba(255,255,255,1),inset 0 0 0 1px rgba(255,255,255,.18);
@@ -73,7 +73,7 @@ body::before{
     radial-gradient(1080px 820px at 100% 52%,rgba(11,99,197,.19) 0%,rgba(11,99,197,0) 68%),
     radial-gradient(940px 740px at -8% 90%,rgba(123,63,228,.14) 0%,rgba(123,63,228,0) 70%),
     linear-gradient(184deg,rgba(255,255,255,.5) 0%,rgba(255,255,255,0) 38%,rgba(11,99,197,.07) 78%,rgba(255,255,255,.26) 100%),
-    linear-gradient(178deg,#EAF2FD 0%,#D8E7F9 44%,#E4EFFC 100%);
+    linear-gradient(178deg,#DFEBFB 0%,#C6DAF5 44%,#D2E3FA 100%);
 }
 a{text-decoration:none;color:inherit;}
 img,svg{max-width:100%;}
