@@ -1340,11 +1340,21 @@ html.no-js .rv{opacity:1;transform:none;}
   background:transparent;border-bottom:0;}
 .pg-hero .wrap{max-width:900px;}
 .pg-hero h1{margin:18px 0 0;font-size:clamp(28px,3.7vw,46px);}
-.pg-hero .lead{margin-top:18px;font-size:16px;line-height:1.9;color:var(--ink-2);max-width:720px;}
+.pg-hero .lead{margin-top:18px;font-size:16px;line-height:1.9;color:var(--ink-2);max-width:720px;text-wrap:pretty;}
 .pg-hero .hero-badge-row{display:flex;flex-wrap:wrap;gap:10px;margin-top:26px;}
 .pg-hero .hero-badge{font-size:12.5px;color:var(--ink-2);background:var(--surface);
   border:1px solid var(--line);border-radius:30px;padding:7px 15px;}
 .pg-hero .hero-badge b{color:var(--blue);font-size:14px;margin-right:3px;}
+
+/* 课程页首屏压紧：这一页的主体是下面六门课，hero 只交代一句定位，
+   不占掉半屏。其他页面仍用上面那组间距。
+   内容宽也放开到 1160：.pg-hero .wrap 默认 900，首屏标题会比下面
+   六张卡缩进 80px，两段对不上。 */
+.page-courses .pg-hero{padding:56px 0 46px;}
+.page-courses .pg-hero .wrap{max-width:1160px;}
+/* 这一句 52 个字，720px 下会折成「…学生 / 练习。」，末行只剩三个字。
+   放到 860 一行读完；再窄就两行，用 balance 让两行等长。 */
+.page-courses .pg-hero .lead{max-width:860px;text-wrap:balance;}
 
 .pg-sec{padding:76px 0;}
 /* 交替底色改成面板的轻微加深，不再画上下两条线：
@@ -1382,6 +1392,24 @@ html.no-js .rv{opacity:1;transform:none;}
    所有页面共用一套。
    ============================================================ */
 .course-grid{display:grid;grid-template-columns:1fr 1fr;gap:22px;}
+
+/* 课程概览的分组名：标的是「这一组课叫什么」，不是板块导语。
+   比正文重一档、用正文色，和下面几张卡拉开层级。 */
+.page-courses .crs-series{
+  font-size:14px;font-weight:700;color:var(--ink);letter-spacing:.2px;
+}
+/* 三列时每张卡内容宽约 310px，一句 24–30 字的介绍正好卡在两行边界，
+   自然断行会把最后两三个字甩到第二行（「…搭档配 / 合。」）。
+   balance 让两行长度接近，不再出现孤行。 */
+.page-courses .sp p{text-wrap:balance;}
+/* 1020 以下 .support 默认掉成单列，六门课排成一条太长；这一页保持两列，
+   560 以下再单列。 */
+@media (max-width:1020px){
+  .page-courses .support{grid-template-columns:repeat(2,minmax(0,1fr));}
+}
+@media (max-width:560px){
+  .page-courses .support{grid-template-columns:1fr;}
+}
 .course-card{
   background:var(--surface);border:1px solid var(--border);border-radius:var(--r-xl);
   padding:34px 32px 30px;display:flex;flex-direction:column;

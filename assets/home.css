@@ -356,6 +356,10 @@
 /* 正文成了卡里最后一项，底部那 13px 会让留白比顶部多出一截 */
 .sp p:last-child{margin-bottom:0;}
 .sp a{font-size:13px;font-weight:600;color:var(--blue);margin-top:auto;}
+.sp a:hover{color:var(--brand-hover);text-decoration:underline;text-underline-offset:3px;}
+/* 只有名称和一句话的卡片（课程与实践页）：没有 sp-k 那一层，
+   标题上方不该留那 9px 的空档。 */
+.sp.is-plain h3{margin-top:0;}
 
 /* 合作三步 */
 .steps3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;}
