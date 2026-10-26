@@ -24,7 +24,7 @@
   "knowsAbout": ["青少年语言艺术","辩论与思辨训练","中英双语主持","模拟联合国","社会艺术水平考级","青少年领导力培养"]
 }
 </script>
-<link rel="stylesheet" href="assets/site.css?v=0a2746ae">
+<link rel="stylesheet" href="assets/site.css?v=8d9cda86">
 <link rel="stylesheet" href="assets/site-v2.css?v=dafb8324">
 <link rel="stylesheet" href="assets/growth.css?v=164ba357">
 <link rel="stylesheet" href="assets/home.css?v=54996a04">
@@ -567,11 +567,6 @@
           </div>
         </div>
       </div>
-
-      <div class="qa-more">
-        <p>还有其他问题？欢迎联系我们</p>
-        <button class="btn btn-p btn-sm" type="button" data-mo="moLead" data-qa-cta data-intent="school">咨询课程合作</button>
-      </div>
     </div>
   </div>
 </section>
@@ -1038,10 +1033,7 @@
 
   var tabs=[].slice.call(qa.querySelectorAll('.qa-tab')),
       panels=[].slice.call(qa.querySelectorAll('.qa-p')),
-      sw=qa.querySelector('.qa-sw'),
-      cta=qa.querySelector('[data-qa-cta]'),
-      LABEL={school:'咨询课程合作',family:'咨询学习方向'},
-      INTENT={school:'school',family:'child'};
+      sw=qa.querySelector('.qa-sw');
 
   function items(box){ return [].slice.call(box.querySelectorAll('.qa-i')); }
 
@@ -1069,10 +1061,6 @@
       p.hidden=!on;
       if(on) openOnly(items(p),0);
     });
-    if(cta){
-      cta.textContent=LABEL[key]||LABEL.school;
-      cta.setAttribute('data-intent',INTENT[key]||INTENT.school);
-    }
   }
 
   /* 初始化：首条展开，其余收起并置 inert（Tab 跳不进去，读屏不念折叠内容）。 */
@@ -1103,21 +1091,6 @@
       if(n<0) return;
       e.preventDefault();
       pick(tabs[n].getAttribute('data-key'),true);
-    });
-  }
-
-  /* 咨询按钮带上当前分组的意图，弹窗打开后把对应单选点亮。
-     延一帧是因为弹窗的开关由 modal.js 另挂一个监听，
-     不依赖两个监听谁先注册。 */
-  if(cta){
-    cta.addEventListener('click',function(){
-      var v=cta.getAttribute('data-intent');
-      setTimeout(function(){
-        var r=document.querySelector('#leadPicks input[value="'+v+'"]');
-        if(!r) return;
-        r.checked=true;
-        r.dispatchEvent(new Event('change',{bubbles:true}));
-      },0);
     });
   }
 })();

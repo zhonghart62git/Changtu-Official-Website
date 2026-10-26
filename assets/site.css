@@ -898,25 +898,12 @@ details .ans{padding:0 0 18px;font-size:14.3px;line-height:1.8;color:var(--ink-2
   padding:0 24px 22px;}
 .qa-a-in p+p{margin-top:10px;}
 
-/* 列表底部：一句提示 + 一个按钮。按钮的目标随当前分组变，
-   两个分组都能一步走到留资弹窗，不需要额外的中转页。
-   这一条不套玻璃框：它是一句收尾的话，不是一条内容卡；
-   套上框之后会跟上面五个问答条目抢层级，看起来像第六条。 */
-.qa-more{
-  display:flex;align-items:center;justify-content:center;gap:18px;flex-wrap:wrap;
-  margin-top:24px;
-}
-.qa-more p{margin:0;font-size:15px;color:var(--ink-2);}
-.qa-more .btn{flex:none;}
-
 @media (max-width:760px){
   #faq{padding:46px 0;}
   .qa-sw{width:100%;margin-bottom:22px;}
   .qa-tab{flex:1 1 0;padding:12px 8px;font-size:14px;}
   .qa-q{padding:17px 18px;font-size:16px;gap:12px;}
   .qa-a-in p{padding:0 18px 18px;font-size:15px;}
-  .qa-more{flex-direction:column;align-items:stretch;gap:12px;text-align:center;}
-  .qa-more .btn{width:100%;justify-content:center;}
 }
 
 /* ===== 末屏转化区 =====
