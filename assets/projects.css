@@ -7,6 +7,15 @@
    于是活动页的每个区块头都和首页反着长。
    hero 的英文小标同理：原来它跟在中文后面、字距 3.4px，是另一套写法，
    现在和区块头共用一套微标签。 */
+
+/* 首屏标题靠左。
+   .pg-hero .wrap 默认 max-width:900（给带导语的页留阅读宽度），
+   而下面四个板块用的是 1160 的 .wrap，于是标题比板块内容右移 130px，
+   两段对不齐。这一族五个页（activities + 四个 activities-*）的正文
+   全部是 1160 的左对齐列表，hero 跟着走同一条左线。
+   和 .page-courses 同一个处理。 */
+.page-activities .pg-hero .wrap{max-width:1160px;}
+
 .pg-hero h1{display:flex;flex-direction:column-reverse;align-items:flex-start;gap:10px;}
 .pg-hero h1 small{display:inline-flex;align-items:center;gap:9px;margin-top:0;
   font-size:10.5px;font-weight:700;letter-spacing:.22em;line-height:1;
@@ -15,36 +24,57 @@
   background:linear-gradient(135deg,var(--brand-blue) 0%,var(--brand-purple) 100%);
   box-shadow:0 0 0 3px rgba(11,99,197,.09);}
 
-/* ===== 二级导航 =====
+/* ===== 分类条 =====
    原来是一条整宽白条，横贯页面，把连续的光场切成上下两半；
    而且白条 + 下边框这套是"区块容器"的语言，首页已经不用了。
-   改成一颗 fit-content 的玻璃胶囊：滚到顶部时浮在光场上，和首页的切换条同一套材质。 */
+   改成一颗玻璃胶囊：滚到顶部时浮在光场上，和首页的切换条同一套材质。
+
+   胶囊靠左，和下面四个板块的内容列同一条左线。原来是 fit-content + margin:auto
+   居中，标题靠左之后它就悬在两段左对齐的内容中间，右边空掉半行。
+   对齐没有在 margin-left 上写 calc：那种写法只在某一个宽度区间成立。
+   这里让 .act-nav 用和 main>section 完全相同的盒子（calc(100% - 56px) / 1360），
+   胶囊再放进 .wrap（1160 / 24）里，从 480 到 1920 每一档都自动落到同一条线。 */
 .act-nav{
   position:sticky;top:86px;z-index:50;
-  width:fit-content;max-width:calc(100% - 56px);
-  margin:26px auto 0;padding:4px;
+  width:calc(100% - 56px);max-width:1360px;margin:26px auto 0;
+  pointer-events:none;   /* 整条是透明的，别挡住从下面划过去的卡片 */
+}
+.act-nav .wrap{display:flex;}
+.act-pill{
+  display:flex;align-items:center;gap:4px;padding:4px;max-width:100%;
+  overflow-x:auto;scrollbar-width:none;
   border-radius:var(--r-pill);
   background:rgba(255,255,255,.72);
   border:1px solid var(--glass-2-edge);
   box-shadow:var(--glass-inner),var(--glass-shadow-sm);
   -webkit-backdrop-filter:blur(14px) saturate(1.2);backdrop-filter:blur(14px) saturate(1.2);
+  pointer-events:auto;
 }
-.act-nav .wrap{display:flex;align-items:center;gap:4px;height:auto;padding:0;max-width:none;
-  overflow-x:auto;scrollbar-width:none;}
-.act-nav .wrap::-webkit-scrollbar{display:none;}
-.act-nav a{flex-shrink:0;font-size:14px;font-weight:600;color:var(--ink-2);
-  padding:11px 22px;border-radius:var(--r-pill);text-decoration:none;white-space:nowrap;
-  transition:background .16s,color .16s,box-shadow .16s;}
-.act-nav a:hover{background:rgba(255,255,255,.62);color:var(--blue);}
-.act-nav a[aria-current="page"]{color:#fff;
+.act-pill::-webkit-scrollbar{display:none;}
+/* a 是分类页的页间切换，button 是首页的原地筛选，两种都吃这一套 */
+.act-pill > a,.act-pill > button{
+  flex-shrink:0;font:inherit;font-size:14px;font-weight:600;line-height:1.5;
+  padding:11px 22px;border-radius:var(--r-pill);white-space:nowrap;
+  color:var(--ink-2);background:none;border:0;text-decoration:none;
+  cursor:pointer;transition:background .16s,color .16s,box-shadow .16s;
+}
+.act-pill > a:hover,.act-pill > button:hover{background:rgba(255,255,255,.62);color:var(--blue);}
+.act-pill > a[aria-current="page"],
+.act-pill > button[aria-pressed="true"]{color:#fff;
   background:linear-gradient(158deg,var(--brand-blue) 0%,var(--brand-hover) 100%);
   box-shadow:inset 0 1px 0 rgba(255,255,255,.30),0 8px 18px -12px rgba(11,99,197,.95);}
 
 /* ===== 板块 =====
    不再画横贯的 border-top：那条线会横穿光场，把"一张连续底图"切成一段一段。
-   区块之间靠间距分节。 */
-.act-sec{padding:56px 0 60px;}
-.act-sec[id]{scroll-margin-top:132px;}
+   区块之间靠间距分节。
+   间距 44+44=88：板块内部最大的一处间距是「标题 → 近期赛事」的 32，
+   分节距离取它的 2.75 倍，读起来是一节接一节；原来是 60+56=116，
+   是 32 的 3.6 倍，四节看下来像四张断开的页面。 */
+.act-sec{padding:44px 0;}
+.act-sec[id]{scroll-margin-top:156px;}
+/* 筛选时整节收起。[hidden] 要自己补 display:none，
+   这一条不是多余的——同一个坑在 .mo / .fm / .pj-filter 上都踩过。 */
+.act-sec[hidden]{display:none;}
 .act-sub{display:flex;align-items:baseline;gap:10px;margin:-14px 0 18px;}
 .act-sub b{font-size:14px;font-weight:800;color:var(--ink);letter-spacing:-.1px;}
 .act-sub span{font-size:12.5px;color:var(--text-3);}
@@ -164,9 +194,13 @@
   .pj-row-go{grid-column:2;grid-row:1 / span 3;align-self:center;}
 }
 @media (max-width:760px){
-  .act-nav{top:76px;max-width:calc(100% - 32px);margin-top:20px;}
-  .act-nav a{font-size:13.5px;padding:10px 17px;}
-  .act-sec{padding:44px 0 48px;}
+  /* 窄屏胶囊占满整行，五个按钮等分：390 下按内容排要 330 宽，
+     多出来的那个被挤进横向滚动，看起来像只有四个。
+     宽度不改，还跟着 main>section 那套盒子走，左边缘和标题同一条线 */
+  .act-nav{top:76px;margin-top:20px;}
+  .act-pill{width:100%;}
+  .act-pill > a,.act-pill > button{flex:1;min-width:0;font-size:13.5px;padding:10px 0;text-align:center;}
+  .act-sec{padding:36px 0;}
   .pj-grid{grid-template-columns:1fr;}
   .act-sub{margin-top:-8px;}
 }

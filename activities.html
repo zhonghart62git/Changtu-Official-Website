@@ -11,7 +11,7 @@
 <meta name="theme-color" content="#0B63C5">
 <link rel="stylesheet" href="assets/site.css?v=fcd42be1">
 <link rel="stylesheet" href="assets/home.css?v=0fa4bc18">
-<link rel="stylesheet" href="assets/projects.css?v=544b3064">
+<link rel="stylesheet" href="assets/projects.css?v=8a5d9998">
 <link rel="canonical" href="https://leadtheway.cn/activities.html">
 <meta name="robots" content="index,follow">
 <meta property="og:type" content="website">
@@ -60,14 +60,18 @@
   </div>
 </section>
 
-<nav class="act-nav" aria-label="活动分类">
+<!-- 分类条：首页不做页间跳转，点哪个就只留哪一类 -->
+<div class="act-nav">
   <div class="wrap">
-    <a href="#competition">赛事</a>
-    <a href="#showcase">展演</a>
-    <a href="#tour">研学</a>
-    <a href="#grading">考级</a>
+    <div class="act-pill" role="group" aria-label="按活动类型筛选">
+      <button type="button" data-filter="all" aria-pressed="true">全部</button>
+      <button type="button" data-filter="competition" aria-pressed="false">赛事</button>
+      <button type="button" data-filter="showcase" aria-pressed="false">展演</button>
+      <button type="button" data-filter="tour" aria-pressed="false">研学</button>
+      <button type="button" data-filter="grading" aria-pressed="false">考级</button>
+    </div>
   </div>
-</nav>
+</div>
 
 <section class="act-sec" id="competition">
   <div class="wrap">
@@ -207,6 +211,39 @@
 </script>
 <script src="assets/chrome.js?v=775567a9"></script>
 <script src="assets/projects.js?v=2659d5f6"></script>
+<script>
+/* 类型筛选。
+   点胶囊只留对应那一节，不跳页面；「全部」复位。
+   滚动位置在胶囊下面时先退回胶囊——筛完之后页面变短，
+   浏览器会把视口夹到新底部，用户会莫名其妙停在报名 CTA 上。
+   带 hash 进来（activities.html#tour）直接落到那一类。 */
+(function(){
+  var pill=document.querySelector('.act-nav .act-pill');
+  if(!pill) return;
+  var btns=[].slice.call(pill.querySelectorAll('button[data-filter]'));
+  var secs=[].slice.call(document.querySelectorAll('main .act-sec[id]'));
+  if(!btns.length||!secs.length) return;
+
+  function apply(f){
+    btns.forEach(function(b){
+      b.setAttribute('aria-pressed', b.getAttribute('data-filter')===f?'true':'false');
+    });
+    secs.forEach(function(s){ s.hidden = (f!=='all' && s.id!==f); });
+  }
+
+  pill.addEventListener('click',function(e){
+    var b=e.target.closest('button[data-filter]');
+    if(!b||b.getAttribute('aria-pressed')==='true') return;
+    var nav=document.querySelector('.act-nav');
+    var top=nav.getBoundingClientRect().top+window.scrollY-86;
+    apply(b.getAttribute('data-filter'));
+    if(window.scrollY>top) window.scrollTo(0,Math.max(0,top));
+  });
+
+  var h=location.hash.replace('#','');
+  if(h && secs.some(function(s){return s.id===h;})) apply(h);
+})();
+</script>
 
 <!-- 学生小程序：页脚「学生小程序」开这个弹窗 -->
 <div class="mo" id="moStu" hidden>
