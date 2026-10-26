@@ -8,21 +8,57 @@
   /* 圆角、阴影、动效全站只留一套。组件里不再各写各的数值，
      否则同一页会出现三种圆角、四种阴影和五种动画时长。 */
   --r-sm:14px;--r:18px;--r-md:18px;--r-lg:24px;--r-xl:32px;--r-pill:30px;
+  /* 表面半径：卡片 20、面板 32。卡片比面板小一档，嵌套时才看得出层级 */
+  --r-card:20px;--r-panel:32px;
   --shadow-sm:0 2px 6px rgba(11,99,197,.06);
   --shadow-md:0 8px 24px -10px rgba(11,99,197,.16);
   --shadow:0 10px 30px -12px rgba(11,99,197,.18);
   --shadow-lg:0 20px 48px -18px rgba(11,99,197,.24);
   --shadow-violet:0 18px 44px -18px rgba(123,63,228,.22);
+
+  /* 三级浮起。参考图里的卡片之所以"浮"得起来，靠的是三个东西同时到位：
+     贴地的一层细影（1–2px，管边缘）+ 一层宽而淡的投影（20–40px，管离地高度）
+     + 顶部 1px 内高光（管材质）。只写其中一样，卡片就会显得像贴在纸上。 */
+  --elev-1:0 1px 2px rgba(16,36,62,.05),0 14px 32px -18px rgba(11,99,197,.26);
+  --elev-2:0 2px 6px rgba(16,36,62,.06),0 28px 56px -26px rgba(11,99,197,.34);
+  --elev-3:0 6px 14px rgba(16,36,62,.06),0 48px 92px -42px rgba(11,99,197,.44);
+  --hairline:rgba(11,99,197,.10);
+  --hairline-soft:rgba(11,99,197,.07);
+  --inset-hi:inset 0 1px 0 rgba(255,255,255,.92);
+
   --ease:cubic-bezier(.22,.61,.36,1);
   --dur-fast:160ms;--dur:220ms;--dur-slow:320ms;
 }
 *{margin:0;padding:0;box-sizing:border-box;}
-html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;background:var(--page-background);}
 body{
   font-family:"PingFang SC","Noto Sans SC","Microsoft YaHei","Helvetica Neue",-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;
-  color:var(--ink);background:var(--bg);line-height:1.75;font-size:16px;
+  color:var(--ink);background:transparent;line-height:1.75;font-size:16px;
   -webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;
-  text-rendering:optimizeLegibility;
+  text-rendering:optimizeLegibility;position:relative;
+}
+
+/* ===== 大气层 =====
+   参考图的共同底子是「页面坐在一片光场里」，不是白纸上贴卡片。
+   这里做成一层固定在视口的光场，内容在上面滚动——光场不动，
+   页面才有纵深，也不会因为每个区块各画一遍渐变而在接缝处断掉。
+   蓝是主光（右上最亮），紫只在左下和右上各一层很淡的次级光。
+   全部落在 z-index:-1，不参与命中测试，也不影响任何文字对比度。 */
+body::before{
+  content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;
+  background:
+    radial-gradient(1240px 800px at 78% -14%,rgba(11,99,197,.20) 0%,rgba(11,99,197,0) 64%),
+    radial-gradient(900px 640px at 4% 2%,rgba(123,63,228,.10) 0%,rgba(123,63,228,0) 66%),
+    radial-gradient(1080px 820px at 100% 52%,rgba(11,99,197,.13) 0%,rgba(11,99,197,0) 68%),
+    radial-gradient(940px 740px at -8% 90%,rgba(123,63,228,.09) 0%,rgba(123,63,228,0) 70%),
+    linear-gradient(178deg,#F2F7FE 0%,#E7F0FC 44%,#EFF6FF 100%);
+}
+/* 极细颗粒：大面积渐变在 8bit 屏上会出现色带，一层 1.5% 的噪点就能压掉，
+   顺带让白面看起来有材质而不是纯色块。固定尺寸小图平铺，开销可忽略。 */
+body::after{
+  content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;opacity:.55;
+  background-image:url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.82' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)' opacity='.055'/%3E%3C/svg%3E");
+  background-size:160px 160px;
 }
 a{text-decoration:none;color:inherit;}
 img,svg{max-width:100%;}
@@ -110,33 +146,37 @@ a:focus-visible{outline:2px solid var(--brand-blue);outline-offset:3px;border-ra
 .burger span::before{top:-6px}.burger span::after{top:6px}
 
 /* ===== Hero =====
-   冷白到浅蓝的底，右侧一团蓝主光，边缘再压一点紫的次级光。
-   光都在内容层后面（::before 网格、背景渐变），文字始终落在干净底色上。 */
-.hero{position:relative;overflow:hidden;padding:76px 0 66px;
+   参考图的首屏都不是「白底 + 一行标题」，而是一片有纵深的光场：
+   右上最亮，往左下衰减，边缘再压一层紫的次级光。
+   这里把光做深一档（原来 17% 提到 20%），同时把底色的中间调压浅，
+   让整块首屏看起来是「光打在空间里」，而不是「在白纸上刷了一层蓝」。 */
+.hero{position:relative;overflow:hidden;padding:92px 0 80px;
   background:
-    radial-gradient(760px 460px at 84% -10%,rgba(11,99,197,.17) 0%,rgba(11,99,197,0) 66%),
-    radial-gradient(520px 340px at 100% 100%,rgba(123,63,228,.10) 0%,rgba(123,63,228,0) 70%),
-    radial-gradient(820px 500px at 0% 108%,rgba(11,99,197,.09) 0%,rgba(11,99,197,0) 70%),
-    linear-gradient(178deg,#F9FCFF 0%,#EAF3FD 100%);}
+    radial-gradient(840px 540px at 86% -16%,rgba(11,99,197,.21) 0%,rgba(11,99,197,0) 62%),
+    radial-gradient(580px 400px at 106% 98%,rgba(123,63,228,.14) 0%,rgba(123,63,228,0) 68%),
+    radial-gradient(920px 580px at -8% 112%,rgba(11,99,197,.10) 0%,rgba(11,99,197,0) 70%),
+    linear-gradient(176deg,#FCFDFF 0%,#EEF5FE 54%,#F6FAFF 100%);}
+/* 网格只做空间刻度，压到几乎看不见；铺满会变成背景墙纸 */
 .hero::before{
   content:"";position:absolute;inset:0;pointer-events:none;
   background-image:linear-gradient(rgba(11,99,197,.10) 1px,transparent 1px),linear-gradient(90deg,rgba(11,99,197,.10) 1px,transparent 1px);
-  background-size:64px 64px;opacity:.30;
-  mask-image:radial-gradient(circle at 70% 30%,var(--text) 0%,transparent 72%);
-  -webkit-mask-image:radial-gradient(circle at 70% 30%,var(--text) 0%,transparent 72%);
+  background-size:72px 72px;opacity:.20;
+  mask-image:radial-gradient(circle at 70% 26%,var(--text) 0%,transparent 68%);
+  -webkit-mask-image:radial-gradient(circle at 70% 26%,var(--text) 0%,transparent 68%);
 }
 .hero .wrap{position:relative;display:grid;grid-template-columns:1.06fr .94fr;gap:52px;align-items:center;}
 .eyebrow{
-  display:inline-flex;align-items:center;gap:9px;background:rgba(255,255,255,.82);border:1px solid var(--border-primary);
-  padding:7px 15px;border-radius:var(--r-pill);font-size:12.5px;color:var(--ink-2);letter-spacing:.4px;
-  box-shadow:0 4px 14px -8px var(--shadow-primary);
+  display:inline-flex;align-items:center;gap:9px;background:rgba(255,255,255,.72);border:1px solid rgba(11,99,197,.16);
+  padding:8px 16px;border-radius:var(--r-pill);font-size:12.5px;color:var(--ink-2);letter-spacing:.4px;
+  -webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);
+  box-shadow:var(--inset-hi),0 6px 18px -12px var(--shadow-primary);
 }
-.eyebrow i{width:7px;height:7px;border-radius:50%;background:var(--brand-blue);box-shadow:0 0 0 4px rgba(11,99,197,.14);}
-h1{font-size:clamp(28px,3.5vw,50px);line-height:1.24;letter-spacing:-.8px;font-weight:800;margin:20px 0 18px;color:var(--text-primary);}
+.eyebrow i{width:6px;height:6px;border-radius:50%;background:var(--brand-blue);box-shadow:0 0 0 4px rgba(11,99,197,.13);}
+h1{font-size:clamp(33px,4.8vw,68px);line-height:1.12;letter-spacing:-1.9px;font-weight:800;margin:26px 0 22px;color:var(--text-primary);}
 /* 重点词用实体品牌蓝。渐变文字在浅底上对比度随位置浮动，读起来发虚，规范里也明确不要 */
 h1 em{font-style:normal;white-space:nowrap;color:var(--brand-blue);
   background:none;-webkit-text-fill-color:currentColor;}
-.hero .lead{font-size:16.5px;color:var(--ink-2);max-width:540px;}
+.hero .lead{font-size:17px;line-height:1.8;color:var(--ink-2);max-width:540px;}
 .hero .lead b{color:var(--blue-deep);}
 .hero-cta{display:flex;flex-wrap:wrap;gap:14px;margin:30px 0 0;}
 /* Hero 视觉：四力一体能力环
@@ -146,45 +186,108 @@ h1 em{font-style:normal;white-space:nowrap;color:var(--brand-blue);
 .hero-visual img{width:100%;height:auto;display:block;}
 
 /* ===== 数据条 ===== */
-.stats-band{background:linear-gradient(180deg,var(--surface) 0%,var(--surface-2) 100%);
-  border-top:1px solid var(--border-primary);border-bottom:1px solid var(--border-primary);}
-.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;padding:34px 0;}
-.stat{text-align:center;padding:0 6px;position:relative;}
-/* 四组大号数字之间不再加竖线：数字本身就是分隔，竖线只会添噪。
-   数字用实体深蓝，不用渐变字——渐变让笔画粗细看起来不匀，数字反而变轻。 */
-.stat b{display:block;font-size:clamp(28px,3.4vw,40px);font-weight:800;letter-spacing:-.6px;
-  font-variant-numeric:tabular-nums;color:var(--brand-hover);}
-.stat b i{font-style:normal;font-size:.5em;font-weight:600;margin-left:2px;}
-.stat span{display:block;font-size:13px;color:var(--muted);margin-top:2px;}
+.stats-band{background:transparent;}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:0;padding:38px 0;
+  border-top:1px solid var(--hairline);border-bottom:1px solid var(--hairline);}
+/* 数字左对齐、栏间一条发丝竖线。居中的五组数字读起来像标语，
+   左对齐之后才像一份可核对的记录；竖线只做分隔，不加重。 */
+.stat{text-align:left;padding:0 26px;position:relative;}
+.stat:first-child{padding-left:0;}
+.stat + .stat::before{
+  content:"";position:absolute;left:0;top:1px;bottom:1px;width:1px;
+  background:linear-gradient(180deg,transparent,var(--hairline) 16%,var(--hairline) 84%,transparent);
+}
+/* 数字用实体深蓝，不用渐变字——渐变让笔画粗细看起来不匀，数字反而变轻。 */
+/* 窄屏两列时，行首那一格不该有竖线——它是上一行的延续，不是新栏的开头 */
+@media (max-width:760px){
+  .stat{padding:0 16px;}
+  .stat:nth-child(odd){padding-left:0;}
+  .stat:nth-child(odd)::before{display:none;}
+}
+.stat b{display:block;font-size:clamp(26px,2.6vw,36px);font-weight:800;letter-spacing:-1.1px;
+  line-height:1.1;font-variant-numeric:tabular-nums;color:var(--brand-hover);white-space:nowrap;}
+.stat b i{font-style:normal;font-size:.44em;font-weight:600;margin-left:3px;letter-spacing:0;}
+.stat span{display:block;font-size:12.5px;color:var(--muted);margin-top:8px;letter-spacing:.2px;}
 
 /* ===== 通用区块 ===== */
 section{padding:88px 0;}
 section[id]{scroll-margin-top:86px;}
-.sec-head{max-width:760px;margin-bottom:44px;}
+
+/* 区块容器化。
+   参考图里没有一个是「白底 + 一条条色带」——每个板块都是一整块浮在光场上的面板，
+   板块之间留缝，光场从缝里透出来，页面才有前后关系。
+   这里用半透明白做面板：光场从面板底下透上来一层很淡的色，
+   所以既保住了正文对比度（等效底仍在 #F8FBFF 附近），又不像纯白纸片。
+   不加 backdrop-filter：光场本身是平滑的，模糊看不出差别，只白付滚动开销。 */
+main > section:not(.hslider){
+  position:relative;width:calc(100% - 56px);max-width:1360px;margin:0 auto 26px;
+  border-radius:var(--r-panel);
+  /* 顶部 180px 一道从白到透明的垂向高光：面板像被上方光源照到，
+     不是一块均匀的白板。这一层只在面板自己身上，不叠到内容上。 */
+  background:
+    linear-gradient(180deg,rgba(255,255,255,.55) 0%,rgba(255,255,255,0) 180px),
+    rgba(255,255,255,.62);
+  border:1px solid rgba(255,255,255,.94);
+  box-shadow:var(--inset-hi),0 1px 2px rgba(16,36,62,.04),0 40px 84px -56px rgba(11,99,197,.42);
+  /* overflow:clip 而不是 hidden：hidden 会生成滚动容器，
+     面板里的 position:sticky（机构名录的筛选条）就再也贴不住视口。
+     clip 只裁剪、不建滚动容器，圆角能裁住，sticky 照常工作。 */
+  overflow:clip;
+}
+/* 隔一块换一次底，靠明暗差断块，不靠分割线 */
+main > section:nth-of-type(even):not(.hslider){
+  background:
+    linear-gradient(180deg,rgba(255,255,255,.55) 0%,rgba(255,255,255,0) 180px),
+    rgba(251,253,255,.70);}
+
+.sec-head{max-width:780px;margin-bottom:46px;}
 /* 标题前那道短线：蓝色打底，末端收进紫。全站紫只在这种几像素的装饰上出现 */
-.sec-head .bar{width:46px;height:4px;border-radius:2px;margin-bottom:16px;
-  background:linear-gradient(90deg,var(--brand-blue) 0%,var(--brand-blue) 58%,var(--brand-purple) 100%);}
-.sec-head h2{font-size:clamp(25px,3.3vw,36px);line-height:1.32;letter-spacing:-.5px;display:flex;align-items:baseline;gap:13px;flex-wrap:wrap;color:var(--text-primary);}
-.sec-head h2 small{font-size:11.5px;font-weight:500;letter-spacing:2px;color:var(--muted);text-transform:uppercase;}
-.sec-head p{margin-top:14px;color:var(--ink-2);font-size:15.5px;line-height:1.85;text-wrap:pretty;}
+/* 微标签前那枚小方块已经把「标签行」标出来了，这条短线再去掉就是重复。
+   .bar 的节点留在 HTML 里不动（不改结构），只是不再占位。 */
+.sec-head .bar{display:none;}
+/* 标题区改成三层：细线 → 英文小标签 → 中文标题。
+   参考图都是这个结构：小标签压在标题上方，字距拉开，字号压到 10–11px。
+   以前英文是跟在中文后面当注解，两边都读不清；分开之后标题才能放大。 */
+.sec-head h2{
+  display:flex;flex-direction:column-reverse;align-items:flex-start;gap:11px;
+  font-size:clamp(27px,3.2vw,42px);line-height:1.24;letter-spacing:-.9px;
+  font-weight:800;color:var(--text-primary);
+}
+.sec-head h2 small{
+  display:inline-flex;align-items:center;gap:9px;
+  font-size:10.5px;font-weight:700;letter-spacing:.22em;line-height:1;
+  color:var(--text-muted);text-transform:uppercase;
+}
+/* 微标签前的小方块：蓝到紫的 6px 渐变小面 + 一圈极淡外光。
+   参考图的区块头都有一个这样的小标识，靠它把「标签行」和「标题行」分开；
+   换成一条 1px 短线力度不够，整块看起来还是两行字摞在一起。 */
+.sec-head h2 small::before{
+  content:"";width:6px;height:6px;border-radius:2px;flex:none;
+  background:linear-gradient(135deg,var(--brand-blue) 0%,var(--brand-purple) 100%);
+  box-shadow:0 0 0 3px rgba(11,99,197,.09);
+}
+.sec-head p{margin-top:16px;color:var(--ink-2);font-size:15.5px;line-height:1.85;text-wrap:pretty;}
 .center{text-align:center;margin-left:auto;margin-right:auto;}
 .center .bar{margin-left:auto;margin-right:auto;}
-.center h2{justify-content:center;}
+.center h2{justify-content:center;align-items:center;}
+.center h2 small{justify-content:center;}
 
 /* ===== 板块底色 =====
-   冷白与极浅蓝灰交替，靠明暗差断块，不靠分割线。
-   每块最多叠一层很淡的光，且都落在内容层之外；不放密集粒子，也不做深色大底。 */
-#why,#archive,#faq,#ab-need,#ab-team{background:var(--page-background);}
+   面板本身已经承担了断块，这里只给两块加一层极淡的本域光，
+   让视觉重量在长页里有个起伏。不再整块换底色——那会把面板材质打断。
+   光直接写在 background 里而不是用 ::before 铺一层：
+   绝对定位的伪元素会盖在正文上面，哪怕是 5% 的蓝也会把对比度往下拖。 */
 #why{background:
-  radial-gradient(780px 400px at 92% -4%,rgba(11,99,197,.055) 0%,rgba(11,99,197,0) 70%),
-  var(--page-background);}
+  linear-gradient(180deg,rgba(255,255,255,.55) 0%,rgba(255,255,255,0) 180px),
+  radial-gradient(780px 440px at 94% -8%,rgba(11,99,197,.075) 0%,rgba(11,99,197,0) 70%),
+  rgba(255,255,255,.62);}
 #archive{background:
-  radial-gradient(720px 380px at 4% 102%,rgba(123,63,228,.05) 0%,rgba(123,63,228,0) 72%),
-  var(--page-background);}
-#path,#partner{background:var(--surface);}
+  linear-gradient(180deg,rgba(255,255,255,.55) 0%,rgba(255,255,255,0) 180px),
+  radial-gradient(720px 420px at 2% 104%,rgba(123,63,228,.07) 0%,rgba(123,63,228,0) 72%),
+  rgba(251,253,255,.70);}
 
 /* ===== 业务矩阵 ===== */
-#matrix{background:var(--bg);}
+#matrix{background:transparent;}
 .matrix{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
 .m-card.wide{
   grid-column:1/-1;flex-direction:row;align-items:center;gap:22px;
@@ -240,10 +343,11 @@ section[id]{scroll-margin-top:86px;}
 .biz.orange .kv li svg{stroke:var(--brand);}
 .kv li b{color:var(--ink);font-weight:600;}
 .biz-body{display:flex;flex-direction:column;gap:14px;}
-.panel{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:24px;box-shadow:var(--shadow);}
+.panel{background:var(--surface);border:1px solid var(--hairline);border-radius:var(--r-card);
+  padding:26px;box-shadow:var(--inset-hi),var(--elev-1);}
 .panel h4{font-size:13px;letter-spacing:1.2px;color:var(--muted);text-transform:uppercase;margin-bottom:14px;font-weight:600;}
 .split{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
-.mini{background:var(--tint-2);border:1px solid var(--line);border-radius:12px;padding:14px 15px;}
+.mini{background:var(--surface-2);border:1px solid var(--hairline-soft);border-radius:14px;padding:16px 16px;}
 .mini b{display:block;font-size:20px;color:var(--blue-deep);letter-spacing:-.3px;line-height:1.3;}
 .mini span{font-size:12.5px;color:var(--muted);}
 .tl{list-style:none;position:relative;padding-left:22px;}
@@ -262,10 +366,11 @@ section[id]{scroll-margin-top:86px;}
 .biz.orange .chip{background:var(--surface-3);color:var(--warning);border-color:var(--border);}
 
 /* ===== 三原力 ===== */
-#sanyuanli{background:radial-gradient(800px 400px at 12% 0%,var(--surface-3) 0%,rgba(234,244,254,0) 65%),
-  radial-gradient(700px 400px at 92% 96%,var(--surface-3) 0%,rgba(234,244,254,0) 68%),
-  var(--surface);
-  border-top:1px solid var(--line);}
+#sanyuanli{background:
+  radial-gradient(800px 400px at 12% 0%,rgba(11,99,197,.055) 0%,rgba(11,99,197,0) 66%),
+  radial-gradient(700px 400px at 92% 96%,rgba(123,63,228,.05) 0%,rgba(123,63,228,0) 68%),
+  transparent;
+  border-top:0;}
 .formula{
   display:flex;align-items:center;justify-content:center;gap:14px;flex-wrap:wrap;
   background:linear-gradient(135deg,var(--blue-deep),var(--blue) 58%,var(--blue-2));
@@ -321,7 +426,6 @@ td em{font-style:normal;font-size:12.5px;color:var(--muted);}
 
 /* ===== 成长路径 ===== */
 /* 白底：上下邻块都是 bg-2，靠底色差断块，不再画分隔线 */
-#path{background:var(--surface);}
 /* ===== 成长路径：一条轨道，三个站点 ===== */
 .path{position:relative;}
 .path-list{list-style:none;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px;position:relative;}
@@ -361,17 +465,17 @@ td em{font-style:normal;font-size:12.5px;color:var(--muted);}
 /* 阶段卡片：白底上靠细边 + 轻影立起来，不能只靠边框，会显得空 */
 .step-card{
   position:relative;flex:1 1 auto;display:flex;flex-direction:column;overflow:hidden;
-  background:var(--surface);border:1px solid var(--line);border-radius:var(--r);
-  padding:19px 20px 17px;box-shadow:var(--shadow-sm);
-  transition:transform .24s,box-shadow .24s,border-color .24s;
+  background:var(--surface);border:1px solid var(--hairline);border-radius:var(--r-card);
+  padding:22px 22px 20px;box-shadow:var(--inset-hi),var(--elev-1);
+  transition:transform var(--dur) var(--ease),box-shadow var(--dur) var(--ease),border-color var(--dur) var(--ease);
 }
 .step-card::before{
   content:"";position:absolute;left:0;right:0;top:0;height:3px;
   background:linear-gradient(90deg,var(--sc),transparent);
 }
-.step:hover .step-card{transform:translateY(-3px);box-shadow:var(--shadow-lg);border-color:rgba(11,99,197,.28);}
+.step:hover .step-card{transform:translateY(-4px);box-shadow:var(--inset-hi),var(--elev-3);border-color:rgba(11,99,197,.22);}
 .step-top{display:flex;align-items:baseline;gap:9px;margin-bottom:7px;}
-.step-top h3{font-size:18px;letter-spacing:-.2px;}
+.step-top h3{font-size:20px;letter-spacing:-.4px;}
 /* p 的下边距是按钮的保底间距：内容少的卡靠 margin-top:auto 把按钮推到底，内容满的卡也不会贴在一起 */
 .step-card p{font-size:13.4px;color:var(--ink-2);line-height:1.8;margin-bottom:14px;}
 /* 每站一个去处：卡片底部一颗胶囊，指向这条路走进去的那一页 */
@@ -386,7 +490,7 @@ td em{font-style:normal;font-size:12.5px;color:var(--muted);}
 .step-btn svg{width:12px;height:12px;}
 
 /* ===== 机构合作 ===== */
-#partner{background:var(--surface);border-top:1px solid var(--line);}
+#partner{background:transparent;}
 /* 三档卡片
    三档的绿 #12BF7A / 金 #C08A16 来自联盟海报，是档位标识，不是通用强调色，
    所以只留在顶条、圆点、按钮和价格数字上；卡片底回到白，顶部透 5% 本档色做浅光。
@@ -436,7 +540,8 @@ button.tc-cta{border:0;font-family:inherit;cursor:pointer;width:100%;}
 .tier-card.t1 .tc-cta:hover{color:var(--ink);border-color:var(--muted);box-shadow:none;}
 
 /* 权益对照表 */
-.bt-wrap{background:var(--page-background);border:1px solid var(--line);border-radius:var(--r);padding:24px 22px 20px;}
+.bt-wrap{background:var(--surface);border:1px solid var(--hairline);border-radius:var(--r-card);
+  padding:26px 24px 22px;box-shadow:var(--inset-hi),var(--elev-1);}
 .bt-head{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:16px;}
 .bt-head h3{font-size:17px;letter-spacing:.2px;}
 .bt-tabs{display:none;gap:4px;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:4px;}
@@ -499,7 +604,7 @@ button.tc-cta{border:0;font-family:inherit;cursor:pointer;width:100%;}
 
 /* ===== FAQ =====
    实体浅色底，不用玻璃。条目之间靠间距和细边分隔，展开时只加深边框和阴影。 */
-#faq{border-top:1px solid var(--border-primary);}
+#faq{border-top:0;}
 .faq{max-width:840px;margin:0 auto;display:flex;flex-direction:column;gap:12px;}
 details{background:var(--surface);border:1px solid var(--border-primary);border-radius:var(--r-sm);padding:0 20px;
   transition:border-color var(--dur) var(--ease),box-shadow var(--dur) var(--ease);}
@@ -520,15 +625,18 @@ details .ans{padding:0 0 18px;font-size:14.3px;line-height:1.8;color:var(--ink-2
 /* ===== 末屏转化区 =====
    全站只有这一个主按钮。电话是辅助信息，排在按钮下方，不并排成第二个按钮。
    底色从冷白收到接近纯白，顶部一团蓝光把视线聚到中间，紫只在底沿做一层薄边光。 */
+/* 末屏现在是面板，底色要跟着面板走：光留着，实底交给面板。
+   原来那条 border-top 在面板里会变成一条悬空的横线，去掉。 */
 #contact{
   background:
-    radial-gradient(640px 360px at 50% -8%,rgba(11,99,197,.10) 0%,rgba(11,99,197,0) 68%),
-    radial-gradient(520px 300px at 50% 112%,rgba(123,63,228,.06) 0%,rgba(123,63,228,0) 70%),
-    linear-gradient(180deg,var(--page-background) 0%,#FCFDFF 100%);
-  border-top:1px solid var(--border-primary);}
+    linear-gradient(180deg,rgba(255,255,255,.55) 0%,rgba(255,255,255,0) 180px),
+    radial-gradient(660px 380px at 50% -10%,rgba(11,99,197,.11) 0%,rgba(11,99,197,0) 68%),
+    radial-gradient(540px 320px at 50% 114%,rgba(123,63,228,.07) 0%,rgba(123,63,228,0) 70%),
+    rgba(255,255,255,.72);
+  border-top:0;}
 .cta{max-width:640px;margin:0 auto;text-align:center;}
 .cta .eyebrow{margin-bottom:18px;}
-.cta h2{font-size:clamp(25px,3.1vw,36px);line-height:1.3;letter-spacing:-.5px;margin:0;color:var(--text-primary);}
+.cta h2{font-size:clamp(26px,3.3vw,42px);line-height:1.26;letter-spacing:-1px;margin:0;color:var(--text-primary);}
 .cta-d{margin:16px auto 0;max-width:560px;font-size:15px;line-height:1.85;color:var(--ink-2);}
 .cta-act{margin-top:30px;}
 .cta-act .btn{padding:15px 44px;font-size:16px;min-height:52px;}
@@ -703,7 +811,9 @@ html.no-js .rv{opacity:1;transform:none;}
 .logo-type span{font-size:7.5px;letter-spacing:1.05px;color:var(--text-3);line-height:1;}
 
 /* ==================== 项目页 ==================== */
-.proj-head{padding:40px 0 38px;background:linear-gradient(180deg,var(--surface-2),var(--surface));border-bottom:1px solid var(--line);}
+/* 页头现在是一块面板，自己再铺渐变 + 底线会把面板材质盖掉，
+   下边那道线还会在圆角里悬着。底交给面板，线去掉。 */
+.proj-head{padding:52px 0 46px;background:transparent;border-bottom:0;}
 .proj-head .wrap{display:flex;align-items:center;justify-content:space-between;gap:30px;}
 .proj-brand{display:flex;align-items:center;gap:26px;}
 /* 项目页头部右上角的主行动入口（如「进入课程」） */
@@ -894,8 +1004,8 @@ html.no-js .rv{opacity:1;transform:none;}
    独立内容页：courses.html / activities.html
    这两个页从首页拆出来，用同一套 hero + 分节骨架。
    ============================================================ */
-.pg-hero{position:relative;overflow:hidden;padding:74px 0 58px;
-  background:linear-gradient(180deg,#F3F9FF 0%,#FBFDFF 100%);border-bottom:1px solid var(--line);}
+.pg-hero{position:relative;overflow:hidden;padding:72px 0 62px;
+  background:transparent;border-bottom:0;}
 .pg-hero .wrap{max-width:900px;}
 .pg-hero h1{margin:18px 0 0;font-size:clamp(28px,3.7vw,46px);}
 .pg-hero .lead{margin-top:18px;font-size:16px;line-height:1.9;color:var(--ink-2);max-width:720px;}
@@ -904,13 +1014,16 @@ html.no-js .rv{opacity:1;transform:none;}
   border:1px solid var(--line);border-radius:30px;padding:7px 15px;}
 .pg-hero .hero-badge b{color:var(--blue);font-size:14px;margin-right:3px;}
 
-.pg-sec{padding:64px 0;}
-.pg-sec-alt{background:var(--bg-2);border-top:1px solid var(--line);border-bottom:1px solid var(--line);}
+.pg-sec{padding:76px 0;}
+/* 交替底色改成面板的轻微加深，不再画上下两条线：
+   面板内部出现横贯的线会把圆角打断。 */
+.pg-sec-alt{background:rgba(246,250,255,.5);border-top:0;border-bottom:0;}
 .pg-sec .sec-head{margin-bottom:34px;}
 .pg-cta{display:flex;flex-wrap:wrap;gap:14px;align-items:center;margin-top:30px;}
 .pg-cta-sec{padding:0 0 72px;}
-.pg-cta-sec .pg-cta{justify-content:space-between;margin-top:0;padding:30px 32px;
-  background:var(--surface);border:1px solid var(--line);border-radius:18px;}
+.pg-cta-sec .pg-cta{justify-content:space-between;margin-top:0;padding:32px 34px;
+  background:var(--surface);border:1px solid var(--hairline);border-radius:var(--r-card);
+  box-shadow:var(--inset-hi),var(--elev-1);}
 .pg-cta-sec b{display:block;font-size:17px;color:var(--ink);letter-spacing:-.2px;}
 .pg-cta-sec span{display:block;margin-top:6px;font-size:14px;color:var(--ink-2);}
 .pg-cta-acts{display:flex;flex-wrap:wrap;gap:12px;flex:none;}

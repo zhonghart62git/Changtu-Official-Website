@@ -20,12 +20,32 @@
   --shadow-lg:0 20px 48px -18px rgba(11,99,197,.24);
   --ease:cubic-bezier(.22,.61,.36,1);
   --dur-fast:160ms;--dur:220ms;--dur-slow:320ms;
+  /* 表面材质与 site.css 同一套。报名页是独立样式表，
+     少这几个令牌的话卡片在两边会是两种浮起程度。 */
+  --r-card:20px;--r-panel:32px;
+  --elev-1:0 1px 2px rgba(16,36,62,.05),0 14px 32px -18px rgba(11,99,197,.26);
+  --elev-2:0 2px 6px rgba(16,36,62,.06),0 28px 56px -26px rgba(11,99,197,.34);
+  --elev-3:0 6px 14px rgba(16,36,62,.06),0 48px 92px -42px rgba(11,99,197,.44);
+  --hairline:rgba(11,99,197,.10);--hairline-soft:rgba(11,99,197,.07);
+  --inset-hi:inset 0 1px 0 rgba(255,255,255,.92);
 }
 *{margin:0;padding:0;box-sizing:border-box;}
+html{background:var(--page-background);}
 body{
   font-family:"PingFang SC","Noto Sans SC","Microsoft YaHei","Helvetica Neue",-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;
-  color:var(--ink);background:var(--page-background);line-height:1.75;font-size:16px;
+  color:var(--ink);background:transparent;line-height:1.75;font-size:16px;position:relative;
   -webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;text-rendering:optimizeLegibility;
+}
+/* 与官网同一层光场。报名页只引 ui.css，不引 site.css，
+   光场得在这里再写一遍，否则从官网点进来会觉得换了一套配色。 */
+body::before{
+  content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;
+  background:
+    radial-gradient(1240px 800px at 78% -14%,rgba(11,99,197,.20) 0%,rgba(11,99,197,0) 64%),
+    radial-gradient(900px 640px at 4% 2%,rgba(123,63,228,.10) 0%,rgba(123,63,228,0) 66%),
+    radial-gradient(1080px 820px at 100% 52%,rgba(11,99,197,.13) 0%,rgba(11,99,197,0) 68%),
+    radial-gradient(940px 740px at -8% 90%,rgba(123,63,228,.09) 0%,rgba(123,63,228,0) 70%),
+    linear-gradient(178deg,#F2F7FE 0%,#E7F0FC 44%,#EFF6FF 100%);
 }
 a{text-decoration:none;color:inherit;}
 img,svg{max-width:100%;}
@@ -72,16 +92,19 @@ header.nav::after{
 .nav-back:hover{color:var(--blue);}
 
 /* ===== 页头 ===== */
-.pagehead{padding:52px 0 34px;
-  background:radial-gradient(820px 360px at 10% -32%,rgba(11,99,197,.13),transparent 62%),
-  radial-gradient(640px 300px at 94% -18%,rgba(123,63,228,.08),transparent 64%),
-  var(--surface);border-bottom:1px solid var(--border-primary);}
+/* 页头不再铺实底：光场已经在 body 上，再盖一层 var(--surface) 会把光切出一条硬边。
+   底下那条线也去掉，改由标题区的留白断块。 */
+.pagehead{padding:56px 0 38px;
+  background:radial-gradient(820px 360px at 10% -32%,rgba(11,99,197,.10),transparent 62%),
+  radial-gradient(640px 300px at 94% -18%,rgba(123,63,228,.07),transparent 64%);
+  border-bottom:0;}
 .pagehead .kicker{font-size:12px;font-weight:800;letter-spacing:2.4px;color:var(--blue);text-transform:uppercase;}
 .pagehead h1{font-size:clamp(26px,3.6vw,38px);line-height:1.28;margin:10px 0 10px;letter-spacing:-.4px;}
 .pagehead p{color:var(--ink-2);font-size:15.5px;max-width:680px;}
 
 /* ===== 卡片 ===== */
-.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);box-shadow:var(--shadow);}
+.card{background:var(--surface);border:1px solid var(--hairline);border-radius:var(--r-card);
+  box-shadow:var(--inset-hi),var(--elev-1);}
 .card-pad{padding:26px 26px;}
 .sect{padding:34px 0 60px;}
 .sect-title{display:flex;align-items:center;justify-content:space-between;gap:14px;margin:0 0 16px;}

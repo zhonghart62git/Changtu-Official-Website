@@ -31,13 +31,18 @@
 .home .hero-lg .lead{font-size:16px;max-width:540px;line-height:1.9;}
 .home .hero-lg .hero-cta{margin-top:32px;gap:12px;}
 /* 三个入口功能等价，视觉也等价：同底色、同宽度，不给某一个加权重。
-   做成轻玻璃胶囊（控制层，不是内容层），落在浅蓝首屏上比纯白更贴。 */
-.home .hero-lg .hero-cta .btn{flex:0 0 auto;min-width:140px;
-  background:rgba(255,255,255,.72);
-  -webkit-backdrop-filter:blur(10px) saturate(1.4);backdrop-filter:blur(10px) saturate(1.4);
-  border-color:rgba(11,99,197,.20);color:var(--blue-deep);}
-.home .hero-lg .hero-cta .btn:hover{background:rgba(255,255,255,.94);border-color:var(--brand-blue);
-  color:var(--brand-blue);}
+   做成轻玻璃胶囊（控制层，不是内容层），落在浅蓝首屏上比纯白更贴。
+   高度做到 46px、最小 152px 宽：首屏只有这三个可点的东西，
+   40px 在 1440 上像三个标签，撑不起「主行动」的分量。 */
+.home .hero-lg .hero-cta .btn{flex:0 0 auto;min-width:152px;min-height:46px;
+  font-size:15.5px;font-weight:600;
+  background:rgba(255,255,255,.74);
+  -webkit-backdrop-filter:blur(14px) saturate(1.5);backdrop-filter:blur(14px) saturate(1.5);
+  border-color:rgba(11,99,197,.20);color:var(--blue-deep);
+  box-shadow:var(--inset-hi),0 10px 26px -18px rgba(11,99,197,.45);}
+.home .hero-lg .hero-cta .btn:hover{background:rgba(255,255,255,.96);border-color:var(--brand-blue);
+  color:var(--brand-blue);transform:translateY(-2px);
+  box-shadow:var(--inset-hi),0 16px 34px -18px rgba(11,99,197,.5);}
 
 /* 能力环的成品图四周自带留白，桌面端左右各外扩 5%，让环的视觉直径
    与原来那版矢量环一致，不会被留白衬小 */
@@ -47,9 +52,9 @@
 
 /* ── 3. 数据条：让数字当主角 ─────────────────────────────
    五项并列，一屏读完：时间 → 纵深 → 机构 → 人数 → 地域。 */
-.home .stats-band .stats{grid-template-columns:repeat(5,1fr);padding:36px 0;}
-.home .stats-band .stat b{font-size:clamp(28px,3.2vw,40px);}
-.home .stats-band .stat span{font-size:12.5px;margin-top:4px;}
+.home .stats-band .stats{grid-template-columns:repeat(5,1fr);padding:40px 0;}
+.home .stats-band .stat b{font-size:clamp(28px,3.1vw,42px);}
+.home .stats-band .stat span{font-size:12.5px;margin-top:8px;}
 
 /* ── 4. 四大能力：从「分类目录」变成「培养框架」 ───────── */
 /* 四域色按 design-colors.css 的 --domain-* 走，表达力蓝 / 思辨力青 / 学习力琥珀 / 创造力紫。
@@ -61,26 +66,29 @@
 .ability-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;}
 /* 四张能力卡：底色接近白，只在顶部透一层 4% 的本域色做「局部浅光」，
    顶条与圆点用满色域色。域色不上正文，青和琥珀在 11–15px 上只有 3.0–3.4:1。 */
+/* 顶条从 3px 收到 2px：整块面板已经是圆角大容器，卡片再用粗顶条会显得笨。
+   顶部透光从 4% 提到 7%，配合放大后的圆角，四张卡才分得清各自的色。 */
 .ab{position:relative;display:flex;flex-direction:column;
-  background:linear-gradient(180deg,color-mix(in srgb,var(--d,#0B63C5) 4%,#fff) 0%,var(--surface) 46%),var(--surface);
-  border:1px solid var(--border-primary);border-top:3px solid var(--d,var(--brand-blue));
-  border-radius:var(--r);padding:24px 26px 22px;
+  background:linear-gradient(180deg,color-mix(in srgb,var(--d,#0B63C5) 7%,#fff) 0%,var(--surface) 44%),var(--surface);
+  border:1px solid var(--hairline);border-top:2px solid var(--d,var(--brand-blue));
+  border-radius:var(--r-card);padding:26px 28px 24px;
+  box-shadow:var(--inset-hi),var(--elev-1);
   transition:border-color var(--dur) var(--ease),transform var(--dur) var(--ease),box-shadow var(--dur) var(--ease);}
 .ab[data-d="expression"]{--d:var(--domain-expression);--d-tint:var(--domain-expression-tint);}
 .ab[data-d="thinking"]{--d:var(--domain-thinking);--d-tint:var(--domain-thinking-tint);}
 .ab[data-d="learning"]{--d:var(--domain-learning);--d-tint:var(--domain-learning-tint);}
 .ab[data-d="creativity"]{--d:var(--domain-creativity);--d-tint:var(--domain-creativity-tint);}
 /* 悬停时卡片按自己那一域的色泛光，不统一成蓝色——这样四张卡一眼能分出彼此 */
-.ab:hover{transform:translateY(-3px);
-  border-color:color-mix(in srgb,var(--d,var(--brand-blue)) 42%,transparent);
-  box-shadow:0 18px 40px -22px color-mix(in srgb,var(--d,var(--brand-blue)) 55%,transparent);}
+.ab:hover{transform:translateY(-4px);
+  border-color:color-mix(in srgb,var(--d,var(--brand-blue)) 38%,transparent);
+  box-shadow:var(--inset-hi),0 26px 56px -28px color-mix(in srgb,var(--d,var(--brand-blue)) 62%,transparent);}
 .ab .ab-k{font-size:11.5px;letter-spacing:1.5px;color:var(--text-3);font-weight:700;}
 .ab .ab-k::before{content:"";display:inline-block;width:8px;height:8px;border-radius:50%;
   background:var(--d,var(--brand-blue));margin-right:8px;vertical-align:1px;
   box-shadow:0 0 0 3px color-mix(in srgb,var(--d,var(--brand-blue)) 16%,transparent);}
-.ab h3{font-size:21px;margin:9px 0 9px;letter-spacing:-.3px;}
+.ab h3{font-size:23px;margin:11px 0 10px;letter-spacing:-.5px;}
 .ab .ab-core{font-size:14.5px;line-height:1.85;color:var(--ink-2);margin:0 0 16px;text-wrap:pretty;}
-.ab .ab-dirs{list-style:none;margin:auto 0 0;padding:14px 0 0;border-top:1px dashed var(--line);
+.ab .ab-dirs{list-style:none;margin:auto 0 0;padding:15px 0 0;border-top:1px solid var(--hairline-soft);
   font-size:12.5px;color:var(--ink-2);line-height:1.85;}
 .ab .ab-dirs li{display:grid;grid-template-columns:max-content minmax(0,1fr);gap:12px;}
 .ab .ab-dirs li+li{margin-top:2px;}
@@ -108,10 +116,13 @@
 .cq .q em{font-style:normal;color:var(--ink);font-weight:600;}
 
 /* ── 6. 五步链：目标 → 任务 → 支持 → 应用 → 反馈 ────────── */
-.flow{display:flex;flex-direction:column;border:1px solid var(--line);
-  border-radius:var(--r);overflow:hidden;background:var(--surface);}
-.fl{display:grid;grid-template-columns:158px 1fr;gap:22px;padding:18px 24px;
-  border-bottom:1px solid var(--line);align-items:baseline;}
+.flow{display:flex;flex-direction:column;border:1px solid var(--hairline);
+  border-radius:var(--r-card);overflow:hidden;background:var(--surface);
+  box-shadow:var(--inset-hi),var(--elev-1);}
+.fl{display:grid;grid-template-columns:158px 1fr;gap:22px;padding:20px 26px;
+  border-bottom:1px solid var(--hairline-soft);align-items:baseline;
+  transition:background var(--dur) var(--ease);}
+.fl:hover{background:rgba(234,244,254,.5);}
 .fl:last-child{border-bottom:none;}
 .fl .fn{display:flex;align-items:center;gap:9px;font-size:13px;font-weight:800;
   color:var(--blue-deep);letter-spacing:.2px;margin:0;}
@@ -122,7 +133,8 @@
 .fl .fd b{color:var(--ink);}
 
 /* ── 7. 一节课 90 分钟三段 + 教案页示意 ─────────────────── */
-.lesson{border:1px solid var(--line);border-radius:var(--r);overflow:hidden;background:var(--surface);}
+.lesson{border:1px solid var(--hairline);border-radius:var(--r-card);overflow:hidden;
+  background:var(--surface);box-shadow:var(--inset-hi),var(--elev-1);}
 .lesson-top{display:flex;flex-wrap:wrap;gap:8px 14px;align-items:baseline;
   padding:18px 22px;background:var(--bg-2);border-bottom:1px solid var(--line);}
 .lesson-top h3{font-size:16px;margin:0;letter-spacing:-.2px;}
@@ -170,7 +182,8 @@
 #projects{scroll-margin-top:86px;}
 .outcome{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;}
 .oc{display:flex;flex-direction:column;background:var(--surface);
-  border:1px solid var(--line);border-radius:var(--r);padding:24px 22px;}
+  border:1px solid var(--hairline);border-radius:var(--r-card);padding:26px 24px;
+  box-shadow:var(--inset-hi),var(--elev-1);}
 .oc .oc-k{font-size:11.5px;letter-spacing:1.5px;color:var(--blue-700);font-weight:700;}
 .oc h3{font-size:18px;margin:9px 0 10px;letter-spacing:-.2px;}
 /* 去掉 01/02 序号后，类别词（学习记录 / 成长记忆）升为卡片标题，下面那行黑色标题回到 18px。
@@ -219,11 +232,17 @@
 
 /* ── 10. 学员与赛事案例：三张引述卡 ─────────────────────── */
 .stories{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px;align-items:stretch;}
-.sc{display:flex;flex-direction:column;background:var(--surface);border:1px solid var(--line);
-  border-radius:var(--r);overflow:hidden;box-shadow:0 1px 2px rgba(11,99,197,.04);
-  transition:transform .24s,box-shadow .24s,border-color .24s;}
-.sc:hover{transform:translateY(-3px);border-color:rgba(11,99,197,.28);box-shadow:var(--shadow-lg);}
-.sc-media{position:relative;aspect-ratio:1/1;overflow:hidden;background:var(--bg-2);}
+/* 三张案例卡：白面 + 发丝边 + 顶部 1px 内高光 + 两级浮起。
+   以前只有 0 1px 2px 一层贴地影，卡片看着像贴在纸上；
+   补上宽而淡的那层投影之后才真的离地，hover 再抬到第三级。 */
+.sc{display:flex;flex-direction:column;background:var(--surface);border:1px solid var(--hairline);
+  border-radius:var(--r-card);overflow:hidden;box-shadow:var(--inset-hi),var(--elev-1);
+  transition:transform var(--dur) var(--ease),box-shadow var(--dur) var(--ease),border-color var(--dur) var(--ease);}
+.sc:hover{transform:translateY(-4px);border-color:rgba(11,99,197,.22);
+  box-shadow:var(--inset-hi),var(--elev-3);}
+/* 1:1 的图把卡片拉得过高，三列并排时整段像三根柱子。
+   4:3 之后图片和正文的比例接近参考图的案例卡，卡也不至于压过下一段。 */
+.sc-media{position:relative;aspect-ratio:4/3;overflow:hidden;background:var(--surface-2);}
 .sc-media img{width:100%;height:100%;object-fit:cover;display:block;}
 /* 暂无现场照的那张：用赛事标识拼一块版式占位，不做成假照片 */
 .sc-media--tile{display:flex;align-items:center;justify-content:center;
@@ -232,13 +251,16 @@
 .sc-tile img{width:auto;height:60px;object-fit:contain;mix-blend-mode:multiply;}
 .sc-tile span{font-size:12.5px;font-weight:700;letter-spacing:3px;color:var(--blue-700);opacity:.66;}
 
-.sc-body{display:flex;flex-direction:column;flex:1;padding:20px 22px 22px;}
-.sc-k{font-size:11.5px;font-weight:800;letter-spacing:1.5px;color:var(--brand-blue);}
-.sc h3{font-size:17.5px;line-height:1.5;margin:9px 0 11px;letter-spacing:-.2px;color:var(--ink);}
+.sc-body{display:flex;flex-direction:column;flex:1;padding:22px 24px 24px;}
+/* 分类标签：字号压到 10.5、字距拉到 .14em。参考图的微标签都是这个尺寸，
+   和正文拉开一档之后，正文才敢用 14px 而不显得碎。 */
+.sc-k{display:inline-block;font-size:10.5px;font-weight:800;letter-spacing:.14em;
+  color:var(--brand-blue);}
+.sc h3{font-size:19px;line-height:1.45;margin:11px 0 12px;letter-spacing:-.35px;color:var(--ink);}
 /* 三列时标题放不下一行，就在逗号处断：后半句整块不可拆，
    否则浏览器会按字数平均，把「一步步」「体验」这类词拆到两行。 */
 .sc h3 .nw{display:inline-block;}
-.sc blockquote{margin:0;font-size:14px;line-height:1.88;color:var(--ink-2);}
+.sc blockquote{margin:0;font-size:14.2px;line-height:1.9;color:var(--ink-2);text-wrap:pretty;}
 .sc cite{display:block;margin-top:12px;font-style:normal;font-size:12.5px;color:var(--text-3);}
 
 .stories-note{margin:18px 0 0;font-size:12px;line-height:1.75;color:var(--text-3);text-align:left;}
@@ -246,7 +268,10 @@
 /* ── 11. 机构与教师支持 ────────────────────────────────── */
 .support{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;}
 .sp{display:flex;flex-direction:column;background:var(--surface);
-  border:1px solid var(--line);border-radius:var(--r);padding:24px 22px;}
+  border:1px solid var(--hairline);border-radius:var(--r-card);padding:26px 24px;
+  box-shadow:var(--inset-hi),var(--elev-1);
+  transition:box-shadow var(--dur) var(--ease),border-color var(--dur) var(--ease),transform var(--dur) var(--ease);}
+.sp:hover{transform:translateY(-3px);border-color:rgba(11,99,197,.20);box-shadow:var(--inset-hi),var(--elev-2);}
 /* 去掉 01/02 序号后，类别词（教学与练习 / 获客与社媒运营）升为卡片标题 */
 .sp .sp-k{font-size:clamp(20px,2.6vw,24px);letter-spacing:-.4px;line-height:1.32;color:var(--blue-700);font-weight:700;}
 .sp h3{font-size:18px;margin:9px 0 10px;letter-spacing:-.2px;}
@@ -257,8 +282,9 @@
 
 /* 合作三步 */
 .steps3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;}
-.s3{position:relative;padding:22px 22px 22px 58px;background:var(--surface);
-  border:1px solid var(--line);border-radius:14px;}
+.s3{position:relative;padding:24px 24px 24px 60px;background:var(--surface);
+  border:1px solid var(--hairline);border-radius:var(--r-card);
+  box-shadow:var(--inset-hi),var(--elev-1);}
 .s3 .sn{position:absolute;left:20px;top:21px;font-size:13px;font-weight:800;
   color:var(--blue);letter-spacing:.5px;}
 .s3 h3{font-size:16.5px;margin:0 0 8px;letter-spacing:-.2px;}
@@ -356,18 +382,32 @@
 /* 整块通栏，首屏内容用 .wrap 对齐，和导航、下方各区块左右齐边。
    原来是深底，底部留 10px 白缝当分隔；现在 banner 变浅，白缝反而把两块切开
    显得悬空，改成贴住下面的白区，用一条 1px 线收边。 */
-.hslider-hero{padding:0;border-bottom:1px solid var(--border-primary);}
-.hslider-hero .hs-box{border-radius:0;box-shadow:none;background:var(--page-background);}
+/* 首屏不再自己铺一块实底。
+   页面底下已经有一层固定的光场，首屏再盖一层 #F7FAFE 会把光场完全挡掉，
+   于是整屏又变回白纸——这正是之前"跟参考图没关系"的主因。
+   现在只叠首屏自己的两团光，底色交给大气层透上来。 */
+.hslider-hero{padding:0;border-bottom:0;}
+.hslider-hero .hs-box{border-radius:0;box-shadow:none;background:transparent;}
 .hslider-hero .hs-track{align-items:stretch;}
 .hs-intro{position:relative;display:flex;align-items:center;line-height:normal;}
 .hs-intro > .hero{width:100%;}
-.hs-intro .hero-lg{padding:46px 0 42px;}
-/* 第 1 屏的底和后五屏对齐成同一块浅冷白，只靠 aurora 的蓝紫光晕区分 */
-.hs-intro .hero{background:linear-gradient(135deg,#FBFCFF 0%,var(--page-background) 52%,#F7F6FE 100%);}
+/* 首屏撑到接近一屏高。参考图的第一个画面是"整屏沉浸"，
+   内容只占一屏高度的 60%，剩下的是光。之前 104/92 的内边距撑不满，
+   视觉上一进来就是"网页"，而不是"一个空间"。 */
+/* 用 vw 不用 vh：截图工具把页面放在一个很高的 iframe 里，
+   vh 会按 iframe 的高度算，首屏直接被撑到两千像素。vw 不受影响。 */
+.hs-intro .hero-lg{padding:clamp(84px,8.6vw,124px) 0 clamp(58px,6vw,86px);}
+/* 第 1 屏：蓝主光落在标题与能力环之间，紫在右下做次级光，
+   左下补一团很淡的蓝把左边界托住。全部无实底，让光场继续透上来。 */
+.hs-intro .hero{background:
+  radial-gradient(940px 640px at 72% 12%,rgba(11,99,197,.26) 0%,rgba(11,99,197,.08) 44%,rgba(11,99,197,0) 70%),
+  radial-gradient(680px 500px at 104% 96%,rgba(123,63,228,.19) 0%,rgba(123,63,228,0) 66%),
+  radial-gradient(860px 600px at -4% 100%,rgba(11,99,197,.15) 0%,rgba(11,99,197,0) 70%),
+  radial-gradient(1500px 560px at 46% -18%,rgba(11,99,197,.10) 0%,rgba(11,99,197,0) 72%);}
 /* 第 1 屏沿用 .hero 的方格底纹，但整块 banner 现在是浅色、后面五屏是纯渐变，
    网格留在第一屏会显得六屏两套底。这里压到只当一层很淡的质感，
    切换时看不出纹理由有到无。全站其他页的 hero 网格不动。 */
-.hs-intro .hero::before{opacity:.14;}
+.hs-intro .hero::before{opacity:.16;background-size:76px 76px;}
 
 /* ── 19c. 活动 banner 的两个按钮 ─────────────────────────
    图里不再烤 CTA，两个按钮是真链接，可聚焦、可读屏。

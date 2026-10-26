@@ -240,9 +240,9 @@ html.no-js .rv2{opacity:1;transform:none;}
 /* ── Hero ── */
 .mx-hero{
   position:relative;overflow:hidden;
-  padding:92px 0 72px;
-  background:linear-gradient(180deg,var(--surface-2) 0%,var(--surface-2) 100%);
-  border-bottom:1px solid var(--border);
+  padding:84px 0 70px;
+  background:transparent;
+  border-bottom:0;
 }
 .mx-hero .wrap{position:relative;z-index:1;max-width:960px;}
 .mx-hero h1{
