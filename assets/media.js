@@ -27,7 +27,7 @@
     B2: { label: '中文演讲',   hint: '学生面对观众演讲',           ratio: '3 / 2',  src: 'assets/course-speech.jpg', alt: '学生在红色舞台上做主题演讲' },
     B3: { label: '英语交流与演讲', hint: '英语演讲或交流场景',      ratio: '3 / 2',  src: 'assets/course-english.jpg', alt: '学生在教室用英语交流讨论' },
     B4: { label: '逻辑思维与辩论', hint: '辩论赛或课堂思辨',        ratio: '3 / 2',  src: 'assets/course-logic.jpg', alt: '学生在教室里分列两侧进行辩论，一人起身陈述观点' },
-    B5: { label: '模拟联合国', hint: '模联会议、代表发言',          ratio: '3 / 2',  src: '', alt: '' },
+    B5: { label: '模拟联合国', hint: '模联会议、代表发言',          ratio: '3 / 2',  src: 'assets/course-mun.jpg', alt: '模拟联合国会场，各国代表围坐在弧形会议桌前发言' },
 
     /* ── 活动与机会 ─────────────────────────────── */
     C:  { label: '活动主视觉', hint: '比赛、舞台或学生活动现场',    ratio: '3 / 2',  src: '', alt: '' },
