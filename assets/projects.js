@@ -146,16 +146,23 @@
 
   /* ---------- 模板 ---------- */
 
+  /* 活动卡：图在上、字在下。
+     图片位的 data-img 直接用活动 id，素材映射在 assets/media.js；
+     没有登记 id 时 media.js 用 data-label / data-hint 兜底，加活动不会掉图。 */
   function card(p) {
     return '' +
       '<article class="pj-card">' +
-        '<span class="pj-st" data-s="' + p.status + '">' + STATUS[p.status].label + '</span>' +
-        '<h3>' + p.name + '</h3>' +
-        '<p class="pj-meta">' + meta(p) + '</p>' +
-        '<p class="pj-dl">报名截止：' + p.deadline + '</p>' +
-        '<a class="pj-go" href="' + p.href + '">查看详情' +
-          '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg>' +
-        '</a>' +
+        '<figure class="img-ph" data-img="' + p.id + '" data-label="' + p.series +
+          '" data-hint="活动现场或舞台照片"></figure>' +
+        '<div class="pj-body">' +
+          '<span class="pj-st" data-s="' + p.status + '">' + STATUS[p.status].label + '</span>' +
+          '<h3>' + p.name + '</h3>' +
+          '<p class="pj-meta">' + meta(p) + '</p>' +
+          '<p class="pj-dl">报名截止：' + p.deadline + '</p>' +
+          '<a class="pj-go" href="' + p.href + '">查看详情' +
+            '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg>' +
+          '</a>' +
+        '</div>' +
       '</article>';
   }
 
@@ -185,53 +192,32 @@
   }
 
   /* ---------- 活动与机会页：精选 ----------
-     只用「报名中」的活动，按开始日期排，最多三条。
-     一条都没有就整节隐藏——没有数据就不出精选区，不凑数。 */
-
-  var ICON_CAL = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="5" width="17" height="15" rx="2.4"/><path d="M8 3v4M16 3v4M3.5 10h17"/></svg>';
-  var ICON_PIN = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s6.5-6 6.5-11a6.5 6.5 0 0 0-13 0C5.5 15 12 21 12 21z"/><circle cx="12" cy="10" r="2.4"/></svg>';
-  var ARROW = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg>';
+     只用「报名中」的活动，按开始日期排，最多四条（两行两列）。
+     一条都没有就整节隐藏——没有数据就不出精选区，不凑数。
+     精选和下面四类共用同一张卡，不再另做「一大两小」的版式：
+     同一页出现两种活动卡，读者会以为它们是两种东西。 */
 
   function featured(n) {
-    return sortAll(LIST.filter(function (p) { return p.status === 'open'; })).slice(0, n || 3);
-  }
-
-  function featCard(p, isMain) {
-    return '<article class="feat-card' + (isMain ? ' feat-main' : '') + '">' +
-      (isMain ? '<figure class="img-ph" data-img="D1"></figure>' : '') +
-      '<div class="feat-body">' +
-        '<span class="pj-st" data-s="' + p.status + '">' + STATUS[p.status].label + '</span>' +
-        '<h3>' + p.name + '</h3>' +
-        '<p class="feat-meta">' +
-          '<span>' + ICON_CAL + p.time + '</span>' +
-          '<span>' + ICON_PIN + p.city + '</span>' +
-        '</p>' +
-        '<a class="feat-go" href="' + p.href + '">查看活动详情' + ARROW + '</a>' +
-      '</div>' +
-    '</article>';
+    return sortAll(LIST.filter(function (p) { return p.status === 'open'; })).slice(0, n || 4);
   }
 
   function mountFeatured() {
     var host = document.getElementById('featWrap');
     if (!host) return;
     var sec = document.getElementById('featured');
-    var items = featured(3);
+    var items = featured(4);
 
     if (!items.length) {
       if (sec) { sec.hidden = true; sec.setAttribute('data-empty', '1'); }
       return;
     }
 
-    var side = items.slice(1);
-    host.innerHTML = featCard(items[0], true) +
-      (side.length ? '<div class="feat-side">' +
-        side.map(function (p) { return featCard(p, false); }).join('') + '</div>' : '');
-    host.classList.toggle('is-single', !side.length);
+    host.innerHTML = items.map(card).join('');
     if (sec) sec.hidden = false;
     if (global.CTMedia) global.CTMedia.mount(host);
   }
 
-  /* ---------- 活动与机会页：每类前 3 条预览 ---------- */
+  /* ---------- 活动与机会页：每类前 4 条预览 ---------- */
 
   function mountPreview() {
     CATS.forEach(function (c) {
@@ -239,13 +225,14 @@
       if (!box) return;
       var live = sortAll(LIST.filter(function (p) {
         return p.cat === c.id && p.status !== 'done';
-      })).slice(0, 3);
+      })).slice(0, 4);
 
       if (!live.length) {
         box.innerHTML = '<div class="pj-empty">暂无开放报名的' + c.name + '活动。</div>';
         return;
       }
       box.innerHTML = '<div class="pj-grid">' + live.map(card).join('') + '</div>';
+      if (global.CTMedia) global.CTMedia.mount(box);
     });
   }
 

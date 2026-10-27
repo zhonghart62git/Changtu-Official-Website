@@ -12,7 +12,7 @@
 <link rel="stylesheet" href="assets/site.css?v=fcd42be1">
 <link rel="stylesheet" href="assets/home.css?v=0fa4bc18">
 <link rel="stylesheet" href="assets/projects.css?v=c5f72cec">
-<link rel="stylesheet" href="assets/catalog.css?v=aaabcc08">
+<link rel="stylesheet" href="assets/catalog.css?v=0dd1ded3">
 <link rel="canonical" href="https://leadtheway.cn/activities.html">
 <meta name="robots" content="index,follow">
 <meta property="og:type" content="website">
@@ -28,7 +28,7 @@
 <meta name="twitter:image" content="https://leadtheway.cn/assets/og-cover.png">
 <script>document.documentElement.classList.remove('no-js');</script>
 </head>
-<body class="page-activities v2">
+<body class="page-activities">
 
 <header class="nav">
   <div class="wrap">
@@ -54,9 +54,9 @@
 
 <main>
 
-<section class="v2-hero v2-hero-act">
+<section class="cat-hero is-act">
   <div class="wrap">
-    <div class="v2-hero-copy">
+    <div class="cat-hero-copy">
       <h1>活动与机会</h1>
       <p class="lead">发现赛事、展演、研学与考级活动。</p>
     </div>
@@ -77,21 +77,25 @@
   </div>
 </div>
 
-<!-- 精选：只取「报名中」的活动，按开始日期排，最多三条。
+<!-- 精选：只取「报名中」的活动，按开始日期排，最多四条。
      一条都没有时整节隐藏（projects.js 里判断），不留空框。 -->
-<section class="feat-sec" id="featured" hidden>
+<section class="act-sec" id="featured" hidden>
   <div class="wrap">
-    <div class="v2-sec-head">
-      <h2>精选活动</h2>
+    <div class="sec-head">
+      <div class="bar"></div>
+      <h2>精选活动 <small>Featured</small></h2>
     </div>
-    <div class="feat-grid" id="featWrap"></div>
+    <div class="pj-grid" id="featWrap"></div>
   </div>
 </section>
 
 <section class="act-sec" id="competition">
   <div class="wrap">
     <div class="cat-head">
-      <h2>赛事</h2>
+      <div class="sec-head">
+        <div class="bar"></div>
+        <h2>赛事 <small>Competitions</small></h2>
+      </div>
       <a class="cat-more" href="activities-competition.html">查看全部
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg>
       </a>
@@ -103,7 +107,10 @@
 <section class="act-sec" id="showcase">
   <div class="wrap">
     <div class="cat-head">
-      <h2>展演</h2>
+      <div class="sec-head">
+        <div class="bar"></div>
+        <h2>展演 <small>Showcases</small></h2>
+      </div>
       <a class="cat-more" href="activities-showcase.html">查看全部
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg>
       </a>
@@ -115,7 +122,10 @@
 <section class="act-sec" id="tour">
   <div class="wrap">
     <div class="cat-head">
-      <h2>研学</h2>
+      <div class="sec-head">
+        <div class="bar"></div>
+        <h2>研学 <small>Study Tours</small></h2>
+      </div>
       <a class="cat-more" href="activities-tour.html">查看全部
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg>
       </a>
@@ -127,7 +137,10 @@
 <section class="act-sec" id="grading">
   <div class="wrap">
     <div class="cat-head">
-      <h2>考级</h2>
+      <div class="sec-head">
+        <div class="bar"></div>
+        <h2>考级 <small>Grading</small></h2>
+      </div>
       <a class="cat-more" href="activities-grading.html">查看全部
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg>
       </a>
@@ -213,8 +226,8 @@
 })();
 </script>
 <script src="assets/chrome.js?v=775567a9"></script>
-<script src="assets/media.js?v=5a76ed16"></script>
-<script src="assets/projects.js?v=1de5573e"></script>
+<script src="assets/media.js?v=04b4693d"></script>
+<script src="assets/projects.js?v=f0e64c73"></script>
 <script>
 /* 类型筛选。
    点胶囊只留对应那一节，不跳页面；「全部」复位。
@@ -249,6 +262,22 @@
 
   var h=location.hash.replace('#','');
   if(h && secs.some(function(s){return s.id===h;})) apply(h);
+})();
+
+/* 分类条贴顶时加一条渐隐底带（.act-nav.is-stuck 的样式在 catalog.css）。
+   sticky 元素没有"已吸附"的伪类，只能读它的 top 判断。
+   停在首屏时它下面是空的，不加这块白；滚起来才淡入。 */
+(function(){
+  var nav=document.querySelector('.act-nav');
+  if(!nav) return;
+  var stick=86;
+  function read(){ stick=parseFloat(getComputedStyle(nav).top)||86; }
+  function sync(){
+    nav.classList.toggle('is-stuck', nav.getBoundingClientRect().top<=stick+0.5);
+  }
+  read(); sync();
+  window.addEventListener('scroll',sync,{passive:true});
+  window.addEventListener('resize',function(){read();sync();});
 })();
 </script>
 
