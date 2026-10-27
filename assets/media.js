@@ -37,7 +37,7 @@
        一场活动一个位置。这里只放提示文案，src 空着就是占位；
        填 src 时把 hint 那句换成 alt 的画面说明。 */
     'sdg-2026a':      { label: '联合国 SDG 发言人', hint: '演讲台或线上答辩现场', ratio: '16 / 9', src: '', alt: '' },
-    'mun-2027w':      { label: '破界 MUN',          hint: '会议现场、代表发言',   ratio: '16 / 9', src: '', alt: '' },
+    'mun-2027w':      { label: '模拟联合国',          hint: '会议现场、代表发言',   ratio: '16 / 9', src: '', alt: '' },
     'debate-2027':    { label: '华语辩论世界杯',    hint: '赛场、选手对辩',       ratio: '16 / 9', src: '', alt: '' },
     'youth-2027':     { label: '亚青辩',            hint: '赛场、选手对辩',       ratio: '16 / 9', src: '', alt: '' },
     'bilingual-2026a':{ label: '雏英杯双语主持',    hint: '主持台、双语报幕',     ratio: '16 / 9', src: '', alt: '' },

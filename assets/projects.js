@@ -41,8 +41,8 @@
       deadline: '11 月 8 日', status: 'open', href: 'sdg.html'
     },
     {
-      id: 'mun-2027w', cat: 'competition', series: '破界 MUN',
-      name: '破界 MUN · 2027 冬季校际会议',
+      id: 'mun-2027w', cat: 'competition', series: '模拟联合国',
+      name: '模拟联合国 · 2027 冬季校际会议',
       time: '待公布', start: '2027-01-15',
       city: '广州', ages: '初中 – 高中',
       deadline: '待公布', status: 'soon', href: 'mun.html'
