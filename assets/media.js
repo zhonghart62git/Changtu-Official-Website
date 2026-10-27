@@ -30,22 +30,22 @@
     B5: { label: '模拟联合国', hint: '模联会议、代表发言',          ratio: '3 / 2',  src: 'assets/course-mun.jpg', alt: '模拟联合国会场，各国代表围坐在弧形会议桌前发言' },
 
     /* ── 活动与机会 ─────────────────────────────── */
-    C:  { label: '活动主视觉', hint: '比赛、舞台或学生活动现场',    ratio: '3 / 2',  src: '', alt: '' },
+    C:  { label: '活动主视觉', hint: '比赛、舞台或学生活动现场',    ratio: '1920 / 767', src: 'assets/hero-activities.jpg', alt: '学生围在展台前讨论作品' },
 
     /* ── 活动卡：键就是 assets/projects.js 里的活动 id ──
        一场活动一个位置。这里只放提示文案，src 空着就是占位；
        填 src 时把 hint 那句换成 alt 的画面说明。 */
-    'sdg-2026a':      { label: '联合国 SDG 发言人', hint: '演讲台或线上答辩现场', ratio: '16 / 9', src: '', alt: '' },
-    'mun-2027w':      { label: '模拟联合国',          hint: '会议现场、代表发言',   ratio: '16 / 9', src: '', alt: '' },
-    'debate-2027':    { label: '华语辩论世界杯',    hint: '赛场、选手对辩',       ratio: '16 / 9', src: '', alt: '' },
-    'youth-2027':     { label: '亚青辩',            hint: '赛场、选手对辩',       ratio: '16 / 9', src: '', alt: '' },
-    'bilingual-2026a':{ label: '雏英杯双语主持',    hint: '主持台、双语报幕',     ratio: '16 / 9', src: '', alt: '' },
-    'caocan-2027':    { label: '曹灿杯',            hint: '朗诵展演现场',         ratio: '16 / 9', src: '', alt: '' },
+    'sdg-2026a':      { label: '联合国 SDG 发言人', hint: '演讲台或线上答辩现场', ratio: '16 / 9', src: 'assets/act-sdg.jpg', alt: 'AI for Good 全球峰会会场，舞台上是 SDG 主题标识与灯光' },
+    'mun-2027w':      { label: '模拟联合国',          hint: '会议现场、代表发言',   ratio: '16 / 9', src: 'assets/act-mun.jpg', alt: '模拟联合国会场，代表在讲台发言，手边是中国代表牌' },
+    'debate-2027':    { label: '华语辩论世界杯',    hint: '赛场、选手对辩',       ratio: '16 / 9', src: 'assets/act-debate.jpg', alt: '辩论赛主视觉：红蓝两色人物侧脸与城市剪影，标语「敢辩，才有答案」' },
+    'youth-2027':     { label: '亚青辩',            hint: '赛场、选手对辩',       ratio: '16 / 9', src: 'assets/act-debate.jpg', alt: '辩论赛主视觉：红蓝两色人物侧脸与城市剪影，标语「敢辩，才有答案」' },
+    'bilingual-2026a':{ label: '雏英杯双语主持',    hint: '主持台、双语报幕',     ratio: '16 / 9', src: 'assets/act-bilingual.jpg', alt: '中英双语青少年主持大会主视觉，绿色水波纹背景与大会标题' },
+    'caocan-2027':    { label: '曹灿杯',            hint: '朗诵展演现场',         ratio: '16 / 9', src: 'assets/act-caocan.jpg', alt: '曹灿杯 2027 主视觉，红色绸带与香港城市剪影' },
     'caocan-2026':    { label: '曹灿杯',            hint: '朗诵展演现场',         ratio: '16 / 9', src: '', alt: '' },
-    'brtv-2027w':     { label: '北京广播电视台考级', hint: '考级考场或测评现场',   ratio: '16 / 9', src: '', alt: '' },
+    'brtv-2027w':     { label: '北京广播电视台考级', hint: '考级考场或测评现场',   ratio: '16 / 9', src: 'assets/act-brtv.jpg', alt: '北京广播电视台社会艺术水平考级主视觉，朗诵·主持·课本剧' },
     'zjcm-2027w':     { label: '浙江音乐学院考级',  hint: '考级考场或测评现场',   ratio: '16 / 9', src: '', alt: '' },
-    'geneva-2027':    { label: '日内瓦联合国研学营', hint: '万国宫、营地课程现场', ratio: '16 / 9', src: '', alt: '' },
-    'hangzhou-2027':  { label: '科技与艺术研学',    hint: '企业展厅、参访现场',   ratio: '16 / 9', src: '', alt: '' }
+    'geneva-2027':    { label: '日内瓦联合国研学营', hint: '万国宫、营地课程现场', ratio: '16 / 9', src: 'assets/act-geneva.jpg', alt: '学生在万国宫庭院里听讲解员介绍建筑' },
+    'hangzhou-2027':  { label: '科技与艺术研学',    hint: '企业展厅、参访现场',   ratio: '16 / 9', src: 'assets/act-hangzhou.jpg', alt: '两名学生在科技馆里遥控机器狗' }
   };
 
   var ICON = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" ' +

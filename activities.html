@@ -12,7 +12,7 @@
 <link rel="stylesheet" href="assets/site.css?v=214491bb">
 <link rel="stylesheet" href="assets/home.css?v=0fa4bc18">
 <link rel="stylesheet" href="assets/projects.css?v=85cbc737">
-<link rel="stylesheet" href="assets/catalog.css?v=e8f41c43">
+<link rel="stylesheet" href="assets/catalog.css?v=df68005d">
 <link rel="canonical" href="https://leadtheway.cn/activities.html">
 <meta name="robots" content="index,follow">
 <meta property="og:type" content="website">
@@ -54,14 +54,17 @@
 
 <main>
 
-<section class="cat-hero">
+<!-- 首屏：与课程与实践页同一套横向融合大图。
+     左侧淡到看不见，清晰的学生场景只留在右侧；文字压在最淡的左段。
+     图是背景层不是卡片——没有圆角、描边、投影，边缘靠遮罩化进页面光场。 -->
+<section class="cat-hero has-art">
   <div class="wrap">
     <div class="cat-hero-copy">
       <h1>活动与机会</h1>
       <p class="lead">发现赛事、展演、研学与考级活动。</p>
     </div>
-    <figure class="img-ph" data-img="C"></figure>
   </div>
+  <figure class="cat-hero-art" data-img="C"></figure>
 </section>
 
 <!-- 分类条：首页不做页间跳转，点哪个就只留哪一类 -->
@@ -149,6 +152,9 @@
   </div>
 </section>
 
+<div class="wrap">
+  <p class="act-note">活动图片为场景示意，实际情况以现场为准。图片如涉及您的肖像或场地权益，请联系我们撤下。</p>
+</div>
 
 </main>
 
@@ -214,7 +220,7 @@
 })();
 </script>
 <script src="assets/chrome.js?v=775567a9"></script>
-<script src="assets/media.js?v=8842f4da"></script>
+<script src="assets/media.js?v=70c65096"></script>
 <script src="assets/projects.js?v=9431380d"></script>
 <script>
 /* 类型筛选。

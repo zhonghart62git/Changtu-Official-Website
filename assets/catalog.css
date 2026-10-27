@@ -27,7 +27,6 @@
 .cat-hero .lead{margin-top:18px;max-width:520px;font-size:16px;line-height:1.85;
   min-height:calc(2 * 1.85em);color:var(--ink-2);text-wrap:pretty;}
 .cat-hero-acts{display:flex;flex-wrap:wrap;gap:12px;margin-top:30px;}
-.cat-hero .img-ph{border-radius:var(--r-panel);box-shadow:var(--elev-2);}
 
 /* ===== 首屏融合大图 =====
    课程与实践用这一版：图铺满整条首屏，不是右边一张卡。
@@ -69,6 +68,12 @@
   mask-image:linear-gradient(to right,rgba(0,0,0,0) 40%,rgba(0,0,0,.9) 50%,rgba(0,0,0,.6) 60%,rgba(0,0,0,0) 72%);}
 
 /* 活动页首屏矮一档：这一页要尽快露出分类条和活动 */
+
+/* ===== 图片声明 =====
+   活动卡用的是主办方主视觉与示意素材，不是每场都实拍。
+   只放活动与机会页——四个分类页是纯文字列表，不出图，写这条反而是噪音。 */
+.act-note{margin:0 0 34px;font-size:12.5px;line-height:1.8;
+  color:var(--text-3);text-wrap:pretty;}
 
 /* ===== 区块 =====
    44 + 44 = 88 的分节距离，和四个分类页一致。
