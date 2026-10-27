@@ -105,22 +105,16 @@
   border-color:color-mix(in srgb,var(--d,var(--brand-blue)) 34%,rgba(255,255,255,.7));
   box-shadow:var(--glass-inner-strong),
     0 30px 64px -30px color-mix(in srgb,var(--d,var(--brand-blue)) 66%,transparent);}
-/* 编号标签：本域色 12% 底 + 同色描边，文字是本域色与 ink 的混合。
-   混 ink 是为了压对比度：满色域色当 10.5px 文字只有 3 点几比一。
+/* 能力名：不挂编号，也不做成胶囊——直接一行「表达力」，字号跟卡内标题一样大。
+   层级靠本域色和标题的 ink 区分，不加底、不加描边。
    对齐要写两条：窄屏下 .ab 是 flex column，align-self 管横向；
    1020px 以上 .ab 换成 subgrid（为了让四张卡的行对齐），
    这时横向由 justify-self 管，只写 align-self 会被拉成一条横贯卡片的长条。 */
 .ab .ab-k{
-  display:inline-flex;align-items:center;gap:8px;
+  display:inline-block;
   align-self:flex-start;justify-self:start;
-  font-size:10.5px;font-weight:800;letter-spacing:.16em;line-height:1;
-  color:color-mix(in srgb,var(--d,var(--brand-blue)) 55%,var(--ink));
-  background:color-mix(in srgb,var(--d,var(--brand-blue)) 12%,rgba(255,255,255,.55));
-  border:1px solid color-mix(in srgb,var(--d,var(--brand-blue)) 24%,transparent);
-  border-radius:20px;padding:6px 12px 6px 9px;}
-.ab .ab-k::before{content:"";display:inline-block;width:6px;height:6px;border-radius:50%;
-  background:var(--d,var(--brand-blue));margin-right:0;vertical-align:0;
-  box-shadow:0 0 0 3px color-mix(in srgb,var(--d,var(--brand-blue)) 18%,transparent);}
+  font-size:23px;font-weight:800;letter-spacing:-.5px;line-height:1.2;
+  color:color-mix(in srgb,var(--d,var(--brand-blue)) 62%,var(--ink));}
 .ab h3{font-size:23px;margin:11px 0 10px;letter-spacing:-.5px;}
 .ab .ab-core{font-size:14.5px;line-height:1.85;color:var(--ink-2);margin:0 0 16px;text-wrap:pretty;}
 .ab .ab-dirs{list-style:none;margin:auto 0 0;padding:15px 0 0;border-top:1px solid var(--hairline-soft);
@@ -128,9 +122,6 @@
 .ab .ab-dirs li{display:grid;grid-template-columns:max-content minmax(0,1fr);gap:12px;}
 .ab .ab-dirs li+li{margin-top:2px;}
 .ab .ab-dirs b{color:var(--ink);font-weight:700;}
-.ab .soon{display:inline-block;margin-left:7px;padding:2px 8px;border-radius:20px;
-  font-size:10.5px;font-weight:700;background:var(--bg-2);color:var(--text-3);
-  border:1px solid var(--line);vertical-align:1px;}
 
 /* 四张卡底部的方向区要跨卡对齐。
    原来靠 .ab-dirs 的 margin-top:auto 各自贴底，方向条目少的那张卡虚线就落得更低，
