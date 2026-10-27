@@ -138,11 +138,10 @@
    左边 65% 是一张学科清单（一行一条，靠发丝线分格，不套卡片），
    右边 35% 是一列带图标的日常场景（靠间距分条，不用线）。
    两种分格方式对着放，两区一眼就能分开，也不会和四力卡撞脸。 */
-.home .sec-head.sec-lg p.tr-thesis{position:relative;margin-top:20px;padding-left:16px;
-  max-width:660px;font-size:16.5px;font-weight:700;line-height:1.8;color:var(--ink);}
-.home .sec-head.sec-lg p.tr-thesis::before{content:"";position:absolute;left:0;
-  top:.42em;bottom:.42em;width:3px;border-radius:2px;
-  background:linear-gradient(180deg,var(--brand-blue) 0%,var(--brand-purple) 100%);}
+
+/* 引导段 57 字，在 780px 里会断成 43/14 两行，末行太短。
+   balance 让两行等长，断点落在「并把」之后，比默认断法读着顺。 */
+.home .sec-head.sec-lg p.tr-lead{text-wrap:balance;}
 
 /* 两栏等高：左栏 10 条撑出高度，右栏只有 4 条，靠 stretch + space-evenly
    把 4 条均匀铺满同一高度。不平分（不用 flex:1）是因为条目文字长短不一，
