@@ -23,7 +23,7 @@
   var MAP = {
     /* ── 课程与实践 ─────────────────────────────── */
     A:  { label: '课程主视觉', hint: '学生演讲、课堂讨论或师生互动', ratio: '3 / 2',  src: '', alt: '' },
-    B1: { label: '中英双语主持', hint: '主持、舞台表达',           ratio: '3 / 2',  src: '', alt: '' },
+    B1: { label: '中英双语主持', hint: '主持、舞台表达',           ratio: '3 / 2',  src: 'assets/course-host.jpg', alt: '两名学生主持人在舞台上报幕' },
     B2: { label: '中文演讲',   hint: '学生面对观众演讲',           ratio: '3 / 2',  src: '', alt: '' },
     B3: { label: '英语交流与演讲', hint: '英语演讲或交流场景',      ratio: '3 / 2',  src: '', alt: '' },
     B4: { label: '逻辑思维与辩论', hint: '辩论赛或课堂思辨',        ratio: '3 / 2',  src: '', alt: '' },

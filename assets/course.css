@@ -23,6 +23,10 @@
   margin:0;font-size:clamp(34px,4.8vw,58px);line-height:1.14;
   letter-spacing:-1.4px;font-weight:800;color:var(--ink);
 }
+.page-course .crs-hero .sub{
+  margin:18px 0 0;font-size:16.5px;line-height:1.7;color:var(--ink-2);
+  letter-spacing:.02em;text-wrap:pretty;
+}
 .page-course .crs-hero .img-ph{border-radius:var(--r-card);aspect-ratio:4 / 3;}
 .page-course .crs-hero .img-ph .ph-ico{width:34px;height:34px;}
 .page-course .crs-hero .img-ph .ph-label{font-size:13.5px;}
