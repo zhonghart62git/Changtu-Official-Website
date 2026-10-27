@@ -1278,6 +1278,9 @@ html.no-js .rv{opacity:1;transform:none;}
 .related .sec-head{margin-bottom:26px;}
 .related .sec-head h2{font-size:clamp(21px,2.4vw,26px);}
 .rel-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;}
+/* 相关卡片只剩两张的页面（考级、赛事页去掉能力底座之后），
+   三列会空出右侧一格。改成两列，两张各占一半。 */
+.rel-grid:has(> .rel-card:first-child:nth-last-child(2)){grid-template-columns:repeat(2,minmax(0,1fr));}
 .rel-card{display:flex;align-items:center;gap:16px;background:var(--glass-2-bg);border:1px solid var(--glass-2-edge);border-radius:14px;padding:16px 18px;
   -webkit-backdrop-filter:blur(14px) saturate(1.2);backdrop-filter:blur(14px) saturate(1.2);
   box-shadow:var(--glass-inner),var(--glass-shadow-sm);

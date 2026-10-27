@@ -49,6 +49,17 @@
    有详情页的整张卡是 <a>；没有详情页的是 <article>，外观一致但不可点，
    也不给「查看课程详情」四个字——不放假入口。 */
 .crs-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px;}
+
+/* 课程五门，两列排下来最后一张单占一行。
+   让它居中、宽度与上一行卡片一致，否则右下角空半格，看着像漏了一张。
+   :nth-child(odd) 兜住这个数——将来课程增到偶数张，这条自动失效，不用回来改。 */
+@media (min-width:761px){
+  .crs-grid > .crs-card:last-child:nth-child(odd){
+    grid-column:1 / -1;
+    justify-self:center;
+    width:calc(50% - 10px);
+  }
+}
 .crs-card{
   display:flex;flex-direction:column;overflow:hidden;text-decoration:none;color:inherit;
   background:var(--glass-2-bg);border:1px solid var(--glass-2-edge);

@@ -1,5 +1,5 @@
 /* 畅途 · 图片位
- * 课程与实践（A / B1–B6）与活动与机会（C / 每场活动一条）共用一套映射。
+ * 课程与实践（A / B1–B5）与活动与机会（C / 每场活动一条）共用一套映射。
  *
  * 用法：HTML 里写一个空盒子 <figure class="img-ph" data-img="B1"></figure>，
  * 本文件在 DOM ready 后扫描一遍，按 MAP 里该条的 src 决定渲染占位还是真图。
@@ -28,7 +28,6 @@
     B3: { label: '英语交流与演讲', hint: '英语演讲或交流场景',      ratio: '3 / 2',  src: 'assets/course-english.jpg', alt: '学生在教室用英语交流讨论' },
     B4: { label: '逻辑思维与辩论', hint: '辩论赛或课堂思辨',        ratio: '3 / 2',  src: 'assets/course-logic.jpg', alt: '学生在教室里分列两侧进行辩论，一人起身陈述观点' },
     B5: { label: '模拟联合国', hint: '模联会议、代表发言',          ratio: '3 / 2',  src: '', alt: '' },
-    B6: { label: '思考、表达与自主学习', hint: '项目式学习、小组协作', ratio: '3 / 2', src: '', alt: '' },
 
     /* ── 活动与机会 ─────────────────────────────── */
     C:  { label: '活动主视觉', hint: '比赛、舞台或学生活动现场',    ratio: '3 / 2',  src: '', alt: '' },
