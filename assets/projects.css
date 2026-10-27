@@ -86,18 +86,21 @@
    和首页的能力卡、阶段卡用同一套 Level 2 玻璃：透底 + 内高光 + 蓝调细影。
    原来是纯白实底 + 灰边，在一张光场上就是一块贴上去的白纸。 */
 .pj-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;}
-.pj-card{display:flex;flex-direction:column;padding:22px 22px 20px;
+.pj-card{display:flex;flex-direction:column;overflow:hidden;padding:0;
   background:var(--glass-2-bg);border:1px solid var(--glass-2-edge);border-radius:var(--r-card);
   box-shadow:var(--glass-inner),var(--glass-shadow-sm);
   transition:background .18s,box-shadow .18s,transform .18s,border-color .18s;}
 .pj-card:hover{transform:translateY(-3px);background:var(--glass-2-bg-hover);
   box-shadow:var(--glass-inner-strong),var(--glass-shadow-hover);
   border-color:rgba(255,255,255,.94);}
-.pj-card h3{margin:12px 0 10px;font-size:17px;font-weight:800;color:var(--ink);
-  line-height:1.45;letter-spacing:-.2px;}
-.pj-meta{margin:0 0 6px;font-size:13px;line-height:1.7;color:var(--text-2);}
-.pj-dl{margin:0 0 16px;font-size:13px;line-height:1.7;color:var(--text-3);}
-.pj-go{display:inline-flex;align-items:center;gap:6px;margin-top:auto;
+/* 卡片内边距挪到 .pj-body：图片贴到卡片边缘，和课程与实践页的课程卡同一种做法。
+   两页结构几乎一样，翻页时不该看出字号和留白变了。 */
+.pj-body{display:flex;flex-direction:column;flex:1;padding:22px 24px 24px;}
+.pj-card h3{margin:12px 0 8px;font-size:20px;font-weight:800;color:var(--ink);
+  line-height:1.4;letter-spacing:-.3px;}
+.pj-meta{margin:0 0 6px;font-size:14.5px;line-height:1.75;color:var(--ink-2);}
+.pj-dl{margin:0 0 16px;font-size:13.5px;line-height:1.7;color:var(--text-3);}
+.pj-go{display:inline-flex;align-items:center;gap:6px;margin-top:auto;padding-top:18px;
   font-size:13.5px;font-weight:700;color:var(--blue);text-decoration:none;transition:gap .16s;}
 .pj-card:hover .pj-go{gap:10px;color:var(--blue-deep);}
 
