@@ -1,56 +1,68 @@
 /* 畅途 · 学以致用
- * 首页「学以致用」板块的唯一数据源：10 个学科 + 4 个日常场景。
+ * 首页「学以致用」板块的唯一数据源：6 个学科方向 + 3 个日常场景。
  * 改文案只动下面两个数组，HTML 一行不用碰。
  *
- * 窄屏默认只露前 6 个学科，其余收在「查看全部学科」后面；
- * 桌面端一律全开，不靠脚本控制——CSS 的 min-width:761px 直接给 1fr。
- * 折叠用 grid-template-rows:0fr → 1fr，和 FAQ 同一套，能平滑过渡。
+ * 学科从十项合并成六项之后，桌面 3 行、手机 6 行，一屏能看完，
+ * 折叠那套（0fr → 1fr + inert）整套撤掉了，别再加回来。
  */
 (function () {
   'use strict';
 
-  /* 反哺学科：学科名 + 一句话说明。说明控制在一到两行，不写成长段落。 */
+  /* 迁移学习：学科方向 + 一句说明 + 四个可迁移的方法。
+     说明写「在什么场景里做什么」，方法写「能带走的具体动作」，
+     两者分工，不重复。 */
   var SUBJECTS = [
-    { name: '语文', desc: '提炼主旨、分析论证、组织材料，让阅读、作文和课堂表达更有条理。' },
-    { name: '英语', desc: '在真实议题中训练听说读写、即席回应与跨文化表达。' },
-    { name: '数学', desc: '强化条件意识、逻辑推演、反例思维与数据判断。' },
-    { name: '历史', desc: '理解时代背景、因果关系与不同群体的立场。' },
-    { name: '地理', desc: '综合地图、人口、资源、气候与贸易信息分析区域问题。' },
-    { name: '道法／政治', desc: '理解权利责任、公共规则、政策协商与国际组织。' },
-    { name: '物理', desc: '识别变量和适用条件，运用规律与证据解释现象。' },
-    { name: '化学', desc: '重视实验条件、变量控制、证据判断与结论边界。' },
-    { name: '生物', desc: '建立系统思维，分析生态、健康、技术与科学伦理。' },
-    { name: '信息科技', desc: '提升资料检索、来源核验、数据整理与可视化表达。' }
+    {
+      name: '语文',
+      desc: '在主持、演讲与辩论中提炼主题、筛选材料、组织论证，并根据对象调整语言。迁移到阅读理解、议论文写作、课堂发言与答辩。',
+      method: ['主题提炼', '材料组织', '论证结构', '修辞表达']
+    },
+    {
+      name: '英语',
+      desc: '在双语主持、英语演讲、辩论与模联中听取关键信息，用英语复述、陈述、追问和回应，让词汇与语法进入真实沟通。',
+      method: ['信息捕捉', '语块运用', '释义转述', '跨文化沟通']
+    },
+    {
+      name: '数学与逻辑',
+      desc: '通过概念界定、条件拆解、因果辨析和反例检验，判断一项主张是否成立，强化严谨推理、过程表达与数据意识。',
+      method: ['概念界定', '条件分析', '逻辑推演', '反例检验']
+    },
+    {
+      name: '人文社会（政史地）',
+      desc: '在模联、辩论与研学中，从历史背景、制度规则、地域条件和多方利益分析议题，形成有依据的立场与解决方案。',
+      method: ['背景研究', '多方视角', '因果分析', '政策论证']
+    },
+    {
+      name: '科学探究',
+      desc: '面对环境、健康、能源与科技议题，从现象中提出问题、识别变量、判断证据，并说明结论成立的条件与边界。',
+      method: ['问题提出', '变量识别', '证据判断', '结论审慎']
+    },
+    {
+      name: '信息科技',
+      desc: '从课程准备到赛事、展演和项目成果，设计检索路径、核验信息来源、整理数据，并用图表、演示或数字作品呈现研究。',
+      method: ['信息检索', '来源核验', '数据整理', '数字呈现']
+    }
   ];
 
-  /* 融入日常：离开课堂之后的四个场景。icon 只放路径，外壳由 ICON() 统一包。 */
+  /* 融入日常：离开课堂之后的三个场景。icon 只放路径，外壳由 icon() 统一包。 */
   var DAILY = [
     {
-      name: '课堂学习',
-      desc: '敢提问、会发言，能够清楚说明自己的思考过程。',
+      name: '课堂表达',
+      desc: '敢于提问与发言，能够说清观点、依据和思考过程。',
       icon: '<rect x="3" y="4" width="18" height="12.5" rx="2"/><path d="M8 20.5h8M12 16.5v4"/>'
     },
     {
       name: '项目协作',
-      desc: '学会倾听、分工、协商，并对共同结果负责。',
+      desc: '在分工、讨论与复盘中学会倾听、协商，并对共同结果负责。',
       icon: '<circle cx="12" cy="6.5" r="2.4"/><circle cx="6" cy="17" r="2.4"/>' +
         '<circle cx="18" cy="17" r="2.4"/><path d="M10.8 8.6 7.2 14.9M13.2 8.6l3.6 6.3M8.4 17h7.2"/>'
     },
     {
-      name: '人际沟通',
-      desc: '准确表达需求、理解差异，理性处理分歧。',
-      icon: '<path d="M21 11.5a8.4 8.4 0 0 1-8.4 8.4H8l-4.4 2.8V11.5A8.4 8.4 0 0 1 12 3.1a8.4 8.4 0 0 1 9 8.4z"/>' +
-        '<circle cx="8.5" cy="11" r=".9"/><circle cx="12" cy="11" r=".9"/><circle cx="15.5" cy="11" r=".9"/>'
-    },
-    {
-      name: '独立成长',
-      desc: '面对陌生任务，能够搜集信息、作出判断并付诸行动。',
+      name: '独立行动',
+      desc: '面对陌生任务，能够查找信息、判断取舍，把想法推进为行动。',
       icon: '<circle cx="12" cy="12" r="8.6"/><path d="M12 16.4V7.9M8.6 11.3 12 7.9l3.4 3.4"/>'
     }
   ];
-
-  /* 窄屏默认露出的学科条数。10 条排满会让手机端这一屏长得离谱。 */
-  var PEEK = 6;
 
   function icon(path) {
     return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" ' +
@@ -58,7 +70,14 @@
   }
 
   function subjectHtml(s) {
-    return '<div class="tr-s" role="listitem"><b>' + s.name + '</b><p>' + s.desc + '</p></div>';
+    /* 方法词单独成 span：窄屏折行时整词换行，不会把「修辞表达」劈成两半。
+       分隔符挂在词的 ::before 上，跟着词走，行尾不会孤零零留一根竖线。 */
+    var method = s.method.map(function (w) { return '<i>' + w + '</i>'; }).join('');
+    return '<div class="tr-s" role="listitem">' +
+      '<b>' + s.name + '</b>' +
+      '<p>' + s.desc + '</p>' +
+      '<p class="tr-m"><span class="tr-mk">方法</span>' + method + '</p>' +
+      '</div>';
   }
 
   function dailyHtml(d) {
@@ -68,43 +87,11 @@
       '</div>';
   }
 
-  function fill(sel, html) {
-    var el = document.querySelector(sel);
-    if (el) el.innerHTML = html;
-  }
-
   function init() {
-    fill('[data-transfer="subjects"]', SUBJECTS.slice(0, PEEK).map(subjectHtml).join(''));
-    fill('[data-transfer="subjects-more"]', SUBJECTS.slice(PEEK).map(subjectHtml).join(''));
-    fill('[data-transfer="daily"]', DAILY.map(dailyHtml).join(''));
-
-    var btn = document.querySelector('[data-transfer-toggle]');
-    var more = document.getElementById('trMore');
-    if (!btn || !more) return;
-    var label = btn.querySelector('[data-transfer-label]');
-    var mq = window.matchMedia('(max-width:760px)');
-
-    /* 收起时置 inert：Tab 跳不进去，读屏也不念折叠内容。
-       桌面端一直展开，靠 CSS 的 1fr 兜底，这里同步把 inert 摘掉。 */
-    function setOpen(open) {
-      more.classList.toggle('is-open', open);
-      btn.setAttribute('aria-expanded', open ? 'true' : 'false');
-      if (label) label.textContent = open ? '收起学科' : '查看全部学科';
-      if (open) more.removeAttribute('inert');
-      else more.setAttribute('inert', '');
-    }
-
-    setOpen(!mq.matches);
-
-    if (mq.addEventListener) {
-      mq.addEventListener('change', function (e) { setOpen(!e.matches); });
-    } else if (mq.addListener) {
-      mq.addListener(function (e) { setOpen(!e.matches); });
-    }
-
-    btn.addEventListener('click', function () {
-      setOpen(btn.getAttribute('aria-expanded') !== 'true');
-    });
+    var subj = document.querySelector('[data-transfer="subjects"]');
+    var daily = document.querySelector('[data-transfer="daily"]');
+    if (subj) subj.innerHTML = SUBJECTS.map(subjectHtml).join('');
+    if (daily) daily.innerHTML = DAILY.map(dailyHtml).join('');
   }
 
   if (document.readyState === 'loading') {

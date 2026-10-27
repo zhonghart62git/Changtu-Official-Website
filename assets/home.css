@@ -135,7 +135,7 @@
 
 /* ── 4b. 学以致用：能力用在哪里 ───────────────────────────
    和上一块刻意不同。那边是四张大卡讲「培养什么」，这边讲「用在哪里」：
-   左边 65% 是一张学科清单（一行一条，靠发丝线分格，不套卡片），
+   左边 65% 是六个学科方向（一格一条，靠发丝线分格，不套卡片），
    右边 35% 是一列带图标的日常场景（靠间距分条，不用线）。
    两种分格方式对着放，两区一眼就能分开，也不会和四力卡撞脸。 */
 
@@ -143,8 +143,8 @@
    balance 让两行等长，断点落在「并把」之后，比默认断法读着顺。 */
 .home .sec-head.sec-lg p.tr-lead{text-wrap:balance;}
 
-/* 两栏等高：左栏 10 条撑出高度，右栏只有 4 条，靠 stretch + space-evenly
-   把 4 条均匀铺满同一高度。不平分（不用 flex:1）是因为条目文字长短不一，
+/* 两栏等高：左栏六格撑出高度，右栏只有三条，靠 stretch + space-evenly
+   把三条均匀铺满同一高度。不平分（不用 flex:1）是因为条目文字长短不一，
    拉高会显得空；只分配剩余间距，条目本身保持自然高度。 */
 .tr-grid{display:grid;grid-template-columns:minmax(0,1.85fr) minmax(0,1fr);
   gap:18px;align-items:stretch;}
@@ -160,19 +160,27 @@
   letter-spacing:-.1px;color:var(--ink);}
 .tr-bh span{font-size:12px;color:var(--text-3);}
 
-/* 学科：两列，行间一条发丝线，列间一条竖线。第一行不要顶线——那会和
-   区块头那条底线叠成双线。第二段（收起的 4 条）第一行要留线，接着上一段。 */
+/* 学科：两列，格间一条发丝线，列间一条竖线。第一行不要顶线——那会和
+   区块头那条底线叠成双线。 */
 .tr-subj{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));}
-.tr-s{padding:13px 20px 14px;border-top:1px solid var(--hairline-soft);}
-.tr-subj:not(.tr-subj-more) > .tr-s:nth-child(-n+2){border-top:0;}
+.tr-s{padding:14px 20px 15px;border-top:1px solid var(--hairline-soft);}
+.tr-subj > .tr-s:nth-child(-n+2){border-top:0;}
 .tr-subj > .tr-s:nth-child(2n){border-left:1px solid var(--hairline-soft);}
 .tr-s b{display:block;font-size:14.5px;font-weight:800;line-height:1.4;
   letter-spacing:.01em;color:var(--ink);}
 .tr-s p{margin:5px 0 0;font-size:13px;line-height:1.72;color:var(--ink-2);text-wrap:pretty;}
+/* 方法行：四个可迁移的动作，是这一格真正要带走的部分。
+   标签用深蓝，词用浅一档的灰蓝——先读到「方法」，再读到具体是哪四个。
+   flex-wrap 让词整体折行，窄屏不会把「修辞表达」劈开。 */
+.tr-s p.tr-m{display:flex;flex-wrap:wrap;align-items:baseline;
+  margin-top:7px;font-size:12.5px;line-height:1.7;color:var(--text-3);}
+.tr-s p.tr-m .tr-mk{color:var(--blue-700);font-weight:700;margin-right:6px;}
+.tr-s p.tr-m i{font-style:normal;white-space:nowrap;}
+.tr-s p.tr-m i + i::before{content:"｜";margin:0 1px;opacity:.55;}
 
 /* 日常：不用线，用间距和图标块分条。图标块是 32px 的浅蓝紫渐变方块，
    里面只有一条 1.6 描边的线，不做插画。flex:1 吃掉左栏撑出来的余量，
-   space-evenly 把它变成上下和条间的等距留白，四条就落满整栏。 */
+   space-evenly 把它变成上下和条间的等距留白，三条就落满整栏。 */
 .tr-daily{display:flex;flex-direction:column;flex:1;
   justify-content:space-evenly;gap:15px;padding:17px 18px 19px;}
 .tr-d{display:grid;grid-template-columns:32px minmax(0,1fr);gap:11px;align-items:start;}
@@ -184,32 +192,14 @@
 .tr-d b{display:block;font-size:14px;font-weight:800;line-height:1.5;color:var(--ink);}
 .tr-d p{margin:3px 0 0;font-size:13px;line-height:1.72;color:var(--ink-2);text-wrap:pretty;}
 
-/* 收起：和 FAQ 同一套 0fr → 1fr，桌面端由 min-width 直接给 1fr，不看脚本脸色 */
-.tr-more{display:grid;grid-template-rows:0fr;transition:grid-template-rows .34s var(--ease);}
-.tr-more.is-open{grid-template-rows:1fr;}
-.tr-more-in{overflow:hidden;min-height:0;}
-
-.tr-toggle{display:none;align-items:center;justify-content:center;gap:7px;width:100%;
-  padding:13px 20px;border:0;border-top:1px solid var(--hairline-soft);
-  background:transparent;font:inherit;font-size:13px;font-weight:700;
-  color:var(--blue);cursor:pointer;transition:background .18s var(--ease);}
-.tr-toggle:hover{background:rgba(255,255,255,.44);}
-.tr-toggle:focus-visible{outline:2px solid var(--blue);outline-offset:-2px;}
-.tr-toggle svg{width:14px;height:14px;transition:transform .3s var(--ease);}
-.tr-toggle[aria-expanded="true"] svg{transform:rotate(180deg);}
-
-@media (min-width:761px){
-  .tr-more{grid-template-rows:1fr;}
-}
-/* 单列后不再等高：上下堆叠时让右栏跟着左栏拉高，四条会散得很稀 */
+/* 单列后不再等高：上下堆叠时让右栏跟着左栏拉高，三条会散得很稀 */
 @media (max-width:1020px){
   .tr-grid{grid-template-columns:1fr;gap:16px;align-items:start;}
   .tr-daily{flex:none;justify-content:flex-start;gap:15px;}
 }
 @media (max-width:760px){
-  .tr-toggle{display:flex;}
   .tr-bh{padding:13px 16px 11px;}
-  .tr-s{padding:12px 16px 13px;}
+  .tr-s{padding:13px 16px 14px;}
   .tr-daily{padding:15px 16px 17px;gap:14px;}
 }
 /* 窄屏单列：竖线去掉，每格一条顶线，只有整张清单的第一格不要线 */
@@ -217,7 +207,7 @@
   .tr-subj{grid-template-columns:1fr;}
   .tr-subj > .tr-s:nth-child(2n){border-left:0;}
   .tr-subj > .tr-s:nth-child(-n+2){border-top:1px solid var(--hairline-soft);}
-  .tr-subj:not(.tr-subj-more) > .tr-s:first-child{border-top:0;}
+  .tr-subj > .tr-s:first-child{border-top:0;}
 }
 
 /* ── 5. 课程卡：只回答四件事 ───────────────────────────── */
