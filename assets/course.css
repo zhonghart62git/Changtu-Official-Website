@@ -27,6 +27,10 @@
   margin:18px 0 0;font-size:16.5px;line-height:1.7;color:var(--ink-2);
   letter-spacing:.02em;text-wrap:pretty;
 }
+/* 有真图时按图片原始比例显示。素材有 4:3 也有 16:9，
+   锁死 4:3 会把 16:9 的图左右切掉，画面里的人和字都断。 */
+.page-course .crs-hero .img-ph.is-filled{aspect-ratio:auto;}
+.page-course .crs-hero .img-ph.is-filled img{height:auto;}
 .page-course .crs-hero .img-ph{border-radius:var(--r-card);aspect-ratio:4 / 3;}
 .page-course .crs-hero .img-ph .ph-ico{width:34px;height:34px;}
 .page-course .crs-hero .img-ph .ph-label{font-size:13.5px;}
