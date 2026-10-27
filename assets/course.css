@@ -41,67 +41,66 @@
 .page-course .crs-sec{padding:52px 0;}
 .page-course .crs-sec .sec-head{margin-bottom:32px;}
 
-/* ===== 卡在哪 =====
-   三条，左侧大编号。编号只是序号，不是内容，
-   所以压到 13px 并给等宽数字，视线先落在标题上。 */
-.page-course .crs-probs{display:grid;gap:14px;}
-.page-course .crs-prob{
-  display:grid;grid-template-columns:52px minmax(0,1fr);gap:20px;align-items:start;
-  padding:22px 26px;border-radius:var(--r-card);
+/* ===== 课程设计：整页唯一的板块 =====
+   一个 section 里三组：01 方法体系 / 02 学习收益 / 03 落地支持。
+   三组用三种形状——两列卡、三列卡、四格连排。
+   全站玻璃卡已经很多，三组再各来一组同样的方块，整页就成了一页表格。 */
+.page-course .cs-body{padding:52px 0;}
+.page-course .cs-body .sec-head{margin-bottom:34px;}
+
+.page-course .cs-part + .cs-part{margin-top:46px;}
+.page-course .cs-part-h{
+  display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 14px;
+  margin-bottom:18px;
+}
+.page-course .cs-part-h > span{
+  font-size:12px;font-weight:800;letter-spacing:.16em;color:var(--blue);
+  font-variant-numeric:tabular-nums;line-height:1.6;
+}
+.page-course .cs-part-h h3{margin:0;font-size:19px;font-weight:800;line-height:1.5;color:var(--ink);}
+.page-course .cs-part-h p{flex:1 1 340px;margin:0;font-size:14px;line-height:1.7;color:var(--muted);}
+
+/* 01 方法体系：两列卡。出处做成胶囊标签，压在标题下方 */
+.page-course .cs-meths{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;}
+.page-course .cs-meth{
+  padding:24px 26px;border-radius:var(--r-card);
   background:var(--glass-2-bg);border:1px solid var(--glass-2-edge);
   box-shadow:var(--glass-inner),var(--glass-shadow-sm);
 }
-.page-course .crs-prob > b{
-  font-size:13px;font-weight:800;letter-spacing:.08em;color:var(--blue);
-  line-height:1.7;font-variant-numeric:tabular-nums;
+.page-course .cs-meth h4{margin:0;font-size:17px;font-weight:800;line-height:1.45;color:var(--ink);}
+.page-course .cs-meth .cs-src{
+  display:inline-block;margin-top:9px;padding:3px 10px;border-radius:var(--r-pill);
+  font-size:11.5px;font-weight:700;letter-spacing:.02em;color:var(--blue);
+  background:rgba(11,99,197,.09);
 }
-.page-course .crs-prob h3{margin:0;font-size:17.5px;font-weight:800;line-height:1.5;color:var(--ink);}
-.page-course .crs-prob p{margin:6px 0 0;font-size:14.5px;line-height:1.8;color:var(--ink-2);text-wrap:pretty;}
+.page-course .cs-meth p{margin:11px 0 0;font-size:14.5px;line-height:1.8;color:var(--ink-2);text-wrap:pretty;}
 
-/* ===== 怎么练 =====
-   四格连排，中间一条发丝线。整块只有一个玻璃底，
-   四步是同一条方法链上的四段，不该拆成四张卡。 */
-.page-course .crs-steps{
+/* 02 学习收益：三列卡。接学科 / 进生活 / 长能力 */
+.page-course .cs-gain{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;}
+.page-course .cs-col{
+  padding:24px 26px;border-radius:var(--r-card);
+  background:var(--glass-2-bg);border:1px solid var(--glass-2-edge);
+  box-shadow:var(--glass-inner),var(--glass-shadow-sm);
+}
+.page-course .cs-col > b{
+  display:block;font-size:12.5px;font-weight:800;letter-spacing:.08em;color:var(--blue);
+}
+.page-course .cs-col ul{margin:16px 0 0;padding:0;list-style:none;display:grid;gap:14px;}
+.page-course .cs-col li{font-size:14px;line-height:1.75;color:var(--ink-2);text-wrap:pretty;}
+.page-course .cs-col li b{display:block;margin-bottom:3px;font-size:14.5px;font-weight:800;color:var(--ink);}
+
+/* 03 落地支持：四格连排，中间一条发丝线。
+   四样是一起交付的，不该拆成四张各自飘着的卡 */
+.page-course .cs-supports{
   display:grid;grid-template-columns:repeat(4,minmax(0,1fr));
   border-radius:var(--r-card);overflow:hidden;
   background:var(--glass-2-bg);border:1px solid var(--glass-2-edge);
   box-shadow:var(--glass-inner),var(--glass-shadow-sm);
 }
-.page-course .crs-step{padding:26px 24px;border-left:1px solid var(--line);}
-.page-course .crs-step:first-child{border-left:0;}
-.page-course .crs-step > b{
-  display:block;font-size:10.5px;font-weight:800;letter-spacing:.2em;
-  color:var(--muted);text-transform:uppercase;
-}
-.page-course .crs-step h3{margin:10px 0 0;font-size:16px;font-weight:800;line-height:1.45;color:var(--ink);}
-.page-course .crs-step p{margin:8px 0 0;font-size:14px;line-height:1.8;color:var(--ink-2);text-wrap:pretty;}
-
-/* ===== 对应学科 =====
-   标签卡。学科名做成胶囊标签，和上下两节的排版拉开距离。 */
-.page-course .crs-subjs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;}
-.page-course .crs-subj{
-  padding:22px 24px;border-radius:var(--r-card);
-  background:var(--glass-2-bg);border:1px solid var(--glass-2-edge);
-  box-shadow:var(--glass-inner),var(--glass-shadow-sm);
-}
-.page-course .crs-subj > b{
-  display:inline-block;padding:4px 11px;border-radius:var(--r-pill);
-  font-size:12px;font-weight:800;letter-spacing:.03em;color:var(--blue);
-  background:rgba(11,99,197,.09);
-}
-.page-course .crs-subj h3{margin:12px 0 0;font-size:16.5px;font-weight:800;line-height:1.5;color:var(--ink);}
-.page-course .crs-subj p{margin:7px 0 0;font-size:14.5px;line-height:1.8;color:var(--ink-2);text-wrap:pretty;}
-
-/* ===== 生活场景 =====
-   无框清单，两列，行间一条发丝线。
-   前三节都是玻璃块，这一节把框去掉，让页面在收尾前松一次。 */
-.page-course .crs-scenes{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 48px;}
-.page-course .crs-scene{
-  display:grid;grid-template-columns:minmax(0,.72fr) minmax(0,1fr);gap:16px;
-  align-items:baseline;padding:17px 0;border-top:1px solid var(--line);
-}
-.page-course .crs-scene b{font-size:15px;font-weight:800;line-height:1.6;color:var(--ink);}
-.page-course .crs-scene span{font-size:14px;line-height:1.75;color:var(--ink-2);text-wrap:pretty;}
+.page-course .cs-support{padding:24px 22px;border-left:1px solid var(--line);}
+.page-course .cs-support:first-child{border-left:0;}
+.page-course .cs-support h4{margin:0;font-size:15.5px;font-weight:800;line-height:1.45;color:var(--ink);}
+.page-course .cs-support p{margin:9px 0 0;font-size:13.8px;line-height:1.78;color:var(--ink-2);text-wrap:pretty;}
 
 /* ===== 收尾 =====
    咨询面板 + 其余课程。不放活动链接：课程与活动分开，
@@ -129,27 +128,25 @@
 }
 
 /* ===== 断点 =====
-   1020：首屏单列、方法两列。
-   760：全部单列，问题编号收到标题上方。 */
+   1020：首屏单列、收益三列改一列、落地四格改两行。
+   760：全部单列。 */
 @media (max-width:1020px){
   .page-course .crs-hero{padding:56px 0 44px;}
   .page-course .crs-hero .wrap{grid-template-columns:1fr;gap:32px;}
   .page-course .crs-hero .lead{max-width:none;}
-  .page-course .crs-steps{grid-template-columns:repeat(2,minmax(0,1fr));}
-  .page-course .crs-subjs{grid-template-columns:repeat(2,minmax(0,1fr));}
-  .page-course .crs-step:nth-child(3){border-left:0;}
-  .page-course .crs-step:nth-child(n+3){border-top:1px solid var(--line);}
+  .page-course .cs-gain{grid-template-columns:1fr;}
+  .page-course .cs-supports{grid-template-columns:repeat(2,minmax(0,1fr));}
+  .page-course .cs-support:nth-child(3){border-left:0;}
+  .page-course .cs-support:nth-child(n+3){border-top:1px solid var(--line);}
 }
 @media (max-width:760px){
   .page-course .crs-hero{padding:44px 0 36px;}
-  .page-course .crs-sec{padding:40px 0;}
-  .page-course .crs-prob{grid-template-columns:1fr;gap:8px;padding:20px 22px;}
-  .page-course .crs-prob > b{line-height:1.4;}
-  .page-course .crs-steps{grid-template-columns:1fr;}
-  .page-course .crs-step{border-left:0;padding:22px;}
-  .page-course .crs-step:nth-child(n+2){border-top:1px solid var(--line);}
-  .page-course .crs-subjs,.page-course .crs-scenes{grid-template-columns:1fr;}
-  .page-course .crs-scene{grid-template-columns:1fr;gap:4px;}
+  .page-course .cs-body{padding:40px 0;}
+  .page-course .cs-part + .cs-part{margin-top:36px;}
+  .page-course .cs-meths{grid-template-columns:1fr;}
+  .page-course .cs-supports{grid-template-columns:1fr;}
+  .page-course .cs-support{border-left:0;padding:22px;}
+  .page-course .cs-support:nth-child(n+2){border-top:1px solid var(--line);}
   .page-course .crs-cta{flex-direction:column;align-items:flex-start;gap:20px;padding:26px 22px;}
   .page-course .crs-cta .btn{width:100%;justify-content:center;}
   .page-course .crs-cta-sec{padding:12px 0 56px;}
