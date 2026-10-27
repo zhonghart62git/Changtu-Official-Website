@@ -252,6 +252,9 @@ html.no-js .rv2{opacity:1;transform:none;}
   margin:18px 0 0;color:var(--text);
 }
 .mx-hero .lead{margin-top:20px;max-width:780px;}
+/* 首屏两段：第一段给真实场景，第二段给体系参数。
+   第二段压一档字号和颜色，让家长先读到自己的事，再读到课时表。 */
+.mx-hero .lead-sub{margin-top:14px;font-size:15px;line-height:1.85;color:var(--ink-2);max-width:740px;}
 .mx-hero .hero-badge-row{margin-top:28px;}
 
 /* ── 总表 ── */
