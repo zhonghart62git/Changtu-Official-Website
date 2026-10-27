@@ -133,6 +133,86 @@
   .ab .ab-dirs{margin-top:0;}
 }
 
+/* ── 4b. 学以致用：能力用在哪里 ───────────────────────────
+   和上一块刻意不同。那边是四张大卡讲「培养什么」，这边讲「用在哪里」：
+   左边 65% 是一张学科清单（一行一条，靠发丝线分格，不套卡片），
+   右边 35% 是一列带图标的日常场景（靠间距分条，不用线）。
+   两种分格方式对着放，两区一眼就能分开，也不会和四力卡撞脸。 */
+.home .sec-head.sec-lg p.tr-thesis{position:relative;margin-top:20px;padding-left:16px;
+  max-width:660px;font-size:16.5px;font-weight:700;line-height:1.8;color:var(--ink);}
+.home .sec-head.sec-lg p.tr-thesis::before{content:"";position:absolute;left:0;
+  top:.42em;bottom:.42em;width:3px;border-radius:2px;
+  background:linear-gradient(180deg,var(--brand-blue) 0%,var(--brand-purple) 100%);}
+
+.tr-grid{display:grid;grid-template-columns:minmax(0,1.85fr) minmax(0,1fr);
+  gap:18px;align-items:start;}
+.tr-block{background:var(--glass-2-bg);border:1px solid var(--glass-2-edge);
+  border-radius:var(--r-card);overflow:hidden;
+  box-shadow:var(--glass-inner),var(--glass-shadow-sm);}
+/* 右栏压一层极淡的紫：和左栏同一套玻璃，但色温不同，两区不会糊成一块 */
+.tr-life{background:linear-gradient(180deg,rgba(123,63,228,.055) 0%,var(--glass-2-bg) 46%);}
+.tr-bh{display:flex;align-items:baseline;gap:10px;
+  padding:15px 20px 13px;border-bottom:1px solid var(--hairline-soft);}
+.tr-bh h3{margin:0;font-size:15px;font-weight:800;line-height:1.4;
+  letter-spacing:-.1px;color:var(--ink);}
+.tr-bh span{font-size:12px;color:var(--text-3);}
+
+/* 学科：两列，行间一条发丝线，列间一条竖线。第一行不要顶线——那会和
+   区块头那条底线叠成双线。第二段（收起的 4 条）第一行要留线，接着上一段。 */
+.tr-subj{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));}
+.tr-s{padding:13px 20px 14px;border-top:1px solid var(--hairline-soft);}
+.tr-subj:not(.tr-subj-more) > .tr-s:nth-child(-n+2){border-top:0;}
+.tr-subj > .tr-s:nth-child(2n){border-left:1px solid var(--hairline-soft);}
+.tr-s b{display:block;font-size:14.5px;font-weight:800;line-height:1.4;
+  letter-spacing:.01em;color:var(--ink);}
+.tr-s p{margin:5px 0 0;font-size:13px;line-height:1.72;color:var(--ink-2);text-wrap:pretty;}
+
+/* 日常：不用线，用间距和图标块分条。图标块是 32px 的浅蓝紫渐变方块，
+   里面只有一条 1.6 描边的线，不做插画。 */
+.tr-daily{display:flex;flex-direction:column;gap:15px;padding:17px 18px 19px;}
+.tr-d{display:grid;grid-template-columns:32px minmax(0,1fr);gap:11px;}
+.tr-di{display:flex;align-items:center;justify-content:center;width:32px;height:32px;
+  border-radius:10px;color:var(--blue-700);
+  background:linear-gradient(150deg,rgba(11,99,197,.10) 0%,rgba(123,63,228,.09) 100%);
+  border:1px solid rgba(255,255,255,.82);}
+.tr-di svg{width:17px;height:17px;display:block;}
+.tr-d b{display:block;font-size:14px;font-weight:800;line-height:1.5;color:var(--ink);}
+.tr-d p{margin:3px 0 0;font-size:13px;line-height:1.72;color:var(--ink-2);text-wrap:pretty;}
+
+/* 收起：和 FAQ 同一套 0fr → 1fr，桌面端由 min-width 直接给 1fr，不看脚本脸色 */
+.tr-more{display:grid;grid-template-rows:0fr;transition:grid-template-rows .34s var(--ease);}
+.tr-more.is-open{grid-template-rows:1fr;}
+.tr-more-in{overflow:hidden;min-height:0;}
+
+.tr-toggle{display:none;align-items:center;justify-content:center;gap:7px;width:100%;
+  padding:13px 20px;border:0;border-top:1px solid var(--hairline-soft);
+  background:transparent;font:inherit;font-size:13px;font-weight:700;
+  color:var(--blue);cursor:pointer;transition:background .18s var(--ease);}
+.tr-toggle:hover{background:rgba(255,255,255,.44);}
+.tr-toggle:focus-visible{outline:2px solid var(--blue);outline-offset:-2px;}
+.tr-toggle svg{width:14px;height:14px;transition:transform .3s var(--ease);}
+.tr-toggle[aria-expanded="true"] svg{transform:rotate(180deg);}
+
+@media (min-width:761px){
+  .tr-more{grid-template-rows:1fr;}
+}
+@media (max-width:1020px){
+  .tr-grid{grid-template-columns:1fr;gap:16px;}
+}
+@media (max-width:760px){
+  .tr-toggle{display:flex;}
+  .tr-bh{padding:13px 16px 11px;}
+  .tr-s{padding:12px 16px 13px;}
+  .tr-daily{padding:15px 16px 17px;gap:14px;}
+}
+/* 窄屏单列：竖线去掉，每格一条顶线，只有整张清单的第一格不要线 */
+@media (max-width:560px){
+  .tr-subj{grid-template-columns:1fr;}
+  .tr-subj > .tr-s:nth-child(2n){border-left:0;}
+  .tr-subj > .tr-s:nth-child(-n+2){border-top:1px solid var(--hairline-soft);}
+  .tr-subj:not(.tr-subj-more) > .tr-s:first-child{border-top:0;}
+}
+
 /* ── 5. 课程卡：只回答四件事 ───────────────────────────── */
 .cq{margin:18px 0 0;}
 .cq .q{display:grid;grid-template-columns:76px 1fr;gap:12px;padding:11px 0;

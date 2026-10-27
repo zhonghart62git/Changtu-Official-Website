@@ -27,7 +27,7 @@
 <link rel="stylesheet" href="assets/site.css?v=214491bb">
 <link rel="stylesheet" href="assets/site-v2.css?v=2f1b0811">
 <link rel="stylesheet" href="assets/growth.css?v=164ba357">
-<link rel="stylesheet" href="assets/home.css?v=e42c8bab">
+<link rel="stylesheet" href="assets/home.css?v=fa331db8">
 <script>document.documentElement.classList.remove('no-js');</script>
 <noscript><style>
 /* 折叠和分组都靠脚本，脚本不在时两条路都断了。
@@ -348,6 +348,48 @@
           <li><b>美术</b>视觉观察、构思与表达</li>
         </ul>
       </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 3a. 学以致用 ============
+     未来能力讲「培养什么」，这一块讲「用在哪里」，成长路径讲「怎么持续」。
+     左边学科清单（一行一条，不套卡片），右边日常场景（带图标的竖排条目），
+     两区分格方式不同，一眼能看出是两类内容。内容由 assets/transfer.js 从数组渲染。 -->
+<section id="transfer">
+  <div class="wrap">
+    <div class="sec-head rv2 sec-lg">
+      <div class="bar"></div>
+      <h2>学以致用 <small>Learning Transfer</small></h2>
+      <p>演讲、辩论、模联与研学并非课堂之外的「附加活动」。孩子在真实议题中调用知识、分析问题、表达观点，再把这些能力带回学科学习与日常生活。</p>
+      <p class="tr-thesis">不是额外学习更多知识，而是学会理解、连接和运用已经学过的知识。</p>
+    </div>
+
+    <div class="tr-grid rv2">
+      <div class="tr-block">
+        <div class="tr-bh">
+          <h3>反哺学科</h3>
+          <span>10 个学科</span>
+        </div>
+        <div class="tr-subj" role="list" data-transfer="subjects"></div>
+        <div class="tr-more" id="trMore">
+          <div class="tr-more-in">
+            <div class="tr-subj tr-subj-more" role="list" data-transfer="subjects-more"></div>
+          </div>
+        </div>
+        <button class="tr-toggle" type="button" aria-expanded="false" aria-controls="trMore" data-transfer-toggle>
+          <span data-transfer-label>查看全部学科</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9.5l6 6 6-6"></path></svg>
+        </button>
+      </div>
+
+      <aside class="tr-block tr-life">
+        <div class="tr-bh">
+          <h3>融入日常</h3>
+          <span>4 个场景</span>
+        </div>
+        <div class="tr-daily" role="list" data-transfer="daily"></div>
+      </aside>
     </div>
   </div>
 </section>
@@ -750,6 +792,7 @@
 </script>
 <script src="assets/chrome.js?v=775567a9"></script>
 <script src="assets/growth.js?v=0b06fe75"></script>
+<script src="assets/transfer.js?v=1be20ed5"></script>
 <div class="mo" id="moTest" hidden>
   <div class="mo-mask" data-mo-close></div>
   <div class="mo-panel is-narrow" role="dialog" aria-modal="true" aria-labelledby="moTestT" tabindex="-1">
