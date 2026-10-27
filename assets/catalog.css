@@ -11,7 +11,12 @@
 /* ===== 首屏 =====
    左右双栏 45 / 55，图在右。上内边距 64，下边距只留到第一个区块的一半，
    剩下的一半交给 .cat-sec 的上内边距——两边各给一次会变成两倍。 */
-.cat-hero{padding:64px 0 20px;}
+/* 高度锁死 471、内容区垂直居中。471 = 64 + 387 + 20，
+   387 是原来右栏那张 3:2 图的实高（(1112-56)×0.55×2/3）。
+   锁死之后，课程页换成整条融合大图、活动页还是右边一张卡，
+   两页 h1 都落在 260，换页标题不动。 */
+.cat-hero{display:flex;align-items:center;min-height:471px;padding:64px 0 20px;}
+.cat-hero > .wrap{width:100%;}
 .cat-hero .wrap{display:grid;grid-template-columns:minmax(0,45fr) minmax(0,55fr);
   gap:56px;align-items:center;}
 .cat-hero h1{margin:0;font-size:clamp(34px,3.6vw,46px);line-height:1.2;
@@ -23,6 +28,45 @@
   min-height:calc(2 * 1.85em);color:var(--ink-2);text-wrap:pretty;}
 .cat-hero-acts{display:flex;flex-wrap:wrap;gap:12px;margin-top:30px;}
 .cat-hero .img-ph{border-radius:var(--r-panel);box-shadow:var(--elev-2);}
+
+/* ===== 首屏融合大图 =====
+   课程与实践用这一版：图铺满整条首屏，不是右边一张卡。
+   文字占 9%–44%，所以 0–36% 完全不出图，给标题和说明留干净底子；
+   44%–85% 走完"若隐若现 → 清晰"；最右 7% 淡出收口——
+   容器两侧各有留白，不收口就是一条竖直硬边，一眼看出是贴上去的矩形。
+
+   三层叠出过渡，单靠透明度会像一层灰纱：
+   ① 横向 alpha 遮罩，中段走非线性曲线，不是匀速渐变
+   ② 图上再叠纵向遮罩，把上下两条硬边化掉
+   ③ 中段一道带遮罩的 backdrop 虚焦——"轻雾化"落在这里，
+      对比度降下去但轮廓还在，右侧清晰区一点不碰
+   全层没有圆角、描边、投影：图和页面光场是同一张底。 */
+.cat-hero.has-art{position:relative;isolation:isolate;}
+.cat-hero.has-art .wrap{position:relative;z-index:1;}
+.cat-hero-art{position:absolute;inset:0;z-index:0;margin:0;padding:0;
+  pointer-events:none;overflow:hidden;
+  -webkit-mask-image:linear-gradient(to right,
+    rgba(0,0,0,0) 0%,rgba(0,0,0,0) 36%,rgba(0,0,0,.07) 45%,rgba(0,0,0,.26) 53%,
+    rgba(0,0,0,.54) 61%,rgba(0,0,0,.80) 69%,rgba(0,0,0,.95) 77%,
+    #000 85%,#000 93%,rgba(0,0,0,0) 100%);
+  mask-image:linear-gradient(to right,
+    rgba(0,0,0,0) 0%,rgba(0,0,0,0) 36%,rgba(0,0,0,.07) 45%,rgba(0,0,0,.26) 53%,
+    rgba(0,0,0,.54) 61%,rgba(0,0,0,.80) 69%,rgba(0,0,0,.95) 77%,
+    #000 85%,#000 93%,rgba(0,0,0,0) 100%);}
+/* 图挂了就整条不显示，不留半截空盒子 */
+.cat-hero-art:not(.is-filled){display:none;}
+.cat-hero-art img{width:100%;height:100%;display:block;
+  object-fit:cover;object-position:100% 50%;
+  /* 压一档色温与饱和：这张照片原色偏亮偏艳，不压会盖过左边的标题。
+     只压 7%，清晰度不动——右侧仍是视觉落点。 */
+  filter:saturate(.93) brightness(1.04) contrast(.99);
+  -webkit-mask-image:linear-gradient(to bottom,rgba(0,0,0,0) 0%,#000 15%,#000 84%,rgba(0,0,0,0) 100%);
+  mask-image:linear-gradient(to bottom,rgba(0,0,0,0) 0%,#000 15%,#000 84%,rgba(0,0,0,0) 100%);}
+.cat-hero-art::after{content:"";position:absolute;inset:0;pointer-events:none;
+  -webkit-backdrop-filter:blur(7px) saturate(.92);
+  backdrop-filter:blur(7px) saturate(.92);
+  -webkit-mask-image:linear-gradient(to right,rgba(0,0,0,0) 40%,rgba(0,0,0,.9) 50%,rgba(0,0,0,.6) 60%,rgba(0,0,0,0) 72%);
+  mask-image:linear-gradient(to right,rgba(0,0,0,0) 40%,rgba(0,0,0,.9) 50%,rgba(0,0,0,.6) 60%,rgba(0,0,0,0) 72%);}
 
 /* 活动页首屏矮一档：这一页要尽快露出分类条和活动 */
 
@@ -140,11 +184,21 @@
   .sup-list{grid-template-columns:1fr;}
 }
 @media (max-width:820px){
-  .cat-hero{padding:44px 0 16px;}
+  .cat-hero{display:block;min-height:0;padding:44px 0 16px;}
   .cat-hero .wrap{grid-template-columns:1fr;gap:28px;}
   .cat-hero h1{font-size:clamp(30px,8vw,38px);letter-spacing:-.8px;}
   /* 单列之后首屏图铺满整宽，3:2 会顶到半屏高，扁一档 */
   .cat-hero .img-ph{aspect-ratio:16 / 9;}
+  /* 融合大图在窄屏退回文档流：文字在上、图在下。
+     图上压字在 820 以下没法保证——标题 475 宽，图的干净区只有 36%，
+     字必然落到人影上。虚焦层一并去掉，小屏不值得为它付性能。
+     遮罩改成两端短淡出：图已经不在字下面，只需要不出现硬边。 */
+  .cat-hero.has-art{min-height:0;padding-bottom:0;}
+  .cat-hero-art{position:relative;inset:auto;aspect-ratio:2 / 1;margin-top:22px;
+    -webkit-mask-image:linear-gradient(to right,rgba(0,0,0,0) 0%,#000 10%,#000 88%,rgba(0,0,0,0) 100%);
+    mask-image:linear-gradient(to right,rgba(0,0,0,0) 0%,#000 10%,#000 88%,rgba(0,0,0,0) 100%);}
+  .cat-hero-art img{object-position:78% 50%;}
+  .cat-hero-art::after{display:none;}
   .cat-hero .lead{font-size:15px;min-height:0;}
   .cat-hero-acts{margin-top:24px;}
   .cat-hero-acts .btn{flex:1;min-width:0;padding:11px 16px;font-size:14.5px;}

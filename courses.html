@@ -10,7 +10,7 @@
 <link rel="apple-touch-icon" href="assets/apple-touch-icon.png?v=b6e8581d">
 <meta name="theme-color" content="#0B63C5">
 <link rel="stylesheet" href="assets/site.css?v=214491bb">
-<link rel="stylesheet" href="assets/catalog.css?v=2b04d0b1">
+<link rel="stylesheet" href="assets/catalog.css?v=e8f41c43">
 <link rel="canonical" href="https://leadtheway.cn/courses.html">
 <meta name="robots" content="index,follow">
 <meta property="og:type" content="website">
@@ -51,15 +51,17 @@
 
 <main>
 
-<!-- 首屏：左文右图，45 / 55。右边是图片位 A（3:2 课程场景主视觉） -->
-<section class="cat-hero">
+<!-- 首屏：横向融合大图。图铺满整条，左侧淡到看不见，清晰的学生场景只留在右侧；
+     文字压在最淡的左段，标题位置与活动页保持一致（都在 260px）。
+     图是背景层不是卡片——没有圆角、描边、投影，边缘靠遮罩化进页面光场。 -->
+<section class="cat-hero has-art">
   <div class="wrap">
     <div class="cat-hero-copy">
       <h1>课程与实践</h1>
       <p class="lead">围绕表达、思辨与综合能力培养，提供课程内容、教学资源与实践支持。</p>
     </div>
-    <figure class="img-ph" data-img="A"></figure>
   </div>
+  <figure class="cat-hero-art" data-img="A"></figure>
 </section>
 
 <!-- 课程体系：图 + 名称 + 一句话。两张一行，五张全部可点。
@@ -336,7 +338,7 @@
 </script>
 <script src="assets/chrome.js?v=775567a9"></script>
 <script src="assets/growth.js?v=0b06fe75"></script>
-<script src="assets/media.js?v=66e619ea"></script>
+<script src="assets/media.js?v=8842f4da"></script>
 
 <!-- 学生小程序：页脚「学生小程序」开这个弹窗 -->
 <div class="mo" id="moStu" hidden>
