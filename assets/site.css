@@ -1437,6 +1437,16 @@ html.no-js .rv{opacity:1;transform:none;}
 .pg-cta-sec .pg-cta{justify-content:space-between;margin-top:0;padding:32px 34px;
   background:var(--glass-2-bg);border:1px solid var(--glass-2-edge);border-radius:var(--r-card);
   box-shadow:var(--glass-inner),var(--glass-shadow-sm);}
+/* 咨询面板的外边缘要和卡片列一条线。
+   .pg-cta 一个元素同时吃两套内边距：.wrap 的 max-width 1160 + padding 0 24，
+   和面板自己的 padding 32 34。后者的 padding 覆盖了前者，盒子仍然撑满 1160，
+   而卡片内容只有 1160 - 48 = 1112，于是面板左右各多出 24px。
+   宽屏把 max-width 收到 1112；窄屏 .wrap 撑满时左右各让出 24。
+   24 与 .wrap 的 padding 同源，改 wrap 时这里要一起改。 */
+.pg-cta-sec .pg-cta{max-width:1112px;}
+@media (max-width:1160px){
+  .pg-cta-sec .pg-cta{margin:0 24px;}
+}
 .pg-cta-sec b{display:block;font-size:17px;color:var(--ink);letter-spacing:-.2px;}
 .pg-cta-sec span{display:block;margin-top:6px;font-size:14px;color:var(--ink-2);}
 .pg-cta-acts{display:flex;flex-wrap:wrap;gap:12px;flex:none;}
