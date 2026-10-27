@@ -144,14 +144,18 @@
   top:.42em;bottom:.42em;width:3px;border-radius:2px;
   background:linear-gradient(180deg,var(--brand-blue) 0%,var(--brand-purple) 100%);}
 
+/* 两栏等高：左栏 10 条撑出高度，右栏只有 4 条，靠 stretch + space-evenly
+   把 4 条均匀铺满同一高度。不平分（不用 flex:1）是因为条目文字长短不一，
+   拉高会显得空；只分配剩余间距，条目本身保持自然高度。 */
 .tr-grid{display:grid;grid-template-columns:minmax(0,1.85fr) minmax(0,1fr);
-  gap:18px;align-items:start;}
-.tr-block{background:var(--glass-2-bg);border:1px solid var(--glass-2-edge);
+  gap:18px;align-items:stretch;}
+.tr-block{display:flex;flex-direction:column;
+  background:var(--glass-2-bg);border:1px solid var(--glass-2-edge);
   border-radius:var(--r-card);overflow:hidden;
   box-shadow:var(--glass-inner),var(--glass-shadow-sm);}
 /* 右栏压一层极淡的紫：和左栏同一套玻璃，但色温不同，两区不会糊成一块 */
 .tr-life{background:linear-gradient(180deg,rgba(123,63,228,.055) 0%,var(--glass-2-bg) 46%);}
-.tr-bh{display:flex;align-items:baseline;gap:10px;
+.tr-bh{display:flex;align-items:baseline;gap:10px;flex:none;
   padding:15px 20px 13px;border-bottom:1px solid var(--hairline-soft);}
 .tr-bh h3{margin:0;font-size:15px;font-weight:800;line-height:1.4;
   letter-spacing:-.1px;color:var(--ink);}
@@ -168,9 +172,11 @@
 .tr-s p{margin:5px 0 0;font-size:13px;line-height:1.72;color:var(--ink-2);text-wrap:pretty;}
 
 /* 日常：不用线，用间距和图标块分条。图标块是 32px 的浅蓝紫渐变方块，
-   里面只有一条 1.6 描边的线，不做插画。 */
-.tr-daily{display:flex;flex-direction:column;gap:15px;padding:17px 18px 19px;}
-.tr-d{display:grid;grid-template-columns:32px minmax(0,1fr);gap:11px;}
+   里面只有一条 1.6 描边的线，不做插画。flex:1 吃掉左栏撑出来的余量，
+   space-evenly 把它变成上下和条间的等距留白，四条就落满整栏。 */
+.tr-daily{display:flex;flex-direction:column;flex:1;
+  justify-content:space-evenly;gap:15px;padding:17px 18px 19px;}
+.tr-d{display:grid;grid-template-columns:32px minmax(0,1fr);gap:11px;align-items:start;}
 .tr-di{display:flex;align-items:center;justify-content:center;width:32px;height:32px;
   border-radius:10px;color:var(--blue-700);
   background:linear-gradient(150deg,rgba(11,99,197,.10) 0%,rgba(123,63,228,.09) 100%);
@@ -196,8 +202,10 @@
 @media (min-width:761px){
   .tr-more{grid-template-rows:1fr;}
 }
+/* 单列后不再等高：上下堆叠时让右栏跟着左栏拉高，四条会散得很稀 */
 @media (max-width:1020px){
-  .tr-grid{grid-template-columns:1fr;gap:16px;}
+  .tr-grid{grid-template-columns:1fr;gap:16px;align-items:start;}
+  .tr-daily{flex:none;justify-content:flex-start;gap:15px;}
 }
 @media (max-width:760px){
   .tr-toggle{display:flex;}
