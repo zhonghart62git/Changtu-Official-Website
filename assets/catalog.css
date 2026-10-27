@@ -8,34 +8,6 @@
 
    这两页与其它页的差别只在版式：卡片两列，图在上、字在下。 */
 
-/* ===== 图片位 =====
-   一个空盒子 + 一行 data-img，内容由 media.js 渲染。
-   比例由 media.js 写进 --ph-ratio，这里给 3:2 当兜底（JS 没跑也有正确高度）。
-   断点要改比例时直接覆盖 aspect-ratio，别去改那个变量。
-   真图走 object-fit:cover，尺寸由盒子决定，换图不改布局。 */
-.img-ph{
-  position:relative;display:block;margin:0;overflow:hidden;
-  background:linear-gradient(150deg,rgba(11,99,197,.13) 0%,rgba(123,63,228,.09) 100%);
-  aspect-ratio:var(--ph-ratio,3 / 2);
-}
-.img-ph img{width:100%;height:100%;display:block;object-fit:cover;}
-/* 真图底部一道极淡的冷色蒙层，让照片"沉"进玻璃卡里，而不是硬切一刀。
-   占位状态不加——占位本身已经是浅色，再蒙一层就糊了。 */
-.img-ph.is-filled::after{
-  content:"";position:absolute;left:0;right:0;bottom:0;height:34%;pointer-events:none;
-  background:linear-gradient(180deg,rgba(255,255,255,0) 0%,rgba(255,255,255,.20) 100%);
-}
-.img-ph .ph-in{
-  position:absolute;inset:0;display:flex;flex-direction:column;
-  align-items:center;justify-content:center;gap:4px;padding:16px;text-align:center;
-  color:var(--ink-2);   /* 淡蓝底上的 6.2:1，占位文字也要过对比度 */
-}
-.img-ph .ph-ico{display:block;width:26px;height:26px;margin-bottom:6px;opacity:.7;}
-.img-ph .ph-ico svg{width:100%;height:100%;display:block;}
-.img-ph b{font-size:11.5px;font-weight:800;letter-spacing:1.2px;opacity:.72;}
-.img-ph .ph-label{font-size:12.5px;font-weight:700;line-height:1.5;}
-.img-ph i{font-size:11.5px;font-style:normal;line-height:1.5;opacity:.75;}
-
 /* ===== 首屏 =====
    左右双栏 45 / 55，图在右。上内边距 64，下边距只留到第一个区块的一半，
    剩下的一半交给 .cat-sec 的上内边距——两边各给一次会变成两倍。 */
@@ -89,7 +61,9 @@
   border-color:rgba(255,255,255,.94);
   box-shadow:var(--glass-inner-strong),var(--glass-shadow-hover);}
 .crs-card:focus-visible{outline:2px solid var(--blue);outline-offset:3px;}
-.crs-card .img-ph{border-radius:0;background-color:rgba(11,99,197,.05);}
+/* 卡片图 16:9：两列下卡片宽 552，3:2 的图高 368，一屏只放得下两张卡。
+   16:9 收到 310，六张卡三行能连着看下来。 */
+.crs-card .img-ph{aspect-ratio:16 / 9;border-radius:0;background-color:rgba(11,99,197,.05);}
 .crs-card .img-ph img{transition:transform .5s var(--ease);}
 .crs-card:hover .img-ph img{transform:scale(1.035);}
 /* 文字区就是卡片本身的玻璃，不再叠一层白——首页案例卡也是这么做的。

@@ -377,6 +377,37 @@ main > section:not(.hslider){
    光晕画在 section 上会被 section 的盒子边界裁断——那又是一条看不见的横线。
    整个页面只有一张光场，它在 body::before 上、固定不动，滚动时内容从它上面划过去。 */
 
+/* ===== 图片位 =====
+   一个空盒子 + 一行 data-img，内容由 assets/media.js 渲染。
+   这是跨页组件：courses / activities / 四个课程详情页都在用，
+   所以基础样式放在这里，页面级差异（卡片内、首屏内）留给各自的样式文件。
+
+   比例由 media.js 写进 --ph-ratio，这里给 3:2 当兜底（JS 没跑也有正确高度）。
+   断点要改比例时直接覆盖 aspect-ratio，别去改那个变量。
+   真图走 object-fit:cover，尺寸由盒子决定，换图不改布局。 */
+.img-ph{
+  position:relative;display:block;margin:0;overflow:hidden;
+  background:linear-gradient(150deg,rgba(11,99,197,.13) 0%,rgba(123,63,228,.09) 100%);
+  aspect-ratio:var(--ph-ratio,3 / 2);
+}
+.img-ph img{width:100%;height:100%;display:block;object-fit:cover;}
+/* 真图底部一道极淡的冷色蒙层，让照片"沉"进玻璃卡里，而不是硬切一刀。
+   占位状态不加——占位本身已经是浅色，再蒙一层就糊了。 */
+.img-ph.is-filled::after{
+  content:"";position:absolute;left:0;right:0;bottom:0;height:34%;pointer-events:none;
+  background:linear-gradient(180deg,rgba(255,255,255,0) 0%,rgba(255,255,255,.20) 100%);
+}
+.img-ph .ph-in{
+  position:absolute;inset:0;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;gap:4px;padding:16px;text-align:center;
+  color:var(--ink-2);   /* 淡蓝底上的 6.2:1，占位文字也要过对比度 */
+}
+.img-ph .ph-ico{display:block;width:26px;height:26px;margin-bottom:6px;opacity:.7;}
+.img-ph .ph-ico svg{width:100%;height:100%;display:block;}
+.img-ph b{font-size:11.5px;font-weight:800;letter-spacing:1.2px;opacity:.72;}
+.img-ph .ph-label{font-size:12.5px;font-weight:700;line-height:1.5;}
+.img-ph i{font-size:11.5px;font-style:normal;line-height:1.5;opacity:.75;}
+
 /* ===== 业务矩阵 ===== */
 /* 这一块曾经写过 background:transparent，当时是为了"别盖住面板"，
    但 id 选择器的特异性高于 main > section，会把面板的玻璃底整条清掉。
