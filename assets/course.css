@@ -12,23 +12,17 @@
    ============================================================ */
 
 /* ===== 首屏 =====
-   左文右图，文字 1fr、图 .86fr。图和课程卡用同一个图片位组件，
-   比例 4:3，与列表页的卡片图一致，从列表点进来不会跳一档。 */
-.page-course .crs-hero{padding:68px 0 60px;}
+   只有课程名和一张图。标签、副标、按钮都撤了：
+   导航里有入口，页脚有联系方式，首屏再放一遍是同一件事说三次。 */
+.page-course .crs-hero{padding:56px 0 48px;}
 .page-course .crs-hero .wrap{
   display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);
   gap:56px;align-items:center;
 }
 .page-course .crs-hero h1{
-  margin:16px 0 0;font-size:clamp(30px,4vw,46px);line-height:1.18;
-  letter-spacing:-1px;font-weight:800;color:var(--ink);
+  margin:0;font-size:clamp(34px,4.8vw,58px);line-height:1.14;
+  letter-spacing:-1.4px;font-weight:800;color:var(--ink);
 }
-.page-course .crs-hero .lead{
-  margin:18px 0 0;max-width:620px;font-size:16px;line-height:1.85;
-  color:var(--ink-2);text-wrap:pretty;
-}
-.page-course .crs-hero .cap-tags{margin-top:20px;}
-.page-course .crs-hero-acts{display:flex;flex-wrap:wrap;gap:12px;margin-top:28px;}
 .page-course .crs-hero .img-ph{border-radius:var(--r-card);aspect-ratio:4 / 3;}
 .page-course .crs-hero .img-ph .ph-ico{width:34px;height:34px;}
 .page-course .crs-hero .img-ph .ph-label{font-size:13.5px;}
@@ -102,38 +96,12 @@
 .page-course .cs-support h4{margin:0;font-size:15.5px;font-weight:800;line-height:1.45;color:var(--ink);}
 .page-course .cs-support p{margin:9px 0 0;font-size:13.8px;line-height:1.78;color:var(--ink-2);text-wrap:pretty;}
 
-/* ===== 收尾 =====
-   咨询面板 + 其余课程。不放活动链接：课程与活动分开，
-   这一页只解决「这门课学什么」。 */
-.page-course .crs-cta-sec{padding:20px 0 76px;}
-.page-course .crs-cta{
-  display:flex;align-items:center;justify-content:space-between;gap:28px;
-  padding:30px 34px;border-radius:var(--r-card);
-  background:var(--glass-2-bg);border:1px solid var(--glass-2-edge);
-  box-shadow:var(--glass-inner),var(--glass-shadow-sm);
-}
-.page-course .crs-cta-t{margin:0;font-size:20px;font-weight:800;line-height:1.4;color:var(--ink);}
-.page-course .crs-cta-p{margin:6px 0 0;font-size:14.5px;line-height:1.8;color:var(--ink-2);}
-.page-course .crs-more{display:flex;flex-wrap:wrap;gap:9px;margin-top:18px;}
-.page-course .crs-more a{
-  padding:8px 16px;border-radius:var(--r-pill);text-decoration:none;
-  font-size:13.5px;font-weight:600;color:var(--ink-2);
-  background:var(--glass-2-bg);border:1px solid var(--glass-2-edge);
-  transition:color .16s,border-color .16s,background .16s;
-}
-.page-course .crs-more a:hover{color:var(--blue);border-color:rgba(11,99,197,.3);}
-.page-course .crs-more a[aria-current="page"]{
-  color:var(--blue);font-weight:800;border-color:rgba(11,99,197,.34);
-  background:rgba(11,99,197,.07);
-}
-
 /* ===== 断点 =====
    1020：首屏单列、收益三列改一列、落地四格改两行。
    760：全部单列。 */
 @media (max-width:1020px){
   .page-course .crs-hero{padding:56px 0 44px;}
   .page-course .crs-hero .wrap{grid-template-columns:1fr;gap:32px;}
-  .page-course .crs-hero .lead{max-width:none;}
   .page-course .cs-gain{grid-template-columns:1fr;}
   .page-course .cs-supports{grid-template-columns:repeat(2,minmax(0,1fr));}
   .page-course .cs-support:nth-child(3){border-left:0;}
@@ -147,7 +115,4 @@
   .page-course .cs-supports{grid-template-columns:1fr;}
   .page-course .cs-support{border-left:0;padding:22px;}
   .page-course .cs-support:nth-child(n+2){border-top:1px solid var(--line);}
-  .page-course .crs-cta{flex-direction:column;align-items:flex-start;gap:20px;padding:26px 22px;}
-  .page-course .crs-cta .btn{width:100%;justify-content:center;}
-  .page-course .crs-cta-sec{padding:12px 0 56px;}
 }
