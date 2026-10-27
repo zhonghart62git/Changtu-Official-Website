@@ -16,8 +16,11 @@
   gap:56px;align-items:center;}
 .cat-hero h1{margin:0;font-size:clamp(34px,3.6vw,46px);line-height:1.2;
   letter-spacing:-1.2px;font-weight:800;color:var(--ink);}
+/* 副标统一按两行留高。两页文案长短不一样——一页折两行、一页一行——
+   align-items:center 之后 h1 会跟着上下跳十几个像素，翻页看着就是"标题在动"。
+   留够两行，h1 就固定在同一个高度。 */
 .cat-hero .lead{margin-top:18px;max-width:520px;font-size:16px;line-height:1.85;
-  color:var(--ink-2);text-wrap:pretty;}
+  min-height:calc(2 * 1.85em);color:var(--ink-2);text-wrap:pretty;}
 .cat-hero-acts{display:flex;flex-wrap:wrap;gap:12px;margin-top:30px;}
 .cat-hero .img-ph{border-radius:var(--r-panel);box-shadow:var(--elev-2);}
 
@@ -142,7 +145,7 @@
   .cat-hero h1{font-size:clamp(30px,8vw,38px);letter-spacing:-.8px;}
   /* 单列之后首屏图铺满整宽，3:2 会顶到半屏高，扁一档 */
   .cat-hero .img-ph{aspect-ratio:16 / 9;}
-  .cat-hero .lead{font-size:15px;}
+  .cat-hero .lead{font-size:15px;min-height:0;}
   .cat-hero-acts{margin-top:24px;}
   .cat-hero-acts .btn{flex:1;min-width:0;padding:11px 16px;font-size:14.5px;}
   .cat-sec{padding:36px 0;}
