@@ -134,80 +134,61 @@
 }
 
 /* ── 4b. 学以致用：能力用在哪里 ───────────────────────────
-   和上一块刻意不同。那边是四张大卡讲「培养什么」，这边讲「用在哪里」：
-   左边 65% 是六个学科方向（一格一条，靠发丝线分格，不套卡片），
-   右边 35% 是一列带图标的日常场景（靠间距分条，不用线）。
-   两种分格方式对着放，两区一眼就能分开，也不会和四力卡撞脸。 */
+   上半六张学科卡，2 列 3 行；下半「融入日常」一条深蓝横带，3 列并排。
+   浅色卡讲学科、深色带讲生活，两个层级靠明度分开，不用再加标题栏。
+   全站只有这一处深色面，和页脚同一个深蓝，不另造颜色。 */
 
 /* 引导段 57 字，在 780px 里会断成 43/14 两行，末行太短。
    balance 让两行等长，断点落在「并把」之后，比默认断法读着顺。 */
 .home .sec-head.sec-lg p.tr-lead{text-wrap:balance;}
 
-/* 两栏等高：左栏六格撑出高度，右栏只有三条，靠 stretch + space-evenly
-   把三条均匀铺满同一高度。不平分（不用 flex:1）是因为条目文字长短不一，
-   拉高会显得空；只分配剩余间距，条目本身保持自然高度。 */
-.tr-grid{display:grid;grid-template-columns:minmax(0,1.85fr) minmax(0,1fr);
-  gap:18px;align-items:stretch;}
-.tr-block{display:flex;flex-direction:column;
-  background:var(--glass-2-bg);border:1px solid var(--glass-2-edge);
-  border-radius:var(--r-card);overflow:hidden;
-  box-shadow:var(--glass-inner),var(--glass-shadow-sm);}
-/* 右栏压一层极淡的紫：和左栏同一套玻璃，但色温不同，两区不会糊成一块 */
-.tr-life{background:linear-gradient(180deg,rgba(123,63,228,.055) 0%,var(--glass-2-bg) 46%);}
-.tr-bh{display:flex;align-items:baseline;gap:10px;flex:none;
-  padding:15px 20px 13px;border-bottom:1px solid var(--hairline-soft);}
-.tr-bh h3{margin:0;font-size:15px;font-weight:800;line-height:1.4;
-  letter-spacing:-.1px;color:var(--ink);}
-.tr-bh span{font-size:12px;color:var(--text-3);}
+/* 学科卡：同一套玻璃，边界从发丝线换成卡片自身。
+   卡高由内容撑，桌面 3 行，手机 6 行，一屏看完，不做折叠。 */
+.tr-subj{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;}
+.tr-s{background:var(--glass-2-bg);border:1px solid var(--glass-2-edge);
+  border-radius:var(--r-card);padding:22px 24px 23px;
+  box-shadow:var(--glass-inner),var(--glass-shadow-sm);
+  transition:background var(--dur) var(--ease),box-shadow var(--dur) var(--ease);}
+.tr-s:hover{background:var(--glass-2-bg-hover);
+  box-shadow:var(--glass-inner-strong),var(--glass-shadow-hover);}
+.tr-s b{display:block;font-size:16px;font-weight:800;line-height:1.4;
+  letter-spacing:-.2px;color:var(--ink);}
+.tr-s p{margin:9px 0 0;font-size:13.5px;line-height:1.78;color:var(--ink-2);text-wrap:pretty;}
 
-/* 学科：两列，格间一条发丝线，列间一条竖线。第一行不要顶线——那会和
-   区块头那条底线叠成双线。 */
-.tr-subj{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));}
-.tr-s{padding:14px 20px 15px;border-top:1px solid var(--hairline-soft);}
-.tr-subj > .tr-s:nth-child(-n+2){border-top:0;}
-.tr-subj > .tr-s:nth-child(2n){border-left:1px solid var(--hairline-soft);}
-.tr-s b{display:block;font-size:14.5px;font-weight:800;line-height:1.4;
-  letter-spacing:.01em;color:var(--ink);}
-.tr-s p{margin:5px 0 0;font-size:13px;line-height:1.72;color:var(--ink-2);text-wrap:pretty;}
-/* 方法行：四个可迁移的动作，是这一格真正要带走的部分。
-   标签用深蓝，词用浅一档的灰蓝——先读到「方法」，再读到具体是哪四个。
-   flex-wrap 让词整体折行，窄屏不会把「修辞表达」劈开。 */
-.tr-s p.tr-m{display:flex;flex-wrap:wrap;align-items:baseline;
-  margin-top:7px;font-size:12.5px;line-height:1.7;color:var(--text-3);}
-.tr-s p.tr-m .tr-mk{color:var(--blue-700);font-weight:700;margin-right:6px;}
-.tr-s p.tr-m i{font-style:normal;white-space:nowrap;}
-.tr-s p.tr-m i + i::before{content:"｜";margin:0 1px;opacity:.55;}
+/* 融入日常：整块是页面里唯一的深色面。底色取页脚同一个深蓝，
+   材质仍是玻璃——顶部一道内高光 + 外投影，不是死板实色块。 */
+.tr-life{margin-top:34px;}
+.tr-dh{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;margin-bottom:14px;}
+.tr-dh h3{margin:0;font-size:16px;font-weight:800;letter-spacing:-.2px;color:var(--ink);}
+.tr-dh p{margin:0;font-size:13px;line-height:1.7;color:var(--text-3);text-wrap:pretty;}
 
-/* 日常：不用线，用间距和图标块分条。图标块是 32px 的浅蓝紫渐变方块，
-   里面只有一条 1.6 描边的线，不做插画。flex:1 吃掉左栏撑出来的余量，
-   space-evenly 把它变成上下和条间的等距留白，三条就落满整栏。 */
-.tr-daily{display:flex;flex-direction:column;flex:1;
-  justify-content:space-evenly;gap:15px;padding:17px 18px 19px;}
-.tr-d{display:grid;grid-template-columns:32px minmax(0,1fr);gap:11px;align-items:start;}
-.tr-di{display:flex;align-items:center;justify-content:center;width:32px;height:32px;
-  border-radius:10px;color:var(--blue-700);
-  background:linear-gradient(150deg,rgba(11,99,197,.10) 0%,rgba(123,63,228,.09) 100%);
-  border:1px solid rgba(255,255,255,.82);}
-.tr-di svg{width:17px;height:17px;display:block;}
-.tr-d b{display:block;font-size:14px;font-weight:800;line-height:1.5;color:var(--ink);}
-.tr-d p{margin:3px 0 0;font-size:13px;line-height:1.72;color:var(--ink-2);text-wrap:pretty;}
+.tr-daily{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));
+  border-radius:var(--r-card);overflow:hidden;padding:24px 0;
+  background:linear-gradient(155deg,#0A5090 0%,var(--blue-deep) 100%);
+  border:1px solid rgba(255,255,255,.16);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.20),
+             0 20px 44px -24px rgba(8,66,127,.62);}
+.tr-d{padding:0 28px;border-left:1px solid rgba(255,255,255,.18);}
+.tr-d:first-child{border-left:0;}
+.tr-d b{display:block;font-size:15px;font-weight:800;line-height:1.4;color:#fff;}
+.tr-d p{margin:7px 0 0;font-size:13px;line-height:1.75;
+  color:rgba(255,255,255,.76);text-wrap:balance;}
 
-/* 单列后不再等高：上下堆叠时让右栏跟着左栏拉高，三条会散得很稀 */
 @media (max-width:1020px){
-  .tr-grid{grid-template-columns:1fr;gap:16px;align-items:start;}
-  .tr-daily{flex:none;justify-content:flex-start;gap:15px;}
+  .tr-subj{gap:16px;}
+}
+/* 两张并排到 820 就挤了：卡片宽不到 340，说明要断成四行 */
+@media (max-width:820px){
+  .tr-subj{grid-template-columns:1fr;}
 }
 @media (max-width:760px){
-  .tr-bh{padding:13px 16px 11px;}
-  .tr-s{padding:13px 16px 14px;}
-  .tr-daily{padding:15px 16px 17px;gap:14px;}
-}
-/* 窄屏单列：竖线去掉，每格一条顶线，只有整张清单的第一格不要线 */
-@media (max-width:560px){
-  .tr-subj{grid-template-columns:1fr;}
-  .tr-subj > .tr-s:nth-child(2n){border-left:0;}
-  .tr-subj > .tr-s:nth-child(-n+2){border-top:1px solid var(--hairline-soft);}
-  .tr-subj > .tr-s:first-child{border-top:0;}
+  .tr-s{padding:18px 18px 19px;}
+  .tr-life{margin-top:28px;}
+  /* 横带转竖排：竖线换横线，首尾不留内边距，免得两头空一截 */
+  .tr-daily{grid-template-columns:1fr;padding:20px 0;}
+  .tr-d{padding:16px 20px;border-left:0;border-top:1px solid rgba(255,255,255,.16);}
+  .tr-d:first-child{border-top:0;padding-top:0;}
+  .tr-d:last-child{padding-bottom:0;}
 }
 
 /* ── 5. 课程卡：只回答四件事 ───────────────────────────── */
