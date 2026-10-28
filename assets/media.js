@@ -65,7 +65,7 @@
     'caocan-2026':    { label: '曹灿杯', hint: '朗诵展演现场', ratio: '16 / 9', src: '', alt: '' },
     'brtv-2027w':     { label: '北京广播电视台考级', hint: '考级考场或测评现场', ratio: '16 / 9',
                         src: 'assets/act-brtv.webp', w: 1200, sizes: SZ_PJ, alt: '北京广播电视台社会艺术水平考级主视觉，朗诵·主持·课本剧' },
-    'zjcm-2027w':     { label: '浙江音乐学院考级', hint: '考级考场或测评现场', ratio: '16 / 9', src: '', alt: '' },
+    'zjcm-2027w':     { label: '浙江音乐学院考级', hint: '考级考场、测评现场', ratio: '16 / 9', src: '', alt: '' },
     'geneva-2027':    { label: '日内瓦联合国研学营', hint: '万国宫、营地课程现场', ratio: '16 / 9',
                         src: 'assets/act-geneva.webp', w: 1200, sizes: SZ_PJ, alt: '学生在万国宫庭院里听讲解员介绍建筑' },
     'hangzhou-2027':  { label: '科技与艺术研学', hint: '企业展厅、参访现场', ratio: '16 / 9',
@@ -152,10 +152,11 @@
     el.innerHTML = emptyHtml(id, m);
   }
 
+  /* 占位只给读者看的东西：一个图标、这是哪个位置、该放什么画面。
+     内部编号留在 data-ph 上供查位置，不上屏——访客不该看见 zjcm-2027w。 */
   function emptyHtml(id, m) {
-    return '<span class="ph-in" aria-hidden="true">' +
+    return '<span class="ph-in" data-ph="' + id + '" aria-hidden="true">' +
         '<span class="ph-ico">' + ICON + '</span>' +
-        '<b>' + id + '</b>' +
         '<span class="ph-label">' + m.label + '</span>' +
         '<i>' + m.hint + '</i>' +
       '</span>';
