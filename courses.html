@@ -30,7 +30,7 @@
 <header class="nav">
   <div class="wrap">
     <a href="index.html" class="brand" aria-label="畅途未来领袖 首页">
-      <img class="logo-img" src="assets/brand-lockup.png?v=a96b284a" alt="畅途未来领袖" width="172" height="48" fetchpriority="high">
+      <img class="logo-img" src="assets/brand-lockup.webp?v=57d5aaf0" alt="畅途未来领袖" width="172" height="48" fetchpriority="high">
     </a>
     <nav class="nav-links" id="navLinks">
       <a href="courses.html">课程与实践</a>
@@ -61,7 +61,14 @@
       <p class="lead">围绕表达、思辨与综合能力培养，提供课程内容、教学资源与实践支持。</p>
     </div>
   </div>
-  <figure class="cat-hero-art" data-img="A"></figure>
+  <!-- 首屏大图直接写在 HTML 里，不走 media.js：它要等脚本跑完才发请求，
+       LCP 会白等一次 DOMContentLoaded。is-filled 是给 .cat-hero-art 用的，
+       没有这个类整块不显示。 -->
+  <figure class="cat-hero-art is-filled"><img
+    src="assets/hero-courses.webp?v=c3990b25"
+    srcset="assets/hero-courses-720.webp 720w, assets/hero-courses.webp 1920w"
+    sizes="100vw" width="1920" height="720" fetchpriority="high" decoding="async"
+    alt="教师与学生在明亮的教室里讨论，玻璃板书上是思维导图图标"></figure>
 </section>
 
 <!-- 课程体系：图 + 名称 + 一句话。两张一行，五张全部可点。
@@ -187,7 +194,7 @@
     <div class="f-top">
       <div class="f-brand">
         <div class="b">
-          <img src="assets/brand-lockup-white.png?v=7723b78c" alt="畅途未来领袖" width="157" height="44">
+          <img src="assets/brand-lockup-white.webp?v=99344887" alt="畅途未来领袖" width="157" height="44">
         </div>
         <p>畅途未来领袖连接孩子与优质项目，协同教育机构、学校和活动场地，推动青少年素质教育资源落地。我们通过课程引入、渠道合作与活动运营，拓展孩子的成长机会，也为合作伙伴创造持续的业务与品牌价值。</p>
       </div>
@@ -338,7 +345,7 @@
 </script>
 <script src="assets/chrome.js?v=775567a9"></script>
 <script src="assets/growth.js?v=0b06fe75"></script>
-<script src="assets/media.js?v=70c65096"></script>
+<script src="assets/media.js?v=436be8c1"></script>
 
 <!-- 学生小程序：页脚「学生小程序」开这个弹窗 -->
 <div class="mo" id="moStu" hidden>
