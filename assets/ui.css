@@ -339,6 +339,9 @@ table.tb .mono{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size
 .mt18{margin-top:18px;}
 .mt24{margin-top:24px;}
 .mb0{margin-bottom:0!important;}
+/* 报名页三张卡靠它拉开间距。原来只有 mt 系列没有 mb18，
+   卡片直接贴在一起，圆角互相顶住。 */
+.mb18{margin-bottom:18px;}
 .flex{display:flex;}
 .between{justify-content:space-between;}
 .center{align-items:center;}

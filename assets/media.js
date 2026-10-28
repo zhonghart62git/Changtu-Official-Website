@@ -89,9 +89,15 @@
   }
 
   /* 小图按命名约定取：xxx.webp 旁边就是 xxx-720.webp。
-     有 w 才拼 srcset——宽度是浏览器挑图的依据，写错不如不写。 */
+     有 w 才拼 srcset——宽度是浏览器挑图的依据，写错不如不写。
+     1000 这个门槛必须和 _ref/optimize_images.py 的 SMALL_MIN_SRC 一致：
+     那边只在原图够宽时才生成 -720，这边门槛更低就会拼出一个不存在的地址，
+     浏览器挑中它就是 404（act-mun 768px 踩过这个坑）。
+     原图本来就没比 720 宽多少时，换小图也省不下几个字节，不值得多一个请求。 */
+  var SMALL_MIN_SRC = 1000;
+
   function srcset(m) {
-    if (!m.w || m.w <= 720) return '';
+    if (!m.w || m.w < SMALL_MIN_SRC) return '';
     return m.src.replace(/\.webp$/, '-720.webp') + ' 720w, ' + m.src + ' ' + m.w + 'w';
   }
 

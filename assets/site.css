@@ -1301,7 +1301,10 @@ html.no-js .rv{opacity:1;transform:none;}
   .proj-head .logo-plate{height:84px;padding:12px 16px;}
   .proj-head .logo-plate img{max-height:52px;max-width:170px;}
   .proj-head .logo-plate img.sq{max-height:58px;max-width:58px;}
-  .rel-grid{grid-template-columns:1fr;}
+  /* 两列那条 :has() 的权重高于单个类，光写 .rel-grid 压不住它，
+     窄屏会一直是两列，卡片里的「进入 →」被挤出屏幕。两个都写上。 */
+  .rel-grid,
+  .rel-grid:has(> .rel-card:first-child:nth-last-child(2)){grid-template-columns:1fr;}
 }
 @media (max-width:560px){
   .proj-head{padding:26px 0 26px;}
