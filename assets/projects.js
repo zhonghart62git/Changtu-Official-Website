@@ -52,18 +52,15 @@
       city: '广州', ages: '初中 – 高中',
       deadline: '待公布', status: 'soon', href: 'mun.html'
     },
+    /* 华语辩论世界杯和亚青辩对外是一个活动：debate.html 一页写两个赛事，
+       报名入口只有一个（enroll.html?act=debate），所以列表只留一条。
+       名字用组委会延期通告里的正式名「华语辩论世界杯·岭南挑战赛」，
+       亚青辩留在 series 上，品类页的行列表和系列筛选还看得见。 */
     {
       id: 'debate-2027', cat: 'competition', series: '华语辩论世界杯 · 亚青辩',
-      name: '华语辩论世界杯 · 2027 岭南赛区',
+      name: '华语辩论世界杯 · 2027 岭南挑战赛',
       time: '待公布', start: '2027-03-20',
       city: '广州', ages: '小学 4 年级 – 高中',
-      deadline: '待公布', status: 'soon', href: 'debate.html'
-    },
-    {
-      id: 'youth-2027', cat: 'competition', series: '华语辩论世界杯 · 亚青辩',
-      name: '亚青辩 · 2027 岭南赛区',
-      time: '待公布', start: '2027-04-18',
-      city: '广州', ages: '初中 – 高中',
       deadline: '待公布', status: 'soon', href: 'debate.html'
     },
 

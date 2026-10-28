@@ -56,8 +56,6 @@
                         src: 'assets/act-mun.webp', w: 768, sizes: SZ_PJ, alt: '模拟联合国会场，代表在讲台发言，手边是中国代表牌' },
     'debate-2027':    { label: '华语辩论世界杯', hint: '赛场、选手对辩', ratio: '16 / 9',
                         src: 'assets/act-debate.webp', w: 1080, sizes: SZ_PJ, alt: '辩论赛主视觉：红蓝两色人物侧脸与城市剪影，标语「敢辩，才有答案」' },
-    'youth-2027':     { label: '亚青辩', hint: '赛场、选手对辩', ratio: '16 / 9',
-                        src: 'assets/act-debate.webp', w: 1080, sizes: SZ_PJ, alt: '辩论赛主视觉：红蓝两色人物侧影与城市剪影，标语「敢辩，才有答案」' },
     'bilingual-2026a':{ label: '雏英杯双语主持', hint: '主持台、双语报幕', ratio: '16 / 9',
                         src: 'assets/act-bilingual.webp', w: 1058, sizes: SZ_PJ, alt: '中英双语青少年主持大会主视觉，绿色水波纹背景与大会标题' },
     'caocan-2027':    { label: '曹灿杯', hint: '朗诵展演现场', ratio: '16 / 9',
