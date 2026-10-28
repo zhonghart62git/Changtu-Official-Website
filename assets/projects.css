@@ -110,6 +110,9 @@
   padding:3px 10px;border-radius:6px;border:1px solid transparent;}
 .pj-st::before{content:"";width:6px;height:6px;border-radius:50%;background:currentColor;}
 .pj-st[data-s="open"]{color:#0B6B43;background:#E9F7EF;border-color:#C3E7D3;}
+/* 常年开放用蓝色：它和「报名中」都是现在能报，区别是没有截止日，
+   同一个绿会让两件事看起来一样。 */
+.pj-st[data-s="year"]{color:var(--blue-700);background:#EAF3FE;border-color:#CFE4FB;}
 .pj-st[data-s="soon"]{color:#8A5A12;background:#FDF6E7;border-color:#EFDDB4;}
 .pj-st[data-s="done"]{color:#5C6675;background:#F2F4F7;border-color:#E1E6EE;}
 

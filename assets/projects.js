@@ -21,7 +21,10 @@
       page: 'activities-grading.html' }
   ];
 
+  /* year 和 open 都是「现在就能报」，区别在一个没有截止日：
+     考级按批次滚动安排，卡片上写「待开启」会让家长以为要等通知。 */
   var STATUS = {
+    year: { label: '常年开放', order: 0 },
     open: { label: '报名中', order: 0 },
     soon: { label: '待开启', order: 1 },
     done: { label: '已结束', order: 2 }
@@ -30,7 +33,9 @@
   var PAGE_SIZE = 10;
 
   /* start 只用来排序，不直接展示；time 是给人看的时间。
-     时间没定的写「待公布」，排序时按 start 排到最后面。 */
+     时间没定的写「待公布」，排序时按 start 排到最后面。
+     常年开放的项目没有「某一场」的时间，time 留空，meta 会自动跳过它。
+     deadline 默认是报名截止日；常年开放的填批次，再用 dlLabel 把标签换成「考期」。 */
   var LIST = [
     /* ── 赛事 ─────────────────────────────────────────── */
     {
@@ -86,19 +91,21 @@
     },
 
     /* ── 考级 ─────────────────────────────────────────── */
+    /* 考级常年开放报名，考期按批次排（store.js 里 brtv 两个冬季考期日、
+       zjcm 寒假与春季两个批次）。名字不绑某一场：绑了就等于说「只有那一场」。 */
     {
       id: 'brtv-2027w', cat: 'grading', series: '北京广播电视台考级',
-      name: '北京广播电视台 · 2027 冬季语言类考级',
-      time: '待公布', start: '2027-01-10',
+      name: '北京广播电视台 · 语言类考级',
+      time: '', start: '2027-01-10',
       city: '广州', ages: '5 岁以上',
-      deadline: '待公布', status: 'soon', href: 'brtv.html'
+      deadline: '全年多批次', dlLabel: '考期', status: 'year', href: 'brtv.html'
     },
     {
       id: 'zjcm-2027w', cat: 'grading', series: '浙江音乐学院考级',
-      name: '浙江音乐学院 · 2027 冬季音乐类考级',
-      time: '待公布', start: '2027-01-22',
+      name: '浙江音乐学院 · 音乐类考级',
+      time: '', start: '2027-01-22',
       city: '广州', ages: '不限年龄',
-      deadline: '待公布', status: 'soon', href: 'zjcm.html'
+      deadline: '全年多批次', dlLabel: '考期', status: 'year', href: 'zjcm.html'
     },
 
     /* ── 研学 ─────────────────────────────────────────── */
@@ -140,8 +147,9 @@
     return list.filter(function (p) { return p.status === status; }).length;
   }
 
+  /* time 留空时不能留下一个空档位，否则会渲染成「｜广州｜5 岁以上」 */
   function meta(p) {
-    return [p.time, p.city, p.ages].join('｜');
+    return [p.time, p.city, p.ages].filter(Boolean).join('｜');
   }
 
   /* ---------- 模板 ---------- */
@@ -158,7 +166,7 @@
           '<span class="pj-st" data-s="' + p.status + '">' + STATUS[p.status].label + '</span>' +
           '<h3>' + p.name + '</h3>' +
           '<p class="pj-meta">' + meta(p) + '</p>' +
-          '<p class="pj-dl">报名截止：' + p.deadline + '</p>' +
+          '<p class="pj-dl">' + (p.dlLabel || '报名截止') + '：' + p.deadline + '</p>' +
           '<a class="pj-go" href="' + p.href + '">查看详情' +
             '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg>' +
           '</a>' +
@@ -174,7 +182,7 @@
           '<span class="pj-series">' + p.series + '</span>' +
         '</div>' +
         '<div class="pj-col pj-col-meta">' + meta(p) + '</div>' +
-        '<div class="pj-col pj-col-dl">报名截止<br><b>' + p.deadline + '</b></div>' +
+        '<div class="pj-col pj-col-dl">' + (p.dlLabel || '报名截止') + '<br><b>' + p.deadline + '</b></div>' +
         '<a class="pj-row-go" href="' + p.href + '">查看详情' +
           '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg>' +
         '</a>' +
