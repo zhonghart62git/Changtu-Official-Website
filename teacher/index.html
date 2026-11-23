@@ -76,6 +76,7 @@
     </a>
 
     <p class="note">
+      进入后如看到腾讯云「风险提醒」页，点<b>确定访问</b>即可继续。<br>
       需要教师账号才能登录。账号由机构管理员开通，忘记密码请联系管理员重置。<br>
       回到 <a href="../index.html">官网首页</a>　｜　家长报名请用 <a href="../enroll.html">报名咨询</a>
     </p>
@@ -83,22 +84,21 @@
 
 <script>
   var TARGET = 'https://cloud1-d1g7lb8uud155b7b9-1435450577.ap-shanghai.app.tcloudbase.com/teacher';
+  // 保留路径与查询串，便于以后带参数进入（如 ?next=lesson/xxx）
   var here = location.search || '';
   var url = TARGET + (here && TARGET.indexOf('?') < 0 ? here : '');
-  var go = document.getElementById('go');
-  go.href = url;
+  document.getElementById('go').href = url;
 
-  var status = document.getElementById('status');
-
-  // 尝试在新标签打开，避免当前页被 attachment 头替换成下载
+  // 用 replace，避免老师按返回键又被弹回这个中转页
   setTimeout(function () {
-    var w = window.open(url, '_blank');
-    if (w) {
-      status.innerHTML = '已在新标签页打开 <b>教师工作台</b>。如未显示，点下方按钮手动进入。';
-    } else {
-      status.innerHTML = '请点击下方 <b>手动进入</b> 打开教师工作台。';
-    }
-  }, 600);
+    location.replace(url);
+  }, 550);
+
+  // 跳转被拦（内嵌浏览器、扩展拦截）时给出明确提示
+  setTimeout(function () {
+    var s = document.getElementById('status');
+    if (s) s.innerHTML = '没有自动跳转？点下面的<b>手动进入</b>。';
+  }, 2600);
 </script>
 <script src="../assets/chrome.js"></script>
 </body>
